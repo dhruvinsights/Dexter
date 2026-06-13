@@ -5,6 +5,7 @@ import { ForecastingPanel } from '@/features/forecast/ForecastingPanel';
 import { AIAgentPanel } from '@/features/ai/AIAgentPanel';
 import { KnowledgePanel } from '@/features/knowledge/KnowledgePanel';
 import { CustomTlePanel } from '@/features/live/CustomTlePanel';
+import { DateTimePicker } from '@/features/live/DateTimePicker';
 import { RegionPanel } from '@/features/live/RegionPanel';
 import { SettingsPanel } from '@/features/settings/SettingsPanel';
 
@@ -34,6 +35,8 @@ export function PanelHost() {
       // The Time Machine renders as a full-width overlay (TimeMachineOverlay);
       // its controls live there, so the side column stays empty.
       return null;
+    case 'datetime':
+      return <DateTimePicker />;
     case 'forecast':
       return <ForecastingPanel />;
     case 'ai':

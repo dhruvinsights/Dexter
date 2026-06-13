@@ -8,6 +8,7 @@ export type PanelId =
   | 'live'
   | 'scenario'
   | 'timeMachine'
+  | 'datetime'
   | 'forecast'
   | 'ai'
   | 'knowledge'

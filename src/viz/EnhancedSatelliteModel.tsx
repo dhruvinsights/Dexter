@@ -55,11 +55,12 @@ function getModelForSatellite(name: string): { obj: string; mtl: string } {
  * Enhanced 3D satellite model with actual mesh loading
  * Loads appropriate model based on satellite type
  */
-export function EnhancedSatelliteModel({ position, scale = 0.001 }: SatelliteModelProps) {
+export function EnhancedSatelliteModel({ position }: SatelliteModelProps) {
   const selection = useSimStore((s) => s.selection);
+  const selectedPos = useSimStore((s) => s.selectedPos);
   const groupRef = useRef<THREE.Group>(null);
   const [model, setModel] = useState<THREE.Group | null>(null);
-  const [loading, setLoading] = useState(false);
+  const setLoading = (_v: boolean) => {}; // mesh-load progress (unused UI hook)
 
   useEffect(() => {
     if (!selection) {
@@ -69,23 +70,27 @@ export function EnhancedSatelliteModel({ position, scale = 0.001 }: SatelliteMod
 
     setLoading(true);
     const modelInfo = getModelForSatellite(selection.label);
-    
+
     const mtlLoader = new MTLLoader();
     mtlLoader.load(
       modelInfo.mtl,
       (materials: any) => {
         materials.preload();
-        
+
         const objLoader = new OBJLoader();
         objLoader.setMaterials(materials);
         objLoader.load(
           modelInfo.obj,
           (object: THREE.Group) => {
-            // Scale and center the model
+            // Center, then normalise to a fixed visual size regardless of the
+            // source mesh's units (OBJ meshes vary wildly).
             const box = new THREE.Box3().setFromObject(object);
             const center = box.getCenter(new THREE.Vector3());
             object.position.sub(center);
-            
+            const size = box.getSize(new THREE.Vector3()).length() || 1;
+            const norm = 0.06 / size; // ~0.06 scene units across
+            object.scale.setScalar(norm);
+
             setModel(object);
             setLoading(false);
           },
@@ -128,30 +133,21 @@ export function EnhancedSatelliteModel({ position, scale = 0.001 }: SatelliteMod
 
   if (!selection || !model) return null;
 
-  const pos = position || new THREE.Vector3();
+  // Real scene-space position fed from LiveField; fall back to any explicit prop.
+  const pos = position ?? (selectedPos ? new THREE.Vector3(...selectedPos) : null);
+  if (!pos) return null;
 
   return (
-    <group ref={groupRef} position={pos} scale={scale}>
-      <primitive object={model} />
-      
-      {/* Selection indicator ring */}
-      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <ringGeometry args={[120, 140, 32]} />
-        <meshBasicMaterial 
-          color="#00ff88" 
-          transparent 
-          opacity={0.6} 
-          side={THREE.DoubleSide} 
-        />
-      </mesh>
+    <group position={pos}>
+      <group ref={groupRef}>
+        <primitive object={model} />
+      </group>
 
-      {/* Satellite label */}
-      {!loading && (
-        <mesh position={[0, 200, 0]}>
-          <sphereGeometry args={[20, 16, 16]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.8} />
-        </mesh>
-      )}
+      {/* Selection indicator ring */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.05, 0.06, 48]} />
+        <meshBasicMaterial color="#00ff88" transparent opacity={0.7} side={THREE.DoubleSide} />
+      </mesh>
     </group>
   );
 }

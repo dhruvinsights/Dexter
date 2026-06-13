@@ -35,6 +35,8 @@ interface SimStore {
   speed: number; // scenario: years per second
   showOrbits: boolean;
   selection: Selection | null;
+  /** Live scene-space position of the selected object, fed by LiveField. */
+  selectedPos: [number, number, number] | null;
   colorScheme: ColorSchemeId;
 
   // ── time machine (live mode) ──
@@ -59,6 +61,7 @@ interface SimStore {
   setSpeed: (s: number) => void;
   toggleOrbits: () => void;
   select: (s: Selection | null) => void;
+  setSelectedPos: (p: [number, number, number] | null) => void;
   setColorScheme: (scheme: ColorSchemeId) => void;
 
   toggleTimeMachine: () => void;
@@ -87,6 +90,7 @@ export const useSimStore = create<SimStore>((set) => ({
   speed: 2,
   showOrbits: false,
   selection: null,
+  selectedPos: null,
   colorScheme: 'objectType',
 
   timeMachineActive: false,
@@ -121,7 +125,8 @@ export const useSimStore = create<SimStore>((set) => ({
   togglePlay: () => set((st) => ({ isPlaying: !st.isPlaying })),
   setSpeed: (s) => set({ speed: s }),
   toggleOrbits: () => set((st) => ({ showOrbits: !st.showOrbits })),
-  select: (s) => set({ selection: s }),
+  select: (s) => set({ selection: s, selectedPos: null }),
+  setSelectedPos: (p) => set({ selectedPos: p }),
   setColorScheme: (scheme) => set({ colorScheme: scheme }),
 
   toggleTimeMachine: () =>

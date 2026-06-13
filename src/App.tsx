@@ -33,14 +33,9 @@ export function App() {
         <div className="flex flex-1 flex-col p-5">
           <TopBar />
 
-          <div className="flex flex-1 items-start justify-between gap-4 py-4">
+          {/* Feature panels dock on the right, clear of the 3D globe. */}
+          <div className="flex flex-1 items-start justify-end gap-4 py-4">
             <PanelHost />
-
-            {mode === 'live' && selection && (
-              <div className="flex items-start">
-                <SatelliteInfoPanel />
-              </div>
-            )}
           </div>
 
           <CustomizeDrawer />
@@ -51,6 +46,9 @@ export function App() {
           </div>
         </div>
       </div>
+
+      {/* Draggable satellite readout (starts left, out of the panels' way) */}
+      {mode === 'live' && selection && <SatelliteInfoPanel />}
     </div>
   );
 }

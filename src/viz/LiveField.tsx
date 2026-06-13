@@ -99,6 +99,14 @@ export function LiveField() {
         (attr.array as Float32Array).set(arr.subarray(0, MAX_OBJECTS * 3));
         attr.needsUpdate = true;
         busy.current = false;
+
+        // Feed the selected object's real scene position to the store so the
+        // 3D model + camera fly-to can track it.
+        const sel = useSimStore.getState().selection;
+        if (sel) {
+          const i = sel.index * 3;
+          useSimStore.getState().setSelectedPos([arr[i], arr[i + 1], arr[i + 2]]);
+        }
       }
     };
 

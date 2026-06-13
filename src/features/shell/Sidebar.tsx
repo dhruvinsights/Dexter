@@ -2,6 +2,7 @@ import {
   Globe,
   Orbit,
   Clock,
+  CalendarDays,
   TrendingUp,
   Bot,
   Database,
@@ -27,6 +28,7 @@ interface NavItem {
 const TOP: NavItem[] = [
   { id: 'live', label: 'Live Sky', icon: Globe, mode: 'live' },
   { id: 'scenario', label: 'Scenario', icon: Orbit, mode: 'scenario' },
+  { id: 'datetime', label: 'Date / Time', icon: CalendarDays, mode: 'live' },
   { id: 'timeMachine', label: 'Time Machine', icon: Clock, mode: 'live' },
   { id: 'forecast', label: 'Forecasting', icon: TrendingUp },
   { id: 'region', label: 'Region Filter', icon: MapPin, mode: 'live' },

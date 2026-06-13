@@ -21,7 +21,6 @@ export function EnhancedCameraControls() {
   const { camera, gl } = useThree();
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const transitionRef = useRef<CameraTransition | null>(null);
-  const selection = useSimStore((s) => s.selection);
 
   useEffect(() => {
     const controls = new OrbitControlsImpl(camera, gl.domElement);
@@ -40,34 +39,32 @@ export function EnhancedCameraControls() {
     };
   }, [camera, gl]);
 
-  // Zoom to satellite when selected
-  useEffect(() => {
-    if (!selection || !controlsRef.current) return;
+  // Fly to the satellite's REAL position once LiveField reports it.
+  const flownTo = useRef<string | null>(null);
+  useFrame(() => {
+    const st = useSimStore.getState();
+    if (!controlsRef.current) return;
+    if (!st.selection) {
+      flownTo.current = null;
+      return;
+    }
+    if (flownTo.current === st.selection.norad || !st.selectedPos) return;
+    flownTo.current = st.selection.norad;
 
-    // Get satellite position (placeholder - in production, get from LiveField)
-    // For now, we'll zoom to a position based on the selection index
-    const angle = (selection.index / 100) * Math.PI * 2;
-    const radius = 2.0;
-    const targetPosition = new THREE.Vector3(
-      Math.cos(angle) * radius,
-      Math.sin(angle * 0.5) * 0.5,
-      Math.sin(angle) * radius
-    );
+    const targetPosition = new THREE.Vector3(...st.selectedPos);
+    // Camera sits a short distance back along the Earth→sat direction.
+    const dir = targetPosition.clone().normalize();
+    const cameraPosition = targetPosition.clone().add(dir.multiplyScalar(0.35)).add(new THREE.Vector3(0.1, 0.1, 0.1));
 
-    // Calculate camera position (offset from target)
-    const offset = new THREE.Vector3(0.5, 0.3, 0.5);
-    const cameraPosition = targetPosition.clone().add(offset);
-
-    // Start smooth transition
     transitionRef.current = {
       startPosition: camera.position.clone(),
       endPosition: cameraPosition,
       startTarget: controlsRef.current.target.clone(),
       endTarget: targetPosition,
       progress: 0,
-      duration: 1.5, // 1.5 seconds
+      duration: 1.2,
     };
-  }, [selection, camera]);
+  });
 
   useFrame((_, delta) => {
     if (!controlsRef.current) return;

@@ -56,7 +56,7 @@ export function SatelliteInfoPanel() {
 
   return (
     <div
-      className="hud-panel hud-scanline pointer-events-auto w-80 select-none overflow-hidden rounded-lg"
+      className="hud-panel hud-scanline pointer-events-auto absolute left-24 top-24 z-40 w-80 select-none overflow-hidden rounded-lg"
       style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
     >
       {/* Drag handle / title */}
