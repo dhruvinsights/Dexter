@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "PlanetsMenuPlugin": {
+      "bottomIconLabel": "Pianeti",
+      "title": "Menu elenco pianeti",
+      "helpBody": "Questo menu consente di selezionare e visualizzare diversi pianeti nella simulazione.",
+      "sections": {
+        "planets": "Pianeti",
+        "dwarfPlanets": "Pianeti nani",
+        "otherCelestialBodies": "Altri corpi celesti"
+      },
+      "tooltips": {
+        "centerCamera": "Centra la fotocamera su {body}.",
+        "plannedFuture": "Previsto per un aggiornamento futuro."
+      }
+    }
+  }
+}

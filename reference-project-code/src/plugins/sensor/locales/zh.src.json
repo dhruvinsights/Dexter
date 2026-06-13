@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "传感器信息",
+      "title": "传感器信息菜单",
+      "helpBody": "传感器信息提供当前选中传感器的相关信息。信息基于公开数据，可能并非100%准确。如果您有更多公开传感器数据或修正建议，请联系<a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>。<br><br>提供的信息包括：<ul style=\"margin-left: 40px;\"> <li>传感器名称</li> <li>传感器所属</li> <li>传感器类型</li> <li>传感器视场</li> </ul><br>此外，可从此菜单快速创建传感器到太阳或月亮的连线。"
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "自定义传感器",
+      "title": "自定义传感器菜单",
+      "helpBody": "此功能允许您创建用于计算和其他菜单功能的自定义传感器。可以是全新传感器，也可以基于现有传感器修改。<br><br>设置传感器的纬度、经度和高度后，可设置视场。选择望远镜选项将创建360度视场，仰角遮罩为10度，范围无限。取消选择望远镜选项可手动设置视场。<br><br>如需编辑现有传感器，可先在传感器列表中选择，之后自定义传感器将更新为所选传感器信息。",
+      "labels": {
+        "sensorName": "传感器名称",
+        "defaultSensorName": "自定义传感器",
+        "latitude": "纬度",
+        "longitude": "经度",
+        "elevation": "海拔高度（公里）",
+        "sensorType": "传感器类型",
+        "typeObserver": "观测者",
+        "typeOptical": "光学",
+        "typePhasedArray": "相控阵雷达",
+        "typeMechanical": "机械",
+        "telescope": "望远镜",
+        "minAzimuth": "最小方位角",
+        "maxAzimuth": "最大方位角",
+        "minElevation": "最小仰角",
+        "maxElevation": "最大仰角",
+        "minRange": "最小距离",
+        "maxRange": "最大距离",
+        "replaceSensor": "替换传感器",
+        "addCustomSensor": "添加自定义传感器",
+        "clearCustomSensors": "清除自定义传感器",
+        "useGeolocation": "使用地理定位",
+        "tooltipSensorName": "传感器的名称",
+        "tooltipLatitude": "十进制纬度（例：43.283）",
+        "tooltipLongitude": "十进制经度（例：-73.283）",
+        "tooltipElevation": "海拔高度，单位为公里（例：0.645）",
+        "tooltipTelescope": "该传感器是否为望远镜？",
+        "tooltipMinAz": "方位角，单位为度（例：50）",
+        "tooltipMaxAz": "方位角，单位为度（例：120）",
+        "tooltipMinEl": "仰角，单位为度（例：10）",
+        "tooltipMaxEl": "仰角，单位为度（例：90）",
+        "tooltipMinRange": "距离，单位为公里（例：500）",
+        "tooltipMaxRange": "距离，单位为公里（例：20000）"
+      },
+      "rmbMenu": {
+        "title": "创建",
+        "createObserver": "在此创建观测者",
+        "createSensor": "在此创建传感器"
+      },
+      "sensorList": {
+        "sensorName": "传感器名称",
+        "latitude": "纬度",
+        "longitude": "经度",
+        "elevation": "海拔",
+        "azimuth": "方位角",
+        "elevationRange": "仰角",
+        "range": "距离"
+      },
+      "errorMsgs": {
+        "latRange": "自定义传感器纬度必须在 -90 到 90 度之间。",
+        "lonRange": "自定义传感器经度必须在 -180 到 180 度之间。",
+        "altRange": "自定义传感器高度必须大于或等于 0 公里。",
+        "minAzRange": "自定义传感器最小方位角必须在 -360 到 360 度之间。",
+        "maxAzRange": "自定义传感器最大方位角必须在 -360 到 360 度之间。",
+        "minElRange": "自定义传感器最小仰角必须在 -90 到 90 度之间。",
+        "maxElRange": "自定义传感器最大仰角必须在 -90 到 90 度之间。",
+        "minRangeValue": "自定义传感器最小距离必须大于或等于 0 公里。",
+        "maxRangeValue": "自定义传感器最大距离必须大于或等于 0 公里。"
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "观测角",
+      "title": "观测角菜单",
+      "helpBody": "观测角菜单允许您计算传感器与卫星之间的距离、方位角和仰角。使用前需先选择卫星和传感器。<br><br>仅计算升起和落下时间的切换功能可快速判断卫星何时可被传感器观测。<br><br>搜索范围可通过更改时长和间隔选项调整。"
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "多站观测",
+      "title": "多站观测角菜单",
+      "helpBody": "多站观测角菜单允许您计算一颗卫星与多个传感器之间的距离、方位角和仰角。使用前需先选择卫星。<br><br>默认情况下，菜单会计算空间监视网络中所有传感器的观测角。如需计算其他传感器的观测角，可在菜单底部导出csv文件，文件将包含所有传感器的观测角。<br><br>点击表格中的一行将选中该传感器并将仿真时间切换到该观测角时间点。"
+    }
+  }
+}

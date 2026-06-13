@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "Zarządzanie katalogiem",
+      "title": "Zarządzanie katalogiem",
+      "tabs": {
+        "import": "Import",
+        "export": "Eksport"
+      },
+      "helpBody": "Menu zarządzania katalogiem udostępnia narzędzia do importu i eksportu danych katalogu satelitów. <b>Zakładka Import:</b> Wczytaj plik katalogu .tce, .tle lub .txt za pomocą selektora plików lub przeciągnij i upuść. <b>Zakładka Eksport:</b> <ul style=\"margin-left: 40px;\"> <li>Eksportuj oficjalne TLE — eksport rzeczywistych dwuliniowych zestawów elementów.</li> <li>Eksportuj 3LE — eksport trzyliniowych zestawów elementów.</li> <li>Eksportuj TLE KeepTrack — eksport wszystkich dwuliniowych zestawów elementów KeepTrack, w tym analitycznych.</li> <li>Eksportuj 3LE KeepTrack — eksport wszystkich trzyliniowych zestawów elementów KeepTrack, w tym analitycznych.</li> <li>Eksportuj katalog CSV — eksport danych katalogu jako CSV.</li> <li>Eksportuj STK .tce — eksport danych TLE w formacie bazy danych satelitów STK.</li> <li>Eksportuj satelity w FOV — eksport satelitów aktualnie w polu widzenia.</li> <li>Eksportuj efemerydę .e — eksport propagowanej efemerydy wybranego satelity w formacie STK.</li> </ul>"
+    }
+  }
+}

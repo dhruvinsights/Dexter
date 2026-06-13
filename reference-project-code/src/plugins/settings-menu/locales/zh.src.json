@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SettingsMenuPlugin": {
+      "bottomIconLabel": "设置",
+      "title": "设置菜单",
+      "helpBody": "设置菜单允许您配置应用程序。"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SettingsMenuPlugin": {
+      "bottomIconLabel": "設定",
+      "title": "設定メニュー",
+      "helpBody": "設定メニューでは、アプリケーションを構成できます。"
+    }
+  }
+}

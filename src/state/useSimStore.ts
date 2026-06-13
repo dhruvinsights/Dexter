@@ -1,0 +1,132 @@
+import { create } from 'zustand';
+import type { RawMOCATOutput } from '@/integration/contracts';
+import { MOCK_RESULTS, SCENARIOS } from '@/integration/mocks';
+
+const DEFAULT_SCENARIO = 'baseline_2024';
+
+export type ViewMode = 'scenario' | 'live';
+
+export interface Selection {
+  index: number;
+  norad: string;
+  label: string;
+}
+
+interface SimStore {
+  mode: ViewMode;
+
+  // ── scenario mode ──
+  scenarioId: string;
+  output: RawMOCATOutput;
+  year: number; // fractional, 0..yearMax
+  yearMax: number;
+  density: number;
+
+  // ── live mode ──
+  liveTimeMs: number;
+  liveSpeed: number; // seconds of sim time per real second
+  liveCount: number;
+
+  // ── shared ──
+  isPlaying: boolean;
+  speed: number; // scenario: years per second
+  showOrbits: boolean;
+  selection: Selection | null;
+
+  // ── time machine (live mode) ──
+  timeMachineActive: boolean;
+  timeMachineYear: number; // fractional, START_YEAR..CURRENT_YEAR+1
+  timeMachineSpeed: number; // years per second
+  timeMachinePlaying: boolean;
+
+  setMode: (m: ViewMode) => void;
+  loadScenario: (id: string) => void;
+  setYear: (y: number) => void;
+  setDensity: (d: number) => void;
+
+  setLiveTime: (ms: number) => void;
+  setLiveSpeed: (s: number) => void;
+  resetLiveToNow: () => void;
+  setLiveCount: (n: number) => void;
+
+  play: () => void;
+  pause: () => void;
+  togglePlay: () => void;
+  setSpeed: (s: number) => void;
+  toggleOrbits: () => void;
+  select: (s: Selection | null) => void;
+
+  toggleTimeMachine: () => void;
+  setTimeMachineYear: (y: number) => void;
+  setTimeMachineSpeed: (s: number) => void;
+  toggleTimeMachinePlay: () => void;
+}
+
+export const TIME_MACHINE_START_YEAR = 1957;
+export const TIME_MACHINE_END_YEAR = new Date().getUTCFullYear() + 1;
+
+export const useSimStore = create<SimStore>((set) => ({
+  mode: 'scenario',
+
+  scenarioId: DEFAULT_SCENARIO,
+  output: MOCK_RESULTS[DEFAULT_SCENARIO],
+  year: 0,
+  yearMax: MOCK_RESULTS[DEFAULT_SCENARIO].simulation_years,
+  density: 1,
+
+  liveTimeMs: Date.now(),
+  liveSpeed: 60,
+  liveCount: 0,
+
+  isPlaying: true,
+  speed: 2,
+  showOrbits: false,
+  selection: null,
+
+  timeMachineActive: false,
+  timeMachineYear: TIME_MACHINE_START_YEAR,
+  timeMachineSpeed: 6,
+  timeMachinePlaying: true,
+
+  setMode: (m) =>
+    set(() => ({
+      mode: m,
+      selection: null,
+      isPlaying: true,
+      timeMachineActive: false,
+      ...(m === 'live' ? { liveTimeMs: Date.now() } : {}),
+    })),
+
+  loadScenario: (id) => {
+    const output = MOCK_RESULTS[id];
+    if (!output) return;
+    set({ scenarioId: id, output, yearMax: output.simulation_years, selection: null });
+  },
+  setYear: (y) => set((st) => ({ year: Math.min(st.yearMax, Math.max(0, y)) })),
+  setDensity: (d) => set({ density: d }),
+
+  setLiveTime: (ms) => set({ liveTimeMs: ms }),
+  setLiveSpeed: (s) => set({ liveSpeed: s }),
+  resetLiveToNow: () => set({ liveTimeMs: Date.now() }),
+  setLiveCount: (n) => set({ liveCount: n }),
+
+  play: () => set({ isPlaying: true }),
+  pause: () => set({ isPlaying: false }),
+  togglePlay: () => set((st) => ({ isPlaying: !st.isPlaying })),
+  setSpeed: (s) => set({ speed: s }),
+  toggleOrbits: () => set((st) => ({ showOrbits: !st.showOrbits })),
+  select: (s) => set({ selection: s }),
+
+  toggleTimeMachine: () =>
+    set((st) => ({
+      timeMachineActive: !st.timeMachineActive,
+      timeMachineYear: TIME_MACHINE_START_YEAR,
+      timeMachinePlaying: true,
+    })),
+  setTimeMachineYear: (y) =>
+    set({ timeMachineYear: Math.min(TIME_MACHINE_END_YEAR, Math.max(TIME_MACHINE_START_YEAR, y)) }),
+  setTimeMachineSpeed: (s) => set({ timeMachineSpeed: s }),
+  toggleTimeMachinePlay: () => set((st) => ({ timeMachinePlaying: !st.timeMachinePlaying })),
+}));
+
+export { SCENARIOS };

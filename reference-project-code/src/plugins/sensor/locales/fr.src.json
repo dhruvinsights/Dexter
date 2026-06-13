@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Info Capteur",
+      "title": "Menu Info Capteur",
+      "helpBody": "Info Capteur fournit des informations sur le capteur actuellement sélectionné. Les informations sont basées sur des données publiques et peuvent ne pas toujours être 100% exactes. Si vous avez des données publiques sur d'autres capteurs ou des corrections à apporter, contactez-moi à <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> Les informations fournies incluent : <ul style=\"margin-left: 40px;\"> <li> Nom du capteur </li> <li> Propriétaire du capteur </li> <li> Type de capteur </li> <li> Champ de vision du capteur </li> </ul> <br> De plus, des lignes peuvent être rapidement créées du capteur vers le soleil ou la lune depuis ce menu."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Capteur personnalisé",
+      "title": "Menu Capteur personnalisé",
+      "helpBody": "Cela vous permet de créer un capteur personnalisé à utiliser dans les calculs et autres fonctions du menu. Il peut s'agir d'un capteur totalement original ou d'une modification d'un capteur existant. <br><br> Après avoir défini la latitude, la longitude et l'altitude du capteur, vous pouvez définir son champ de vision. Sélectionner télescope créera un champ de vision à 360 degrés avec un masque d'élévation de 10 degrés et une portée illimitée. Désélectionner l'option télescope permet de définir manuellement le champ de vision. <br><br> Si vous souhaitez modifier un capteur existant, sélectionnez-le d'abord dans la liste et le capteur personnalisé sera mis à jour avec ses informations.",
+      "labels": {
+        "sensorName": "Nom du capteur",
+        "defaultSensorName": "Capteur personnalisé",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "elevation": "Altitude au-dessus du niveau de la mer (km)",
+        "sensorType": "Type de capteur",
+        "typeObserver": "Observateur",
+        "typeOptical": "Optique",
+        "typePhasedArray": "Radar à antenne réseau à commande de phase",
+        "typeMechanical": "Mécanique",
+        "telescope": "Télescope",
+        "minAzimuth": "Azimut minimum",
+        "maxAzimuth": "Azimut maximum",
+        "minElevation": "Élévation minimum",
+        "maxElevation": "Élévation maximum",
+        "minRange": "Portée minimum",
+        "maxRange": "Portée maximum",
+        "replaceSensor": "Remplacer le capteur",
+        "addCustomSensor": "Ajouter un capteur personnalisé",
+        "clearCustomSensors": "Effacer les capteurs personnalisés",
+        "useGeolocation": "Utiliser la géolocalisation",
+        "tooltipSensorName": "Nom du capteur",
+        "tooltipLatitude": "Latitude en forme décimale (ex : 43,283)",
+        "tooltipLongitude": "Longitude en forme décimale (ex : -73,283)",
+        "tooltipElevation": "Altitude en kilomètres (ex : 0,645)",
+        "tooltipTelescope": "Ce capteur est-il un télescope ?",
+        "tooltipMinAz": "Azimut en degrés (ex : 50)",
+        "tooltipMaxAz": "Azimut en degrés (ex : 120)",
+        "tooltipMinEl": "Élévation en degrés (ex : 10)",
+        "tooltipMaxEl": "Élévation en degrés (ex : 90)",
+        "tooltipMinRange": "Portée en kilomètres (ex : 500)",
+        "tooltipMaxRange": "Portée en kilomètres (ex : 20000)"
+      },
+      "rmbMenu": {
+        "title": "Créer",
+        "createObserver": "Créer un observateur ici",
+        "createSensor": "Créer un capteur ici"
+      },
+      "sensorList": {
+        "sensorName": "Nom du capteur",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "elevation": "Altitude",
+        "azimuth": "Azimut",
+        "elevationRange": "Élévation",
+        "range": "Portée"
+      },
+      "errorMsgs": {
+        "latRange": "La latitude du capteur personnalisé doit être comprise entre -90 et 90 degrés.",
+        "lonRange": "La longitude du capteur personnalisé doit être comprise entre -180 et 180 degrés.",
+        "altRange": "L'altitude du capteur personnalisé doit être supérieure ou égale à 0 km.",
+        "minAzRange": "L'azimut minimum du capteur personnalisé doit être compris entre -360 et 360 degrés.",
+        "maxAzRange": "L'azimut maximum du capteur personnalisé doit être compris entre -360 et 360 degrés.",
+        "minElRange": "L'élévation minimum du capteur personnalisé doit être comprise entre -90 et 90 degrés.",
+        "maxElRange": "L'élévation maximum du capteur personnalisé doit être comprise entre -90 et 90 degrés.",
+        "minRangeValue": "La portée minimum du capteur personnalisé doit être supérieure ou égale à 0 km.",
+        "maxRangeValue": "La portée maximum du capteur personnalisé doit être supérieure ou égale à 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Angles de visée",
+      "title": "Menu Angles de visée",
+      "helpBody": "Le menu Angles de visée permet de calculer la distance, l'azimut et l'élévation entre un capteur et un satellite. Un satellite et un capteur doivent d'abord être sélectionnés pour utiliser ce menu. <br><br> L'option n'afficher que les heures de lever et de coucher ne calcule que ces moments pour le satellite. Cela permet de savoir rapidement quand un satellite sera visible d'un capteur. <br><br> La plage de recherche peut être modifiée en changeant la longueur et l'intervalle."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Angles multi-sites",
+      "title": "Menu Angles multi-sites",
+      "helpBody": "Le menu Angles multi-sites permet de calculer la distance, l'azimut et l'élévation entre un satellite et plusieurs capteurs. Un satellite doit d'abord être sélectionné pour utiliser ce menu. <br><br> Par défaut, le menu calcule les angles de visée pour tous les capteurs du Space Surveillance Network. Pour calculer les angles pour d'autres capteurs, vous pouvez exporter un fichier csv en bas du menu. Le fichier csv contiendra les angles pour tous les capteurs. <br><br> Cliquer sur une ligne du tableau sélectionne le capteur et change l'heure de la simulation à celle de l'angle de visée."
+    }
+  }
+}

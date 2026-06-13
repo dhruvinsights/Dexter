@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "Gestión de catálogo",
+      "title": "Gestión de catálogo",
+      "tabs": {
+        "import": "Importar",
+        "export": "Exportar"
+      },
+      "helpBody": "El menú de Gestión de catálogo proporciona herramientas para importar y exportar datos del catálogo de satélites. <b>Pestaña Importar:</b> Cargue un archivo de catálogo .tce, .tle o .txt mediante selector de archivos o arrastrar y soltar. <b>Pestaña Exportar:</b> <ul style=\"margin-left: 40px;\"> <li>Exportar TLEs oficiales – Exportar conjuntos de elementos de dos líneas reales.</li> <li>Exportar 3LEs – Exportar conjuntos de elementos de tres líneas.</li> <li>Exportar TLEs de KeepTrack – Exportar todos los conjuntos de elementos de dos líneas de KeepTrack incluyendo analistas.</li> <li>Exportar 3LEs de KeepTrack – Exportar todos los conjuntos de elementos de tres líneas de KeepTrack incluyendo analistas.</li> <li>Exportar catálogo CSV – Exportar datos del catálogo como CSV.</li> <li>Exportar STK .tce – Exportar datos TLE en formato de base de datos de satélites STK.</li> <li>Exportar satélites en FOV – Exportar satélites actualmente en el campo de visión.</li> <li>Exportar efemérides .e – Exportar efemérides propagadas del satélite seleccionado en formato STK.</li> </ul>"
+    }
+  }
+}

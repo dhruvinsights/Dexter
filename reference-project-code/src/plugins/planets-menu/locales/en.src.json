@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "PlanetsMenuPlugin": {
+      "bottomIconLabel": "Planets",
+      "title": "Planets List Menu",
+      "helpBody": "This menu allows you to select and view different planets in the simulation.",
+      "sections": {
+        "planets": "Planets",
+        "dwarfPlanets": "Dwarf Planets",
+        "otherCelestialBodies": "Other Celestial Bodies"
+      },
+      "tooltips": {
+        "centerCamera": "Center the camera on {body}.",
+        "plannedFuture": "Planned for future update."
+      }
+    }
+  }
+}

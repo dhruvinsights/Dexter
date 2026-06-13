@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Informacje o czujniku",
+      "title": "Menu informacji o czujniku",
+      "helpBody": "Informacje o czujniku zawierają dane o aktualnie wybranym czujniku. Informacje oparte są na publicznie dostępnych danych i nie zawsze muszą być w 100% dokładne. Jeśli posiadasz publiczne dane o dodatkowych czujnikach lub poprawki do istniejących informacji o czujnikach, skontaktuj się ze mną pod adresem <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> Dostępne informacje obejmują: <ul style=\"margin-left: 40px;\"> <li> Nazwa czujnika </li> <li> Właściciel czujnika </li> <li> Typ czujnika </li> <li> Pole widzenia czujnika </li> </ul> <br> Dodatkowo z tego menu można szybko utworzyć linie od czujnika do Słońca lub Księżyca."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Własny czujnik",
+      "title": "Menu własnego czujnika",
+      "helpBody": "Umożliwia utworzenie własnego czujnika do wykorzystania w obliczeniach i funkcjach innych menu. Może to być zupełnie nowy czujnik lub modyfikacja istniejącego. <br><br> Po ustawieniu szerokości geograficznej, długości geograficznej i wysokości czujnika można ustawić jego pole widzenia. Wybranie teleskopu utworzy pole widzenia 360 stopni z maską elewacji 10 stopni i nieograniczonym zasięgiem. Odznaczenie opcji teleskopu pozwoli na ręczne ustawienie pola widzenia. <br><br> Jeśli próbujesz edytować istniejący czujnik, możesz najpierw wybrać go z listy czujników, a własny czujnik zostanie zaktualizowany informacjami wybranego czujnika.",
+      "labels": {
+        "sensorName": "Nazwa czujnika",
+        "defaultSensorName": "Własny czujnik",
+        "latitude": "Szerokość geograficzna",
+        "longitude": "Długość geograficzna",
+        "elevation": "Wysokość nad poziomem morza (km)",
+        "sensorType": "Typ czujnika",
+        "typeObserver": "Obserwator",
+        "typeOptical": "Optyczny",
+        "typePhasedArray": "Radar z anteną fazowaną",
+        "typeMechanical": "Mechaniczny",
+        "telescope": "Teleskop",
+        "minAzimuth": "Minimalny azymut",
+        "maxAzimuth": "Maksymalny azymut",
+        "minElevation": "Minimalna elewacja",
+        "maxElevation": "Maksymalna elewacja",
+        "minRange": "Minimalny zasięg",
+        "maxRange": "Maksymalny zasięg",
+        "replaceSensor": "Zastąp czujnik",
+        "addCustomSensor": "Dodaj własny czujnik",
+        "clearCustomSensors": "Wyczyść własne czujniki",
+        "useGeolocation": "Użyj geolokalizacji",
+        "tooltipSensorName": "Nazwa czujnika",
+        "tooltipLatitude": "Szerokość geograficzna w formie dziesiętnej (np.: 43,283)",
+        "tooltipLongitude": "Długość geograficzna w formie dziesiętnej (np.: -73,283)",
+        "tooltipElevation": "Wysokość w kilometrach (np.: 0,645)",
+        "tooltipTelescope": "Czy ten czujnik jest teleskopem?",
+        "tooltipMinAz": "Azymut w stopniach (np.: 50)",
+        "tooltipMaxAz": "Azymut w stopniach (np.: 120)",
+        "tooltipMinEl": "Elewacja w stopniach (np.: 10)",
+        "tooltipMaxEl": "Elewacja w stopniach (np.: 90)",
+        "tooltipMinRange": "Zasięg w kilometrach (np.: 500)",
+        "tooltipMaxRange": "Zasięg w kilometrach (np.: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Utwórz",
+        "createObserver": "Utwórz obserwatora tutaj",
+        "createSensor": "Utwórz czujnik tutaj"
+      },
+      "sensorList": {
+        "sensorName": "Nazwa czujnika",
+        "latitude": "Szerokość geograficzna",
+        "longitude": "Długość geograficzna",
+        "elevation": "Wysokość",
+        "azimuth": "Azymut",
+        "elevationRange": "Elewacja",
+        "range": "Zasięg"
+      },
+      "errorMsgs": {
+        "latRange": "Szerokość geograficzna własnego czujnika musi wynosić od -90 do 90 stopni.",
+        "lonRange": "Długość geograficzna własnego czujnika musi wynosić od -180 do 180 stopni.",
+        "altRange": "Wysokość własnego czujnika musi być większa lub równa 0 km.",
+        "minAzRange": "Minimalny azymut własnego czujnika musi wynosić od -360 do 360 stopni.",
+        "maxAzRange": "Maksymalny azymut własnego czujnika musi wynosić od -360 do 360 stopni.",
+        "minElRange": "Minimalna elewacja własnego czujnika musi wynosić od -90 do 90 stopni.",
+        "maxElRange": "Maksymalna elewacja własnego czujnika musi wynosić od -90 do 90 stopni.",
+        "minRangeValue": "Minimalny zasięg własnego czujnika musi być większy lub równy 0 km.",
+        "maxRangeValue": "Maksymalny zasięg własnego czujnika musi być większy lub równy 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Kąty obserwacji",
+      "title": "Menu kątów obserwacji",
+      "helpBody": "Menu kątów obserwacji umożliwia obliczenie zasięgu, azymutu i kątów elewacji między czujnikiem a satelitą. Przed użyciem menu należy najpierw wybrać satelitę i czujnik. <br><br> Przełącznik pokazywania tylko czasów wschodu i zachodu obliczy jedynie czasy wschodu i zachodu satelity. Jest to przydatne do szybkiego określenia, kiedy satelita będzie widoczny dla czujnika. <br><br> Zakres wyszukiwania można modyfikować, zmieniając opcje długości i interwału."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Obserwacje wielostanowiskowe",
+      "title": "Menu wielostanowiskowych kątów obserwacji",
+      "helpBody": "Menu wielostanowiskowych kątów obserwacji umożliwia obliczenie zasięgu, azymutu i kątów elewacji między satelitą a wieloma czujnikami. Przed użyciem menu należy najpierw wybrać satelitę. <br><br> Domyślnie menu oblicza kąty obserwacji dla wszystkich czujników w Sieci Obserwacji Przestrzeni Kosmicznej. Jeśli chcesz obliczyć kąty obserwacji dla dodatkowych czujników, możesz wyeksportować plik CSV na dole menu. Plik CSV będzie zawierał kąty obserwacji dla wszystkich czujników. <br><br> Kliknięcie wiersza w tabeli spowoduje wybranie czujnika i zmianę czasu symulacji na czas kąta obserwacji."
+    }
+  }
+}

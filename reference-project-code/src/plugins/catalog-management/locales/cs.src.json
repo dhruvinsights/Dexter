@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "Správa katalogu",
+      "title": "Správa katalogu",
+      "tabs": {
+        "import": "Import",
+        "export": "Export"
+      },
+      "helpBody": "Nabídka Správa katalogu poskytuje nástroje pro import a export dat katalogů satelitů. <b>Karta Import:</b> Načtěte soubor katalogu .tce, .tle nebo .txt pomocí výběru souborů nebo přetažením. <b>Karta Export:</b> <ul style=\"margin-left: 40px;\"> <li>Export oficiálních TLE – Export skutečných dvouřádkových elementů.</li> <li>Export 3LE – Export třířádkových elementů.</li> <li>Export KeepTrack TLE – Export všech dvouřádkových elementů KeepTrack včetně analytických.</li> <li>Export KeepTrack 3LE – Export všech třířádkových elementů KeepTrack včetně analytických.</li> <li>Export katalogu CSV – Export dat katalogu ve formátu CSV.</li> <li>Export STK .tce – Export dat TLE ve formátu databáze satelitů STK.</li> <li>Export satelitů v FOV – Export satelitů aktuálně v zorném poli.</li> <li>Export efemerid .e – Export propagovaných efemerid pro vybraný satelit ve formátu STK.</li> </ul>"
+    }
+  }
+}

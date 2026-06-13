@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Dexter - Orbital Sustainability Decision Support Platform"
+    />
+
+    <meta property="og:title" content="Dexter" />
+    <meta property="og:site_name" content="Dexter - Orbital Visualization" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Dexter - Orbital Sustainability Decision Support Platform"
+    />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicons/favicon.ico" />
+
+    <link rel="apple-touch-icon" href="./img/favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Dexter" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0,
+        maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <title>Dexter - Orbital Visualization</title>
+
+    <script src=" settings/settingsOverride.js"></script>
+
+    <!-- Early SW update check: reload before the app bundle loads if a new version is waiting -->
+    <script>
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        (function () {
+          var hadController = !!navigator.serviceWorker.controller;
+
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            if (hadController) {
+              location.reload();
+            }
+          });
+
+          navigator.serviceWorker.getRegistration().then(function (reg) {
+            if (reg && reg.waiting) {
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+          });
+        })();
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="dexter-root" class="no-text-select" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; margin: 0; background: #000000;"></div>
+  </body>
+</html>

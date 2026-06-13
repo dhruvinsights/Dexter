@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Sensor Info",
+      "title": "Sensor Info Menu",
+      "helpBody": "Sensor Info provides information about the currently selected sensor. The information is based on publicly available data and may not always be 100% accurate. If you have public data on additional sensors or corrections to existing sensor information please contact me at <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> The information provided includes: <ul style=\"margin-left: 40px;\"> <li> Sensor Name </li> <li> Sensor Owner </li> <li> Sensor Type </li> <li> Sensor Field of View </li> </ul> <br> Additionally, lines can be quickly created from the sensor to the sun or moon from this menu."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Custom Sensor",
+      "title": "Custom Sensor Menu",
+      "helpBody": "This allows you to create a custom sensor for use in calculations and other menu's functions. This can be a completely original sensor or a modification of an existing sensor. <br><br> After setting the latitude, longitude, and altitude of the sensor, you can set the sensor's field of view. Selecting telescope will create a 360 degree field of view with an elevation mask of 10 degrees and unlimited range. Deselecting the telescope option will allow you to set the field of view manually. <br><br> If you are trying to edit an existing sensor, you can select it from the sensor list first and the custom sensor will be updated with the selected sensor's information.",
+      "labels": {
+        "sensorName": "Sensor Name",
+        "defaultSensorName": "Custom Sensor",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "elevation": "Elevation Above Sea Level (Km)",
+        "sensorType": "Type of Sensor",
+        "typeObserver": "Observer",
+        "typeOptical": "Optical",
+        "typePhasedArray": "Phased Array Radar",
+        "typeMechanical": "Mechanical",
+        "telescope": "Telescope",
+        "minAzimuth": "Minimum Azimuth",
+        "maxAzimuth": "Maximum Azimuth",
+        "minElevation": "Minimum Elevation",
+        "maxElevation": "Maximum Elevation",
+        "minRange": "Minimum Range",
+        "maxRange": "Maximum Range",
+        "replaceSensor": "Replace Sensor",
+        "addCustomSensor": "Add Custom Sensor",
+        "clearCustomSensors": "Clear Custom Sensors",
+        "useGeolocation": "Use Geolocation",
+        "tooltipSensorName": "Name of the Sensor",
+        "tooltipLatitude": "Latitude in Decimal Form (ex: 43.283)",
+        "tooltipLongitude": "Longitude in Decimal Form (ex: -73.283)",
+        "tooltipElevation": "Elevation in kilometers (ex: 0.645)",
+        "tooltipTelescope": "Is this Sensor a Telescope?",
+        "tooltipMinAz": "Azimuth in degrees (ex: 50)",
+        "tooltipMaxAz": "Azimuth in degrees (ex: 120)",
+        "tooltipMinEl": "Elevation in degrees (ex: 10)",
+        "tooltipMaxEl": "Elevation in degrees (ex: 90)",
+        "tooltipMinRange": "Range in kilometers (ex: 500)",
+        "tooltipMaxRange": "Range in kilometers (ex: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Create",
+        "createObserver": "Create Observer Here",
+        "createSensor": "Create Sensor Here"
+      },
+      "sensorList": {
+        "sensorName": "Sensor Name",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "elevation": "Elevation",
+        "azimuth": "Azimuth",
+        "elevationRange": "Elevation",
+        "range": "Range"
+      },
+      "errorMsgs": {
+        "latRange": "Custom Sensor Latitude must be between -90 and 90 degrees.",
+        "lonRange": "Custom Sensor Longitude must be between -180 and 180 degrees.",
+        "altRange": "Custom Sensor Altitude must be greater than or equal to 0 km.",
+        "minAzRange": "Custom Sensor Minimum Azimuth must be between -360 and 360 degrees.",
+        "maxAzRange": "Custom Sensor Maximum Azimuth must be between -360 and 360 degrees.",
+        "minElRange": "Custom Sensor Minimum Elevation must be between -90 and 90 degrees.",
+        "maxElRange": "Custom Sensor Maximum Elevation must be between -90 and 90 degrees.",
+        "minRangeValue": "Custom Sensor Minimum Range must be greater than or equal to 0 km.",
+        "maxRangeValue": "Custom Sensor Maximum Range must be greater than or equal to 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Look Angles",
+      "title": "Look Angles Menu",
+      "helpBody": "The Look Angles menu allows you to calculate the range, azimuth, and elevation angles between a sensor and a satellite. A satellite and sensor must first be selected before the menu can be used. <br><br> The toggle only rise and set times will only calculate the rise and set times of the satellite. This is useful for quickly determining when a satellite will be visible to a sensor. <br><br> The search range can be modified by changing the length and interval options."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Multi-Site Looks",
+      "title": "Multi-Site Look Angles Menu",
+      "helpBody": "The Multi-Site Look Angles menu allows you to calculate the range, azimuth, and elevation angles between a satellite and multiple sensors. A satellite must first be selected before the menu can be used. <br><br> By default the menu will calculate the look angles for all sensors in the Space Surveillance Netowrk. If you would like to calculate the look angles for additional sensors, you can export a csv file at the bottom of the menu. The csv file will contain look angles for all sensors. <br><br> Clicking on a row in the table will select the sensor and change the simulation time to the time of the look angle."
+    }
+  }
+}

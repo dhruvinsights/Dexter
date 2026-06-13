@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "ColorMenu": {
+      "bottomIconLabel": "Barvy",
+      "title": "Barevná schémata",
+      "rmbLabel": "Barevné schéma",
+      "helpBody": "Nabídka Barvy umožňuje změnit způsob zbarvení satelitů na displeji. Různá barevná schémata zvýrazňují různé vlastnosti satelitů, jako je země původu, typ oběžné dráhy nebo typ objektu."
+    }
+  }
+}

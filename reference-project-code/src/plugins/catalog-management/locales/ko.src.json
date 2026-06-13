@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "카탈로그 관리",
+      "title": "카탈로그 관리",
+      "tabs": {
+        "import": "가져오기",
+        "export": "내보내기"
+      },
+      "helpBody": "카탈로그 관리 메뉴는 위성 카탈로그 데이터를 가져오고 내보내는 도구를 제공합니다. <b>가져오기 탭:</b> 파일 선택기 또는 드래그 앤 드롭으로 .tce, .tle 또는 .txt 카탈로그 파일을 로드합니다. <b>내보내기 탭:</b> <ul style=\"margin-left: 40px;\"> <li>공식 TLE 내보내기 – 실제 2행 궤도 요소를 내보냅니다.</li> <li>3LE 내보내기 – 3행 궤도 요소를 내보냅니다.</li> <li>KeepTrack TLE 내보내기 – 분석가를 포함한 모든 KeepTrack 2행 궤도 요소를 내보냅니다.</li> <li>KeepTrack 3LE 내보내기 – 분석가를 포함한 모든 KeepTrack 3행 궤도 요소를 내보냅니다.</li> <li>카탈로그 CSV 내보내기 – 카탈로그 데이터를 CSV로 내보냅니다.</li> <li>STK .tce 내보내기 – TLE 데이터를 STK 위성 데이터베이스 형식으로 내보냅니다.</li> <li>시야 내 위성 내보내기 – 현재 시야에 있는 위성을 내보냅니다.</li> <li>.e 천체력 내보내기 – 선택한 위성의 전파된 천체력을 STK 형식으로 내보냅니다.</li> </ul>"
+    }
+  }
+}

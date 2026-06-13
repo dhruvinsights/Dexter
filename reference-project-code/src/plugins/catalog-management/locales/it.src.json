@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "Gestione catalogo",
+      "title": "Gestione catalogo",
+      "tabs": {
+        "import": "Importa",
+        "export": "Esporta"
+      },
+      "helpBody": "Il menu Gestione catalogo fornisce strumenti per importare ed esportare i dati del catalogo satellitare. <b>Scheda Importa:</b> Carica un file catalogo .tce, .tle o .txt tramite selettore file o trascinamento. <b>Scheda Esporta:</b> <ul style=\"margin-left: 40px;\"> <li>Esporta TLE ufficiali - Esporta i set di elementi a due linee reali.</li> <li>Esporta 3LE - Esporta i set di elementi a tre linee.</li> <li>Esporta TLE KeepTrack - Esporta tutti i set di elementi a due linee di KeepTrack inclusi gli analisti.</li> <li>Esporta 3LE KeepTrack - Esporta tutti i set di elementi a tre linee di KeepTrack inclusi gli analisti.</li> <li>Esporta catalogo CSV - Esporta i dati del catalogo in formato CSV.</li> <li>Esporta STK .tce - Esporta i dati TLE nel formato database satellitare STK.</li> <li>Esporta satelliti nel FOV - Esporta i satelliti attualmente nel campo visivo.</li> <li>Esporta effemeridi .e - Esporta le effemeridi propagate per il satellite selezionato in formato STK.</li> </ul>"
+    }
+  }
+}

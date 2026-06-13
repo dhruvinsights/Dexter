@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "FindSatPlugin": {
+      "bottomIconLabel": "Najít satelit",
+      "title": "Najít satelit",
+      "helpBody": "Menu Najít satelit umožňuje vyhledávat satelity podle různých kritérií:<br><br><ul style=\"margin-left: 40px;\"><li><strong>Typ objektu</strong> – Filtrovat podle užitečného zatížení, tělesa rakety nebo trosek</li><li><strong>Země</strong> – Filtrovat podle země vypuštění</li><li><strong>Platforma satelitu/Užitečné zatížení/Tvar/Zdroj</strong> – Filtrovat podle vlastností satelitu</li><li><strong>Azimut/Elevace/Dosah</strong> – Hledat podle pozorovacích úhlů (vyžaduje senzor)</li><li><strong>Orbitální parametry</strong> – Inklinace, perioda, RAAN, argument perigea</li><li><strong>Stáří TLE</strong> – Filtrovat podle aktuálnosti TLE</li><li><strong>RCS</strong> – Filtrovat podle efektivní odrazné plochy</li></ul><br>Výsledky se zobrazí ve vyhledávacím panelu. Pomocí tlačítka Export uložíte výsledky jako CSV.",
+      "labels": {
+        "objectType": "Typ objektu",
+        "country": "Země",
+        "satelliteBus": "Platforma satelitu",
+        "payload": "Užitečné zatížení",
+        "shape": "Tvar",
+        "source": "Zdroj",
+        "azimuth": "Azimut (°)",
+        "azimuthMargin": "Tolerance (°)",
+        "elevation": "Elevace (°)",
+        "elevationMargin": "Tolerance (°)",
+        "range": "Dosah (km)",
+        "rangeMargin": "Tolerance (km)",
+        "inclination": "Inklinace (°)",
+        "inclinationMargin": "Tolerance (°)",
+        "period": "Perioda (min)",
+        "periodMargin": "Tolerance (min)",
+        "tleAge": "Stáří TLE (hodiny)",
+        "tleAgeMargin": "Tolerance (hodiny)",
+        "rcs": "RCS (m²)",
+        "rcsMargin": "Tolerance (m²)",
+        "rightAscension": "Rektascenze (°)",
+        "rightAscensionMargin": "Tolerance (°)",
+        "argOfPerigee": "Argument perigea (°)",
+        "argOfPerigeeMargin": "Tolerance (°)",
+        "all": "Vše",
+        "findSatellites": "Najít satelity",
+        "exportData": "Exportovat data"
+      },
+      "errorMsgs": {
+        "NoSatellitesFound": "Žádné satelity nenalezeny",
+        "NoSearchCriteriaEntered": "Nebyla zadána žádná kritéria vyhledávání",
+        "TooManyResults": "Příliš mnoho výsledků, omezeno na {limit}",
+        "TryFindingFirst": "Nejprve zkuste vyhledat satelity!"
+      }
+    }
+  }
+}

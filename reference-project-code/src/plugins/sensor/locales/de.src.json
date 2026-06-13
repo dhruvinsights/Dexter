@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Sensorinfo",
+      "title": "Sensorinfo-Menü",
+      "helpBody": "Sensorinfo bietet Informationen über den aktuell ausgewählten Sensor. Die Informationen basieren auf öffentlich zugänglichen Daten und sind möglicherweise nicht immer 100% genau. Wenn Sie öffentliche Daten zu zusätzlichen Sensoren oder Korrekturen zu bestehenden Sensorinformationen haben, kontaktieren Sie mich bitte unter <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> Die bereitgestellten Informationen umfassen: <ul style=\"margin-left: 40px;\"> <li> Sensorname </li> <li> Sensoreigentümer </li> <li> Sensortyp </li> <li> Sichtfeld des Sensors </li> </ul> <br> Zusätzlich können von diesem Menü aus schnell Linien vom Sensor zur Sonne oder zum Mond erstellt werden."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Benutzerdefinierter Sensor",
+      "title": "Menü für benutzerdefinierte Sensoren",
+      "helpBody": "Dies ermöglicht es Ihnen, einen benutzerdefinierten Sensor für Berechnungen und andere Menüfunktionen zu erstellen. Dies kann ein völlig origineller Sensor oder eine Modifikation eines bestehenden Sensors sein. <br><br> Nachdem Sie den Breitengrad, den Längengrad und die Höhe des Sensors festgelegt haben, können Sie das Sichtfeld des Sensors einstellen. Die Auswahl von 'Teleskop' erstellt ein 360-Grad-Sichtfeld mit einer Elevationsmaske von 10 Grad und unbegrenzter Reichweite. Wenn Sie die Teleskop-Option deaktivieren, können Sie das Sichtfeld manuell einstellen. <br><br> Wenn Sie versuchen, einen bestehenden Sensor zu bearbeiten, können Sie ihn zuerst aus der Sensorliste auswählen, und der benutzerdefinierte Sensor wird mit den Informationen des ausgewählten Sensors aktualisiert.",
+      "labels": {
+        "sensorName": "Sensorname",
+        "defaultSensorName": "Benutzerdefinierter Sensor",
+        "latitude": "Breitengrad",
+        "longitude": "Längengrad",
+        "elevation": "Höhe über dem Meeresspiegel (km)",
+        "sensorType": "Sensortyp",
+        "typeObserver": "Beobachter",
+        "typeOptical": "Optisch",
+        "typePhasedArray": "Phased-Array-Radar",
+        "typeMechanical": "Mechanisch",
+        "telescope": "Teleskop",
+        "minAzimuth": "Minimaler Azimut",
+        "maxAzimuth": "Maximaler Azimut",
+        "minElevation": "Minimale Elevation",
+        "maxElevation": "Maximale Elevation",
+        "minRange": "Minimale Reichweite",
+        "maxRange": "Maximale Reichweite",
+        "replaceSensor": "Sensor ersetzen",
+        "addCustomSensor": "Benutzerdefinierten Sensor hinzufügen",
+        "clearCustomSensors": "Benutzerdefinierte Sensoren löschen",
+        "useGeolocation": "Geolokalisierung verwenden",
+        "tooltipSensorName": "Name des Sensors",
+        "tooltipLatitude": "Breitengrad in Dezimalform (z.B.: 43,283)",
+        "tooltipLongitude": "Längengrad in Dezimalform (z.B.: -73,283)",
+        "tooltipElevation": "Höhe in Kilometern (z.B.: 0,645)",
+        "tooltipTelescope": "Ist dieser Sensor ein Teleskop?",
+        "tooltipMinAz": "Azimut in Grad (z.B.: 50)",
+        "tooltipMaxAz": "Azimut in Grad (z.B.: 120)",
+        "tooltipMinEl": "Elevation in Grad (z.B.: 10)",
+        "tooltipMaxEl": "Elevation in Grad (z.B.: 90)",
+        "tooltipMinRange": "Reichweite in Kilometern (z.B.: 500)",
+        "tooltipMaxRange": "Reichweite in Kilometern (z.B.: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Erstellen",
+        "createObserver": "Beobachter hier erstellen",
+        "createSensor": "Sensor hier erstellen"
+      },
+      "sensorList": {
+        "sensorName": "Sensorname",
+        "latitude": "Breitengrad",
+        "longitude": "Längengrad",
+        "elevation": "Höhe",
+        "azimuth": "Azimut",
+        "elevationRange": "Elevation",
+        "range": "Reichweite"
+      },
+      "errorMsgs": {
+        "latRange": "Der Breitengrad des benutzerdefinierten Sensors muss zwischen -90 und 90 Grad liegen.",
+        "lonRange": "Der Längengrad des benutzerdefinierten Sensors muss zwischen -180 und 180 Grad liegen.",
+        "altRange": "Die Höhe des benutzerdefinierten Sensors muss größer oder gleich 0 km sein.",
+        "minAzRange": "Der minimale Azimut des benutzerdefinierten Sensors muss zwischen -360 und 360 Grad liegen.",
+        "maxAzRange": "Der maximale Azimut des benutzerdefinierten Sensors muss zwischen -360 und 360 Grad liegen.",
+        "minElRange": "Die minimale Elevation des benutzerdefinierten Sensors muss zwischen -90 und 90 Grad liegen.",
+        "maxElRange": "Die maximale Elevation des benutzerdefinierten Sensors muss zwischen -90 und 90 Grad liegen.",
+        "minRangeValue": "Die minimale Reichweite des benutzerdefinierten Sensors muss größer oder gleich 0 km sein.",
+        "maxRangeValue": "Die maximale Reichweite des benutzerdefinierten Sensors muss größer oder gleich 0 km sein."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Blickwinkel",
+      "title": "Blickwinkel-Menü",
+      "helpBody": "Das Blickwinkel-Menü ermöglicht es Ihnen, die Entfernung, den Azimut und die Elevationswinkel zwischen einem Sensor und einem Satelliten zu berechnen. Ein Satellit und ein Sensor müssen zuerst ausgewählt werden, bevor das Menü verwendet werden kann. <br><br> Die Option 'Nur Auf- und Untergangszeiten umschalten' berechnet nur die Auf- und Untergangszeiten des Satelliten. Dies ist nützlich, um schnell zu bestimmen, wann ein Satellit für einen Sensor sichtbar sein wird. <br><br> Der Suchbereich kann durch Ändern der Längen- und Intervalloptionen modifiziert werden."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Multi-Standort-Blickwinkel",
+      "title": "Multi-Standort-Blickwinkel-Menü",
+      "helpBody": "Das Multi-Standort-Blickwinkel-Menü ermöglicht es Ihnen, die Entfernung, den Azimut und die Elevationswinkel zwischen einem Satelliten und mehreren Sensoren zu berechnen. Ein Satellit muss zuerst ausgewählt werden, bevor das Menü verwendet werden kann. <br><br> Standardmäßig berechnet das Menü die Blickwinkel für alle Sensoren im Space Surveillance Network. Wenn Sie die Blickwinkel für zusätzliche Sensoren berechnen möchten, können Sie am unteren Rand des Menüs eine CSV-Datei exportieren. Die CSV-Datei enthält Blickwinkel für alle Sensoren. <br><br> Durch Klicken auf eine Zeile in der Tabelle wird der Sensor ausgewählt und die Simulationszeit auf die Zeit des Blickwinkels geändert."
+    }
+  }
+}

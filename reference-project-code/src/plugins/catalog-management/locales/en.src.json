@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "Catalog Management",
+      "title": "Catalog Management",
+      "tabs": {
+        "import": "Import",
+        "export": "Export"
+      },
+      "helpBody": "The Catalog Management menu provides tools to import and export satellite catalog data. <b>Import tab:</b> Load a .tce, .tle, or .txt catalog file via file picker or drag-and-drop. <b>Export tab:</b> <ul style=\"margin-left: 40px;\"> <li>Export Official TLEs - Export real two line element sets.</li> <li>Export 3LEs - Export three line element sets.</li> <li>Export KeepTrack TLEs - Export all KeepTrack two line element sets including analysts.</li> <li>Export KeepTrack 3LEs - Export all KeepTrack three line element sets including analysts.</li> <li>Export Catalog CSV - Export catalog data as CSV.</li> <li>Export STK .tce - Export TLE data in STK satellite database format.</li> <li>Export Satellites in FOV - Export satellites currently in field of view.</li> <li>Export .e Ephemeris - Export propagated ephemeris for selected satellite in STK format.</li> </ul>"
+    }
+  }
+}

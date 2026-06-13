@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Info sensore",
+      "title": "Menu info sensore",
+      "helpBody": "Info sensore fornisce informazioni sul sensore attualmente selezionato. Le informazioni si basano su dati pubblicamente disponibili e potrebbero non essere sempre accurate al 100%. Se disponi di dati pubblici su sensori aggiuntivi o correzioni alle informazioni sui sensori esistenti, contattami all'indirizzo <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> Le informazioni fornite includono: <ul style=\"margin-left: 40px;\"> <li> Nome del sensore </li> <li> Proprietario del sensore </li> <li> Tipo di sensore </li> <li> Campo visivo del sensore </li> </ul> <br> Inoltre, da questo menu è possibile creare rapidamente linee dal sensore al sole o alla luna."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Sensore personalizzato",
+      "title": "Menu sensore personalizzato",
+      "helpBody": "Questa funzione consente di creare un sensore personalizzato da utilizzare nei calcoli e nelle funzioni di altri menu. Può essere un sensore completamente originale o una modifica di un sensore esistente. <br><br> Dopo aver impostato la latitudine, la longitudine e l'altitudine del sensore, è possibile impostare il campo visivo. Selezionando il telescopio si creerà un campo visivo di 360 gradi con una maschera di elevazione di 10 gradi e portata illimitata. Deselezionando l'opzione telescopio sarà possibile impostare il campo visivo manualmente. <br><br> Se si desidera modificare un sensore esistente, è possibile selezionarlo prima dall'elenco dei sensori e il sensore personalizzato verrà aggiornato con le informazioni del sensore selezionato.",
+      "labels": {
+        "sensorName": "Nome del sensore",
+        "defaultSensorName": "Sensore personalizzato",
+        "latitude": "Latitudine",
+        "longitude": "Longitudine",
+        "elevation": "Altitudine sul livello del mare (km)",
+        "sensorType": "Tipo di sensore",
+        "typeObserver": "Osservatore",
+        "typeOptical": "Ottico",
+        "typePhasedArray": "Radar ad array a scansione di fase",
+        "typeMechanical": "Meccanico",
+        "telescope": "Telescopio",
+        "minAzimuth": "Azimut minimo",
+        "maxAzimuth": "Azimut massimo",
+        "minElevation": "Elevazione minima",
+        "maxElevation": "Elevazione massima",
+        "minRange": "Portata minima",
+        "maxRange": "Portata massima",
+        "replaceSensor": "Sostituisci sensore",
+        "addCustomSensor": "Aggiungi sensore personalizzato",
+        "clearCustomSensors": "Cancella sensori personalizzati",
+        "useGeolocation": "Usa geolocalizzazione",
+        "tooltipSensorName": "Nome del sensore",
+        "tooltipLatitude": "Latitudine in forma decimale (es: 43,283)",
+        "tooltipLongitude": "Longitudine in forma decimale (es: -73,283)",
+        "tooltipElevation": "Altitudine in chilometri (es: 0,645)",
+        "tooltipTelescope": "Questo sensore è un telescopio?",
+        "tooltipMinAz": "Azimut in gradi (es: 50)",
+        "tooltipMaxAz": "Azimut in gradi (es: 120)",
+        "tooltipMinEl": "Elevazione in gradi (es: 10)",
+        "tooltipMaxEl": "Elevazione in gradi (es: 90)",
+        "tooltipMinRange": "Portata in chilometri (es: 500)",
+        "tooltipMaxRange": "Portata in chilometri (es: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Crea",
+        "createObserver": "Crea osservatore qui",
+        "createSensor": "Crea sensore qui"
+      },
+      "sensorList": {
+        "sensorName": "Nome del sensore",
+        "latitude": "Latitudine",
+        "longitude": "Longitudine",
+        "elevation": "Altitudine",
+        "azimuth": "Azimut",
+        "elevationRange": "Elevazione",
+        "range": "Portata"
+      },
+      "errorMsgs": {
+        "latRange": "La latitudine del sensore personalizzato deve essere compresa tra -90 e 90 gradi.",
+        "lonRange": "La longitudine del sensore personalizzato deve essere compresa tra -180 e 180 gradi.",
+        "altRange": "L'altitudine del sensore personalizzato deve essere maggiore o uguale a 0 km.",
+        "minAzRange": "L'azimut minimo del sensore personalizzato deve essere compreso tra -360 e 360 gradi.",
+        "maxAzRange": "L'azimut massimo del sensore personalizzato deve essere compreso tra -360 e 360 gradi.",
+        "minElRange": "L'elevazione minima del sensore personalizzato deve essere compresa tra -90 e 90 gradi.",
+        "maxElRange": "L'elevazione massima del sensore personalizzato deve essere compresa tra -90 e 90 gradi.",
+        "minRangeValue": "La portata minima del sensore personalizzato deve essere maggiore o uguale a 0 km.",
+        "maxRangeValue": "La portata massima del sensore personalizzato deve essere maggiore o uguale a 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Angoli di osservazione",
+      "title": "Menu angoli di osservazione",
+      "helpBody": "Il menu Angoli di osservazione consente di calcolare la distanza, l'azimut e gli angoli di elevazione tra un sensore e un satellite. Prima di poter utilizzare il menu è necessario selezionare un satellite e un sensore. <br><br> L'opzione per mostrare solo gli orari di sorgere e tramontare calcolerà esclusivamente gli orari di sorgere e tramontare del satellite. Questo è utile per determinare rapidamente quando un satellite sarà visibile a un sensore. <br><br> L'intervallo di ricerca può essere modificato cambiando le opzioni di durata e intervallo."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Osservazione multi-sito",
+      "title": "Menu angoli di osservazione multi-sito",
+      "helpBody": "Il menu Angoli di osservazione multi-sito consente di calcolare la distanza, l'azimut e gli angoli di elevazione tra un satellite e più sensori. Prima di poter utilizzare il menu è necessario selezionare un satellite. <br><br> Per impostazione predefinita, il menu calcolerà gli angoli di osservazione per tutti i sensori nella rete di sorveglianza spaziale. Se si desidera calcolare gli angoli di osservazione per sensori aggiuntivi, è possibile esportare un file CSV in fondo al menu. Il file CSV conterrà gli angoli di osservazione per tutti i sensori. <br><br> Facendo clic su una riga nella tabella si selezionerà il sensore e si cambierà il tempo di simulazione all'orario dell'angolo di osservazione."
+    }
+  }
+}

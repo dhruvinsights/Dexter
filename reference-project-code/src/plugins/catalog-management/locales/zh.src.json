@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "CatalogManagementPlugin": {
+      "bottomIconLabel": "目录管理",
+      "title": "目录管理",
+      "tabs": {
+        "import": "导入",
+        "export": "导出"
+      },
+      "helpBody": "目录管理菜单提供导入和导出卫星目录数据的工具。<b>导入选项卡：</b>通过文件选择器或拖放加载 .tce、.tle 或 .txt 目录文件。<b>导出选项卡：</b><ul style=\"margin-left: 40px;\"> <li>导出官方TLE – 导出真实的两行轨道根数。</li> <li>导出3LE – 导出三行轨道根数。</li> <li>导出KeepTrack TLE – 导出所有KeepTrack两行轨道根数（包括分析员数据）。</li> <li>导出KeepTrack 3LE – 导出所有KeepTrack三行轨道根数（包括分析员数据）。</li> <li>导出目录CSV – 以CSV格式导出目录数据。</li> <li>导出STK .tce – 以STK卫星数据库格式导出TLE数据。</li> <li>导出视场内卫星 – 导出当前在视场范围内的卫星。</li> <li>导出.e星历 – 以STK格式导出所选卫星的传播星历。</li> </ul>"
+    }
+  }
+}

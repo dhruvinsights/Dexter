@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "CountriesMenu": {
+      "bottomIconLabel": "Země",
+      "title": "Nabídka zemí",
+      "helpBody": "Nabídka Země umožňuje filtrovat satelity podle země původu."
+    }
+  }
+}

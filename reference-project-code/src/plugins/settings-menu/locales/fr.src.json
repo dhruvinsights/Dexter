@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SettingsMenuPlugin": {
+      "bottomIconLabel": "Paramètres",
+      "title": "Menu Paramètres",
+      "helpBody": "Le menu Paramètres vous permet de configurer l'application."
+    }
+  }
+}

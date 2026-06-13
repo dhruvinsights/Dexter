@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Info o senzoru",
+      "title": "Menu informací o senzoru",
+      "helpBody": "Info o senzoru poskytuje informace o aktuálně vybraném senzoru. Informace jsou založeny na veřejně dostupných datech a nemusí být vždy 100% přesné. Pokud máte veřejná data o dalších senzorech nebo opravy k existujícím informacím o senzorech, kontaktujte mě na <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> Poskytované informace zahrnují: <ul style=\"margin-left: 40px;\"> <li> Název senzoru </li> <li> Vlastník senzoru </li> <li> Typ senzoru </li> <li> Zorné pole senzoru </li> </ul> <br> Navíc lze z tohoto menu rychle vytvořit čáry ze senzoru ke Slunci nebo Měsíci."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Vlastní senzor",
+      "title": "Menu vlastního senzoru",
+      "helpBody": "Toto vám umožňuje vytvořit vlastní senzor pro použití ve výpočtech a funkcích ostatních menu. Může se jednat o zcela originální senzor nebo o úpravu existujícího senzoru. <br><br> Po nastavení zeměpisné šířky, zeměpisné délky a výšky senzoru můžete nastavit jeho zorné pole. Výběr teleskopu vytvoří 360stupňové zorné pole s elevační maskou 10 stupňů a neomezeným dosahem. Zrušení výběru možnosti teleskopu vám umožní nastavit zorné pole ručně. <br><br> Pokud se pokoušíte upravit existující senzor, můžete jej nejprve vybrat ze seznamu senzorů a vlastní senzor bude aktualizován informacemi vybraného senzoru.",
+      "labels": {
+        "sensorName": "Název senzoru",
+        "defaultSensorName": "Vlastní senzor",
+        "latitude": "Zeměpisná šířka",
+        "longitude": "Zeměpisná délka",
+        "elevation": "Nadmořská výška (km)",
+        "sensorType": "Typ senzoru",
+        "typeObserver": "Pozorovatel",
+        "typeOptical": "Optický",
+        "typePhasedArray": "Fázový anténní radar",
+        "typeMechanical": "Mechanický",
+        "telescope": "Teleskop",
+        "minAzimuth": "Minimální azimut",
+        "maxAzimuth": "Maximální azimut",
+        "minElevation": "Minimální elevace",
+        "maxElevation": "Maximální elevace",
+        "minRange": "Minimální dosah",
+        "maxRange": "Maximální dosah",
+        "replaceSensor": "Nahradit senzor",
+        "addCustomSensor": "Přidat vlastní senzor",
+        "clearCustomSensors": "Vymazat vlastní senzory",
+        "useGeolocation": "Použít geolokaci",
+        "tooltipSensorName": "Název senzoru",
+        "tooltipLatitude": "Zeměpisná šířka v desítkové formě (např.: 43,283)",
+        "tooltipLongitude": "Zeměpisná délka v desítkové formě (např.: -73,283)",
+        "tooltipElevation": "Nadmořská výška v kilometrech (např.: 0,645)",
+        "tooltipTelescope": "Je tento senzor teleskop?",
+        "tooltipMinAz": "Azimut ve stupních (např.: 50)",
+        "tooltipMaxAz": "Azimut ve stupních (např.: 120)",
+        "tooltipMinEl": "Elevace ve stupních (např.: 10)",
+        "tooltipMaxEl": "Elevace ve stupních (např.: 90)",
+        "tooltipMinRange": "Dosah v kilometrech (např.: 500)",
+        "tooltipMaxRange": "Dosah v kilometrech (např.: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Vytvořit",
+        "createObserver": "Vytvořit pozorovatele zde",
+        "createSensor": "Vytvořit senzor zde"
+      },
+      "sensorList": {
+        "sensorName": "Název senzoru",
+        "latitude": "Zeměpisná šířka",
+        "longitude": "Zeměpisná délka",
+        "elevation": "Nadmořská výška",
+        "azimuth": "Azimut",
+        "elevationRange": "Elevace",
+        "range": "Dosah"
+      },
+      "errorMsgs": {
+        "latRange": "Zeměpisná šířka vlastního senzoru musí být mezi -90 a 90 stupni.",
+        "lonRange": "Zeměpisná délka vlastního senzoru musí být mezi -180 a 180 stupni.",
+        "altRange": "Nadmořská výška vlastního senzoru musí být větší nebo rovna 0 km.",
+        "minAzRange": "Minimální azimut vlastního senzoru musí být mezi -360 a 360 stupni.",
+        "maxAzRange": "Maximální azimut vlastního senzoru musí být mezi -360 a 360 stupni.",
+        "minElRange": "Minimální elevace vlastního senzoru musí být mezi -90 a 90 stupni.",
+        "maxElRange": "Maximální elevace vlastního senzoru musí být mezi -90 a 90 stupni.",
+        "minRangeValue": "Minimální dosah vlastního senzoru musí být větší nebo roven 0 km.",
+        "maxRangeValue": "Maximální dosah vlastního senzoru musí být větší nebo roven 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Úhly pohledu",
+      "title": "Menu úhlů pohledu",
+      "helpBody": "Menu úhlů pohledu umožňuje vypočítat vzdálenost, azimut a elevační úhly mezi senzorem a satelitem. Před použitím menu musí být nejprve vybrán satelit a senzor. <br><br> Přepínač pouze časů východu a západu vypočítá pouze časy východu a západu satelitu. To je užitečné pro rychlé určení, kdy bude satelit viditelný pro senzor. <br><br> Rozsah vyhledávání lze upravit změnou možností délky a intervalu."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Pohledy z více míst",
+      "title": "Menu úhlů pohledu z více míst",
+      "helpBody": "Menu úhlů pohledu z více míst umožňuje vypočítat vzdálenost, azimut a elevační úhly mezi satelitem a více senzory. Před použitím menu musí být nejprve vybrán satelit. <br><br> Ve výchozím nastavení menu vypočítá úhly pohledu pro všechny senzory v síti sledování vesmíru. Pokud chcete vypočítat úhly pohledu pro další senzory, můžete exportovat soubor CSV ve spodní části menu. Soubor CSV bude obsahovat úhly pohledu pro všechny senzory. <br><br> Kliknutím na řádek v tabulce vyberete senzor a změníte čas simulace na čas úhlu pohledu."
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "Info del Sensor",
+      "title": "Menú de Información del Sensor",
+      "helpBody": "La Información del Sensor proporciona detalles sobre el sensor actualmente seleccionado. La información se basa en datos públicamente disponibles y puede no ser 100% precisa siempre. Si tienes datos públicos sobre sensores adicionales o correcciones a la información de sensores existentes, por favor contáctame en <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>. <br><br> La información proporcionada incluye: <ul style=\"margin-left: 40px;\"> <li> Nombre del Sensor </li> <li> Propietario del Sensor </li> <li> Tipo de Sensor </li> <li> Campo de Visión del Sensor </li> </ul> <br> Además, se pueden crear rápidamente líneas desde el sensor al sol o la luna desde este menú."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "Sensor Personalizado",
+      "title": "Menú de Sensor Personalizado",
+      "helpBody": "Esto te permite crear un sensor personalizado para usar en cálculos y funciones de otros menús. Puede ser un sensor completamente original o una modificación de uno existente. <br><br> Después de establecer la latitud, longitud y altitud del sensor, puedes configurar su campo de visión. Seleccionar telescopio creará un campo de visión de 360 grados con una máscara de elevación de 10 grados y rango ilimitado. Deseleccionar la opción de telescopio te permitirá configurar el campo de visión manualmente. <br><br> Si estás tratando de editar un sensor existente, puedes seleccionarlo primero de la lista de sensores y el sensor personalizado se actualizará con la información del sensor seleccionado.",
+      "labels": {
+        "sensorName": "Nombre del Sensor",
+        "defaultSensorName": "Sensor Personalizado",
+        "latitude": "Latitud",
+        "longitude": "Longitud",
+        "elevation": "Elevación sobre el Nivel del Mar (Km)",
+        "sensorType": "Tipo de Sensor",
+        "typeObserver": "Observador",
+        "typeOptical": "Óptico",
+        "typePhasedArray": "Radar de Matriz en Fase",
+        "typeMechanical": "Mecánico",
+        "telescope": "Telescopio",
+        "minAzimuth": "Azimut Mínimo",
+        "maxAzimuth": "Azimut Máximo",
+        "minElevation": "Elevación Mínima",
+        "maxElevation": "Elevación Máxima",
+        "minRange": "Rango Mínimo",
+        "maxRange": "Rango Máximo",
+        "replaceSensor": "Reemplazar Sensor",
+        "addCustomSensor": "Añadir Sensor Personalizado",
+        "clearCustomSensors": "Limpiar Sensores Personalizados",
+        "useGeolocation": "Usar Geolocalización",
+        "tooltipSensorName": "Nombre del Sensor",
+        "tooltipLatitude": "Latitud en forma decimal (ej: 43.283)",
+        "tooltipLongitude": "Longitud en forma decimal (ej: -73.283)",
+        "tooltipElevation": "Elevación en kilómetros (ej: 0.645)",
+        "tooltipTelescope": "¿Es este sensor un telescopio?",
+        "tooltipMinAz": "Azimut en grados (ej: 50)",
+        "tooltipMaxAz": "Azimut en grados (ej: 120)",
+        "tooltipMinEl": "Elevación en grados (ej: 10)",
+        "tooltipMaxEl": "Elevación en grados (ej: 90)",
+        "tooltipMinRange": "Rango en kilómetros (ej: 500)",
+        "tooltipMaxRange": "Rango en kilómetros (ej: 20000)"
+      },
+      "rmbMenu": {
+        "title": "Crear",
+        "createObserver": "Crear Observador Aquí",
+        "createSensor": "Crear Sensor Aquí"
+      },
+      "sensorList": {
+        "sensorName": "Nombre del Sensor",
+        "latitude": "Latitud",
+        "longitude": "Longitud",
+        "elevation": "Elevación",
+        "azimuth": "Azimut",
+        "elevationRange": "Elevación",
+        "range": "Rango"
+      },
+      "errorMsgs": {
+        "latRange": "La latitud del sensor personalizado debe estar entre -90 y 90 grados.",
+        "lonRange": "La longitud del sensor personalizado debe estar entre -180 y 180 grados.",
+        "altRange": "La altitud del sensor personalizado debe ser mayor o igual a 0 km.",
+        "minAzRange": "El azimut mínimo del sensor personalizado debe estar entre -360 y 360 grados.",
+        "maxAzRange": "El azimut máximo del sensor personalizado debe estar entre -360 y 360 grados.",
+        "minElRange": "La elevación mínima del sensor personalizado debe estar entre -90 y 90 grados.",
+        "maxElRange": "La elevación máxima del sensor personalizado debe estar entre -90 y 90 grados.",
+        "minRangeValue": "El rango mínimo del sensor personalizado debe ser mayor o igual a 0 km.",
+        "maxRangeValue": "El rango máximo del sensor personalizado debe ser mayor o igual a 0 km."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "Ángulos de Visión",
+      "title": "Menú de Ángulos de Visión",
+      "helpBody": "El menú de Ángulos de Visión te permite calcular el rango, azimut y ángulos de elevación entre un sensor y un satélite. Un satélite y un sensor deben ser seleccionados primero antes de que el menú pueda ser usado. <br><br> La opción de alternar solo tiempos de ascenso y puesta calculará solo los tiempos de ascenso y puesta del satélite. Esto es útil para determinar rápidamente cuándo un satélite será visible para un sensor. <br><br> El rango de búsqueda puede ser modificado cambiando las opciones de longitud e intervalo."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "Vistas Multi-Sitio",
+      "title": "Menú de Ángulos de Visión Multi-Sitio",
+      "helpBody": "El menú de Ángulos de Visión Multi-Sitio te permite calcular el rango, azimut y ángulos de elevación entre un satélite y múltiples sensores. Un satélite debe ser seleccionado primero antes de que el menú pueda ser usado. <br><br> Por defecto, el menú calculará los ángulos de visión para todos los sensores en la Red de Vigilancia Espacial. Si deseas calcular los ángulos de visión para sensores adicionales, puedes exportar un archivo csv en la parte inferior del menú. El archivo csv contendrá ángulos de visión para todos los sensores. <br><br> Hacer clic en una fila de la tabla seleccionará el sensor y cambiará el tiempo de simulación al tiempo del ángulo de visión."
+    }
+  }
+}

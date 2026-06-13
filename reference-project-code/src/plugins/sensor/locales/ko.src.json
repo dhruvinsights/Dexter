@@ -1,0 +1,83 @@
+{
+  "plugins": {
+    "SensorInfoPlugin": {
+      "bottomIconLabel": "센서 정보",
+      "title": "센서 정보 메뉴",
+      "helpBody": "센서 정보는 현재 선택된 센서에 대한 정보를 제공합니다. 이 정보는 공개적으로 사용 가능한 데이터를 기반으로 하며 항상 100% 정확하지 않을 수 있습니다. 추가 센서에 대한 공개 데이터나 기존 센서 정보에 대한 수정 사항이 있으면 <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>로 연락해 주세요. <br><br> 제공되는 정보는 다음과 같습니다: <ul style=\"margin-left: 40px;\"> <li> 센서 이름 </li> <li> 센서 소유자 </li> <li> 센서 유형 </li> <li> 센서 시야각 </li> </ul> <br> 또한, 이 메뉴에서 센서에서 태양이나 달까지의 선을 빠르게 생성할 수 있습니다."
+    },
+    "CustomSensorPlugin": {
+      "bottomIconLabel": "커스텀 센서",
+      "title": "커스텀 센서 메뉴",
+      "helpBody": "이 메뉴를 사용하면 계산 및 기타 메뉴 기능에 사용할 커스텀 센서를 생성할 수 있습니다. 완전히 새로운 센서를 만들거나 기존 센서를 수정할 수 있습니다. <br><br> 센서의 위도, 경도 및 고도를 설정한 후 센서의 시야각을 설정할 수 있습니다. 망원경을 선택하면 360도 시야각, 10도 고도 마스크 및 무제한 범위로 생성됩니다. 망원경 옵션을 선택 해제하면 시야각을 수동으로 설정할 수 있습니다. <br><br> 기존 센서를 편집하려면 먼저 센서 목록에서 선택하면 커스텀 센서가 선택한 센서의 정보로 업데이트됩니다.",
+      "labels": {
+        "sensorName": "센서 이름",
+        "defaultSensorName": "커스텀 센서",
+        "latitude": "위도",
+        "longitude": "경도",
+        "elevation": "해발 고도 (km)",
+        "sensorType": "센서 유형",
+        "typeObserver": "관측자",
+        "typeOptical": "광학",
+        "typePhasedArray": "위상 배열 레이더",
+        "typeMechanical": "기계식",
+        "telescope": "망원경",
+        "minAzimuth": "최소 방위각",
+        "maxAzimuth": "최대 방위각",
+        "minElevation": "최소 고도각",
+        "maxElevation": "최대 고도각",
+        "minRange": "최소 거리",
+        "maxRange": "최대 거리",
+        "replaceSensor": "센서 교체",
+        "addCustomSensor": "커스텀 센서 추가",
+        "clearCustomSensors": "커스텀 센서 지우기",
+        "useGeolocation": "위치 정보 사용",
+        "tooltipSensorName": "센서의 이름",
+        "tooltipLatitude": "십진수 형식의 위도 (예: 43.283)",
+        "tooltipLongitude": "십진수 형식의 경도 (예: -73.283)",
+        "tooltipElevation": "킬로미터 단위의 고도 (예: 0.645)",
+        "tooltipTelescope": "이 센서가 망원경입니까?",
+        "tooltipMinAz": "도 단위의 방위각 (예: 50)",
+        "tooltipMaxAz": "도 단위의 방위각 (예: 120)",
+        "tooltipMinEl": "도 단위의 고도각 (예: 10)",
+        "tooltipMaxEl": "도 단위의 고도각 (예: 90)",
+        "tooltipMinRange": "킬로미터 단위의 거리 (예: 500)",
+        "tooltipMaxRange": "킬로미터 단위의 거리 (예: 20000)"
+      },
+      "rmbMenu": {
+        "title": "생성",
+        "createObserver": "여기에 관측자 생성",
+        "createSensor": "여기에 센서 생성"
+      },
+      "sensorList": {
+        "sensorName": "센서 이름",
+        "latitude": "위도",
+        "longitude": "경도",
+        "elevation": "고도",
+        "azimuth": "방위각",
+        "elevationRange": "고도각",
+        "range": "거리"
+      },
+      "errorMsgs": {
+        "latRange": "커스텀 센서 위도는 -90도에서 90도 사이여야 합니다.",
+        "lonRange": "커스텀 센서 경도는 -180도에서 180도 사이여야 합니다.",
+        "altRange": "커스텀 센서 고도는 0 km 이상이어야 합니다.",
+        "minAzRange": "커스텀 센서 최소 방위각은 -360도에서 360도 사이여야 합니다.",
+        "maxAzRange": "커스텀 센서 최대 방위각은 -360도에서 360도 사이여야 합니다.",
+        "minElRange": "커스텀 센서 최소 고도각은 -90도에서 90도 사이여야 합니다.",
+        "maxElRange": "커스텀 센서 최대 고도각은 -90도에서 90도 사이여야 합니다.",
+        "minRangeValue": "커스텀 센서 최소 거리는 0 km 이상이어야 합니다.",
+        "maxRangeValue": "커스텀 센서 최대 거리는 0 km 이상이어야 합니다."
+      }
+    },
+    "LookAnglesPlugin": {
+      "bottomIconLabel": "관측각",
+      "title": "관측각 메뉴",
+      "helpBody": "관측각 메뉴를 사용하면 센서와 위성 사이의 거리, 방위각 및 고도각을 계산할 수 있습니다. 메뉴를 사용하기 전에 먼저 위성과 센서를 선택해야 합니다. <br><br> '상승 및 하강 시간만 전환'은 위성의 상승 및 하강 시간만 계산합니다. 이는 위성이 센서에 언제 보일지 빠르게 결정하는 데 유용합니다. <br><br> 검색 범위는 길이 및 간격 옵션을 변경하여 수정할 수 있습니다."
+    },
+    "MultiSiteLookAnglesPlugin": {
+      "bottomIconLabel": "다중 사이트 관측각",
+      "title": "다중 사이트 관측각 메뉴",
+      "helpBody": "다중 사이트 관측각 메뉴를 사용하면 위성과 여러 센서 사이의 거리, 방위각 및 고도각을 계산할 수 있습니다. 메뉴를 사용하기 전에 먼저 위성을 선택해야 합니다. <br><br> 기본적으로 메뉴는 우주 감시 네트워크의 모든 센서에 대한 관측각을 계산합니다. 추가 센서에 대한 관측각을 계산하려면 메뉴 하단에서 csv 파일을 내보낼 수 있습니다. csv 파일에는 모든 센서에 대한 관측각이 포함됩니다. <br><br> 표에서 행을 클릭하면 센서가 선택되고 시뮬레이션 시간이 관측각 시간으로 변경됩니다."
+    }
+  }
+}

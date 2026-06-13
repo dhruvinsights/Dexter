@@ -1,0 +1,172 @@
+import { GroupType } from '@app/app/data/object-group';
+import { MenuMode, ToastMsgType } from '@app/engine/core/interfaces';
+import { ServiceLocator } from '@app/engine/core/service-locator';
+import {
+  ICommandPaletteCommand,
+  ISettingsContribution,
+  ISettingsContributor,
+} from '@app/engine/plugins/core/plugin-capabilities';
+import { PersistenceManager, StorageKey } from '@app/engine/utils/persistence-manager';
+import { t7e } from '@app/locales/keys';
+import historyPng from '@public/img/icons/history.png';
+import { DexterPlugin } from '../../engine/plugins/base-plugin';
+
+export class TimeMachine extends DexterPlugin implements ISettingsContributor {
+  readonly id = 'TimeMachine';
+  static readonly TIME_BETWEEN_SATELLITES = 10000;
+  dependencies_ = [];
+
+  bottomIconCallback = () => {
+    const groupManagerInstance = ServiceLocator.getGroupsManager();
+    const colorSchemeManagerInstance = ServiceLocator.getColorSchemeManager();
+    const orbitManagerInstance = ServiceLocator.getOrbitManager();
+
+    if (this.isMenuButtonActive) {
+      ServiceLocator.getUiManager().searchManager.hideResults();
+      this.setBottomIconToSelected();
+      this.historyOfSatellitesPlay();
+    } else {
+      this.isTimeMachineRunning = false;
+      settingsManager.colors.transparent = orbitManagerInstance.tempTransColor;
+      groupManagerInstance.clearSelect();
+      colorSchemeManagerInstance.calculateColorBuffers(true); // force color recalc
+      this.setBottomIconToUnselected();
+    }
+  };
+
+
+  bottomIconImg = historyPng;
+  bottomIconLabel = 'Time Machine';
+
+  getCommandPaletteCommands(): ICommandPaletteCommand[] {
+    return [
+      {
+        id: 'TimeMachine.toggle',
+        label: 'Toggle Time Machine',
+        category: 'Playback',
+        callback: () => this.bottomMenuClicked(),
+      },
+    ];
+  }
+
+  getSettingsContribution(): ISettingsContribution {
+    return {
+      sectionId: this.id,
+      sectionLabel: this.bottomIconLabel,
+      controls: [
+        {
+          type: 'toggle',
+          id: 'disableToasts',
+          label: t7e('plugins.TimeMachine.settings.disableToasts.label'),
+          helpText: t7e('plugins.TimeMachine.settings.disableToasts.helpText'),
+          get: () => settingsManager.isDisableTimeMachineToasts,
+          set: (next) => {
+            settingsManager.isDisableTimeMachineToasts = next;
+            PersistenceManager.getInstance().saveItem(
+              StorageKey.SETTINGS_DISABLE_TIME_MACHINE_TOASTS,
+              next.toString(),
+            );
+          },
+        },
+      ],
+    };
+  }
+  historyOfSatellitesRunCount = 0;
+  isTimeMachineRunning = false;
+
+  menuMode: MenuMode[] = [MenuMode.TOOLS, MenuMode.ALL];
+
+  historyOfSatellitesPlay() {
+    this.isTimeMachineRunning = true;
+    this.historyOfSatellitesRunCount++;
+    ServiceLocator.getOrbitManager().tempTransColor = settingsManager.colors.transparent;
+    settingsManager.colors.transparent = [0, 0, 0, 0];
+    for (let yy = 0; yy <= 200; yy++) {
+      let year = 57 + yy;
+
+      if (year >= 100) {
+        year -= 100;
+      }
+      setTimeout(
+        (runCount) => {
+          this.playNextSatellite(runCount, year);
+        },
+        settingsManager.timeMachineDelay * yy,
+        this.historyOfSatellitesRunCount,
+      );
+
+      const currentYear = parseInt(new Date().getUTCFullYear().toString().slice(2, 4));
+
+      if (year === currentYear) {
+        break;
+      }
+    }
+  }
+
+  playNextSatellite(runCount: number, year: number) {
+    if (!this.isTimeMachineRunning) {
+      if (this.isMenuButtonActive) {
+        this.setBottomIconToUnselected();
+      }
+
+      return;
+    }
+    const groupManagerInstance = ServiceLocator.getGroupsManager();
+    const colorSchemeManagerInstance = ServiceLocator.getColorSchemeManager();
+
+    // Kill all old async calls if run count updates
+    if (runCount !== this.historyOfSatellitesRunCount) {
+      return;
+    }
+    const yearGroup = groupManagerInstance.createGroup(GroupType.YEAR_OR_LESS, year);
+
+    groupManagerInstance.selectGroup(yearGroup);
+    yearGroup.updateOrbits();
+    colorSchemeManagerInstance.isUseGroupColorScheme = true;
+    colorSchemeManagerInstance.calculateColorBuffers();
+
+    if (!settingsManager.isDisableTimeMachineToasts) {
+      if (year >= 57 && year < 100) {
+        const timeMachineString = <string>(settingsManager.timeMachineString(year.toString()) || `Time Machine In Year 19${year}!`);
+
+        ServiceLocator.getUiManager().toast(timeMachineString, ToastMsgType.normal, settingsManager.timeMachineLongToast);
+      } else {
+        const yearStr = year < 10 ? `0${year}` : `${year}`;
+        const timeMachineString = <string>(settingsManager.timeMachineString(yearStr) || `Time Machine In Year 20${yearStr}!`);
+
+        ServiceLocator.getUiManager().toast(timeMachineString, ToastMsgType.normal, settingsManager.timeMachineLongToast);
+      }
+    }
+
+    if (year === parseInt(new Date().getUTCFullYear().toString().slice(2, 4))) {
+      if (settingsManager.loopTimeMachine) {
+        setTimeout(() => {
+          this.historyOfSatellitesPlay();
+        }, settingsManager.timeMachineDelayAtPresentDay);
+      } else {
+        setTimeout(() => {
+          this.removeSatellite(runCount);
+        }, TimeMachine.TIME_BETWEEN_SATELLITES); // Linger for 10 seconds
+      }
+    }
+  }
+
+  removeSatellite(runCount: number): void {
+    const orbitManagerInstance = ServiceLocator.getOrbitManager();
+    const groupManagerInstance = ServiceLocator.getGroupsManager();
+    const colorSchemeManagerInstance = ServiceLocator.getColorSchemeManager();
+
+    if (runCount !== this.historyOfSatellitesRunCount) {
+      return;
+    }
+    if (!this.isMenuButtonActive) {
+      return;
+    }
+    settingsManager.colors.transparent = orbitManagerInstance.tempTransColor;
+    this.isMenuButtonActive = false;
+    this.isTimeMachineRunning = false;
+    groupManagerInstance.clearSelect();
+    colorSchemeManagerInstance.calculateColorBuffers(true);
+  }
+}
+

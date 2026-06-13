@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "FindSatPlugin": {
+      "bottomIconLabel": "Znajdź satelitę",
+      "title": "Znajdź satelitę",
+      "helpBody": "Menu Znajdź satelitę pozwala wyszukiwać satelity na podstawie różnych kryteriów:<br><br><ul style=\"margin-left: 40px;\"><li><strong>Typ obiektu</strong> - Filtruj według ładunku, członu rakietowego lub odłamków</li><li><strong>Kraj</strong> - Filtruj według kraju wynoszącego</li><li><strong>Platforma satelitarna/Ładunek/Kształt/Źródło</strong> - Filtruj według cech satelity</li><li><strong>Azymut/Elewacja/Zasięg</strong> - Szukaj według kątów obserwacji (wymaga czujnika)</li><li><strong>Parametry orbitalne</strong> - Inklinacja, Okres, RAAN, Argument perycentrum</li><li><strong>Wiek TLE</strong> - Filtruj według daty ostatniej aktualizacji TLE</li><li><strong>RCS</strong> - Filtruj według przekroju radarowego</li></ul><br>Wyniki są wyświetlane w pasku wyszukiwania. Użyj przycisku Eksportuj, aby zapisać wyniki jako CSV.",
+      "labels": {
+        "objectType": "Typ obiektu",
+        "country": "Kraj",
+        "satelliteBus": "Platforma satelitarna",
+        "payload": "Ładunek",
+        "shape": "Kształt",
+        "source": "Źródło",
+        "azimuth": "Azymut (°)",
+        "azimuthMargin": "Margines (°)",
+        "elevation": "Elewacja (°)",
+        "elevationMargin": "Margines (°)",
+        "range": "Zasięg (km)",
+        "rangeMargin": "Margines (km)",
+        "inclination": "Inklinacja (°)",
+        "inclinationMargin": "Margines (°)",
+        "period": "Okres (min)",
+        "periodMargin": "Margines (min)",
+        "tleAge": "Wiek TLE (godziny)",
+        "tleAgeMargin": "Margines (godziny)",
+        "rcs": "RCS (m²)",
+        "rcsMargin": "Margines (m²)",
+        "rightAscension": "Rektascensja (°)",
+        "rightAscensionMargin": "Margines (°)",
+        "argOfPerigee": "Argument perycentrum (°)",
+        "argOfPerigeeMargin": "Margines (°)",
+        "all": "Wszystkie",
+        "findSatellites": "Znajdź satelity",
+        "exportData": "Eksportuj dane"
+      },
+      "errorMsgs": {
+        "NoSatellitesFound": "Nie znaleziono satelitów",
+        "NoSearchCriteriaEntered": "Nie podano kryteriów wyszukiwania",
+        "TooManyResults": "Zbyt wiele wyników, ograniczono do {limit}",
+        "TryFindingFirst": "Najpierw spróbuj wyszukać satelity!"
+      }
+    }
+  }
+}

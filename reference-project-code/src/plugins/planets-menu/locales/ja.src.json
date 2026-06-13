@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "PlanetsMenuPlugin": {
+      "bottomIconLabel": "惑星",
+      "title": "惑星リストメニュー",
+      "helpBody": "このメニューでは、シミュレーション内のさまざまな惑星を選択して表示できます。",
+      "sections": {
+        "planets": "惑星",
+        "dwarfPlanets": "矮小惑星",
+        "otherCelestialBodies": "その他の天体"
+      },
+      "tooltips": {
+        "centerCamera": "{body} にカメラを合わせる。",
+        "plannedFuture": "将来のアップデートで予定。"
+      }
+    }
+  }
+}
