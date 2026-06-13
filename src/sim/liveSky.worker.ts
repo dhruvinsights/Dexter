@@ -54,7 +54,8 @@ function parseCatalogue(text: string, max: number): SatEntry[] {
     }
     lastName = '';
     i++; // consumed the pair
-    if (out.length >= max) break;
+    // Only break if we've reached the max limit (allows loading all satellites when max is high enough)
+    if (max > 0 && out.length >= max) break;
   }
   return out;
 }

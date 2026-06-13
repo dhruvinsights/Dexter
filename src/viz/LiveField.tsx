@@ -3,7 +3,8 @@ import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useSimStore, TIME_MACHINE_END_YEAR } from '@/state/useSimStore';
 
-const MAX_OBJECTS = 16000;
+// Removed MAX_OBJECTS limit to load all available satellites from CelesTrak
+const MAX_OBJECTS = 20000; // Increased to accommodate all CelesTrak satellites (~15,699)
 const UPDATE_INTERVAL_MS = 300; // re-propagate ~3×/s (screen motion is slow at this scale)
 const POINT_SIZE = 0.035;
 const SELECTED_POINT_SIZE = 0.08;
