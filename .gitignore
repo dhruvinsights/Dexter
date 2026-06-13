@@ -1,0 +1,21 @@
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Databases
+*.db
+*.sqlite
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# IDE Configs
+.vscode/
+.idea/
