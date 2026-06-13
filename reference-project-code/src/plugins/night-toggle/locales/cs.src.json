@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "NightToggle": {
-      "bottomIconLabel": "Přepínač noci"
-    }
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorSurvFence": {
-      "bottomIconLabel": "Пошуковий бар'єр сенсора"
-    }
-  }
-}

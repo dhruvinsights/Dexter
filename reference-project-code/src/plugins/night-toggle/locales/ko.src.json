@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "NightToggle": {
-      "bottomIconLabel": "야간 토글"
-    }
-  }
-}

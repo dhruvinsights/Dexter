@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "FpsView": {
-      "bottomIconLabel": "FPS 보기"
-    }
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "EarthCenteredView": {
-      "bottomIconLabel": "Vista Terrestre"
-    }
-  }
-}

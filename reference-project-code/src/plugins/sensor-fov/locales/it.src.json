@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorFov": {
-      "bottomIconLabel": "FOV Sensore"
-    }
-  }
-}

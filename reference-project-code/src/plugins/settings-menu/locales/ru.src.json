@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "SettingsMenuPlugin": {
-      "bottomIconLabel": "Настройки",
-      "title": "Меню настроек",
-      "helpBody": "Меню настроек позволяет настроить приложение."
-    }
-  }
-}

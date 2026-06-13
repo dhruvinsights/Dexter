@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "OrbitGuardMenuPlugin": {
-      "bottomIconLabel": "OrbitGuard",
-      "title": "OrbitGuard",
-      "helpBody": "OrbitGuard異常検出メニューは、衛星の最新の軌道変更、軌道逸脱、および安定性変化イベントを表示します。"
-    }
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorSurvFence": {
-      "bottomIconLabel": "센서 펜스"
-    }
-  }
-}

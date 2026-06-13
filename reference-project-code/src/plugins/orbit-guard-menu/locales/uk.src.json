@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "OrbitGuardMenuPlugin": {
-      "bottomIconLabel": "OrbitGuard",
-      "title": "OrbitGuard",
-      "helpBody": "Меню виявлення аномалій OrbitGuard відображає останні маневри, відхилення орбіти від сімейства та події зміни стабільності для супутників."
-    }
-  }
-}

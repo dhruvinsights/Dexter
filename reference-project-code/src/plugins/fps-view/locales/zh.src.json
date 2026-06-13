@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "FpsView": {
-      "bottomIconLabel": "第一人称视图"
-    }
-  }
-}

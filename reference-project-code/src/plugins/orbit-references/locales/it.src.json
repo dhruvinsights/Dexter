@@ -1,8 +1,0 @@
-{
-  "plugins": {
-    "OrbitReferences": {
-      "tooltip": "Crea satelliti analista in orbita",
-      "linkText": "Genera satelliti di riferimento orbitale..."
-    }
-  }
-}

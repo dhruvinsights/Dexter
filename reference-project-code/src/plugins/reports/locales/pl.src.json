@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "ReportsPlugin": {
-      "bottomIconLabel": "Raporty",
-      "title": "Menu raportów",
-      "helpBody": "Menu raportów to zbiór narzędzi pomagających analizować i rozumieć przeglądane dane."
-    }
-  }
-}

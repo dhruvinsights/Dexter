@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "SettingsMenuPlugin": {
-      "bottomIconLabel": "Nastavení",
-      "title": "Nabídka nastavení",
-      "helpBody": "Nabídka nastavení umožňuje konfigurovat aplikaci."
-    }
-  }
-}

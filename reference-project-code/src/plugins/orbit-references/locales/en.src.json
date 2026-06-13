@@ -1,8 +1,0 @@
-{
-  "plugins": {
-    "OrbitReferences": {
-      "tooltip": "Create Analyst Satellites in Orbit",
-      "linkText": "Generate Orbit Reference Satellites..."
-    }
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "plugins": {
-    "OrbitReferences": {
-      "tooltip": "Analysesatelliten im Orbit erstellen",
-      "linkText": "Orbit-Referenzsatelliten generieren..."
-    }
-  }
-}

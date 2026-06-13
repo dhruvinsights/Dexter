@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "NightToggle": {
-      "bottomIconLabel": "夜间切换"
-    }
-  }
-}

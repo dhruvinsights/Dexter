@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "TimeSlider": {
-      "tooltip": "시간 슬라이더: 드래그하여 시간 조정"
-    }
-  }
-}

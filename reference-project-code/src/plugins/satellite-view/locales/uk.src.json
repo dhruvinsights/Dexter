@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SatelliteViewPlugin": {
-      "bottomIconLabel": "Вид супутника"
-    }
-  }
-}

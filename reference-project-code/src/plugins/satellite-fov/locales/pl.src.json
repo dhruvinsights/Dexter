@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "SatelliteFov": {
-      "bottomIconLabel": "Pole widzenia satelity",
-      "title": "Pole widzenia satelity",
-      "helpBody": "Wtyczka Pole widzenia satelity umożliwia kontrolowanie pola widzenia satelity."
-    }
-  }
-}

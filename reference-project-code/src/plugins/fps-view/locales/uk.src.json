@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "FpsView": {
-      "bottomIconLabel": "Вид від першої особи"
-    }
-  }
-}

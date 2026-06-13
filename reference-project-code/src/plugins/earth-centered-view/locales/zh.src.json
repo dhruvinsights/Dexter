@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "EarthCenteredView": {
-      "bottomIconLabel": "地球视图"
-    }
-  }
-}

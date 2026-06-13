@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorFov": {
-      "bottomIconLabel": "传感器视场"
-    }
-  }
-}

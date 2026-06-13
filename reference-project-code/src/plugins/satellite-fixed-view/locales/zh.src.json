@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SatelliteFixedView": {
-      "bottomIconLabel": "卫星固定视图"
-    }
-  }
-}

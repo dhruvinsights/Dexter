@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "TimeSlider": {
-      "tooltip": "Posuvník času: Přetáhněte pro úpravu denní doby"
-    }
-  }
-}

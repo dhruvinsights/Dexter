@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "GithubLinkPlugin": {
-      "tooltip": "Zobacz na GitHub"
-    }
-  }
-}

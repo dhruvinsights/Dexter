@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorFov": {
-      "bottomIconLabel": "Champ de vision capteur"
-    }
-  }
-}

@@ -1,8 +1,0 @@
-# Satellite Categories
-# One category per line. Lines starting with # are comments.
-Critical
-Mission
-Debris
-Adversary
-Calibration
-Other

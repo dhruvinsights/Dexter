@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "SensorFov": {
-      "bottomIconLabel": "Campo de Visión del Sensor"
-    }
-  }
-}

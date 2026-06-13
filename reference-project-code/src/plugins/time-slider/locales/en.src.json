@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "TimeSlider": {
-      "tooltip": "Time Slider: Drag to adjust time of day"
-    }
-  }
-}

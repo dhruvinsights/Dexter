@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "OrbitGuardMenuPlugin": {
-      "bottomIconLabel": "OrbitGuard",
-      "title": "OrbitGuard",
-      "helpBody": "El menú de Detección de Anomalías OrbitGuard muestra los últimos eventos de maniobra, órbita fuera de familia y cambio de estabilidad para satélites."
-    }
-  }
-}

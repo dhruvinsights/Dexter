@@ -8,3 +8,7 @@ dist-ssr
 .DS_Store
 *.log
 .vite
+
+
+# Reference code (keep local only, don't push to GitHub)
+reference-project-code/

@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "TimeSlider": {
-      "tooltip": "Zeitschieber: Ziehen, um die Tageszeit anzupassen"
-    }
-  }
-}
