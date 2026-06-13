@@ -7,6 +7,8 @@ import { LiveField } from './LiveField';
 import { OrbitRings } from './OrbitRings';
 import { EnhancedSatelliteModel } from './EnhancedSatelliteModel';
 import { EnhancedCameraControls } from './EnhancedCameraControls';
+import { SunLight } from './SunLight';
+import { SelectedOrbit } from './SelectedOrbit';
 import { useSimStore } from '@/state/useSimStore';
 
 /**
@@ -33,15 +35,19 @@ export function Scene() {
     >
       <color attach="background" args={['#000000']} />
 
-      <directionalLight position={[5, 3, 5]} intensity={2.2} />
-      <ambientLight intensity={0.08} />
+      <SunLight />
 
       <Suspense fallback={null}>
         <Skybox />
         <Earth />
         {(showOrbits || timeMachineActive) && <OrbitRings />}
         {mode === 'scenario' ? <ObjectField /> : <LiveField />}
-        {mode === 'live' && selection && <EnhancedSatelliteModel />}
+        {mode === 'live' && selection && (
+          <>
+            <SelectedOrbit />
+            <EnhancedSatelliteModel />
+          </>
+        )}
       </Suspense>
 
       <EnhancedCameraControls />

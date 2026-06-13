@@ -1,7 +1,6 @@
 import { useUIStore } from '@/state/useUIStore';
 import { LivePanel } from '@/features/live/LivePanel';
 import { PolicyRail } from '@/features/policies/PolicyRail';
-import { ColorSchemeSelector } from '@/features/live/ColorSchemeSelector';
 import { ForecastingPanel } from '@/features/forecast/ForecastingPanel';
 import { AIAgentPanel } from '@/features/ai/AIAgentPanel';
 import { KnowledgePanel } from '@/features/knowledge/KnowledgePanel';
@@ -21,9 +20,8 @@ export function PanelHost() {
   switch (active) {
     case 'live':
       return (
-        <div className="panel-in flex flex-col gap-4">
+        <div className="panel-in">
           <LivePanel />
-          <ColorSchemeSelector />
         </div>
       );
     case 'scenario':

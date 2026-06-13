@@ -15,6 +15,8 @@ interface SatEntry {
   norad: string;
   name: string;
   launchYear: number;
+  l1: string;
+  l2: string;
 }
 
 let sats: SatEntry[] = [];
@@ -47,7 +49,7 @@ function parseCatalogue(text: string, max: number): SatEntry[] {
       const rec = satellite.twoline2satrec(l1, l2);
       if (rec.error === 0) {
         const norad = l1.slice(2, 7).trim();
-        out.push({ rec, norad, name: lastName || `NORAD ${norad}`, launchYear: launchYearFromTle(l1) });
+        out.push({ rec, norad, name: lastName || `NORAD ${norad}`, launchYear: launchYearFromTle(l1), l1, l2 });
       }
     } catch {
       /* skip malformed */
@@ -73,6 +75,8 @@ self.onmessage = (e: MessageEvent) => {
       norads: sats.map((s) => s.norad),
       names: sats.map((s) => s.name),
       launchYears: sats.map((s) => s.launchYear),
+      line1: sats.map((s) => s.l1),
+      line2: sats.map((s) => s.l2),
     });
     return;
   }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Sparkles } from 'lucide-react';
 import { PanelShell } from '@/features/shell/PanelShell';
 import { useSimStore } from '@/state/useSimStore';
 import { play } from '@/lib/sound';
@@ -139,6 +139,7 @@ export function AIAgentPanel() {
     <PanelShell
       title="AI Agent"
       subtitle={hc?.model_name && hc.model_name !== 'unknown' ? hc.model_name : 'Orbital Intelligence'}
+      icon={<Sparkles size={14} />}
       width="w-96"
       status={
         <span className="flex items-center gap-1.5 font-mono text-[10px] text-neutral-400">

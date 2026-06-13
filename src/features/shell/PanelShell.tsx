@@ -11,12 +11,14 @@ export function PanelShell({
   title,
   subtitle,
   status,
+  icon,
   children,
   width = 'w-80',
 }: {
   title: string;
   subtitle?: string;
   status?: ReactNode;
+  icon?: ReactNode;
   children: ReactNode;
   width?: string;
 }) {
@@ -26,13 +28,20 @@ export function PanelShell({
       className={`panel-in hud-panel hud-scanline pointer-events-auto flex max-h-full ${width} flex-col overflow-hidden rounded-lg`}
     >
       <header className="flex items-center justify-between border-b border-[#1f1f1f] px-4 py-3">
-        <div className="min-w-0">
-          <h2 className="truncate font-mono text-xs font-semibold uppercase tracking-[0.18em] text-white">
-            {title}
-          </h2>
-          {subtitle && (
-            <p className="truncate font-mono text-[10px] text-neutral-500">{subtitle}</p>
+        <div className="flex min-w-0 items-center gap-2.5">
+          {icon && (
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#00ff88]/30 bg-[#00ff88]/5 text-[#00ff88]">
+              {icon}
+            </span>
           )}
+          <div className="min-w-0">
+            <h2 className="truncate font-mono text-xs font-semibold uppercase tracking-[0.18em] text-white">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="truncate font-mono text-[10px] text-neutral-500">{subtitle}</p>
+            )}
+          </div>
         </div>
         <div className="flex items-center gap-2">
           {status}

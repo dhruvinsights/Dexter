@@ -6,6 +6,7 @@ import { SatelliteInfoPanel } from '@/features/live/SatelliteInfoPanel';
 import { TimeMachineOverlay } from '@/features/live/TimeMachineOverlay';
 import { Sidebar } from '@/features/shell/Sidebar';
 import { PanelHost } from '@/features/shell/PanelHost';
+import { CustomizeDrawer } from '@/features/shell/CustomizeDrawer';
 import { useSimStore } from '@/state/useSimStore';
 
 /**
@@ -41,6 +42,8 @@ export function App() {
               </div>
             )}
           </div>
+
+          <CustomizeDrawer />
 
           <div className="flex flex-col gap-3">
             {mode === 'scenario' && <MetricsStrip />}

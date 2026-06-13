@@ -11,6 +11,8 @@ export interface Selection {
   index: number;
   norad: string;
   label: string;
+  line1?: string;
+  line2?: string;
 }
 
 interface SimStore {

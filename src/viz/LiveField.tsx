@@ -40,6 +40,8 @@ const fragmentShader = /* glsl */ `
 export function LiveField() {
   const noradsRef = useRef<string[]>([]);
   const namesRef = useRef<string[]>([]);
+  const line1Ref = useRef<string[]>([]);
+  const line2Ref = useRef<string[]>([]);
   const launchYearsRef = useRef<Int16Array>(new Int16Array(0));
   const lastTMYear = useRef(-1);
   const lastUpdate = useRef(0);
@@ -86,6 +88,8 @@ export function LiveField() {
       if (msg.type === 'ready') {
         noradsRef.current = msg.norads;
         namesRef.current = msg.names;
+        line1Ref.current = msg.line1 ?? [];
+        line2Ref.current = msg.line2 ?? [];
         launchYearsRef.current = Int16Array.from(msg.launchYears as number[]);
         points.geometry.setDrawRange(0, msg.count);
         useSimStore.getState().setLiveCount(msg.count);
@@ -113,7 +117,13 @@ export function LiveField() {
         const norad = noradsRef.current[idx];
         const name = namesRef.current[idx];
         if (norad && name) {
-          useSimStore.getState().select({ index: idx, norad, label: name });
+          useSimStore.getState().select({
+            index: idx,
+            norad,
+            label: name,
+            line1: line1Ref.current[idx],
+            line2: line2Ref.current[idx],
+          });
           
           // Highlight selected satellite
           const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
