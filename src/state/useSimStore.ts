@@ -74,7 +74,7 @@ export const TIME_MACHINE_START_YEAR = 1957;
 export const TIME_MACHINE_END_YEAR = new Date().getUTCFullYear() + 1;
 
 export const useSimStore = create<SimStore>((set) => ({
-  mode: 'scenario',
+  mode: 'live',
 
   scenarioId: DEFAULT_SCENARIO,
   output: MOCK_RESULTS[DEFAULT_SCENARIO],

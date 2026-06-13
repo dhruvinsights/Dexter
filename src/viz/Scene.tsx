@@ -2,8 +2,10 @@ import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Earth } from './Earth';
 import { Skybox } from './Skybox';
+import { Starfield } from './Starfield';
 import { ObjectField } from './ObjectField';
 import { LiveField } from './LiveField';
+import { CustomSatField } from './CustomSatField';
 import { OrbitRings } from './OrbitRings';
 import { EnhancedSatelliteModel } from './EnhancedSatelliteModel';
 import { EnhancedCameraControls } from './EnhancedCameraControls';
@@ -39,9 +41,11 @@ export function Scene() {
 
       <Suspense fallback={null}>
         <Skybox />
+        <Starfield />
         <Earth />
         {(showOrbits || timeMachineActive) && <OrbitRings />}
         {mode === 'scenario' ? <ObjectField /> : <LiveField />}
+        {mode === 'live' && <CustomSatField />}
         {mode === 'live' && selection && (
           <>
             <SelectedOrbit />

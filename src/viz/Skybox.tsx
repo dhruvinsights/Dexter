@@ -12,7 +12,9 @@ export function Skybox() {
   return (
     <mesh scale={[-1, 1, 1]}>
       <sphereGeometry args={[120, 64, 64]} />
-      <meshBasicMaterial map={texture} side={BackSide} depthWrite={false} />
+      {/* Dim the Milky Way panorama so deep space reads truly black, then the
+          Starfield adds crisp foreground stars on top. */}
+      <meshBasicMaterial map={texture} color="#2a2e3a" side={BackSide} depthWrite={false} />
     </mesh>
   );
 }

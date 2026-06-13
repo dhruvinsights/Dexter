@@ -32,7 +32,7 @@ export function CustomizeDrawer() {
           play('button', 0.35);
           setOpen(true);
         }}
-        className="pointer-events-auto absolute right-5 top-20 flex h-10 w-10 items-center justify-center rounded-md border border-[#1f1f1f] bg-[#060606]/90 text-neutral-400 backdrop-blur transition-colors hover:border-[#00ff88]/40 hover:text-[#00ff88]"
+        className="pointer-events-auto absolute bottom-24 right-5 flex h-10 w-10 items-center justify-center rounded-md border border-[#1f1f1f] bg-[#060606]/90 text-neutral-400 backdrop-blur transition-colors hover:border-[#00ff88]/40 hover:text-[#00ff88]"
       >
         <SlidersHorizontal size={16} />
       </button>
@@ -40,7 +40,7 @@ export function CustomizeDrawer() {
   }
 
   return (
-    <div className="hud-panel hud-scanline panel-in pointer-events-auto absolute right-5 top-20 w-64 overflow-hidden rounded-lg">
+    <div className="hud-panel hud-scanline panel-in pointer-events-auto absolute bottom-24 right-5 w-64 overflow-hidden rounded-lg">
       <header className="flex items-center justify-between border-b border-[#1f1f1f] px-3 py-2.5">
         <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
           Display

@@ -86,4 +86,88 @@ export function flagFromName(name: string): FlagInfo {
   return { emoji: '🛰️', country: 'Unknown' };
 }
 
+const EARTH_RADIUS_KM_EQ = 6378.137;
+
+function tleChecksum(line: string): number {
+  let sum = 0;
+  for (const ch of line.slice(0, 68)) {
+    if (ch >= '0' && ch <= '9') sum += Number(ch);
+    else if (ch === '-') sum += 1;
+  }
+  return sum % 10;
+}
+
+/** Right-justified fixed-width field. */
+function fw(value: string, width: number): string {
+  return value.slice(0, width).padStart(width, ' ');
+}
+
+export interface TleParams {
+  noradId: number;
+  epochYear: number; // 2-digit
+  epochDay: number; // day-of-year with fraction
+  inclinationDeg: number;
+  raanDeg: number;
+  eccentricity: number; // 0..1
+  argPerigeeDeg: number;
+  meanAnomalyDeg: number;
+  meanMotionRevPerDay: number;
+}
+
+/** Build a valid two-line element set (with checksums) from orbital params. */
+export function buildTle(p: TleParams): { line1: string; line2: string } {
+  const id = String(p.noradId).padStart(5, '0');
+  const intlDesig = `${String(p.epochYear).padStart(2, '0')}001A`.padEnd(8, ' ');
+  const epoch = `${String(p.epochYear).padStart(2, '0')}${p.epochDay.toFixed(8).padStart(12, '0')}`;
+
+  let l1 = '1 ' + id + 'U ' + intlDesig + ' ' + epoch + ' ' + '.00000000' + ' ' + '00000-0' + ' ' + '00000-0' + ' 0 ' + ' 999';
+  l1 = l1.padEnd(68, ' ');
+  l1 += String(tleChecksum(l1));
+
+  const ecc = Math.round(p.eccentricity * 1e7).toString().padStart(7, '0').slice(0, 7);
+  let l2 =
+    '2 ' +
+    id +
+    ' ' +
+    fw(p.inclinationDeg.toFixed(4), 8) +
+    ' ' +
+    fw(p.raanDeg.toFixed(4), 8) +
+    ' ' +
+    ecc +
+    ' ' +
+    fw(p.argPerigeeDeg.toFixed(4), 8) +
+    ' ' +
+    fw(p.meanAnomalyDeg.toFixed(4), 8) +
+    ' ' +
+    fw(p.meanMotionRevPerDay.toFixed(8), 11) +
+    '00001';
+  l2 = l2.padEnd(68, ' ');
+  l2 += String(tleChecksum(l2));
+
+  return { line1: l1, line2: l2 };
+}
+
+/** Mean motion (rev/day) for a circular-ish orbit from apogee/perigee altitudes. */
+export function meanMotionFromAltitudes(apogeeKm: number, perigeeKm: number): number {
+  const ra = EARTH_RADIUS_KM_EQ + apogeeKm;
+  const rp = EARTH_RADIUS_KM_EQ + perigeeKm;
+  const a = (ra + rp) / 2;
+  const periodSec = 2 * Math.PI * Math.sqrt((a * a * a) / MU);
+  return 86400 / periodSec;
+}
+
+export function eccentricityFromAltitudes(apogeeKm: number, perigeeKm: number): number {
+  const ra = EARTH_RADIUS_KM_EQ + apogeeKm;
+  const rp = EARTH_RADIUS_KM_EQ + perigeeKm;
+  return (ra - rp) / (ra + rp);
+}
+
+/** Current UTC epoch as {year2, dayOfYear} for a freshly created element set. */
+export function nowEpoch(): { year: number; day: number } {
+  const now = new Date();
+  const start = Date.UTC(now.getUTCFullYear(), 0, 1);
+  const day = (now.getTime() - start) / 86400000 + 1;
+  return { year: now.getUTCFullYear() % 100, day };
+}
+
 export { satellite };
