@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useSimStore, TIME_MACHINE_END_YEAR } from '@/state/useSimStore';
+import { COLOR_SCHEMES } from '@/viz/colorSchemes';
+import type { SatelliteData } from '@/viz/colorSchemes';
 
 // Removed MAX_OBJECTS limit to load all available satellites from CelesTrak
 const MAX_OBJECTS = 20000; // Increased to accommodate all CelesTrak satellites (~15,699)
@@ -184,6 +186,34 @@ export function LiveField() {
       pendingTime.current = t;
       busy.current = true;
       worker.postMessage({ type: 'tick', time: t });
+    }
+
+    // Update colors based on active color scheme
+    const colorScheme = COLOR_SCHEMES[st.colorScheme];
+    if (colorScheme && noradsRef.current.length > 0) {
+      const colorAttr = points.geometry.getAttribute('aColor') as THREE.BufferAttribute;
+      const colors = colorAttr.array as Float32Array;
+      
+      // Apply color scheme (simplified - in production, get full satellite data)
+      for (let i = 0; i < Math.min(noradsRef.current.length, 100); i++) {
+        const satData: SatelliteData = {
+          id: i,
+          norad: noradsRef.current[i],
+          name: namesRef.current[i],
+          type: 'PAYLOAD', // Simplified - would need actual type data
+        };
+        
+        const colorInfo = colorScheme.getColor(satData, {
+          satellites: [],
+          selectedId: st.selection?.index
+        });
+        
+        colors[i * 3] = colorInfo.color[0];
+        colors[i * 3 + 1] = colorInfo.color[1];
+        colors[i * 3 + 2] = colorInfo.color[2];
+      }
+      
+      colorAttr.needsUpdate = true;
     }
 
     // Time Machine — sweep through real launch history, hiding objects

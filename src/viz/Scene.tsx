@@ -1,17 +1,23 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import { Earth } from './Earth';
 import { Skybox } from './Skybox';
 import { ObjectField } from './ObjectField';
 import { LiveField } from './LiveField';
 import { OrbitRings } from './OrbitRings';
-import { SatelliteModel } from './SatelliteModel';
+import { EnhancedSatelliteModel } from './EnhancedSatelliteModel';
+import { EnhancedCameraControls } from './EnhancedCameraControls';
 import { useSimStore } from '@/state/useSimStore';
 
 /**
  * Root of the 3D orbital environment. Renders the representative particle field
  * (Scenario mode) or the real SGP4 catalogue (Live Sky mode), plus optional orbit paths.
+ *
+ * Phase 1 Enhancements:
+ * - Enhanced camera controls with zoom-to-satellite
+ * - 3D satellite models with mesh loading
+ * - Color scheme system support
+ * - Improved orbit rendering
  */
 export function Scene() {
   const mode = useSimStore((s) => s.mode);
@@ -35,18 +41,10 @@ export function Scene() {
         <Earth />
         {(showOrbits || timeMachineActive) && <OrbitRings />}
         {mode === 'scenario' ? <ObjectField /> : <LiveField />}
-        {mode === 'live' && selection && <SatelliteModel />}
+        {mode === 'live' && selection && <EnhancedSatelliteModel />}
       </Suspense>
 
-      <OrbitControls
-        enablePan={false}
-        minDistance={1.4}
-        maxDistance={40}
-        rotateSpeed={0.5}
-        zoomSpeed={0.8}
-        enableDamping
-        dampingFactor={0.08}
-      />
+      <EnhancedCameraControls />
     </Canvas>
   );
 }

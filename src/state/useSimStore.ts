@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { RawMOCATOutput } from '@/integration/contracts';
 import { MOCK_RESULTS, SCENARIOS } from '@/integration/mocks';
+import type { ColorSchemeId } from '@/viz/colorSchemes';
 
 const DEFAULT_SCENARIO = 'baseline_2024';
 
@@ -32,6 +33,7 @@ interface SimStore {
   speed: number; // scenario: years per second
   showOrbits: boolean;
   selection: Selection | null;
+  colorScheme: ColorSchemeId;
 
   // ── time machine (live mode) ──
   timeMachineActive: boolean;
@@ -55,6 +57,7 @@ interface SimStore {
   setSpeed: (s: number) => void;
   toggleOrbits: () => void;
   select: (s: Selection | null) => void;
+  setColorScheme: (scheme: ColorSchemeId) => void;
 
   toggleTimeMachine: () => void;
   setTimeMachineYear: (y: number) => void;
@@ -82,6 +85,7 @@ export const useSimStore = create<SimStore>((set) => ({
   speed: 2,
   showOrbits: false,
   selection: null,
+  colorScheme: 'objectType',
 
   timeMachineActive: false,
   timeMachineYear: TIME_MACHINE_START_YEAR,
@@ -116,6 +120,7 @@ export const useSimStore = create<SimStore>((set) => ({
   setSpeed: (s) => set({ speed: s }),
   toggleOrbits: () => set((st) => ({ showOrbits: !st.showOrbits })),
   select: (s) => set({ selection: s }),
+  setColorScheme: (scheme) => set({ colorScheme: scheme }),
 
   toggleTimeMachine: () =>
     set((st) => ({

@@ -5,6 +5,7 @@ import { Timeline } from '@/features/timeline/Timeline';
 import { MetricsStrip } from '@/features/metrics/MetricsStrip';
 import { LivePanel } from '@/features/live/LivePanel';
 import { SatelliteInfoPanel } from '@/features/live/SatelliteInfoPanel';
+import { ColorSchemeSelector } from '@/features/live/ColorSchemeSelector';
 import { TimeMachineOverlay } from '@/features/live/TimeMachineOverlay';
 import { AIAgentPanel } from '@/features/ai/AIAgentPanel';
 import { useSimStore } from '@/state/useSimStore';
@@ -29,7 +30,10 @@ export function App() {
         <TopBar />
 
         <div className="flex flex-1 items-start justify-between gap-4 py-4">
-          {mode === 'scenario' ? <PolicyRail /> : <LivePanel />}
+          <div className="flex flex-col gap-4">
+            {mode === 'scenario' ? <PolicyRail /> : <LivePanel />}
+            {mode === 'live' && <ColorSchemeSelector />}
+          </div>
           {mode === 'live' && selection && (
             <div className="flex items-start">
               <SatelliteInfoPanel />
