@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "绘制",
+        "eciAxes": "ECI 坐标轴",
+        "xAxesGrid": "X 轴网格",
+        "yAxesGrid": "Y 轴网格",
+        "zAxesGrid": "Z 轴网格",
+        "xAxesRadialGrid": "X 轴径向网格",
+        "yAxesRadialGrid": "Y 轴径向网格",
+        "zAxesRadialGrid": "Z 轴径向网格",
+        "earthToSatellite": "地球到卫星",
+        "sensorToSatellite": "传感器到卫星",
+        "satelliteToSatellite": "卫星到卫星",
+        "satelliteToSun": "卫星到太阳",
+        "satelliteToMoon": "卫星到月球",
+        "moonOrbit": "绘制月球轨道"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "未选择主卫星用于卫星到卫星连线。"
+      }
+    }
+  }
+}

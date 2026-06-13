@@ -38,9 +38,9 @@ import * as getElAll from '@app/engine/utils/get-el';
 
 describe('openColorbox_function', () => {
   beforeEach(() => {
-    Dexter.getInstance().containerRoot = document.body as HTMLDivElement;
+    KeepTrack.getInstance().containerRoot = document.body as HTMLDivElement;
     KeepTrack.getDefaultBodyHtml();
-    Dexter.getInstance().containerRoot.innerHTML = `
+    KeepTrack.getInstance().containerRoot.innerHTML = `
         <div id="colorbox-container" style="display:none;"></div>
         <div id="colorbox-header"></div>
         <div id="colorbox-div" style="display:block;"></div>

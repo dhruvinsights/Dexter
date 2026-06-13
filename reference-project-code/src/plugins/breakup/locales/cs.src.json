@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "Breakup": {
+      "bottomIconLabel": "Vytvořit rozpad",
+      "title": "Menu rozpadu",
+      "helpBody": "Menu rozpadu je nástroj pro simulaci rozpadu satelitu. <br><br> Duplikováním a úpravou dráhy satelitu můžeme modelovat rozpad satelitu. Po výběru satelitu a otevření menu může uživatel nastavit: <ul style=\"margin-left: 40px;\"> <li>Variaci inklinace</li> <li>Variaci RAAN</li> <li>Variaci periody</li> <li>Počet úlomků rozpadu</li> </ul> Čím větší variace, tím větší rozptyl v simulovaném rozpadu. Výchozí variace jsou dostatečné pro simulaci rozpadu s přiměřeným rozptylem.",
+      "errorMsgs": {
+        "SatelliteNotFound": "Satelit nebyl nalezen!",
+        "CannotCreateBreakupForNonCircularOrbits": "Nelze vytvořit rozpad pro nekruhové dráhy. Pracujeme na opravě.",
+        "CannotCalcDirectionOfSatellite": "Nelze vypočítat směr satelitu. Zkuste to znovu později.",
+        "ErrorCreatingBreakup": "Chyba při vytváření rozpadu!",
+        "InvalidStartNum": "Neplatné počáteční číslo satelitu! Výchozí hodnota 90000!",
+        "BreakupGeneratorFailed": "Generátor rozpadu selhal!"
+      }
+    }
+  }
+}

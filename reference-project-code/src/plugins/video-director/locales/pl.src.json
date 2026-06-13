@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "title": "Reżyser wideo",
+      "bottomIconLabel": "Reżyser wideo",
+      "helpBody": "To menu pozwala dodawać efekty kamery i kontrolować ruchy kamery w celu tworzenia filmowych nagrań w symulacji."
+    }
+  }
+}

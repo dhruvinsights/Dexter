@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Analiza rozpadu",
+      "title": "Analiza rozpadu",
+      "helpBody": "Wtyczka Analiza rozpadu udostępnia bazę danych głównych wydarzeń rozpadu satelitów w historii. Wybierz wydarzenie, aby wyświetlić szczegółowe informacje, w tym obiekt macierzysty, przyczynę rozpadu, oś czasu od startu do rozpadu oraz analizę rozproszenia fragmentów. Wtyczka przeszukuje bieżący katalog w poszukiwaniu śledzonych odłamków pasujących do każdego wydarzenia i wyświetla analizę statystyczną zakresów wysokości, mimośrodu oraz rozkładów inklinacji."
+    }
+  }
+}

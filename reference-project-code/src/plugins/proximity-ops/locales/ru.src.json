@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Сближение и операции сближения",
+      "title": "Сближение и операции сближения (RPO)",
+      "titleSecondary": "Список сближений и операций сближения",
+      "helpBody": "Поиск предстоящих сближений между спутниками. Настройте параметры поиска, включая порог расстояния, относительную скорость и тип орбиты (ГСО/НОО). Поддерживает режимы поиска одного спутника и все против всех.",
+      "noradId": "NORAD ID",
+      "maxDistThreshold": "Максимальный порог расстояния (км)",
+      "maxRelativeVelocity": "Максимальная относительная скорость (км/с)",
+      "searchDuration": "Длительность поиска (часы)",
+      "geoText": "Геостационарная",
+      "leoText": "Низкая околоземная орбита",
+      "orbitType": "Тип орбиты",
+      "geoAllVsAll": "Геостационарная все против всех",
+      "geoAllVsAllTooltip": "Поиск RPO между всеми геостационарными спутниками",
+      "comparePayloadsOnly": "Сравнивать только полезные нагрузки",
+      "comparePayloadsOnlyTooltip": "Искать RPO только между полезными нагрузками",
+      "ignoreVimpelRso": "Игнорировать Vimpel RSO",
+      "ignoreVimpelRsoTooltip": "Игнорировать RSO из каталога Vimpel",
+      "submitButton": "Найти RPO \u25b6",
+      "noRposToDownload": "Нет RPO для загрузки!",
+      "noRposFound": "RPO не найдены!",
+      "satNotFound": "Спутник с NORAD ID {sccNum} не найден",
+      "geoOrbitsEcf": "Орбиты ГСО отображены в ECF",
+      "geoOrbitsEci": "Орбиты ГСО отображены в ECI",
+      "vimpelNotSupported": "Спутники Vimpel не поддерживаются",
+      "table": {
+        "target": "Цель",
+        "targetName": "Имя цели",
+        "chaser": "Преследователь",
+        "chaserName": "Имя преследователя",
+        "relDistance": "Отн. расстояние [км]",
+        "relVelocity": "Отн. скорость [км/с]",
+        "date": "Дата"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "最適パス",
+      "title": "最適パス時刻",
+      "helpBody": "最適パス時刻プラグインは、現在選択されているセンサーに基づいて衛星の最適なパス時刻を計算します。パスは持続時間、最大仰角、最小距離、太陽位置に基づいて評価されます。結果はCSVとしてエクスポートされます。",
+      "satelliteNumbersLabel": "衛星番号",
+      "generateButton": "最適パス時刻を生成",
+      "selectSensorFirst": "先にセンサーを選択してください！",
+      "errorMsgs": {
+        "SensorRequired": "最初にセンサーを選択する必要があります！",
+        "SensorFormatError": "センサーの形式が正しくありません。センサーを選択しましたか？"
+      }
+    }
+  }
+}

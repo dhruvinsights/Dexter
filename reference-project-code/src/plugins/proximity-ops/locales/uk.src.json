@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Зближення та операції зближення",
+      "title": "Зближення та операції зближення (RPO)",
+      "titleSecondary": "Список зближень та операцій зближення",
+      "helpBody": "Знайти майбутні зближення між супутниками. Налаштуйте параметри пошуку, включаючи поріг відстані, відносну швидкість та тип орбіти (ГСО/НОО). Підтримує режими пошуку одного супутника та всі проти всіх.",
+      "noradId": "NORAD ID",
+      "maxDistThreshold": "Максимальний поріг відстані (км)",
+      "maxRelativeVelocity": "Максимальна відносна швидкість (км/с)",
+      "searchDuration": "Тривалість пошуку (години)",
+      "geoText": "Геостаціонарна",
+      "leoText": "Низька навколоземна орбіта",
+      "orbitType": "Тип орбіти",
+      "geoAllVsAll": "Геостаціонарна всі проти всіх",
+      "geoAllVsAllTooltip": "Пошук RPO між усіма геостаціонарними супутниками",
+      "comparePayloadsOnly": "Порівнювати лише корисні навантаження",
+      "comparePayloadsOnlyTooltip": "Шукати RPO лише між корисними навантаженнями",
+      "ignoreVimpelRso": "Ігнорувати Vimpel RSO",
+      "ignoreVimpelRsoTooltip": "Ігнорувати RSO з каталогу Vimpel",
+      "submitButton": "Знайти RPO \u25b6",
+      "noRposToDownload": "Немає RPO для завантаження!",
+      "noRposFound": "RPO не знайдено!",
+      "satNotFound": "Супутник з NORAD ID {sccNum} не знайдено",
+      "geoOrbitsEcf": "Орбіти ГСО відображені в ECF",
+      "geoOrbitsEci": "Орбіти ГСО відображені в ECI",
+      "vimpelNotSupported": "Супутники Vimpel не підтримуються",
+      "table": {
+        "target": "Ціль",
+        "targetName": "Назва цілі",
+        "chaser": "Переслідувач",
+        "chaserName": "Назва переслідувача",
+        "relDistance": "Відн. відстань [км]",
+        "relVelocity": "Відн. швидкість [км/с]",
+        "date": "Дата"
+      }
+    }
+  }
+}

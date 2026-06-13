@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Raketa",
+      "title": "Menu raket",
+      "helpBody": "Menu raket slouží ke generování hypotetických raketových startů mezi zeměmi. <br><br> Při použití raket odpalovaných z ponorek je místem odpalu vlastní zeměpisná šířka a délka. Při použití pozemních raket je místo odpalu pevně daná zeměpisná šířka a délka na základě otevřených zdrojů. <br><br> Kromě vlastních raket je k dispozici několik předdefinovaných scénářů zahrnujících stovky raket. <br><br> Všechny raketové starty jsou hypotetické a nemají představovat skutečné události. Trajektorie startů jsou všechny založeny na stejném balistickém modelu, ale používají různé minimální a maximální dosahy."
+    }
+  }
+}

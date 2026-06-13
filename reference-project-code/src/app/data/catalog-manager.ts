@@ -33,7 +33,7 @@ import { GetSatType, MissileParams } from '@app/engine/core/interfaces';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { isThisNode } from '@app/engine/utils/isThisNode';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import {
   BaseObject, Degrees,
   KilometersPerSecond, Radians,
@@ -373,7 +373,7 @@ export class CatalogManager {
 
   init(satCruncherOveride?: Worker): void {
     if (!satCruncherOveride) {
-      const threadManager = new SatCruncherThreadManager(Dexter.getInstance().threads);
+      const threadManager = new SatCruncherThreadManager(KeepTrack.getInstance().threads);
 
       SplashScreen.loadStr(SplashScreen.msg.elsets);
       threadManager.init();
@@ -385,7 +385,7 @@ export class CatalogManager {
       this.satCruncherThread = threadManager;
     } else {
       // Test/override path: wrap the raw Worker in a minimal thread manager
-      const threadManager = new SatCruncherThreadManager(Dexter.getInstance().threads);
+      const threadManager = new SatCruncherThreadManager(KeepTrack.getInstance().threads);
 
       threadManager.init(satCruncherOveride);
       this.satCruncherThread = threadManager;

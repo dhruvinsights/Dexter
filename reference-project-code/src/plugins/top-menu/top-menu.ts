@@ -6,9 +6,9 @@ import { html } from '@app/engine/utils/development/formatter';
 import { getEl } from '@app/engine/utils/get-el';
 import { t7e } from '@app/locales/keys';
 import fullscreenPng from '@public/img/icons/fullscreen.png';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 
-export class TopMenu extends DexterPlugin {
+export class TopMenu extends KeepTrackPlugin {
   readonly id = 'TopMenu';
   dependencies_ = [];
   static readonly SEARCH_RESULT_ID = 'search-results';

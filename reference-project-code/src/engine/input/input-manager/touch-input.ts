@@ -3,7 +3,7 @@ import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { SelectSatManager } from '@app/plugins/select-sat-manager/select-sat-manager';
 import { MouseInput } from './mouse-input';
 
@@ -296,7 +296,7 @@ export class TouchInput {
     const gl = ServiceLocator.getRenderer().gl;
     const canvas = this.canvasDOM;
     const rect = canvas.getBoundingClientRect();
-    const container = Dexter.getInstance().containerRoot;
+    const container = KeepTrack.getInstance().containerRoot;
 
     // Compute corrected coordinates (matching mouse-input.ts offset logic)
     const rectCorrX = evt.x - rect.left;

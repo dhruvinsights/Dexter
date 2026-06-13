@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Trace polaire",
+      "title": "Menu Trace polaire",
+      "helpBody": "Le menu Trace polaire permet de générer un graphique polaire 2D de l’azimut et de l’élévation du satellite au fil du temps."
+    }
+  }
+}

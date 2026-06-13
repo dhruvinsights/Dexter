@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Blízké operace",
+      "title": "Blízké operace (RPO)",
+      "titleSecondary": "Seznam blízkých operací",
+      "helpBody": "Najděte nadcházející blízká setkání mezi satelity. Nakonfigurujte parametry vyhledávání včetně prahové vzdálenosti, relativní rychlosti a typu orbity (GEO/LEO). Podporuje režim vyhledávání pro jeden satelit i všechny proti všem.",
+      "noradId": "NORAD ID",
+      "maxDistThreshold": "Maximální prahová vzdálenost (km)",
+      "maxRelativeVelocity": "Maximální relativní rychlost (km/s)",
+      "searchDuration": "Doba vyhledávání (hodiny)",
+      "geoText": "Geostacionární",
+      "leoText": "Nízká oběžná dráha",
+      "orbitType": "Typ orbity",
+      "geoAllVsAll": "Geostacionární všechny vs všechny",
+      "geoAllVsAllTooltip": "Hledat RPO mezi všemi geostacionárními satelity",
+      "comparePayloadsOnly": "Porovnat pouze náklady",
+      "comparePayloadsOnlyTooltip": "Hledat RPO pouze mezi náklady",
+      "ignoreVimpelRso": "Ignorovat RSO Vimpel",
+      "ignoreVimpelRsoTooltip": "Ignorovat RSO z katalogu Vimpel",
+      "submitButton": "Najít RPO \u25b6",
+      "noRposToDownload": "Žádné RPO ke stažení!",
+      "noRposFound": "Nebyly nalezeny žádné RPO!",
+      "satNotFound": "Satelit s NORAD ID {sccNum} nebyl nalezen",
+      "geoOrbitsEcf": "GEO orbity zobrazeny v ECF",
+      "geoOrbitsEci": "GEO orbity zobrazeny v ECI",
+      "vimpelNotSupported": "Satelity Vimpel nejsou podporovány",
+      "table": {
+        "target": "Cíl",
+        "targetName": "Název cíle",
+        "chaser": "Pronásledovatel",
+        "chaserName": "Název pronásledovatele",
+        "relDistance": "Rel. vzdálenost [km]",
+        "relVelocity": "Rel. rychlost [km/s]",
+        "date": "Datum"
+      }
+    }
+  }
+}

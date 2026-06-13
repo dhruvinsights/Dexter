@@ -129,14 +129,14 @@ describe('fadeIn_function', () => {
 
 describe('fadeOut_function', () => {
   beforeEach(() => {
-    Dexter.getInstance().containerRoot = document.createElement('div');
+    KeepTrack.getInstance().containerRoot = document.createElement('div');
   });
 
   // Tests that the element fades out smoothly with default duration
   it('test_fades_out_with_default_duration', () => {
     const el = document.createElement('div');
 
-    Dexter.getInstance().containerRoot.appendChild(el);
+    KeepTrack.getInstance().containerRoot.appendChild(el);
     fadeOut(el);
     vi.advanceTimersByTime(1000);
     expect(el.style.display).toBe('none');
@@ -146,7 +146,7 @@ describe('fadeOut_function', () => {
   it('test_fades_out_with_custom_duration', () => {
     const el = document.createElement('div');
 
-    Dexter.getInstance().containerRoot.appendChild(el);
+    KeepTrack.getInstance().containerRoot.appendChild(el);
     fadeOut(el, 2000);
     vi.advanceTimersByTime(2000);
     expect(el.style.display).toBe('none');
@@ -156,7 +156,7 @@ describe('fadeOut_function', () => {
   it('test_callback_is_called_after_fade_out_animation', () => {
     const el = document.createElement('div');
 
-    Dexter.getInstance().containerRoot.appendChild(el);
+    KeepTrack.getInstance().containerRoot.appendChild(el);
     const spy = vi.fn();
 
     fadeOut(el, 1000, spy);
@@ -176,7 +176,7 @@ describe('fadeOut_function', () => {
     const el = document.createElement('div');
 
     el.style.display = 'none';
-    Dexter.getInstance().containerRoot.appendChild(el);
+    KeepTrack.getInstance().containerRoot.appendChild(el);
     const spy = vi.fn();
 
     fadeOut(el, 1000, spy);

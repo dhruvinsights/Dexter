@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Neuer Start",
+      "title": "Neuer Start Menü",
+      "helpBody": "Das Menü 'Neuer Start' wird verwendet, um fiktive Orbitalmissionen zu generieren, indem bestehende Satelliten mit ähnlichen Parametern modifiziert werden. <br><br> Nach Auswahl eines Satelliten können Sie einen Startort und einen Nord/Süd-Azimut auswählen. Der ausgewählte Satellit wird modifiziert, um ihn mit dem Startort in Einklang zu bringen. Die Uhr wird dann auf 00:00:00 geändert, um die relative Zeit nach dem Start darzustellen. Dies kann hilfreich sein, um die Sensorabdeckung relativ zur Startzeit zu berechnen. Die Beziehung des Objekts zu anderen Orbitalobjekten wird nicht korrekt sein."
+    }
+  }
+}

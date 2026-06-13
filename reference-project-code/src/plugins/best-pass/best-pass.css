@@ -1,0 +1,10 @@
+.bp-title-row {
+  margin: 5px 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bp-title-row h5 {
+  margin: 0 auto;
+}

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Reentries",
+      "title": "Reentries",
+      "helpBody": "The Reentries menu has two tabs: <br><br> <b>TIP Messages</b> shows recent and upcoming satellite reentry predictions from the US Space Command. Clicking on a row will select that satellite and change the time to the predicted decay time. <br><br> <b>Reentry Analysis</b> shows objects sorted by lowest perigee that are most likely to reenter the atmosphere. Click any row to select the satellite.",
+      "dataSource": "Tracking and Impact Prediction (TIP) messages provided by the US Space Command (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "No TIP data found!",
+        "errorFetching": "Error fetching reentry data!",
+        "errorProcessing": "Error processing reentry data!",
+        "satelliteDecayed": "Satellite appears to have decayed!"
+      }
+    }
+  }
+}

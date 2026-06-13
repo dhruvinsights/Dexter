@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Barriera a breve termine",
+      "title": "Menu barriere a breve termine (STF)",
+      "helpBody": "Il menu Barriere a breve termine (STF) viene utilizzato per visualizzare le aree di ricerca dei sensori. <br><br> Questa funzione difficilmente sarà molto utile a meno che non si possieda/gestisca un sensore con funzionalità di area di ricerca."
+    }
+  }
+}

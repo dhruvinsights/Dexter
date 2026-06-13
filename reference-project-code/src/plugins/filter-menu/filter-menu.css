@@ -1,0 +1,8 @@
+#filter-menu .filter-category {
+  padding-top: 0.5rem;
+}
+
+#filter-menu .filter-reset-row {
+  display: flex;
+  justify-content: flex-end;
+}

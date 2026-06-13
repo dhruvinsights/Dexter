@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteTimeline": {
+      "bottomIconLabel": "Línea de Tiempo del Satélite",
+      "title": "Menú de Línea de Tiempo del Satélite",
+      "helpBody": "El menú de Línea de Tiempo del Satélite muestra cuándo un solo sensor tiene visibilidad de una lista de satélites. La línea de tiempo está codificada por colores para mostrar la calidad del pase. Rojo es un mal pase, amarillo es un pase promedio y verde es un buen pase. Haz clic en un pase para cambiar el satélite y el tiempo a ese pase. <br><br> La línea de tiempo puede ser modificada cambiando el tiempo de inicio y fin de la simulación. Además, la línea de tiempo puede ser modificada cambiando las opciones de longitud e intervalo."
+    }
+  }
+}

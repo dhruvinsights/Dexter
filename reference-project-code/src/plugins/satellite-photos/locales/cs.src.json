@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "Satelitní snímky",
+      "title": "Satelitní snímky",
+      "helpBody": "Plugin satelitních snímků zobrazuje nejnovější snímky z geostacionárních meteorologických satelitů a DSCOVR. Klikněte na název satelitu pro zobrazení jeho nejnovějšího snímku.",
+      "defaultImageTitle": "Nejnovější satelitní snímek",
+      "errorMsgs": {
+        "FuturePictures": "Nelze načíst snímky z budoucnosti. Načítám nejnovější snímky."
+      }
+    }
+  }
+}

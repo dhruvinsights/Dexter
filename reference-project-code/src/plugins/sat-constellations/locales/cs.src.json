@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Konstelace",
+      "title": "Nabídka konstelací",
+      "helpBody": "Nabídka Konstelace umožňuje zobrazit skupiny satelitů. <br><br> U některých konstelací budou vykresleny hypotetické uplinky/downlinky a/nebo crosslinky mezi satelity v konstelaci.",
+      "constellations": {
+        "SpaceStations": "Kosmické stanice",
+        "AmateurRadio": "Radioamatérské",
+        "GPSGroup": "Satelity GPS",
+        "GalileoGroup": "Satelity Galileo",
+        "GlonassGroup": "Satelity Glonass",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar a AEHF",
+        "wgs": "DSCS a WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Satelity",
+        "avgAltitude": "Prům. výška",
+        "incRange": "Sklon"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Název",
+        "inclination": "Sklon",
+        "raan": "RAAN",
+        "perigee": "Perigeum",
+        "apogee": "Apogeum"
+      },
+      "filters": {
+        "incMin": "Min. sklon (°)",
+        "incMax": "Max. sklon (°)",
+        "altMin": "Min. výška (km)",
+        "altMax": "Max. výška (km)",
+        "raanMin": "Min. RAAN (°)",
+        "raanMax": "Max. RAAN (°)",
+        "nameFilter": "Filtr názvu",
+        "apply": "Použít",
+        "reset": "Obnovit výchozí"
+      },
+      "commands": {
+        "category": "Konstelace"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "Nebyla vybrána žádná konstelace"
+      }
+    }
+  }
+}

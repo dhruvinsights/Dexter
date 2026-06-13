@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Trace Inc vs Alt",
+      "title": "Menu Inclinaison vs Altitude",
+      "helpBody": "Le menu Inclinaison vs Altitude permet de tracer l'inclinaison du satellite en fonction de son altitude.",
+      "labels": {
+        "totalLeoPayloads": "Total des charges utiles LEO"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Trace Inc vs Lon",
+      "title": "Menu Inclinaison vs Longitude",
+      "helpBody": "Le menu Inc vs Lon permet de tracer l'inclinaison en fonction de la longitude dans la ceinture GEO.",
+      "labels": {
+        "totalGeoPayloads": "Total des charges utiles GEO"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Graphique en Cascade",
+      "title": "Menu Graphique en Cascade",
+      "helpBody": "Le graphique Temps-Longitude (Cascade) affiche la dérive en longitude des satellites GEO au fil du temps.",
+      "labels": {
+        "totalGeoPayloads": "Total des charges utiles GEO"
+      }
+    }
+  }
+}

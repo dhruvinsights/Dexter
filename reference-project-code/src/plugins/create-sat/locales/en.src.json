@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "CreateSat": {
+      "bottomIconLabel": "Create Satellite",
+      "title": "Create Satellite",
+      "helpBody": "The Create Satellite menu allows you to create a satellite by entering orbital elements manually or by importing an STK ephemeris (.e) file.<br><br><b>Basic Tab</b>: Enter apogee, perigee, and inclination to quickly create a satellite.<br><br><b>Advanced Tab</b>: Enter full Keplerian elements (inclination, RAAN, eccentricity, argument of perigee, mean anomaly, mean motion).<br><br><b>STK .e Import</b>: Drag and drop an STK ephemeris file onto the menu. Supported formats: EphemerisTimePosVel, EphemerisTimePos, and EphemerisTimePosVelAcc in inertial coordinate systems (J2000, ICRF, TEME, etc.). Time formats EpSec and UTCG are supported. Keywords are case-insensitive.<br><br><b>Not Supported</b>: Geodetic formats (LLA, LLR, MSL, Terrain), non-inertial frames (Fixed, TrueOfDate), and covariance data are not supported.",
+      "tabs": {
+        "basic": "Basic",
+        "advanced": "Advanced"
+      },
+      "labels": {
+        "noradId": "Satellite NORAD ID (90000-99999)",
+        "satelliteName": "Satellite Name",
+        "inclinationDeg": "Inclination (degrees)",
+        "apogeeAltKm": "Apogee Altitude (km)",
+        "perigeeAltKm": "Perigee Altitude (km)",
+        "objectType": "Object Type",
+        "country": "Country",
+        "epochYear": "Epoch Year",
+        "epochDay": "Epoch Day",
+        "inclination": "Inclination",
+        "rightAscension": "Right Ascension",
+        "eccentricity": "Eccentricity",
+        "argOfPerigee": "Argument of Perigee",
+        "meanAnomaly": "Mean Anomaly",
+        "meanMotion": "Mean Motion",
+        "period": "Period",
+        "dataSource": "Data source",
+        "calculatedParameters": "Calculated Parameters",
+        "apogeeKm": "Apogee (km)",
+        "perigeeKm": "Perigee (km)",
+        "smaKm": "Semi-Major Axis (km)",
+        "velocityKms": "Orbital Velocity (km/s)"
+      },
+      "buttons": {
+        "createSatellite": "Create Satellite",
+        "saveTle": "Save TLE"
+      },
+      "options": {
+        "payload": "Payload",
+        "rocketBody": "Rocket Body",
+        "debris": "Debris",
+        "special": "Special",
+        "unknown": "Unknown"
+      },
+      "errorMsgs": {
+        "errorCreatingSat": "Error creating satellite!",
+        "invalidNumericValues": "Please enter valid numeric values",
+        "perigeeTooLow": "Perigee too low - satellite would decay rapidly",
+        "apogeeMustBeGtePerigee": "Apogee must be >= Perigee",
+        "inclinationRange": "Inclination must be between 0 and 180 degrees",
+        "invalidInputParams": "Invalid input parameters",
+        "invalidSatObject": "Invalid satellite object",
+        "propagationFailed": "Failed to propagate satellite. Try different parameters or report this issue if parameters are correct.",
+        "noValidTle": "No valid TLE to export",
+        "exportFailed": "Failed to export TLE",
+        "invalidNoradId": "Invalid NORAD ID. Must be a 5-digit number between 90000 and 99999.",
+        "invalidType": "Invalid type. Must be 1 (Payload), 2 (Rocket Body), 3 (Debris), or 4 (Special).",
+        "invalidCountry": "Invalid country. Must be selected from the list.",
+        "invalidEpochYear": "Invalid epoch year. Must be a 2-digit number.",
+        "invalidEpochDay": "Invalid epoch day. Must be in the format NNN.NNNNNNNN (e.g., 001.00000000).",
+        "invalidInclination": "Invalid inclination. Must be in the format NNN.NNNN (e.g., 000.0000).",
+        "invalidRasc": "Invalid right ascension. Must be in the format NNN.NNNN (e.g., 000.0000).",
+        "invalidEccentricity": "Invalid eccentricity. Must be a 7-digit number (e.g., 0000000).",
+        "invalidArgPe": "Invalid argument of perigee. Must be in the format NNN.NNNN (e.g., 000.0000).",
+        "invalidMeanAnomaly": "Invalid mean anomaly. Must be in the format NNN.NNNN (e.g., 000.0000).",
+        "invalidMeanMotion": "Invalid mean motion. Must be in the format NN.NNNNN (e.g., 16.00000).",
+        "invalidPeriod": "Invalid period. Must be in the format NN.NNNN to NNNN.NNNN (e.g., 90.0000, 9999.9999) with 8 digits total.",
+        "invalidSource": "Invalid source. Must not be empty.",
+        "invalidName": "Invalid name. Must not be empty."
+      },
+      "successMsgs": {
+        "satCreated": "Satellite {name} ({scc}) created successfully",
+        "tleExported": "TLE exported successfully"
+      }
+    }
+  }
+}

@@ -19,10 +19,6 @@ import { errorManagerInstance } from '@app/engine/utils/errorManager';
 export class ColorCruncherThreadManager extends WebWorkerThreadManager {
   readonly WEB_WORKER_CODE: string = 'js/colorCruncher.js';
 
-  protected getWorkerUrl(): URL {
-    return new URL('../../webworker/colorCruncher.ts', import.meta.url);
-  }
-
   private pendingColorData_: Float32Array | null = null;
   private pendingPickableData_: Int8Array | null = null;
   private currentSeqNum_ = 0;

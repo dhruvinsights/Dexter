@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Nový start",
+      "title": "Menu nového startu",
+      "helpBody": "Menu nového startu slouží ke generování hypotetických orbitálních startů úpravou existujících satelitů s podobnými parametry. <br><br> Po výběru satelitu můžete zvolit místo startu a severní/jižní azimut. Vybraný satelit bude upraven tak, aby odpovídal místu startu. Hodiny se poté změní na 00:00:00, což představuje relativní čas po startu. To může být užitečné při výpočtu pokrytí senzory vzhledem k času startu. Vztah objektu k ostatním orbitálním objektům bude nesprávný."
+    }
+  }
+}

@@ -1,11 +1,29 @@
 /**
- * Dexter - Orbital Visualization Engine
- * Part of Orbital Sentinel Platform
+ * /////////////////////////////////////////////////////////////////////////////
  *
- * Based on KeepTrack.space
- * Original work by Theodore Kruczek and contributors
+ * index.ts is a TypeScript implementation of the KeepTrack class. This is responsible for
+ * initializing the website.
+ * https://keeptrack.space
+ *
+ * @Copyright (C) 2025 Kruczek Labs LLC
+ * @Copyright (C) 2015-2016, James Yoder
+ *
+ * Original source code released by James Yoder at https://github.com/jeyoder/ThingsInSpace/
+ * under the MIT License. Please reference https://keeptrack.space/license/thingsinspace.txt
+ *
+ * KeepTrack is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * KeepTrack is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * KeepTrack. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * /////////////////////////////////////////////////////////////////////////////
  */
 
-export { Dexter } from './keeptrack';
-export { Dexter as KeepTrack } from './keeptrack'; // Backward compatibility
+export { KeepTrack } from './keeptrack';
 

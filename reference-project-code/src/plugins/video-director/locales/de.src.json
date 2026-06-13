@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "bottomIconLabel": "Video-Direktor",
+      "title": "Video-Direktor-Menü",
+      "helpBody": "Das Video-Direktor-Menü wird verwendet, um die Kamera und Objekte in der Szene zu manipulieren, um ein Video zu erstellen."
+    }
+  }
+}

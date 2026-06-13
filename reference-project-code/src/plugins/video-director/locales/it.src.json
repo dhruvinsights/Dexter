@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "title": "Regista Video",
+      "bottomIconLabel": "Regista Video",
+      "helpBody": "Questo menu consente di aggiungere effetti della telecamera e controllare i movimenti della telecamera per creare video cinematografici all'interno della simulazione."
+    }
+  }
+}

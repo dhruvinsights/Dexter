@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "Dane transpondera i kanałów",
+      "title": "Częstotliwości satelitarne",
+      "helpBody": "<p>Ta wtyczka wyświetla informacje o częstotliwościach transpondera i kanałów dla geostacjonarnych satelitów telewizyjnych. Wybierz satelitę z dostępnymi danymi kanałów i otwórz ten panel, aby wyświetlić częstotliwości nadawania, kanały, zasięg wiązki i szczegóły szyfrowania.</p><p>Użyj przycisku pobierania na pasku tytułu, aby wyeksportować dane kanałów jako plik CSV.</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "Satelita nie posiada informacji o kanałach",
+        "NotSatellite": "Wybrany obiekt nie jest satelitą",
+        "FetchFailed": "Nie udało się pobrać informacji o kanałach dla {name} i {altName}",
+        "NoData": "Brak dostępnych danych kanałów"
+      }
+    }
+  }
+}

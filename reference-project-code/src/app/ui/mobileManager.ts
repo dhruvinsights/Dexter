@@ -3,7 +3,7 @@ import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { EarthCloudTextureQuality, EarthDayTextureQuality, EarthNightTextureQuality, EarthTextureStyle } from '@app/engine/rendering/draw-manager/earth-quality-enums';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { Kilometers, Radians } from '@ootk/src/main';
 import { errorManagerInstance } from '../../engine/utils/errorManager';
 import { getEl, hideEl } from '../../engine/utils/get-el';
@@ -15,7 +15,7 @@ export class MobileManager {
   static async checkMobileMode() {
     try {
       // Don't become mobile after initialization
-      if (!Dexter.getInstance().isInitialized) {
+      if (!KeepTrack.getInstance().isInitialized) {
         if (MobileManager.checkIfMobileDevice()) {
           settingsManager.isMobileModeEnabled = true;
           settingsManager.disableWindowTouchMove = false;
@@ -72,8 +72,8 @@ export class MobileManager {
           settingsManager.defaultColorScheme = 'CelestrakColorScheme';
           settingsManager.isDisablePlanets = true;
 
-          // Get the size of dexter-root
-          const keeptrackRoot = getEl('dexter-root');
+          // Get the size of keeptrack-root
+          const keeptrackRoot = getEl('keeptrack-root');
 
           if (keeptrackRoot?.clientWidth ?? 601 < 600) {
             settingsManager.isShowPrimaryLogo = false;

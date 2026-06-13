@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Krátkodobé hradby",
+      "title": "Menu krátkodobých hradeb (STF)",
+      "helpBody": "Menu krátkodobých hradeb (STF) slouží k vizualizaci vyhledávacích oblastí senzoru. <br><br> Toto pravděpodobně nebude příliš užitečné, pokud nevlastníte/neprovozujete senzor s funkcí vyhledávací oblasti."
+    }
+  }
+}

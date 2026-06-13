@@ -3,13 +3,6 @@ import { isThisNode } from '../utils/isThisNode';
 
 export abstract class WebWorkerThreadManager {
   abstract readonly WEB_WORKER_CODE: string;
-
-  /**
-   * Returns the URL used to construct the module worker for this thread.
-   * Subclasses must implement this using `new URL('./relative/path.ts', import.meta.url)`
-   * so Vite can statically analyze and bundle the worker entrypoint.
-   */
-  protected abstract getWorkerUrl(): URL;
   protected worker_: Worker | null = null;
   protected isReady_ = false;
 
@@ -30,8 +23,10 @@ export abstract class WebWorkerThreadManager {
     // Verify browser supports workers
     this.checkWebWorkerSupport_();
 
+    workerScriptUrl = `./${this.WEB_WORKER_CODE}`;
+
     try {
-      this.worker_ = workerStub ?? new Worker(this.getWorkerUrl(), { type: 'module' });
+      this.worker_ = workerStub ?? new Worker(workerScriptUrl);
 
       if (workerStub) {
         this.isReady_ = true;

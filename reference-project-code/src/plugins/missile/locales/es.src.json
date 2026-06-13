@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Misil",
+      "title": "Menú de Misiles",
+      "helpBody": "El Menú de Misiles se usa para generar lanzamientos nocionales de misiles entre países. <br><br> Cuando usas misiles lanzados desde submarinos, el punto de lanzamiento es una latitud y longitud personalizadas. Cuando usas misiles basados en tierra, el punto de lanzamiento es una latitud y longitud fijas basadas en informes de fuentes abiertas. <br><br> Además de misiles personalizados, están disponibles algunos escenarios predefinidos que involucran cientos de misiles. <br><br> Todos los lanzamientos de misiles son nocionales y no pretenden representar eventos del mundo real. Las trayectorias de lanzamiento se basan todas en el mismo modelo balístico, pero usan diferentes rangos mínimos y máximos."
+    }
+  }
+}

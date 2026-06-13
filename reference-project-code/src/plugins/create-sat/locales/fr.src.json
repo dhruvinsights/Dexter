@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "CreateSat": {
+      "bottomIconLabel": "Créer un satellite",
+      "title": "Créer un satellite",
+      "helpBody": "Le menu Créer un satellite vous permet de créer un satellite en saisissant manuellement les éléments orbitaux ou en important un fichier d'éphémérides STK (.e).<br><br><b>Onglet Basique</b> : Entrez l'apogée, le périgée et l'inclinaison pour créer rapidement un satellite.<br><br><b>Onglet Avancé</b> : Entrez les éléments képlériens complets (inclinaison, RAAN, excentricité, argument du périgée, anomalie moyenne, mouvement moyen).<br><br><b>Import STK .e</b> : Glissez-déposez un fichier d'éphémérides STK sur le menu. Formats pris en charge : EphemerisTimePosVel, EphemerisTimePos et EphemerisTimePosVelAcc dans les systèmes de coordonnées inertiels (J2000, ICRF, TEME, etc.). Les formats de temps EpSec et UTCG sont pris en charge. Les mots-clés ne sont pas sensibles à la casse.<br><br><b>Non pris en charge</b> : Les formats géodésiques (LLA, LLR, MSL, Terrain), les référentiels non inertiels (Fixed, TrueOfDate) et les données de covariance ne sont pas pris en charge.",
+      "tabs": {
+        "basic": "Basique",
+        "advanced": "Avancé"
+      },
+      "labels": {
+        "noradId": "ID NORAD du satellite (90000-99999)",
+        "satelliteName": "Nom du satellite",
+        "inclinationDeg": "Inclinaison (degrés)",
+        "apogeeAltKm": "Altitude de l'apogée (km)",
+        "perigeeAltKm": "Altitude du périgée (km)",
+        "objectType": "Type d'objet",
+        "country": "Pays",
+        "epochYear": "Année d'époque",
+        "epochDay": "Jour d'époque",
+        "inclination": "Inclinaison",
+        "rightAscension": "Ascension droite",
+        "eccentricity": "Excentricité",
+        "argOfPerigee": "Argument du périgée",
+        "meanAnomaly": "Anomalie moyenne",
+        "meanMotion": "Mouvement moyen",
+        "period": "Période",
+        "dataSource": "Source de données",
+        "calculatedParameters": "Paramètres calculés",
+        "apogeeKm": "Apogée (km)",
+        "perigeeKm": "Périgée (km)",
+        "smaKm": "Demi-grand axe (km)",
+        "velocityKms": "Vitesse orbitale (km/s)"
+      },
+      "buttons": {
+        "createSatellite": "Créer le satellite",
+        "saveTle": "Enregistrer le TLE"
+      },
+      "options": {
+        "payload": "Charge utile",
+        "rocketBody": "Corps de fusée",
+        "debris": "Débris",
+        "special": "Spécial",
+        "unknown": "Inconnu"
+      },
+      "errorMsgs": {
+        "errorCreatingSat": "Erreur lors de la création du satellite !",
+        "invalidNumericValues": "Veuillez saisir des valeurs numériques valides",
+        "perigeeTooLow": "Périgée trop bas — le satellite se désintégrerait rapidement",
+        "apogeeMustBeGtePerigee": "L'apogée doit être supérieure ou égale au périgée",
+        "inclinationRange": "L'inclinaison doit être entre 0 et 180 degrés",
+        "invalidInputParams": "Paramètres d'entrée invalides",
+        "invalidSatObject": "Objet satellite invalide",
+        "propagationFailed": "Échec de la propagation du satellite. Essayez d'autres paramètres ou signalez ce problème si les paramètres sont corrects.",
+        "noValidTle": "Aucun TLE valide à exporter",
+        "exportFailed": "Échec de l'exportation du TLE",
+        "invalidNoradId": "ID NORAD invalide. Doit être un nombre à 5 chiffres entre 90000 et 99999.",
+        "invalidType": "Type invalide. Doit être 1 (Charge utile), 2 (Corps de fusée), 3 (Débris) ou 4 (Spécial).",
+        "invalidCountry": "Pays invalide. Doit être sélectionné dans la liste.",
+        "invalidEpochYear": "Année d'époque invalide. Doit être un nombre à 2 chiffres.",
+        "invalidEpochDay": "Jour d'époque invalide. Doit être au format NNN.NNNNNNNN (ex. : 001.00000000).",
+        "invalidInclination": "Inclinaison invalide. Doit être au format NNN.NNNN (ex. : 000.0000).",
+        "invalidRasc": "Ascension droite invalide. Doit être au format NNN.NNNN (ex. : 000.0000).",
+        "invalidEccentricity": "Excentricité invalide. Doit être un nombre à 7 chiffres (ex. : 0000000).",
+        "invalidArgPe": "Argument du périgée invalide. Doit être au format NNN.NNNN (ex. : 000.0000).",
+        "invalidMeanAnomaly": "Anomalie moyenne invalide. Doit être au format NNN.NNNN (ex. : 000.0000).",
+        "invalidMeanMotion": "Mouvement moyen invalide. Doit être au format NN.NNNNN (ex. : 16.00000).",
+        "invalidPeriod": "Période invalide. Doit être au format NN.NNNN à NNNN.NNNN (ex. : 90.0000, 9999.9999) avec 8 chiffres au total.",
+        "invalidSource": "Source invalide. Ne doit pas être vide.",
+        "invalidName": "Nom invalide. Ne doit pas être vide."
+      },
+      "successMsgs": {
+        "satCreated": "Satellite {name} ({scc}) créé avec succès",
+        "tleExported": "TLE exporté avec succès"
+      }
+    }
+  }
+}

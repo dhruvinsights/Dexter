@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "短期搜索框",
+      "title": "短期搜索框（STF）菜单",
+      "helpBody": "短期搜索框（STF）菜单用于可视化传感器搜索区域。<br><br>除非您拥有/操作带有搜索框功能的传感器，否则该功能可能用处不大。"
+    }
+  }
+}

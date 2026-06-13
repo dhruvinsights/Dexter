@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "卫星影像",
+      "title": "卫星影像",
+      "helpBody": "卫星影像插件显示地球静止轨道气象卫星和DSCOVR的最新影像。点击卫星名称查看最新影像。",
+      "defaultImageTitle": "最新卫星影像",
+      "errorMsgs": {
+        "FuturePictures": "无法加载未来的影像。正在加载最新影像。"
+      }
+    }
+  }
+}

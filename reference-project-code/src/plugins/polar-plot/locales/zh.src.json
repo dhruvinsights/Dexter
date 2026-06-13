@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "极坐标图",
+      "title": "极坐标图菜单",
+      "helpBody": "极坐标图菜单用于生成卫星方位角和仰角随时间变化的二维极坐标图。"
+    }
+  }
+}

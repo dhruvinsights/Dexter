@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Kurzzeit-Zaun",
+      "title": "Kurzzeit-Zäune (STF) Menü",
+      "helpBody": "Das Kurzzeit-Zäune (STF) Menü wird verwendet, um Sensor-Suchboxen zu visualisieren. <br><br> Dies ist wahrscheinlich nicht sehr hilfreich, es sei denn, Sie besitzen/betreiben einen Sensor mit einer Suchbox-Funktionalität."
+    }
+  }
+}

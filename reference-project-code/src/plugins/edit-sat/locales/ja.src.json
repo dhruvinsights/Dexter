@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "衛星を編集",
+      "title": "衛星編集メニュー",
+      "helpBody": "衛星編集メニューは、衛星データを編集するために使用されます。<br><br><ul><li>衛星SCC# - 米国宇宙軍によって各衛星に割り当てられた固有の番号。</li><li>エポック年 - 衛星の最後の軌道更新の年。</li><li>エポック日 - 衛星の最後の軌道更新の年間日数。</li><li>傾斜角 - 衛星の軌道面と赤道面との角度。</li><li>昇交点赤経 - 昇交点と最後の軌道更新時の衛星位置との角度。</li><li>離心率 - 衛星の軌道が完全な円からどれだけ逸脱しているかの量。</li><li>近地点引数 - 昇交点と衛星の地球に最も近い点との角度。</li><li>平均近点角 - 最後の軌道更新時の衛星位置と衛星の地球に最も近い点との角度。</li><li>平均運動 - 衛星の平均近点角が変化する率。</li></ul>",
+      "labels": {
+        "scc": "衛星 SCC#",
+        "country": "国",
+        "epochYear": "エポック年",
+        "epochDay": "エポック日",
+        "inclination": "傾斜角",
+        "rightAscension": "昇交点赤経",
+        "eccentricity": "離心率",
+        "argOfPerigee": "近地点引数",
+        "meanAnomaly": "平均近点角",
+        "meanMotion": "平均運動",
+        "period": "周期",
+        "error": "エラー"
+      },
+      "buttons": {
+        "updateSatellite": "衛星を更新",
+        "updateEpoch": "エポックを現在に更新",
+        "saveTle": "TLEを保存",
+        "loadTle": "TLEを読み込み"
+      },
+      "contextMenu": {
+        "editSat": "衛星を編集",
+        "setPrimarySat": "プライマリ衛星に設定",
+        "setSecondarySat": "セカンダリ衛星に設定",
+        "editSatellite": "衛星を編集"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "ファイル読み込み中にエラーが発生しました！",
+        "satelliteNotFound": "衛星 {sccNum} が見つかりません！",
+        "failedToPropagate": "衛星の伝播に失敗しました。別のパラメータを試すか、正しいと確信している場合はこの問題を報告してください。",
+        "cannotCalculateDirection": "衛星の方向を計算できません。後でもう一度お試しください。",
+        "notRealSatellite": "実在の衛星ではありません"
+      }
+    }
+  }
+}

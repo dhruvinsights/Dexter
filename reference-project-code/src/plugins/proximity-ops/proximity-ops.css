@@ -1,0 +1,16 @@
+#proximityOps-menu,
+#proximityOps-menu-secondary {
+  user-select: none;
+}
+
+.proximity-ops-secondary {
+  margin: 0 10px;
+}
+
+.proximity-ops-header {
+  text-decoration: underline;
+}
+
+#proximity-ops-table td:last-child {
+  min-width: 155px;
+}

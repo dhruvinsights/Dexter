@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Meilleurs passages",
+      "title": "Meilleurs temps de passage",
+      "helpBody": "Le plugin Meilleurs temps de passage calcule les temps de passage optimaux des satellites en fonction du capteur actuellement s\u00e9lectionn\u00e9. Les passages sont \u00e9valu\u00e9s selon la dur\u00e9e, l'\u00e9l\u00e9vation maximale, la port\u00e9e minimale et la position du soleil. Les r\u00e9sultats sont export\u00e9s en CSV.",
+      "satelliteNumbersLabel": "Num\u00e9ros de satellite",
+      "generateButton": "G\u00e9n\u00e9rer les meilleurs temps de passage",
+      "selectSensorFirst": "S\u00e9lectionnez d'abord un capteur !",
+      "errorMsgs": {
+        "SensorRequired": "Vous devez d'abord s\u00e9lectionner un capteur !",
+        "SensorFormatError": "Format du capteur incorrect. Avez-vous s\u00e9lectionn\u00e9 un capteur ?"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Grafico polare",
+      "title": "Menu grafico polare",
+      "helpBody": "Il menu Grafico polare viene utilizzato per generare un grafico polare 2D dell'azimut e dell'elevazione del satellite nel tempo."
+    }
+  }
+}

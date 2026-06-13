@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "PoliticalMapToggle": {
+      "bottomIconLabel": "Mapa Politico",
+      "commandPalette": {
+        "toggle": "Alternar fronteras politicas"
+      }
+    }
+  }
+}

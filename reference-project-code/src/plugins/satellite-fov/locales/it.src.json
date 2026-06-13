@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "FOV Satellite",
+      "title": "Campo Visivo del Satellite",
+      "helpBody": "Il plugin Campo Visivo del Satellite consente di controllare il campo visivo di un satellite."
+    }
+  }
+}

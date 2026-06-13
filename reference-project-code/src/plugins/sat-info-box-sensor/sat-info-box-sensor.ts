@@ -13,7 +13,7 @@ import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { html } from '@app/engine/utils/development/formatter';
 import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { getEl, hideEl, showEl } from '@app/engine/utils/get-el';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { keepTrackApi } from '@app/keepTrackApi';
 import {
   BaseObject, cKmPerMs, DEG2RAD,
@@ -23,7 +23,7 @@ import {
   SpaceObjectType, Sun, SunTime,
 } from '@ootk/src/main';
 import type { SensorManager } from '../../app/sensors/sensorManager';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { missileManager } from '../missile/missile-manager';
 import { SatInfoBox } from '../sat-info-box/sat-info-box';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
@@ -46,7 +46,7 @@ const EL = {
   NEXT_PASS: 'sat-nextpass',
 };
 
-export class SatInfoBoxSensor extends DexterPlugin {
+export class SatInfoBoxSensor extends KeepTrackPlugin {
   readonly id = 'SatInfoBoxSensor';
   dependencies_: string[] = [SatInfoBox.name];
 
@@ -231,7 +231,7 @@ export class SatInfoBoxSensor extends DexterPlugin {
 
   // eslint-disable-next-line max-statements, complexity
   private updateSelectBox_(obj: BaseObject) {
-    if (!Dexter.getInstance().isInitialized) {
+    if (!KeepTrack.getInstance().isInitialized) {
       return;
     }
 

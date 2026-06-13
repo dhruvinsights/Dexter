@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "Zprávy",
+      "title": "Menu zpráv",
+      "helpBody": "Menu zpráv je sbírka nástrojů, které vám pomohou analyzovat a pochopit zobrazovaná data."
+    }
+  }
+}

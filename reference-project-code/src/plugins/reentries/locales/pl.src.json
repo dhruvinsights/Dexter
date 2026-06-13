@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Powroty do atmosfery",
+      "title": "Powroty do atmosfery",
+      "helpBody": "Menu Powroty do atmosfery ma dwie zakładki: <br><br> <b>Komunikaty TIP</b> pokazują ostatnie i nadchodzące prognozy powrotów satelitów do atmosfery z US Space Command. Kliknięcie wiersza spowoduje wybranie tego satelity i zmianę czasu na przewidywany czas rozpadu. <br><br> <b>Analiza powrotów</b> pokazuje obiekty posortowane według najniższego perygeum, które mają największe prawdopodobieństwo powrotu do atmosfery. Kliknij dowolny wiersz, aby wybrać satelitę.",
+      "dataSource": "Komunikaty Tracking and Impact Prediction (TIP) dostarczane przez US Space Command (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "Nie znaleziono danych TIP!",
+        "errorFetching": "Błąd pobierania danych o powrotach do atmosfery!",
+        "errorProcessing": "Błąd przetwarzania danych o powrotach do atmosfery!",
+        "satelliteDecayed": "Satelita prawdopodobnie rozpadł się!"
+      }
+    }
+  }
+}

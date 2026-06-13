@@ -1,0 +1,26 @@
+{
+  "plugins": {
+    "WatchlistPlugin": {
+      "bottomIconLabel": "Watchlist",
+      "title": "Watchlist",
+      "helpBody": "The Watchlist menu allows you to create a list of priority satellites to track. This allows you to quickly retrieve the satellites you are most interested in. The list is saved in your browser's local storage and will be available the next time you visit the site. <br><br> When satellites on the watchlist enter the selected sensor's field of view a notification will be displayed, a line will be drawn from the sensor to the satellite, and the satellite's number will be displayed on the globe. <br><br> The overlay feature relies on the watchlist being populated."
+,
+      "settings": {
+        "satLabelMode": {
+          "label": "Satellite Label Mode",
+          "helpText": "Controls satellite label rendering on watchlist satellites.",
+          "options": {
+            "off": "Off",
+            "fovOnly": "FOV Only",
+            "all": "All Watchlist"
+          }
+        }
+      }
+    },
+    "WatchlistOverlay": {
+      "bottomIconLabel": "Overlay",
+      "title": "Overlay Menu",
+      "helpBody": "<p> The Watchlist Overlay shows the next pass time for each satellite in your watchlist. The overlay is updated every 10 seconds. </p> <p> The overlay is color coded to show the time to the next pass. The colors are as follows: </p> <ul> <li>Yellow - In View</li> <li>Blue - Time to Next Pass is up to 30 minutes after the current time or 10 minutes before the current time</li> <li>White - Any future pass not fitting the above requirements</li> </ul> <p> Clicking on a satellite in the overlay will center the map on that satellite. </p>"
+    }
+  }
+}

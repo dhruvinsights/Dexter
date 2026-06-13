@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "Pokaż DOP",
+      "title": "Menu rozmycia precyzji",
+      "helpTitle": "Menu rozmycia precyzji (DOP)",
+      "helpBody": "Menu rozmycia precyzji (DOP) służy do obliczania rozmycia precyzji (DOP) dla danej lokalizacji i maski elewacji.<br><br>HDOP to poziome rozmycie precyzji. Jest miarą dokładności pozycji poziomej.<br><br>PDOP to pozycyjne rozmycie precyzji. Jest miarą dokładności pozycji.<br><br>GDOP to geometryczne rozmycie precyzji. Jest miarą dokładności pozycji.",
+      "labels": {
+        "dopTable": "Tabela DOP",
+        "latitude": "Szerokość geogr.",
+        "longitude": "Długość geogr.",
+        "altitude": "Wysokość",
+        "mask": "Maska",
+        "updateDopData": "Aktualizuj dane DOP"
+      },
+      "tooltips": {
+        "latitude": "Szerokość geograficzna w stopniach",
+        "longitude": "Długość geograficzna w stopniach",
+        "altitude": "Wysokość w km",
+        "mask": "Minimalna elewacja dla blokady GPS"
+      },
+      "rmb": {
+        "dops": "DOP",
+        "currentGpsDops": "Bieżące DOP GPS",
+        "twentyFourHourGpsDops": "24-godzinne DOP GPS"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Wybierz prawidłową lokalizację na Ziemi dla 24-godzinnych DOP!"
+      }
+    }
+  }
+}

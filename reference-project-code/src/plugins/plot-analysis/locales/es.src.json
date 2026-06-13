@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Gráfico Inc vs Alt",
+      "title": "Menú de Gráfico de Inclinación a Altitud",
+      "helpBody": "El Menú de Gráfico de Inclinación a Altitud se utiliza para graficar la inclinación del satélite contra su altitud.",
+      "labels": {
+        "totalLeoPayloads": "Total de Cargas Útiles LEO"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Gráfico Inc vs Lon",
+      "title": "Menú de Gráfico de Inclinación a Longitud",
+      "helpBody": "El menú de Gráfico Inc vs Lon se utiliza para graficar la inclinación contra la longitud en el cinturón GEO.",
+      "labels": {
+        "totalGeoPayloads": "Total de Cargas Útiles GEO"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Gráfico Cascada",
+      "title": "Menú de Gráfico Cascada",
+      "helpBody": "El gráfico de Tiempo a Longitud (Cascada) muestra la deriva de longitud de los satélites GEO a lo largo del tiempo.",
+      "labels": {
+        "totalGeoPayloads": "Total de Cargas Útiles GEO"
+      }
+    }
+  }
+}

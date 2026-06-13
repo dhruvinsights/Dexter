@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Wykres inkl. vs wys.",
+      "title": "Menu wykresu inklinacji do wysokości",
+      "helpBody": "Menu wykresu inklinacji do wysokości służy do prezentacji inklinacji satelity w funkcji jego wysokości.",
+      "labels": {
+        "totalLeoPayloads": "Łączna liczba ładunków LEO"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Wykres inkl. vs dł.",
+      "title": "Menu wykresu inklinacji do długości geograficznej",
+      "helpBody": "Menu wykresu inkl. vs dł. służy do prezentacji inklinacji w funkcji długości geograficznej w pasie GEO.",
+      "labels": {
+        "totalGeoPayloads": "Łączna liczba ładunków GEO"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Wykres kaskadowy",
+      "title": "Menu wykresu kaskadowego",
+      "helpBody": "Wykres czasu do długości geograficznej (kaskadowy) przedstawia dryf długości geograficznej satelitów GEO w czasie.",
+      "labels": {
+        "totalGeoPayloads": "Łączna liczba ładunków GEO"
+      }
+    }
+  }
+}

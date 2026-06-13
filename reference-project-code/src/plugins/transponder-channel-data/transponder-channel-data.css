@@ -1,0 +1,9 @@
+#TransponderChannelData-menu {
+  width: 1000px !important;
+}
+
+#TransponderChannelData-table th,
+#TransponderChannelData-table td {
+  padding: 4px 8px;
+  font-size: 0.85rem;
+}

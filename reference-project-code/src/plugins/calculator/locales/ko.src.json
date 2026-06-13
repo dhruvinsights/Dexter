@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "기준계 변환",
+      "title": "기준계 변환 메뉴",
+      "helpBody": "기준계 변환 메뉴는 서로 다른 기준계 간에 변환하는 데 사용됩니다. <br><br> 이 메뉴를 사용하면 다음 기준계 간에 변환할 수 있습니다: <ul style=\"margin-left: 40px;\"> <li> ECI - 지구 중심 관성 </li> <li> ECEF - 지구 중심 지구 고정 </li> <li> 측지학적 </li> <li> 지역 중심 </li> </ul>"
+    }
+  }
+}

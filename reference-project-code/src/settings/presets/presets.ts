@@ -13,7 +13,7 @@ import {
 } from '@app/engine/rendering/draw-manager/earth-quality-enums';
 import { MilkyWayTextureQuality } from '@app/engine/rendering/draw-manager/skybox-sphere';
 import { getEl, setInnerHtml } from '@app/engine/utils/get-el';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { TimeMachine } from '@app/plugins/time-machine/time-machine';
 import { Kilometers, Milliseconds } from '@ootk/src/main';
 import { SettingsManager } from '../settings';
@@ -201,7 +201,7 @@ export class SettingsPresets {
       const textOverlay = document.createElement('div');
 
       textOverlay.id = 'textOverlay';
-      Dexter.getInstance().containerRoot.appendChild(textOverlay);
+      KeepTrack.getInstance().containerRoot.appendChild(textOverlay);
 
       // Update CSS
       const toastCss = `

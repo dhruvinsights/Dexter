@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "倾角-高度图",
+      "title": "倾角-高度绘图菜单",
+      "helpBody": "倾角-高度绘图菜单用于绘制卫星倾角与高度的关系。",
+      "labels": {
+        "totalLeoPayloads": "LEO有效载荷总数"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "倾角-经度图",
+      "title": "倾角-经度绘图菜单",
+      "helpBody": "倾角-经度绘图菜单用于在GEO带中绘制倾角与经度的关系。",
+      "labels": {
+        "totalGeoPayloads": "GEO有效载荷总数"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "瀑布图",
+      "title": "瀑布图菜单",
+      "helpBody": "时间-经度（瀑布）图显示GEO卫星经度随时间的漂移。",
+      "labels": {
+        "totalGeoPayloads": "GEO有效载荷总数"
+      }
+    }
+  }
+}

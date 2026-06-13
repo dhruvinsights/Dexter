@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Missile",
+      "title": "Menu Missile",
+      "helpBody": "Le menu Missile permet de générer des lancements de missiles notionnels entre pays. <br><br> Pour les missiles lancés depuis un sous-marin, le point de lancement est une latitude et longitude personnalisées. Pour les missiles terrestres, le point de lancement est une latitude et longitude fixes selon des sources ouvertes. <br><br> En plus des missiles personnalisés, quelques scénarios prédéfinis impliquant des centaines de missiles sont disponibles. <br><br> Tous les lancements de missiles sont notionnels et ne représentent pas des événements réels. Les trajectoires sont basées sur le même modèle balistique, mais avec différentes portées minimales et maximales."
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Constellations sat.",
+      "title": "Menu Constellations",
+      "helpBody": "Le menu Constellations permet de visualiser des groupes de satellites. <br><br> Pour certaines constellations, des liaisons montantes/descendantes ou inter-satellites notionnelles seront affich\u00e9es.",
+      "constellations": {
+        "SpaceStations": "Stations Spatiales",
+        "AmateurRadio": "Radio Amateur",
+        "GPSGroup": "Satellites GPS",
+        "GalileoGroup": "Satellites Galileo",
+        "GlonassGroup": "Satellites Glonass",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar et AEHF",
+        "wgs": "DSCS et WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Satellites",
+        "avgAltitude": "Alt Moy",
+        "incRange": "Inc"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Nom",
+        "inclination": "Inc",
+        "raan": "RAAN",
+        "perigee": "P\u00e9rig\u00e9e",
+        "apogee": "Apog\u00e9e"
+      },
+      "filters": {
+        "incMin": "Inc Min (\u00B0)",
+        "incMax": "Inc Max (\u00B0)",
+        "altMin": "Alt Min (km)",
+        "altMax": "Alt Max (km)",
+        "raanMin": "RAAN Min (\u00B0)",
+        "raanMax": "RAAN Max (\u00B0)",
+        "nameFilter": "Filtre de Nom",
+        "apply": "Appliquer",
+        "reset": "R\u00e9initialiser"
+      },
+      "commands": {
+        "category": "Constellations de satellites"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "Aucune constellation s\u00e9lectionn\u00e9e"
+      }
+    }
+  }
+}

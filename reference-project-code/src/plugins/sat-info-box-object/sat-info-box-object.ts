@@ -14,12 +14,12 @@ import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { getEl, hideEl, showEl } from '@app/engine/utils/get-el';
 import { t7e } from '@app/locales/keys';
 import { BaseObject, PayloadStatus, Satellite, SpaceObjectType } from '@ootk/src/main';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { SatInfoBox } from '../sat-info-box/sat-info-box';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 import { EL, SECTIONS } from './sat-info-box-object-html';
 
-export class SatInfoBoxObject extends DexterPlugin {
+export class SatInfoBoxObject extends KeepTrackPlugin {
   readonly id = 'SatInfoBoxObject';
   dependencies_: string[] = [SatInfoBox.name];
 

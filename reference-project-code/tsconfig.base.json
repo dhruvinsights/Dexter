@@ -50,50 +50,14 @@
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
     "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
     "paths": {
-      "@ootk/src/interpolator/ChebyshevCoefficients": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@ootk/src/interpolator/ChebyshevInterpolator": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@ootk/src/main": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@ootk/*": [
-        "src/engine/ootk/*"
-      ],
-      "@app/engine/ootk/src/coordinate/ClassicalElements": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/coordinate/ITRF": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/coordinate/J2000": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/coordinate/Tle": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/interpolator/LagrangeInterpolator": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/interpolator/SegmentedLagrangeInterpolator": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/interpolator/StateInterpolator": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/objects": [
-        "node_modules/ootk/dist/main"
-      ],
-      "@app/engine/ootk/src/main": [
-        "node_modules/ootk/dist/main"
-      ],
       "@app/*": [
         "src/*"
       ],
       "@engine/*": [
         "src/engine/*"
+      ],
+      "@ootk/*": [
+        "src/engine/ootk/*"
       ],
       "@plugins-pro/*": [
         "src/plugins-pro/*"

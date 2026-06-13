@@ -7,11 +7,11 @@ import { getEl, setInnerHtml } from '@app/engine/utils/get-el';
 import { isThisNode } from '@app/engine/utils/isThisNode';
 import { settingsManager } from '@app/settings/settings';
 import { Milliseconds } from '@ootk/src/main';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { TopMenu } from '../top-menu/top-menu';
 import { Calendar } from './calendar';
 
-export class DateTimeManager extends DexterPlugin {
+export class DateTimeManager extends KeepTrackPlugin {
   readonly id = 'DateTimeManager';
   dependencies_ = [TopMenu.name];
   isEditTimeOpen = false;

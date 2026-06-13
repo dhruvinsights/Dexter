@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Close Objects",
+      "title": "Close Objects Search",
+      "helpBody": "The Close Objects Search finds satellites and debris within close proximity to each other. It uses a two-phase spatial search algorithm to identify objects within 50km of each other, first checking current positions, then verifying with projected positions 30 minutes later.",
+      "findBtn": "Find Close Objects"
+    }
+  }
+}

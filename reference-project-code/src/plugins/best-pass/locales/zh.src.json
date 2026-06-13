@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "最佳过境",
+      "title": "最佳过境时间",
+      "helpBody": "最佳过境时间插件根据当前选定的传感器计算卫星的最佳过境时间。过境按持续时间、最大仰角、最小距离和太阳位置进行评分。结果以CSV格式导出。",
+      "satelliteNumbersLabel": "卫星编号",
+      "generateButton": "生成最佳过境时间",
+      "selectSensorFirst": "请先选择传感器！",
+      "errorMsgs": {
+        "SensorRequired": "您必须先选择一个传感器！",
+        "SensorFormatError": "传感器格式不正确。您是否先选择了传感器？"
+      }
+    }
+  }
+}

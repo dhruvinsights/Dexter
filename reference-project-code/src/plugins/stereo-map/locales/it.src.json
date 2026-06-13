@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "Mappa stereo",
+      "title": "Menu mappa stereografica",
+      "helpBody": "Il menu Mappa stereografica viene utilizzato per visualizzare le tracce a terra dei satelliti in proiezione stereografica. <br/><br/> È possibile fare clic su un punto lungo la traccia a terra per cambiare il tempo della simulazione al momento in cui il satellite raggiunge quel punto. <br/><br/> I punti gialli indicano quando il satellite è visibile dal sensore. I punti rossi indicano quando il satellite non è visibile dal sensore. Il punto più vicino al satellite è il tempo corrente.",
+      "labels": {
+        "orbitsToDisplay": "Orbite da visualizzare",
+        "showGraticule": "Mostra reticolato",
+        "mapStyle": "Stile mappa",
+        "standard": "Standard",
+        "political": "Politica",
+        "nightLights": "Luci notturne"
+      }
+    }
+  }
+}

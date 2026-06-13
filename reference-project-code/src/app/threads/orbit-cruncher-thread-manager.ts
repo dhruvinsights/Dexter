@@ -11,10 +11,6 @@ import { Degrees, Kilometers } from '@ootk/src/main';
 export class OrbitCruncherThreadManager extends WebWorkerThreadManager {
   readonly WEB_WORKER_CODE: string = 'js/orbitCruncher.js';
 
-  protected getWorkerUrl(): URL {
-    return new URL('../../webworker/orbitCruncher.ts', import.meta.url);
-  }
-
   private currentSeqNum_ = 0;
 
   // ─── Typed Send Methods ─────────────────────────────────────────────

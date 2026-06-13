@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "Mapa stereograficzna",
+      "title": "Menu mapy stereograficznej",
+      "helpBody": "Menu mapy stereograficznej służy do wizualizacji śladów naziemnych satelitów w projekcji stereograficznej. <br/><br/> Możesz kliknąć punkt na śladzie naziemnym, aby zmienić czas symulacji na moment, w którym satelita dotrze do tego punktu. <br/><br/> Żółte kropki oznaczają, że satelita jest w zasięgu czujnika. Czerwone kropki oznaczają, że satelita nie jest w zasięgu czujnika. Kropka najbliżej satelity oznacza bieżący czas.",
+      "labels": {
+        "orbitsToDisplay": "Orbity do wyświetlenia",
+        "showGraticule": "Pokaż siatkę kartograficzną",
+        "mapStyle": "Styl mapy",
+        "standard": "Standardowy",
+        "political": "Polityczny",
+        "nightLights": "Światła nocne"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "卫星视场",
+      "title": "卫星视场",
+      "helpBody": "卫星视场插件允许您控制卫星的视场。"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Ink vs Höhe-Diagramm",
+      "title": "Inklination-zu-Höhe-Diagramm-Menü",
+      "helpBody": "Das Inklination-zu-Höhe-Diagramm-Menü wird verwendet, um die Inklination des Satelliten gegen seine Höhe darzustellen.",
+      "labels": {
+        "totalLeoPayloads": "Gesamtzahl LEO-Nutzlasten"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Ink vs Län-Diagramm",
+      "title": "Inklination-zu-Längengrad-Diagramm-Menü",
+      "helpBody": "Das Ink-vs-Län-Diagramm-Menü wird verwendet, um die Inklination gegen den Längengrad im GEO-Gürtel darzustellen.",
+      "labels": {
+        "totalGeoPayloads": "Gesamtzahl GEO-Nutzlasten"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Wasserfall-Diagramm",
+      "title": "Wasserfall-Diagramm-Menü",
+      "helpBody": "Das Zeit-zu-Längengrad (Wasserfall) Diagramm zeigt die GEO-Satelliten-Längengradverschiebung über die Zeit.",
+      "labels": {
+        "totalGeoPayloads": "Gesamtzahl GEO-Nutzlasten"
+      }
+    }
+  }
+}

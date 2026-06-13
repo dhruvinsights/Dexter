@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteTimeline": {
+      "bottomIconLabel": "Časová osa satelitu",
+      "title": "Menu časové osy satelitu",
+      "helpBody": "Menu časové osy satelitu zobrazuje, kdy má jeden senzor viditelnost seznamu satelitů. Časová osa je barevně kódována pro zobrazení kvality přeletu. Červená je špatný přelet, žlutá je průměrný přelet a zelená je dobrý přelet. Kliknutím na přelet změníte satelit a čas na daný přelet. <br><br> Časovou osu lze upravit změnou počátečního a koncového času simulace. Dále lze časovou osu upravit změnou možností délky a intervalu."
+    }
+  }
+}

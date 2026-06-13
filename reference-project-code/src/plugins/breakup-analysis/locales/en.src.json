@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Breakup Analysis",
+      "title": "Breakup Analysis",
+      "helpBody": "The Breakup Analysis plugin provides a database of major satellite breakup events in history. Select an event to view detailed information including the parent object, breakup cause, timeline from launch to breakup, and fragment dispersion analysis. The plugin searches the current catalog for tracked debris matching each event and displays statistical analysis of altitude ranges, eccentricity, and inclination distributions."
+    }
+  }
+}

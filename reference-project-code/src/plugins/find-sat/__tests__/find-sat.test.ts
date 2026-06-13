@@ -16,7 +16,7 @@ import { Satellite } from '@ootk/src/main';
 // eslint-disable-next-line max-lines-per-function
 describe('FindSatPlugin_class', () => {
   beforeEach(() => {
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     setupStandardEnvironment();
     window.M.AutoInit = vi.fn();
   });

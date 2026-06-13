@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Rysuj",
+        "eciAxes": "Osie ECI",
+        "xAxesGrid": "Siatka osi X",
+        "yAxesGrid": "Siatka osi Y",
+        "zAxesGrid": "Siatka osi Z",
+        "xAxesRadialGrid": "Siatka radialna osi X",
+        "yAxesRadialGrid": "Siatka radialna osi Y",
+        "zAxesRadialGrid": "Siatka radialna osi Z",
+        "earthToSatellite": "Ziemia do satelity",
+        "sensorToSatellite": "Czujnik do satelity",
+        "satelliteToSatellite": "Satelita do satelity",
+        "satelliteToSun": "Satelita do Słońca",
+        "satelliteToMoon": "Satelita do Księżyca",
+        "moonOrbit": "Rysuj orbitę Księżyca"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "Nie wybrano głównego satelity dla linii satelita–satelita."
+      }
+    }
+  }
+}

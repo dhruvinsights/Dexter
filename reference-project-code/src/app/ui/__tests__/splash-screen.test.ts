@@ -12,14 +12,14 @@ describe('SplashScreen_class', () => {
     // getEl() resolves via document.getElementById, which does not pierce
     // shadow roots, so the splash screen must be attached to the live document.
     document.body.innerHTML = '';
-    previousContainerRoot = Dexter.getInstance().containerRoot;
-    Dexter.getInstance().containerRoot = document.body as unknown as HTMLDivElement;
+    previousContainerRoot = KeepTrack.getInstance().containerRoot;
+    KeepTrack.getInstance().containerRoot = document.body as unknown as HTMLDivElement;
     SplashScreen.initLoadingScreen(document.body);
   });
 
   afterEach(() => {
     document.body.innerHTML = '';
-    Dexter.getInstance().containerRoot = previousContainerRoot;
+    KeepTrack.getInstance().containerRoot = previousContainerRoot;
   });
 
   // Tests that the loading screen is hidden immediately when running on mobile
@@ -41,7 +41,7 @@ describe('SplashScreen_class', () => {
 
   // Tests that loadStr() does nothing when the loader text element is not found
   it('test_load_str_element_not_found', () => {
-    Dexter.getInstance().containerRoot.innerHTML = '<div id="loader-text"></div>';
+    KeepTrack.getInstance().containerRoot.innerHTML = '<div id="loader-text"></div>';
     SplashScreen.loadStr('test');
     expect(getEl('loader-text')?.textContent).toBe('test');
   });

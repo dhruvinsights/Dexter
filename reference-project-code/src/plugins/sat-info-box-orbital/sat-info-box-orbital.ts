@@ -17,12 +17,12 @@ import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { getEl, setInnerHtml } from '@app/engine/utils/get-el';
 import { t7e } from '@app/locales/keys';
 import { BaseObject, eci2lla, Kilometers, MINUTES_PER_DAY, Satellite } from '@ootk/src/main';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { SatInfoBox } from '../sat-info-box/sat-info-box';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 import { EL, SECTIONS } from './sat-info-box-orbital-html';
 
-export class SatInfoBoxOrbital extends DexterPlugin {
+export class SatInfoBoxOrbital extends KeepTrackPlugin {
   readonly id = 'SatInfoBoxOrbital';
   dependencies_: string[] = [SatInfoBox.name];
 

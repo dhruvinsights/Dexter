@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Rendezvous y Operaciones de Proximidad",
+      "title": "Rendezvous y Operaciones de Proximidad (RPO)",
+      "titleSecondary": "Lista de Rendezvous y Operaciones de Proximidad",
+      "helpBody": "Encuentra acercamientos próximos entre satélites. Configura parámetros de búsqueda incluyendo umbral de distancia, velocidad relativa y tipo de órbita (GEO/LEO). Soporta modos de búsqueda de satélite individual y todos contra todos.",
+      "noradId": "ID NORAD",
+      "maxDistThreshold": "Distancia Máxima de Umbral (km)",
+      "maxRelativeVelocity": "Velocidad Relativa Máxima (km/s)",
+      "searchDuration": "Duración de Búsqueda (horas)",
+      "geoText": "Geoestacionario",
+      "leoText": "Órbita Terrestre Baja",
+      "orbitType": "Tipo de Órbita",
+      "geoAllVsAll": "Geoestacionario Todos vs Todos",
+      "geoAllVsAllTooltip": "Buscar RPOs entre todos los satélites geoestacionarios",
+      "comparePayloadsOnly": "Comparar Solo Cargas Útiles",
+      "comparePayloadsOnlyTooltip": "Buscar solo RPOs entre cargas útiles",
+      "ignoreVimpelRso": "Ignorar Vimpel RSO",
+      "ignoreVimpelRsoTooltip": "Ignorar RSOs provenientes del Catálogo Vimpel",
+      "submitButton": "Buscar RPOs \u25b6",
+      "noRposToDownload": "¡No hay RPOs para descargar!",
+      "noRposFound": "¡No se encontraron RPOs!",
+      "satNotFound": "Satélite con ID NORAD {sccNum} no encontrado",
+      "geoOrbitsEcf": "Órbitas GEO mostradas en ECF",
+      "geoOrbitsEci": "Órbitas GEO mostradas en ECI",
+      "vimpelNotSupported": "Los satélites Vimpel no son compatibles",
+      "table": {
+        "target": "Objetivo",
+        "targetName": "Nombre del Objetivo",
+        "chaser": "Perseguidor",
+        "chaserName": "Nombre del Perseguidor",
+        "relDistance": "Dist. Rel. [km]",
+        "relVelocity": "Vel. Rel. [km/s]",
+        "date": "Fecha"
+      }
+    }
+  }
+}

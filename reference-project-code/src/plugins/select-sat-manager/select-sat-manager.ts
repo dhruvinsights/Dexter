@@ -24,7 +24,7 @@ import { PersistenceManager, StorageKey } from '@app/engine/utils/persistence-ma
 import { t7e } from '@app/locales/keys';
 import { createSampleCovarianceFromTle, Kilometers, LandObject, RADIUS_OF_EARTH, Satellite, SpaceObjectType, TemeVec3 } from '@ootk/src/main';
 import { vec3 } from 'gl-matrix';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { PlanetsMenuPlugin } from '../planets-menu/planets-menu';
 import { SatInfoBox } from '../sat-info-box/sat-info-box';
 import { TopMenu } from '../top-menu/top-menu';
@@ -32,7 +32,7 @@ import { TopMenu } from '../top-menu/top-menu';
 /**
  * This is the class that manages the selection of objects.
  */
-export class SelectSatManager extends DexterPlugin implements ISettingsContributor {
+export class SelectSatManager extends KeepTrackPlugin implements ISettingsContributor {
   readonly id = 'SelectSatManager';
   dependencies_ = [];
 

@@ -538,11 +538,12 @@ export class SettingsManager {
   }
 
   init(settingsOverride?: SettingsManagerOverride) {
-    // Export settingsManager to everyone else
-    window.settingsManager = this;
-
-    // Expose these to node if running in node
-    if (typeof global !== 'undefined') {
+    /*
+     * Export settingsManager to everyone else
+     * window.settingsManager = this;
+     * Expose these to node if running in node
+     */
+    if (global) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (<any>global).settingsManager = this;
     }

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Analisi frammentazione",
+      "title": "Analisi frammentazione",
+      "helpBody": "Il plugin Analisi frammentazione fornisce un database dei principali eventi di frammentazione satellitare nella storia. Seleziona un evento per visualizzare informazioni dettagliate, incluso l'oggetto principale, la causa della frammentazione, la cronologia dal lancio alla frammentazione e l'analisi della dispersione dei frammenti. Il plugin cerca nel catalogo attuale i detriti tracciati corrispondenti a ciascun evento e visualizza analisi statistiche degli intervalli di altitudine, eccentricità e distribuzioni di inclinazione."
+    }
+  }
+}

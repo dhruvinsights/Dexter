@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Nuevo Lanzamiento",
+      "title": "Menú de Nuevo Lanzamiento",
+      "helpBody": "El Menú de Nuevo Lanzamiento se usa para generar lanzamientos orbitales nocionales modificando satélites existentes con parámetros similares. <br><br> Después de seleccionar un satélite, puedes seleccionar una ubicación de lanzamiento y un azimut norte/sur. El satélite seleccionado será modificado para alinearlo con el sitio de lanzamiento. El reloj se cambia entonces a 00:00:00 para representar el tiempo relativo después del lanzamiento. Esto puede ser útil para calcular la cobertura del sensor relativa al tiempo de lanzamiento. La relación del objeto con otros objetos orbitales será incorrecta."
+    }
+  }
+}

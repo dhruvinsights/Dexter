@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Barrière court terme",
+      "title": "Menu Barrières court terme (STF)",
+      "helpBody": "Le menu Barrières court terme (STF) permet de visualiser les zones de recherche des capteurs. <br><br> Ceci n'est probablement utile que si vous possédez/exploitez un capteur avec cette fonctionnalité."
+    }
+  }
+}

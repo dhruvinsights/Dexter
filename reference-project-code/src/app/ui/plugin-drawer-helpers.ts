@@ -1,7 +1,7 @@
 import { MenuMode } from '@app/engine/core/interfaces';
 import { KeyboardShortcutRegistry } from '@app/engine/core/keyboard-shortcut-registry';
 import { PluginRegistry } from '@app/engine/core/plugin-registry';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import { IconPlacement, UtilityGroup } from '@app/engine/plugins/core/plugin-capabilities';
 import { TopMenuPlugin } from '@app/engine/plugins/top-menu-plugin';
 import { getEl } from '@app/engine/utils/get-el';
@@ -63,7 +63,7 @@ const UTILITY_NAV_ITEM_IDS = new Set(['sound-btn', 'layers-menu-btn']);
  * Resolve a plugin's bottom icon image source — preferring the already-rendered
  * DOM element (which may have a resolved or delayed src) over the raw module.
  */
-export function resolveImgSrc(plugin: DexterPlugin): string {
+export function resolveImgSrc(plugin: KeepTrackPlugin): string {
   const iconEl = getEl(plugin.bottomIconElementName, true);
   const img = iconEl?.querySelector('img') as HTMLImageElement | null;
 
@@ -142,7 +142,7 @@ export function collectDrawerItems(): CollectedDrawerItems {
       continue;
     }
 
-    const order = plugin.bottomIconOrder ?? DexterPlugin.MAX_BOTTOM_ICON_ORDER;
+    const order = plugin.bottomIconOrder ?? KeepTrackPlugin.MAX_BOTTOM_ICON_ORDER;
 
     // Resolve the image source — it may be a webpack module or a string
     const imgSrc = resolveImgSrc(plugin);
@@ -264,7 +264,7 @@ export function renderUtilityFooter(groups: Record<string, DrawerGroup>): void {
 /** Whether the user is signed in (required before the phone link is usable). */
 function isCompanionSignedIn_(): boolean {
   const userPlugin = PluginRegistry.getPluginByName('UserAccountPlugin') as
-    (DexterPlugin & { cachedUser?: { id?: string } | null }) | null;
+    (KeepTrackPlugin & { cachedUser?: { id?: string } | null }) | null;
 
   return Boolean(userPlugin?.cachedUser?.id);
 }

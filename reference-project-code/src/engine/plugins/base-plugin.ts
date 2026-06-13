@@ -3,7 +3,7 @@ import { BottomMenu } from '@app/app/ui/bottom-menu';
 import { SoundNames } from '@app/engine/audio/sounds';
 import { MenuMode, Singletons } from '@app/engine/core/interfaces';
 import { adviceManagerInstance } from '@app/engine/utils/adviceManager';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { t7e, TranslationKey } from '@app/locales/keys';
 import { OfflineIconBehavior } from '@app/settings/core-settings';
 import { BaseObject } from '@ootk/src/main';
@@ -80,7 +80,7 @@ export interface SideMenuSettingsOptions {
 /**
  * Represents a plugin for KeepTrack.
  */
-export abstract class DexterPlugin {
+export abstract class KeepTrackPlugin {
   static readonly bottomIconsContainerId = 'bottom-icons';
   static readonly sideMenuContainerId = 'left-menus';
   static readonly rmbMenuL1ContainerId = 'right-btn-menu-ul';
@@ -347,7 +347,7 @@ export abstract class DexterPlugin {
    * Sets the login gate token on a plugin instance. Called by LoginGateService
    * to distribute or clear rotating tokens.
    */
-  static setLoginGateToken(plugin: DexterPlugin, token: string | null): void {
+  static setLoginGateToken(plugin: KeepTrackPlugin, token: string | null): void {
     plugin[LOGIN_GATE_KEY] = token;
   }
 
@@ -364,7 +364,7 @@ export abstract class DexterPlugin {
       return true;
     }
 
-    const expectedToken = DexterPlugin.loginGateTokenProvider?.() ?? null;
+    const expectedToken = KeepTrackPlugin.loginGateTokenProvider?.() ?? null;
 
     if (!expectedToken) {
       return false;
@@ -415,7 +415,7 @@ export abstract class DexterPlugin {
   protected usesCompositionPattern_ = false;
 
   /**
-   * Creates a new instance of the DexterPlugin class.
+   * Creates a new instance of the KeepTrackPlugin class.
    * @param pluginName The name of the plugin.
    */
   constructor() {
@@ -438,7 +438,7 @@ export abstract class DexterPlugin {
   }
 
   /**
-   * Initializes the DexterPlugin by checking its dependencies.
+   * Initializes the KeepTrackPlugin by checking its dependencies.
    * @returns void
    */
   init(): void {
@@ -654,7 +654,7 @@ export abstract class DexterPlugin {
             true,
           );
           this.shakeBottomIcon();
-          DexterPlugin.loginGateOpenModal?.();
+          KeepTrackPlugin.loginGateOpenModal?.();
         } : undefined,
       );
       this.keyboardComponent_.init();
@@ -675,7 +675,7 @@ export abstract class DexterPlugin {
 
 
   /**
-   * Adds HTML for the DexterPlugin.
+   * Adds HTML for the KeepTrackPlugin.
    * @throws {Error} If HTML has already been added.
    */
   // eslint-disable-next-line complexity
@@ -950,7 +950,7 @@ export abstract class DexterPlugin {
   }
 
   /**
-   * Adds the JS for the DexterPlugin.
+   * Adds the JS for the KeepTrackPlugin.
    * @throws {Error} If the JS has already been added.
    */
   addJs(): void {
@@ -981,7 +981,7 @@ export abstract class DexterPlugin {
     if (this.bottomIconElementName && !this.isBottomIconHidden_ && this.iconPlacement !== IconPlacement.UTILITY_ONLY) {
       this.registerMenuMode();
       this.menuMode.forEach((menuMode) => {
-        DexterPlugin.registeredMenus[menuMode].push(this.bottomIconElementName);
+        KeepTrackPlugin.registeredMenus[menuMode].push(this.bottomIconElementName);
       });
     }
 
@@ -1006,9 +1006,9 @@ export abstract class DexterPlugin {
   };
 
   static hideUnusedMenuModes(): void {
-    for (const menuMode in Object.keys(DexterPlugin.registeredMenus)) {
-      if (Object.hasOwn(DexterPlugin.registeredMenus, menuMode)) {
-        const menuElements = DexterPlugin.registeredMenus[menuMode];
+    for (const menuMode in Object.keys(KeepTrackPlugin.registeredMenus)) {
+      if (Object.hasOwn(KeepTrackPlugin.registeredMenus, menuMode)) {
+        const menuElements = KeepTrackPlugin.registeredMenus[menuMode];
 
         if (menuElements.length === 0) {
           switch (parseInt(menuMode)) {
@@ -1103,7 +1103,7 @@ export abstract class DexterPlugin {
 
         // Replace outer element with first child
         if (lastChild) {
-          getEl(DexterPlugin.rmbMenuL1ContainerId)?.appendChild(lastChild);
+          getEl(KeepTrackPlugin.rmbMenuL1ContainerId)?.appendChild(lastChild);
         }
       },
     );
@@ -1118,7 +1118,7 @@ export abstract class DexterPlugin {
         item.id = elementId;
         item.className = 'right-btn-menu';
         item.innerHTML = html;
-        getEl(DexterPlugin.rmbMenuL2ContainerId)?.appendChild(item);
+        getEl(KeepTrackPlugin.rmbMenuL2ContainerId)?.appendChild(item);
       },
     );
   }
@@ -1135,7 +1135,7 @@ export abstract class DexterPlugin {
 
         button.id = this.bottomIconElementName;
         // embed an order id to allow for sorting
-        button.setAttribute('data-order', this.bottomIconOrder?.toString() ?? DexterPlugin.MAX_BOTTOM_ICON_ORDER.toString());
+        button.setAttribute('data-order', this.bottomIconOrder?.toString() ?? KeepTrackPlugin.MAX_BOTTOM_ICON_ORDER.toString());
         button.classList.add('bmenu-item');
         if (isDisabled) {
           button.classList.add('bmenu-item-disabled');
@@ -1157,7 +1157,7 @@ export abstract class DexterPlugin {
           </div>
           <span class="bmenu-title">${this.bottomIconLabel}</span>
           `;
-        getEl(DexterPlugin.bottomIconsContainerId)?.appendChild(button);
+        getEl(KeepTrackPlugin.bottomIconsContainerId)?.appendChild(button);
       },
     );
   }
@@ -1206,7 +1206,7 @@ export abstract class DexterPlugin {
           </div>
         `;
         item.addEventListener('click', () => {
-          if (item.classList.contains(DexterPlugin.iconDisabledClassString)) {
+          if (item.classList.contains(KeepTrackPlugin.iconDisabledClassString)) {
             shake(item);
 
             return;
@@ -1218,14 +1218,14 @@ export abstract class DexterPlugin {
         let containerId: string;
 
         if (this.utilityGroup === UtilityGroup.CAMERA_MODE) {
-          containerId = DexterPlugin.utilityCameraContainerId;
+          containerId = KeepTrackPlugin.utilityCameraContainerId;
         } else if (this.utilityGroup === UtilityGroup.SETTINGS_TOGGLE) {
-          containerId = DexterPlugin.utilitySettingsContainerId;
+          containerId = KeepTrackPlugin.utilitySettingsContainerId;
         } else {
-          containerId = DexterPlugin.utilityLayerContainerId;
+          containerId = KeepTrackPlugin.utilityLayerContainerId;
         }
 
-        const container = getEl(containerId) ?? getEl(DexterPlugin.utilityPanelContainerId);
+        const container = getEl(containerId) ?? getEl(KeepTrackPlugin.utilityPanelContainerId);
 
         container?.appendChild(item);
       },
@@ -1406,7 +1406,7 @@ export abstract class DexterPlugin {
 
   addSideMenu(sideMenuHtml: string): void {
     EventBus.getInstance().on(EventBusEvent.uiManagerInit, () => {
-      getEl(DexterPlugin.sideMenuContainerId)?.insertAdjacentHTML('beforeend', sideMenuHtml);
+      getEl(KeepTrackPlugin.sideMenuContainerId)?.insertAdjacentHTML('beforeend', sideMenuHtml);
     });
   }
 
@@ -1468,8 +1468,8 @@ export abstract class DexterPlugin {
               this.hideSideMenus();
             }
             this.isMenuButtonActive = false;
-            getEl(this.bottomIconElementName, true)?.classList.remove(DexterPlugin.iconSelectedClassString);
-            getEl(`${this.id}-utility-icon`, true)?.classList.remove(DexterPlugin.iconSelectedClassString);
+            getEl(this.bottomIconElementName, true)?.classList.remove(KeepTrackPlugin.iconSelectedClassString);
+            getEl(`${this.id}-utility-icon`, true)?.classList.remove(KeepTrackPlugin.iconSelectedClassString);
           } else {
             // Check login gate before any other activation logic
             if (this.isLoginRequired && !this.isLoginGateValid_()) {
@@ -1478,7 +1478,7 @@ export abstract class DexterPlugin {
                 true,
               );
               this.shakeBottomIcon();
-              DexterPlugin.loginGateOpenModal?.();
+              KeepTrackPlugin.loginGateOpenModal?.();
 
               return;
             }
@@ -1505,8 +1505,8 @@ export abstract class DexterPlugin {
 
               // Show the bottom icon as selected
               this.isMenuButtonActive = true;
-              getEl(this.bottomIconElementName, true)?.classList.add(DexterPlugin.iconSelectedClassString);
-              getEl(`${this.id}-utility-icon`, true)?.classList.add(DexterPlugin.iconSelectedClassString);
+              getEl(this.bottomIconElementName, true)?.classList.add(KeepTrackPlugin.iconSelectedClassString);
+              getEl(`${this.id}-utility-icon`, true)?.classList.add(KeepTrackPlugin.iconSelectedClassString);
             }
           }
 
@@ -1549,7 +1549,7 @@ export abstract class DexterPlugin {
     slideInRight(getEl(this.sideMenuElementName), 300);
 
     if (this.isRenderPausedOnOpen) {
-      Dexter.getInstance().engine.pause();
+      KeepTrack.getInstance().engine.pause();
     }
   }
 
@@ -1679,10 +1679,10 @@ export abstract class DexterPlugin {
       EventBusEvent.hideSideMenus,
       (): void => {
         if (this.isRenderPausedOnOpen && this.isMenuButtonActive) {
-          Dexter.getInstance().engine.resume();
+          KeepTrack.getInstance().engine.resume();
         }
         slideCb();
-        getEl(bottomIconElementName)?.classList.remove(DexterPlugin.iconSelectedClassString);
+        getEl(bottomIconElementName)?.classList.remove(KeepTrackPlugin.iconSelectedClassString);
         this.isMenuButtonActive = false;
       },
     );

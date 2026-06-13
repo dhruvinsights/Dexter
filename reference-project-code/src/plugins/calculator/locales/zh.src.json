@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "参考系转换",
+      "title": "参考系转换菜单",
+      "helpBody": "参考系转换菜单用于在不同参考系之间转换。<br><br>菜单允许您在以下参考系之间转换：<ul style=\"margin-left: 40px;\"><li>ECI - 地心惯性系</li><li>ECEF - 地心地固系</li><li>大地坐标系</li><li>地方坐标系</li></ul>"
+    }
+  }
+}

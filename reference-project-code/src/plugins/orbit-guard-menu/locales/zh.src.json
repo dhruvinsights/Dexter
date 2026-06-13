@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "OrbitGuard",
+      "title": "OrbitGuard",
+      "helpBody": "OrbitGuard 异常检测菜单显示卫星的最新机动、轨道偏离族群和稳定性变化事件。"
+    }
+  }
+}

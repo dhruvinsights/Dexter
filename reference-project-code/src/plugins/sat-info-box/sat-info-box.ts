@@ -12,11 +12,11 @@ import { IKeyboardShortcut } from '@app/engine/plugins/core/plugin-capabilities'
 import { DraggableBox } from '@app/engine/ui/draggable-box';
 import { html } from '@app/engine/utils/development/formatter';
 import { getEl, hideEl, setInnerHtml, showEl } from '@app/engine/utils/get-el';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { BaseObject, CatalogSource, Satellite } from '@ootk/src/main';
 import bookmarkAddPng from '@public/img/icons/bookmark-add.png';
 import bookmarkRemovePng from '@public/img/icons/bookmark-remove.png';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 import { CONTAINER_ID, EL, SECTIONS } from './sat-info-box-html';
 import './sat-info-box.css';
@@ -25,7 +25,7 @@ import './sat-info-box.css';
  * This class controls all the functionality of the satellite info box.
  * There are select events and update events that are registered to the Event Bus.
  */
-export class SatInfoBox extends DexterPlugin {
+export class SatInfoBox extends KeepTrackPlugin {
   readonly id = 'SatInfoBox';
   dependencies_: string[] = [SelectSatManager.name];
 
@@ -138,7 +138,7 @@ export class SatInfoBox extends DexterPlugin {
   private initDraggabilly() {
     if (!settingsManager.isMobileModeEnabled) {
       const draggie = new Draggabilly(getEl(SatInfoBox.containerId_)!, {
-        containment: Dexter.getInstance().containerRoot,
+        containment: KeepTrack.getInstance().containerRoot,
       });
 
       draggie.on('dragStart', () => {
@@ -275,7 +275,7 @@ export class SatInfoBox extends DexterPlugin {
     setInnerHtml(EL.NAME, obj.name);
 
     if (obj instanceof Satellite || obj instanceof OemSatellite) {
-      Dexter.getInstance().containerRoot.querySelectorAll('.sat-only-info')?.forEach((el) => {
+      KeepTrack.getInstance().containerRoot.querySelectorAll('.sat-only-info')?.forEach((el) => {
         (<HTMLElement>el).style.display = 'flex';
       });
     }

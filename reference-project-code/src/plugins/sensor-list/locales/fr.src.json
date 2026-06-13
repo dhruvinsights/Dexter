@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Capteurs",
+      "title": "Menu Liste des Capteurs",
+      "helpBody": "Le menu Capteurs vous permet de sélectionner un capteur à utiliser dans les calculs et les autres fonctions du menu. Les capteurs sont regroupés selon les réseaux qu'ils soutiennent principalement. Sur le côté gauche du menu se trouve le nom du capteur et à droite le pays/l'organisation propriétaire. <br><br> Sélectionner une option \"Tous...Capteurs\" permet de sélectionner tous les capteurs de ce groupe. Cela est utile pour visualiser la couverture des réseaux, mais ne fonctionne pas pour tous les calculs. Si vous souhaitez calculer les angles de visée pour un réseau, il est préférable d'utiliser l'outil multi-sites ou de calculer les angles pour chaque capteur individuellement. <br><br> Les capteurs de cette liste incluent des radars mécaniques et à réseau phasé, ainsi que des capteurs optiques : <ul style=\"margin-left: 40px;\"> <li> Les radars à réseau phasé sont généralement limités à l'orbite terrestre basse (LEO). </li> <li> Les radars mécaniques peuvent être utilisés pour LEO et l'orbite géostationnaire (GEO). </li> <li> Les capteurs optiques sont généralement utilisés pour GEO, mais peuvent aussi servir pour LEO. </li> <li> Les capteurs optiques sont limités aux observations nocturnes par ciel dégagé, tandis que les radars fonctionnent de jour comme de nuit. </li> </ul> <br> Les informations sur les capteurs sont basées sur des données publiques et peuvent être vérifiées dans le menu Info Capteur. Si vous avez des données publiques sur d'autres capteurs ou des corrections à apporter, contactez-moi à <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

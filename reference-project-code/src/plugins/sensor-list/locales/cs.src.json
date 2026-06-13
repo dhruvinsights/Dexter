@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Senzory",
+      "title": "Menu seznamu senzorů",
+      "helpBody": "Menu senzorů umožňuje vybrat senzor pro použití ve výpočtech a funkcích ostatních menu. Senzory jsou ve skupinách podle sítí, které primárně podporují. Na levé straně menu je název senzoru a na pravé straně je země/organizace, která jej vlastní. <br><br> Výběr možnosti \u201EVšechny...senzory\u201C vybere všechny senzory v dané skupině. To je užitečné pro vizualizaci pokrytí sítě, ale v současnosti nefunguje pro všechny výpočty. Pokud se pokoušíte vypočítat úhly pohledu pro síť, je nejlepší použít nástroj úhlů pohledu z více míst nebo použít úhly pohledu pro každý jednotlivý senzor v síti. <br><br> Senzory v tomto seznamu zahrnují mechanické a fázované radarové soustavy, stejně jako optické senzory: <ul style=\"margin-left: 40px;\"> <li> Fázované radarové soustavy jsou obvykle omezeny na nízkou oběžnou dráhu (LEO). </li> <li> Mechanické radary lze použít jak pro LEO, tak pro geostacionární oběžnou dráhu (GEO). </li> <li> Optické senzory se obvykle používají pro GEO, ale lze je použít i pro LEO. </li> <li> Optické senzory jsou omezeny na noční pozorování za jasného nebe, zatímco radary lze používat ve dne i v noci. </li> </ul> <br> Informace o senzorech jsou založeny na veřejně dostupných datech a lze je ověřit v menu Info o senzoru. Pokud máte veřejná data o dalších senzorech nebo opravy k existujícím informacím o senzorech, kontaktujte mě na <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

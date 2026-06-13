@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3",
+      "title": "\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3\u30e1\u30cb\u30e5\u30fc",
+      "helpBody": "\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3\u30e1\u30cb\u30e5\u30fc\u3067\u306f\u3001\u885b\u661f\u306e\u30b0\u30eb\u30fc\u30d7\u3092\u8868\u793a\u3067\u304d\u307e\u3059\u3002<br><br>\u4e00\u90e8\u306e\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3\u3067\u306f\u3001\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3\u5185\u306e\u885b\u661f\u9593\u306e\u6982\u5ff5\u7684\u306a\u30a2\u30c3\u30d7\u30ea\u30f3\u30af/\u30c0\u30a6\u30f3\u30ea\u30f3\u30af\u3084\u30af\u30ed\u30b9\u30ea\u30f3\u30af\u304c\u63cf\u753b\u3055\u308c\u307e\u3059\u3002",
+      "constellations": {
+        "SpaceStations": "\u5b87\u5b99\u30b9\u30c6\u30fc\u30b7\u30e7\u30f3",
+        "AmateurRadio": "\u30a2\u30de\u30c1\u30e5\u30a2\u7121\u7dda",
+        "GPSGroup": "GPS\u885b\u661f",
+        "GalileoGroup": "Galileo\u885b\u661f",
+        "GlonassGroup": "Glonass\u885b\u661f",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar\u3068AEHF",
+        "wgs": "DSCS\u3068WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "\u885b\u661f",
+        "avgAltitude": "\u5e73\u5747\u9ad8\u5ea6",
+        "incRange": "\u50be\u659c\u89d2"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "\u540d\u524d",
+        "inclination": "\u50be\u659c\u89d2",
+        "raan": "RAAN",
+        "perigee": "\u8fd1\u5730\u70b9",
+        "apogee": "\u9060\u5730\u70b9"
+      },
+      "filters": {
+        "incMin": "\u6700\u5c0f\u50be\u659c\u89d2 (\u00B0)",
+        "incMax": "\u6700\u5927\u50be\u659c\u89d2 (\u00B0)",
+        "altMin": "\u6700\u5c0f\u9ad8\u5ea6 (km)",
+        "altMax": "\u6700\u5927\u9ad8\u5ea6 (km)",
+        "raanMin": "\u6700\u5c0fRaan (\u00B0)",
+        "raanMax": "\u6700\u5927RAAN (\u00B0)",
+        "nameFilter": "\u540d\u524d\u30d5\u30a3\u30eb\u30bf\u30fc",
+        "apply": "\u9069\u7528",
+        "reset": "\u30ea\u30bb\u30c3\u30c8"
+      },
+      "commands": {
+        "category": "\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "\u30b3\u30f3\u30b9\u30c6\u30ec\u30fc\u30b7\u30e7\u30f3\u304c\u9078\u629e\u3055\u308c\u3066\u3044\u307e\u305b\u3093"
+      }
+    }
+  }
+}

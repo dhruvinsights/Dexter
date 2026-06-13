@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "Collisions": {
+      "bottomIconLabel": "Kolize",
+      "title": "Nabídka kolizí",
+      "helpBody": "Nabídka Kolize zobrazuje satelity s vysokou pravděpodobností kolize. <br><br> Kliknutím na řádek vyberete dva satelity zapojené do kolize a čas se změní na čas kolize.",
+      "errorMsgs": {
+        "noCollisionsData": "Nebyla nalezena žádná data o kolizích!",
+        "errorProcessingCollisions": "Chyba při zpracování dat SOCRATES!"
+      }
+    }
+  }
+}

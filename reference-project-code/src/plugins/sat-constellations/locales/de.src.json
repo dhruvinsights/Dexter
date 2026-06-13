@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Konstellationen",
+      "title": "Konstellationen-Men\u00fc",
+      "helpBody": "Das Konstellationen-Men\u00fc erm\u00f6glicht es Ihnen, Gruppen von Satelliten anzuzeigen. <br><br> F\u00fcr einige Konstellationen werden fiktive Uplinks/Downlinks und/oder Crosslinks zwischen Satelliten in der Konstellation gezeichnet.",
+      "constellations": {
+        "SpaceStations": "Raumstationen",
+        "AmateurRadio": "Amateurfunk",
+        "GPSGroup": "GPS-Satelliten",
+        "GalileoGroup": "Galileo-Satelliten",
+        "GlonassGroup": "Glonass-Satelliten",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar und AEHF",
+        "wgs": "DSCS und WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Satelliten",
+        "avgAltitude": "\u00d8 H\u00f6he",
+        "incRange": "Ink"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Name",
+        "inclination": "Ink",
+        "raan": "RAAN",
+        "perigee": "Perig\u00e4um",
+        "apogee": "Apog\u00e4um"
+      },
+      "filters": {
+        "incMin": "Min Ink (\u00B0)",
+        "incMax": "Max Ink (\u00B0)",
+        "altMin": "Min H\u00f6he (km)",
+        "altMax": "Max H\u00f6he (km)",
+        "raanMin": "Min. RAAN (\u00B0)",
+        "raanMax": "Max. RAAN (\u00B0)",
+        "nameFilter": "Namensfilter",
+        "apply": "Anwenden",
+        "reset": "Zur\u00fccksetzen"
+      },
+      "commands": {
+        "category": "Konstellationen"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "Keine Konstellation ausgew\u00e4hlt"
+      }
+    }
+  }
+}

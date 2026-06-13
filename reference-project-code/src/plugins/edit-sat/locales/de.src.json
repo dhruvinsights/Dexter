@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "Satellit bearbeiten",
+      "title": "Satellit bearbeiten Menü",
+      "helpBody": "Das Menü 'Satellit bearbeiten' wird verwendet, um die Satellitendaten zu bearbeiten. <br><br> <ul> <li> Satellit SCC# - Eine eindeutige Nummer, die jedem Satelliten von der US Space Force zugewiesen wird. </li> <li> Epochenjahr - Das Jahr der letzten Bahnaktualisierung des Satelliten. </li> <li> Epochentag - Der Tag des Jahres der letzten Bahnaktualisierung des Satelliten. </li> <li> Inklination - Der Winkel zwischen der Bahnebene des Satelliten und der Äquatorebene. </li> <li> Rektaszension - Der Winkel zwischen dem aufsteigenden Knoten und der Position des Satelliten zum Zeitpunkt der letzten Bahnaktualisierung. </li> <li> Exzentrizität - Das Maß, um das die Umlaufbahn des Satelliten von einem perfekten Kreis abweicht. </li> <li> Argument des Perigäums - Der Winkel zwischen dem aufsteigenden Knoten und dem erdnächsten Punkt des Satelliten. </li> <li> Mittlere Anomalie - Der Winkel zwischen der Position des Satelliten zum Zeitpunkt der letzten Bahnaktualisierung und dem erdnächsten Punkt des Satelliten. </li> <li> Mittlere Bewegung - Die Geschwindigkeit, mit der sich die mittlere Anomalie des Satelliten ändert. </li> </ul>",
+      "labels": {
+        "scc": "Satellit SCC#",
+        "country": "Land",
+        "epochYear": "Epochenjahr",
+        "epochDay": "Epochentag",
+        "inclination": "Inklination",
+        "rightAscension": "Rektaszension",
+        "eccentricity": "Exzentrizität",
+        "argOfPerigee": "Argument des Perigäums",
+        "meanAnomaly": "Mittlere Anomalie",
+        "meanMotion": "Mittlere Bewegung",
+        "period": "Periode",
+        "error": "Fehler"
+      },
+      "buttons": {
+        "updateSatellite": "Satellit aktualisieren",
+        "updateEpoch": "Epoche auf Jetzt aktualisieren",
+        "saveTle": "TLE speichern",
+        "loadTle": "TLE laden"
+      },
+      "contextMenu": {
+        "editSat": "Sat bearbeiten",
+        "setPrimarySat": "Als Primärsatellit setzen",
+        "setSecondarySat": "Als Sekundärsatellit setzen",
+        "editSatellite": "Satellit bearbeiten"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "Fehler beim Lesen der Datei!",
+        "satelliteNotFound": "Satellit {sccNum} nicht gefunden!",
+        "failedToPropagate": "Satellit konnte nicht propagiert werden. Versuchen Sie andere Parameter oder melden Sie dieses Problem, wenn Sie sicher sind, dass sie korrekt sind.",
+        "cannotCalculateDirection": "Richtung des Satelliten kann nicht berechnet werden. Versuchen Sie es später erneut.",
+        "notRealSatellite": "Kein realer Satellit"
+      }
+    }
+  }
+}

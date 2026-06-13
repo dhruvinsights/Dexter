@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "Informes",
+      "title": "Menú de Informes",
+      "helpBody": "El Menú de Informes es una colección de herramientas para ayudarte a analizar y entender los datos que estás viendo."
+    }
+  }
+}

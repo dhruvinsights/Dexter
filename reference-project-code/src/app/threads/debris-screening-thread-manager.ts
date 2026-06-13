@@ -41,10 +41,6 @@ export interface DsScreeningParams {
 export class DebrisScreeningThreadManager extends WebWorkerThreadManager {
   readonly WEB_WORKER_CODE: string = 'js/debrisScreeningWorker.js';
 
-  protected getWorkerUrl(): URL {
-    return new URL('../../webworker/debrisScreeningWorker.ts', import.meta.url);
-  }
-
   private currentRunId_ = 0;
   private callbacks_: DsScreeningCallbacks | null = null;
 

@@ -28,9 +28,9 @@ import {
 import tableRowsPng from '@public/img/icons/table-rows.png';
 import { sensorGroups } from '../../app/data/catalogs/sensor-groups';
 import { SensorManager } from '../../app/sensors/sensorManager';
-import { ClickDragOptions, fileExcelPng, DexterPlugin, SideMenuSettingsOptions } from '../../engine/plugins/base-plugin';
+import { ClickDragOptions, fileExcelPng, KeepTrackPlugin, SideMenuSettingsOptions } from '../../engine/plugins/base-plugin';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
-export class MultiSiteLookAnglesPlugin extends DexterPlugin {
+export class MultiSiteLookAnglesPlugin extends KeepTrackPlugin {
   readonly id = 'MultiSiteLookAnglesPlugin';
   dependencies_ = [SelectSatManager.name];
   private readonly selectSatManager_: SelectSatManager;
@@ -48,7 +48,7 @@ export class MultiSiteLookAnglesPlugin extends DexterPlugin {
 
   constructor() {
     super();
-    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in DexterPlugin constructor
+    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in KeepTrackPlugin constructor
     this.sensorList_ = sensorGroups.map((group) => group.list).flat().map((sensor) => {
       if (sensors[sensor] instanceof DetailedSensor) {
         return sensors[sensor];

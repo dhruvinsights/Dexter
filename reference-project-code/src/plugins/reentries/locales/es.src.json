@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Reentradas",
+      "title": "Reentradas",
+      "helpBody": "El menú de Reentradas tiene dos pestañas: <br><br> <b>Mensajes TIP</b> muestra predicciones recientes y próximas de reentrada de satélites del Comando Espacial de EE.UU. Al hacer clic en una fila se seleccionará el satélite y cambiará la hora al momento de decaimiento previsto. <br><br> <b>Análisis de Reentrada</b> muestra objetos ordenados por perigeo más bajo que tienen más probabilidad de reingresar a la atmósfera. Haga clic en cualquier fila para seleccionar el satélite.",
+      "dataSource": "Mensajes de Seguimiento y Prediccion de Impacto (TIP) proporcionados por el Comando Espacial de EE.UU. (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "No se encontraron datos TIP!",
+        "errorFetching": "Error al obtener datos de reentrada!",
+        "errorProcessing": "Error al procesar datos de reentrada!",
+        "satelliteDecayed": "El satelite parece haber decaido!"
+      }
+    }
+  }
+}

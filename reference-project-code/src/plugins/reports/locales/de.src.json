@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "Berichte",
+      "title": "Berichte-Menü",
+      "helpBody": "Das Berichte-Menü ist eine Sammlung von Werkzeugen, die Ihnen helfen, die angezeigten Daten zu analysieren und zu verstehen."
+    }
+  }
+}

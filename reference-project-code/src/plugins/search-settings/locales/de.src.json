@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "Sucheinstellungen",
+      "title": "Sucheinstellungen",
+      "labels": {
+        "maxResults": "Maximale Suchergebnisse",
+        "showDecayed": "Verglühte Satelliten anzeigen"
+      },
+      "tooltips": {
+        "maxResults": "Maximale Anzahl der in der Suche angezeigten Satelliten",
+        "showDecayed": "Verglühte Satelliten (Position 0,0,0) in den Suchergebnissen anzeigen"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "Ungültiger Wert für maximale Suchergebnisse!"
+      }
+    }
+  }
+}

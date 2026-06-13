@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Kreslit",
+        "eciAxes": "Osy ECI",
+        "xAxesGrid": "Mřížka osy X",
+        "yAxesGrid": "Mřížka osy Y",
+        "zAxesGrid": "Mřížka osy Z",
+        "xAxesRadialGrid": "Radiální mřížka osy X",
+        "yAxesRadialGrid": "Radiální mřížka osy Y",
+        "zAxesRadialGrid": "Radiální mřížka osy Z",
+        "earthToSatellite": "Země – satelit",
+        "sensorToSatellite": "Senzor – satelit",
+        "satelliteToSatellite": "Satelit – satelit",
+        "satelliteToSun": "Satelit – Slunce",
+        "satelliteToMoon": "Satelit – Měsíc",
+        "moonOrbit": "Nakreslit oběžnou dráhu Měsíce"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "Nebyl vybrán primární satelit pro linii satelit–satelit."
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Best Passes",
+      "title": "Best Pass Times",
+      "helpBody": "The Best Pass Times plugin calculates optimal pass times for satellites based on the currently selected sensor. Passes are scored based on duration, maximum elevation, minimum range, and sun position. Results are exported as CSV.",
+      "satelliteNumbersLabel": "Satellite Numbers",
+      "generateButton": "Generate Best Pass Times",
+      "selectSensorFirst": "Select Sensor First!",
+      "errorMsgs": {
+        "SensorRequired": "You must select a sensor first!",
+        "SensorFormatError": "Sensor's format incorrect. Did you select a sensor first?"
+      }
+    }
+  }
+}

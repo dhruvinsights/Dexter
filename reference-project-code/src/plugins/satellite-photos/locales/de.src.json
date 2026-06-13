@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "Satellitenbilder",
+      "title": "Satellitenbilder",
+      "helpBody": "Das Satellitenbilder-Plugin zeigt die neuesten Aufnahmen von geostationären Wettersatelliten und DSCOVR an. Klicken Sie auf einen Satellitennamen, um das neueste Bild anzuzeigen.",
+      "defaultImageTitle": "Neuestes Satellitenbild",
+      "errorMsgs": {
+        "FuturePictures": "Bilder aus der Zukunft können nicht geladen werden. Die neuesten Aufnahmen werden geladen."
+      }
+    }
+  }
+}

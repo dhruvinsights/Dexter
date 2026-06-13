@@ -1,0 +1,638 @@
+import { SatMath } from '@app/app/analysis/sat-math';
+import { CatalogSearch } from '@app/app/data/catalog-search';
+import { MenuMode, ToastMsgType } from '@app/engine/core/interfaces';
+import { PluginRegistry } from '@app/engine/core/plugin-registry';
+import { ServiceLocator } from '@app/engine/core/service-locator';
+import { EventBus } from '@app/engine/events/event-bus';
+import { EventBusEvent } from '@app/engine/events/event-bus-events';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
+import {
+  IBottomIconConfig,
+  IDragOptions,
+  IHelpConfig,
+  IKeyboardShortcut,
+  ISideMenuConfig,
+} from '@app/engine/plugins/core/plugin-capabilities';
+import { buildSideMenuTabsHtml, initSideMenuTabs, updateSideMenuTabIndicator } from '@app/engine/ui/side-menu-tabs';
+import { html } from '@app/engine/utils/development/formatter';
+import { errorManagerInstance } from '@app/engine/utils/errorManager';
+import { getEl, hideEl, showEl } from '@app/engine/utils/get-el';
+import { hideLoading, showLoading, showLoadingSticky } from '@app/engine/utils/showLoading';
+import { t7e } from '@app/locales/keys';
+import { RAD2DEG, Satellite, SpaceObjectType } from '@ootk/src/main';
+import fetchPng from '@public/img/icons/download.png';
+import refreshPng from '@public/img/icons/refresh.png';
+import sputnickPng from '@public/img/icons/sputnick.png';
+import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
+import './reentries.css';
+
+const TABS_ID = 'reentries-tabs';
+
+export interface TipMsg {
+  NORAD_CAT_ID: string;
+  MSG_EPOCH: string;
+  INSERT_EPOCH: string;
+  DECAY_EPOCH: string;
+  WINDOW: string;
+  REV: string;
+  DIRECTION: string;
+  LAT: string;
+  LON: string;
+  INCL: string;
+  NEXT_REPORT: string;
+  ID: string;
+  HIGH_INTEREST: string;
+  OBJECT_NUMBER: string;
+}
+
+export class Reentries extends KeepTrackPlugin {
+  readonly id = 'Reentries';
+  dependencies_ = [];
+  private readonly tipDataSrc_ = 'https://r2.keeptrack.space/spacetrack-tip.json';
+  protected selectSatIdOnCruncher_: number | null = null;
+  protected tipList_: TipMsg[] = [];
+  protected reentryList_: Satellite[] = [];
+  private isLoggedIn_ = false;
+  private isFetching_ = false;
+
+  // =========================================================================
+  // Composition-based configuration methods
+  // =========================================================================
+
+  getBottomIconConfig(): IBottomIconConfig {
+    return {
+      elementName: 'reentries-bottom-icon',
+      label: t7e('plugins.Reentries.bottomIconLabel' as Parameters<typeof t7e>[0]),
+      image: sputnickPng,
+      menuMode: [MenuMode.EVENTS, MenuMode.ALL],
+    };
+  }
+
+  /**
+   * Called when the bottom icon is clicked.
+   */
+  onBottomIconClick(): void {
+    if (!this.isMenuButtonActive) {
+      return;
+    }
+
+    this.updateToolbarForLoginState_();
+    updateSideMenuTabIndicator(TABS_ID);
+
+    if (this.isLoggedIn_ && this.tipList_.length === 0) {
+      this.fetchTipData_();
+    }
+  }
+
+  // Bridge for legacy event system (per CLAUDE.md)
+  bottomIconCallback = (): void => {
+    this.onBottomIconClick();
+  };
+
+  getSideMenuConfig(): ISideMenuConfig {
+    return {
+      elementName: 'reentries-menu',
+      title: t7e('plugins.Reentries.title' as Parameters<typeof t7e>[0]),
+      html: this.buildSideMenuHtml_(),
+      dragOptions: this.getDragOptions_(),
+    };
+  }
+
+  private getDragOptions_(): IDragOptions {
+    return {
+      isDraggable: true,
+      minWidth: 1200,
+      maxWidth: 1500,
+    };
+  }
+
+  private buildSideMenuHtml_(): string {
+    const tipMessagesContent = html`
+      <div class="row">
+        <div class="re-toolbar">
+          <button id="reentries-fetch-btn" class="btn btn-ui waves-effect waves-light icon-btn"
+            type="button" kt-tooltip="Fetch Data">
+            <img src="${fetchPng}" class="icon-btn-img" alt="" />
+          </button>
+          <button id="reentries-refresh-btn" class="btn btn-ui waves-effect waves-light icon-btn"
+            type="button" kt-tooltip="Refresh" style="display:none;">
+            <img src="${refreshPng}" class="icon-btn-img" alt="" />
+          </button>
+        </div>
+        <table id="reentries-tip-table" class="center-align"></table>
+        <sub class="center-align">*${t7e('plugins.Reentries.dataSource' as Parameters<typeof t7e>[0])}</sub>
+      </div>
+    `;
+
+    const reentryAnalysisContent = html`
+      <div class="row">
+        <table id="reentries-analysis-table" class="center-align"></table>
+      </div>
+    `;
+
+    const tabsHtml = buildSideMenuTabsHtml(TABS_ID, [
+      { id: 'reentries-tip-tab', label: 'TIP Messages', content: tipMessagesContent },
+      { id: 'reentries-analysis-tab', label: 'Reentry Analysis', content: reentryAnalysisContent },
+    ]);
+
+    return html`
+      <div id="reentries-menu" class="side-menu-parent start-hidden">
+        <div id="reentries-content" class="side-menu">
+          ${tabsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  getHelpConfig(): IHelpConfig {
+    return {
+      title: t7e('plugins.Reentries.title' as Parameters<typeof t7e>[0]),
+      body: t7e('plugins.Reentries.helpBody' as Parameters<typeof t7e>[0]),
+    };
+  }
+
+  getKeyboardShortcuts(): IKeyboardShortcut[] {
+    return [
+      {
+        key: 'R',
+        callback: () => this.bottomMenuClicked(),
+      },
+    ];
+  }
+
+  // =========================================================================
+  // Lifecycle methods
+  // =========================================================================
+
+  addJs(): void {
+    super.addJs();
+
+    EventBus.getInstance().on(EventBusEvent.uiManagerFinal, this.uiManagerFinal_.bind(this));
+    EventBus.getInstance().on(EventBusEvent.userLogin, this.onUserLogin_.bind(this));
+    EventBus.getInstance().on(EventBusEvent.userLogout, this.onUserLogout_.bind(this));
+
+    EventBus.getInstance().on(
+      EventBusEvent.onCruncherMessage,
+      () => {
+        if (this.selectSatIdOnCruncher_ !== null) {
+          PluginRegistry.getPlugin(SelectSatManager)?.selectSat(this.selectSatIdOnCruncher_);
+
+          this.selectSatIdOnCruncher_ = null;
+        }
+      },
+    );
+  }
+
+  private uiManagerFinal_() {
+    initSideMenuTabs(TABS_ID);
+
+    getEl('reentries-fetch-btn', true)?.addEventListener('click', () => {
+      hideEl('reentries-fetch-btn');
+      showEl('reentries-refresh-btn', 'inline-flex');
+      this.fetchTipData_();
+    });
+
+    getEl('reentries-refresh-btn', true)?.addEventListener('click', () => {
+      this.tipList_ = [];
+      this.fetchTipData_();
+    });
+
+    // TIP Messages row click handler
+    getEl(this.sideMenuElementName)!.addEventListener('click', (evt: Event) => {
+      const el = (<HTMLElement>evt.target)?.parentElement;
+
+      if (el?.classList.contains('tip-object')) {
+        showLoading(() => {
+          const hiddenRow = el.dataset?.row ?? null;
+
+          if (hiddenRow !== null) {
+            this.tipEventClicked_(parseInt(hiddenRow));
+          }
+        });
+
+        return;
+      }
+
+      // Reentry Analysis row click handler
+      if (el?.classList.contains('reentry-object')) {
+        showLoading(() => {
+          const sccNum = el.dataset?.scc ?? null;
+
+          if (sccNum !== null) {
+            this.reentryEventClicked_(sccNum);
+          }
+        });
+      }
+    });
+
+    // Populate reentry table on tab switch (lazy load)
+    const reentryTab = getEl('reentries-analysis-tab');
+
+    reentryTab?.addEventListener('click', () => {
+      if (this.reentryList_.length === 0) {
+        this.populateReentryTable_();
+      }
+    });
+
+    // Listen for tab clicks on the tab header
+    const tabsEl = getEl(TABS_ID);
+
+    tabsEl?.addEventListener('click', (evt: Event) => {
+      const anchor = (<HTMLElement>evt.target)?.closest('a');
+
+      if (anchor?.getAttribute('href') === '#reentries-analysis-tab' && this.reentryList_.length === 0) {
+        this.populateReentryTable_();
+      }
+    });
+  }
+
+  // =========================================================================
+  // TIP Messages (Tab 1) — existing functionality
+  // =========================================================================
+
+  private fetchTipData_(): void {
+    if (this.isFetching_) {
+      return;
+    }
+    this.isFetching_ = true;
+
+    fetch(this.tipDataSrc_)
+      .then((response) => response.json())
+      .then((tipList: TipMsg[]) => {
+        this.setTipList_(tipList);
+        this.createTipTable_();
+
+        if (this.tipList_.length === 0) {
+          errorManagerInstance.warn(t7e('plugins.Reentries.errorMsgs.noTipData' as Parameters<typeof t7e>[0]));
+        }
+
+        hideEl('reentries-fetch-btn');
+        showEl('reentries-refresh-btn', 'inline-flex');
+      })
+      .catch(() => {
+        errorManagerInstance.warn(t7e('plugins.Reentries.errorMsgs.errorFetching' as Parameters<typeof t7e>[0]));
+      })
+      .finally(() => {
+        this.isFetching_ = false;
+      });
+  }
+
+  private onUserLogin_(): void {
+    this.isLoggedIn_ = true;
+
+    if (this.isMenuButtonActive) {
+      this.updateToolbarForLoginState_();
+      if (this.tipList_.length === 0) {
+        this.fetchTipData_();
+      }
+    }
+  }
+
+  private onUserLogout_(): void {
+    this.isLoggedIn_ = false;
+
+    if (this.isMenuButtonActive) {
+      this.updateToolbarForLoginState_();
+    }
+  }
+
+  private updateToolbarForLoginState_(): void {
+    const fetchBtn = getEl('reentries-fetch-btn', true);
+    const refreshBtn = getEl('reentries-refresh-btn', true);
+
+    if (this.isLoggedIn_) {
+      if (fetchBtn) {
+        hideEl(fetchBtn);
+      }
+      if (refreshBtn) {
+        showEl(refreshBtn, 'inline-flex');
+      }
+    } else {
+      if (fetchBtn) {
+        if (this.tipList_.length === 0) {
+          showEl(fetchBtn, 'inline-flex');
+        } else {
+          hideEl(fetchBtn);
+        }
+      }
+      if (refreshBtn) {
+        if (this.tipList_.length > 0) {
+          showEl(refreshBtn, 'inline-flex');
+        } else {
+          hideEl(refreshBtn);
+        }
+      }
+    }
+  }
+
+  private setTipList_(tipList: TipMsg[]) {
+    this.tipList_ = tipList;
+    this.tipList_.sort((a, b) => new Date(b.MSG_EPOCH).getTime() - new Date(a.MSG_EPOCH).getTime());
+    this.tipList_ = this.tipList_.filter((v, i, a) => a.findIndex((t) => t.NORAD_CAT_ID === v.NORAD_CAT_ID) === i);
+    this.tipList_.sort((a, b) => new Date(b.DECAY_EPOCH).getTime() - new Date(a.DECAY_EPOCH).getTime());
+  }
+
+  protected tipEventClicked_(row: number) {
+    // sccNum2Sat accepts the NORAD_CAT_ID string directly; parseInt would drop
+    // alpha-5 IDs.
+    const sat = ServiceLocator.getCatalogManager().sccNum2Sat(this.tipList_[row].NORAD_CAT_ID);
+
+    if (!sat) {
+      ServiceLocator.getUiManager().toast(t7e('plugins.Reentries.errorMsgs.satelliteDecayed' as Parameters<typeof t7e>[0]), ToastMsgType.caution);
+
+      return;
+    }
+
+    const now = new Date();
+    const decayEpoch = new Date(
+      Date.UTC(
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(0, 4)),
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(5, 7)) - 1,
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(8, 10)),
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(11, 13)),
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(14, 16)),
+        parseInt(this.tipList_[row].DECAY_EPOCH.substring(17, 19)),
+      ),
+    );
+
+    ServiceLocator.getTimeManager().changeStaticOffset(decayEpoch.getTime() - now.getTime());
+    ServiceLocator.getMainCamera().state.isAutoPitchYawToTarget = false;
+
+    ServiceLocator.getUiManager().doSearch(`${sat.sccNum5 ?? sat.sccNum}`);
+
+    this.selectSatIdOnCruncher_ = sat.id;
+  }
+
+  protected createTipTable_(): void {
+    try {
+      const tbl = <HTMLTableElement>getEl('reentries-tip-table');
+
+      tbl.innerHTML = '';
+      tbl.classList.add('centered');
+
+      Reentries.createTipHeaders_(tbl);
+
+      for (let i = 0; i < this.tipList_.length; i++) {
+        this.createTipRow_(tbl, i);
+      }
+    } catch {
+      errorManagerInstance.warn(t7e('plugins.Reentries.errorMsgs.errorProcessing' as Parameters<typeof t7e>[0]));
+    }
+  }
+
+  private static createTipHeaders_(tbl: HTMLTableElement) {
+    const tr = tbl.insertRow();
+    const names = [
+      'NORAD',
+      'Decay Date',
+      'Latitude',
+      'Longitude',
+      'Window (min)',
+      'Next Report (hrs)',
+      'Reentry Angle (deg)',
+      'RCS (m^2)',
+      'GP Age (hrs)',
+      'Dry Mass (kg)',
+      'Volume (m^3)',
+    ];
+
+    for (const name of names) {
+      const column = tr.insertCell();
+
+      column.appendChild(document.createTextNode(name));
+      column.setAttribute('style', 'text-decoration: underline');
+      column.setAttribute('class', 'center');
+    }
+  }
+
+  private createTipRow_(tbl: HTMLTableElement, i: number): HTMLTableRowElement {
+    const tr = tbl.insertRow();
+
+    tr.setAttribute('class', 'tip-object link');
+    tr.setAttribute('data-row', i.toString());
+
+    const sat = ServiceLocator.getCatalogManager().sccNum2Sat(this.tipList_[i].NORAD_CAT_ID);
+    let rcs = 'Reentered';
+    let age = 'Reentered';
+    let volume = 'Reentered';
+    let gammaDegrees = 'Reentered';
+
+    if (sat) {
+      const decayEpochDate = new Date(this.tipList_[i].DECAY_EPOCH);
+      let nu: number | null = null;
+
+      try {
+        nu = sat.toClassicalElements(decayEpochDate)?.trueAnomaly;
+      } catch {
+        // Expected to fail for some satellites since they are reentries
+      }
+
+      if (nu !== null) {
+        const sinNu = Math.sin(nu);
+        const gamma = Math.atan((sat.eccentricity * sinNu) / (1 + sat.eccentricity * Math.cos(nu)));
+
+        gammaDegrees = `${Math.abs(gamma * RAD2DEG).toFixed(2)}\u00B0`;
+      } else {
+        gammaDegrees = 'Unknown';
+      }
+
+      if (sat?.rcs) {
+        rcs = `${sat.rcs}`;
+      } else {
+        const rcsEst = SatMath.estimateRcsUsingHistoricalData(sat);
+
+        rcs = rcsEst ? `${rcsEst.toFixed(2)}` : 'Unknown';
+      }
+
+      age = sat ? `${sat.ageOfElset(new Date(), 'hours').toFixed(2)}` : 'Unknown';
+
+      const span = sat?.span ? parseFloat(sat.span.replace(/[^0-9.]/gu, '')) : -1;
+      const length = sat?.length ? parseFloat(sat.length.replace(/[^0-9.]/gu, '')) : -1;
+      const diameter = sat?.diameter ? parseFloat(sat.diameter.replace(/[^0-9.]/gu, '')) : -1;
+
+      volume = span !== -1 && length !== -1 && diameter !== -1 ? `${((Math.PI / 6) * span * length * diameter).toFixed(2)}` : 'Unknown';
+    }
+
+    Reentries.createCell_(tr, this.tipList_[i].NORAD_CAT_ID);
+    Reentries.createCell_(tr, this.tipList_[i].DECAY_EPOCH);
+    Reentries.createCell_(tr, this.lat2degrees_(this.tipList_[i].LAT));
+    Reentries.createCell_(tr, this.lon2degrees_(this.tipList_[i].LON));
+    Reentries.createCell_(tr, this.tipList_[i].WINDOW);
+    Reentries.createCell_(tr, this.tipList_[i].NEXT_REPORT);
+    Reentries.createCell_(tr, gammaDegrees);
+    Reentries.createCell_(tr, rcs);
+    Reentries.createCell_(tr, age);
+    Reentries.createCell_(tr, sat?.dryMass ?? 'Reentered');
+    Reentries.createCell_(tr, volume);
+
+    return tr;
+  }
+
+  // =========================================================================
+  // Reentry Analysis (Tab 2)
+  // =========================================================================
+
+  private populateReentryTable_() {
+    showLoadingSticky();
+
+    setTimeout(() => {
+      try {
+        const objectCache = ServiceLocator.getCatalogManager().objectCache;
+        const sccNums = CatalogSearch.findReentry(<Satellite[]>objectCache, 200);
+
+        this.reentryList_ = sccNums
+          .map((scc) => ServiceLocator.getCatalogManager().sccNum2Sat(scc))
+          .filter((sat): sat is Satellite => sat !== null);
+
+        this.createReentryTable_();
+      } catch {
+        errorManagerInstance.warn(t7e('plugins.Reentries.errorMsgs.errorProcessing' as Parameters<typeof t7e>[0]));
+      } finally {
+        hideLoading();
+      }
+    }, 0);
+  }
+
+  protected createReentryTable_() {
+    const tbl = <HTMLTableElement>getEl('reentries-analysis-table');
+
+    tbl.innerHTML = '';
+    tbl.classList.add('centered');
+
+    Reentries.createReentryHeaders_(tbl);
+
+    for (const sat of this.reentryList_) {
+      Reentries.createReentryRow_(tbl, sat);
+    }
+  }
+
+  private static createReentryHeaders_(tbl: HTMLTableElement) {
+    const tr = tbl.insertRow();
+    const names = [
+      'NORAD',
+      'Name',
+      'Type',
+      'Perigee (km)',
+      'Apogee (km)',
+      'Mean Alt (km)',
+      'Incl (\u00B0)',
+      'RCS (m\u00B2)',
+    ];
+
+    for (const name of names) {
+      const column = tr.insertCell();
+
+      column.appendChild(document.createTextNode(name));
+      column.setAttribute('style', 'text-decoration: underline');
+      column.setAttribute('class', 'center');
+    }
+  }
+
+  private static createReentryRow_(tbl: HTMLTableElement, sat: Satellite) {
+    const tr = tbl.insertRow();
+
+    tr.setAttribute('class', 'reentry-object link');
+    tr.setAttribute('data-scc', sat.sccNum);
+
+    let hasReentered = sat.perigee < 120;
+
+    if (!hasReentered) {
+      try {
+        sat.toClassicalElements(new Date());
+      } catch {
+        hasReentered = true;
+      }
+    }
+
+    if (hasReentered) {
+      tr.classList.add('reentry-critical');
+    } else if (sat.perigee < 160) {
+      tr.classList.add('reentry-warning');
+    }
+
+    let typeStr = 'Unknown';
+
+    if (sat.type === SpaceObjectType.PAYLOAD) {
+      typeStr = 'Payload';
+    } else if (sat.type === SpaceObjectType.ROCKET_BODY) {
+      typeStr = 'R/B';
+    } else if (sat.type === SpaceObjectType.DEBRIS) {
+      typeStr = 'Debris';
+    }
+
+    let rcsStr = 'Unknown';
+
+    if (sat.rcs) {
+      rcsStr = `${sat.rcs}`;
+    } else {
+      const rcsEst = SatMath.estimateRcsUsingHistoricalData(sat);
+
+      rcsStr = rcsEst ? `${rcsEst.toFixed(2)}` : 'Unknown';
+    }
+
+    const meanAltStr = hasReentered
+      ? 'Reentered'
+      : ((sat.apogee + sat.perigee) / 2).toFixed(1);
+
+    Reentries.createCell_(tr, sat.sccNum);
+    Reentries.createCell_(tr, sat.name || 'Unknown');
+    Reentries.createCell_(tr, typeStr);
+    Reentries.createCell_(tr, sat.perigee.toFixed(1));
+    Reentries.createCell_(tr, sat.apogee.toFixed(1));
+    Reentries.createCell_(tr, meanAltStr);
+    Reentries.createCell_(tr, sat.inclination.toFixed(2));
+    Reentries.createCell_(tr, rcsStr);
+  }
+
+  protected reentryEventClicked_(sccNum: string) {
+    const sat = ServiceLocator.getCatalogManager().sccNum2Sat(sccNum);
+
+    if (!sat) {
+      ServiceLocator.getUiManager().toast(t7e('plugins.Reentries.errorMsgs.satelliteDecayed' as Parameters<typeof t7e>[0]), ToastMsgType.caution);
+
+      return;
+    }
+
+    ServiceLocator.getUiManager().doSearch(`${sat.sccNum5 ?? sat.sccNum}`);
+
+    this.selectSatIdOnCruncher_ = sat.id;
+  }
+
+  // =========================================================================
+  // Utilities
+  // =========================================================================
+
+  private lon2degrees_(lon: string): string {
+    let lonDeg = parseFloat(lon);
+    let direction = 'E';
+
+    if (lonDeg > 180) {
+      lonDeg -= 360;
+    }
+
+    if (lonDeg < 0) {
+      direction = 'W';
+      lonDeg = Math.abs(lonDeg);
+    }
+
+    return `${lonDeg.toFixed(2)}\u00B0 ${direction}`;
+  }
+
+  private lat2degrees_(lat: string): string {
+    let latDeg = parseFloat(lat);
+    let direction = 'N';
+
+    if (latDeg < 0) {
+      direction = 'S';
+      latDeg = Math.abs(latDeg);
+    }
+
+    return `${latDeg.toFixed(2)}\u00B0 ${direction}`;
+  }
+
+  private static createCell_(tr: HTMLTableRowElement, text: string): void {
+    const cell = tr.insertCell();
+
+    cell.appendChild(document.createTextNode(text));
+  }
+}

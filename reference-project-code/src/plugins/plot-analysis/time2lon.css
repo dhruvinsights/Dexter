@@ -1,0 +1,35 @@
+#time2lon-plots-menu.side-menu-parent {
+  z-index: 10001 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+#time2lon-plots-menu .side-menu {
+  height: 100%;
+  position: relative !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#time2lon-stats {
+  padding: 10px;
+  color: #fff;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+#time2lon-country-counts {
+  margin-top: 5px;
+}
+
+#time2lon-country-counts span {
+  margin-right: 10px;
+}
+
+.time2lon-chart-container {
+  width: 100%;
+  flex: 1;
+  min-height: 200px;
+}

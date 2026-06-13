@@ -10,7 +10,7 @@ import {
   EarthSpecTextureQuality,
 } from '@app/engine/rendering/draw-manager/earth-quality-enums';
 import { lat2pitch, lon2yaw } from '@app/engine/utils/transforms';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { t7e } from '@app/locales/keys';
 import { SelectSatManager } from '@app/plugins/select-sat-manager/select-sat-manager';
 import { Degrees, Kilometers, Milliseconds, Radians } from '@ootk/src/main';
@@ -131,7 +131,7 @@ export const darkClouds = (settingsManager: SettingsManager) => {
     const textOverlay = document.createElement('div');
 
     textOverlay.id = 'textOverlay';
-    Dexter.getInstance().containerRoot.appendChild(textOverlay);
+    KeepTrack.getInstance().containerRoot.appendChild(textOverlay);
 
     // Update CSS
     const toastCss = `

@@ -71,7 +71,7 @@ describe('updateDopsTable_method', () => {
       { time: new Date(), dops: { pdop: '4', hdop: '5', gdop: '6' } },
     ] as DopList;
 
-    Dexter.getInstance().containerRoot.innerHTML += '<table id="dops"></table>';
+    KeepTrack.getInstance().containerRoot.innerHTML += '<table id="dops"></table>';
     DopMath.updateDopsTable(dopsResults);
     const table = getEl('dops') as HTMLTableElement;
 
@@ -92,13 +92,13 @@ describe('updateDopsTable_method', () => {
 
   // Tests that the method throws an error if the table element cannot be found
   it('test_missing_table', () => {
-    const temp = Dexter.getInstance().containerRoot.innerHTML;
+    const temp = KeepTrack.getInstance().containerRoot.innerHTML;
 
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     disableConsoleErrors();
     expect(() => DopMath.updateDopsTable({ fake: 'bad data' } as unknown as DopList)).toThrow();
     enableConsoleErrors();
-    Dexter.getInstance().containerRoot.innerHTML = temp;
+    KeepTrack.getInstance().containerRoot.innerHTML = temp;
   });
 
   // Tests that the method throws an error if no DOPs results are found

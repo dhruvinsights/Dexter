@@ -26,7 +26,7 @@ describe('PluginDrawer internals', () => {
   beforeEach(() => {
     setupStandardEnvironment();
     PersistenceManager.getInstance().clear();
-    for (const id of ['dexter-root', 'nav-wrapper', 'ui-wrapper']) {
+    for (const id of ['keeptrack-root', 'nav-wrapper', 'ui-wrapper']) {
       if (!getEl(id, true)) {
         document.body.insertAdjacentHTML('beforeend', `<div id="${id}"></div>`);
       }

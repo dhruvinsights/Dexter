@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ScenarioManagementMenu": {
+      "title": "Zarządzanie scenariuszami",
+      "bottomIconLabel": "Zarządzanie scenariuszami",
+      "helpBody": "Wtyczka zarządzania scenariuszami pozwala organizować pracę dla różnych projektów lub kontekstów.<br/>Obecne funkcje to:<br/><br/>  - Nazwa i opis dla każdego scenariusza<br/>  - Data i godzina początku i końca okresu analizy<br/>  - Zapis/Wczytywanie scenariuszy<br/><br/>Celem jest ostatecznie dostarczenie pojedynczego pliku zawierającego wszystkie informacje niezbędne do zarządzania scenariuszami. Więcej funkcji wkrótce!"
+    }
+  }
+}

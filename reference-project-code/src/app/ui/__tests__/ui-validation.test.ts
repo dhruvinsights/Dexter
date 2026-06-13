@@ -10,7 +10,7 @@ describe('UiValidation_class', () => {
   // Tests that all event listeners are added successfully
   it('test_init_ui_validation', () => {
     // the following event listeners may be added.
-    Dexter.getInstance().containerRoot.innerHTML = `<div id="editSat">
+    KeepTrack.getInstance().containerRoot.innerHTML = `<div id="editSat">
             <input id="es-ecen" />
             <input id="es-day" />
             <input id="es-inc" />

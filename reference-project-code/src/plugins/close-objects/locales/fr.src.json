@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Objets proches",
+      "title": "Recherche d'objets proches",
+      "helpBody": "La recherche d'objets proches trouve les satellites et débris à proximité les uns des autres. Elle utilise un algorithme de recherche spatiale en deux phases pour identifier les objets à moins de 50 km les uns des autres, en vérifiant d'abord les positions actuelles, puis en confirmant avec les positions projetées 30 minutes plus tard.",
+      "findBtn": "Rechercher des objets proches"
+    }
+  }
+}

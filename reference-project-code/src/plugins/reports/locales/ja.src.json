@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "レポート",
+      "title": "レポートメニュー",
+      "helpBody": "レポートメニューは、表示しているデータを分析し理解するのに役立つツールの集まりです。"
+    }
+  }
+}

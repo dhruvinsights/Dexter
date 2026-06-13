@@ -7,7 +7,7 @@ import { GetSatType, MenuMode, ToastMsgType } from '@app/engine/core/interfaces'
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import {
   IBottomIconConfig,
   IDragOptions,
@@ -51,7 +51,7 @@ export interface SearchSatParams {
   source: string;
 }
 
-export class FindSatPlugin extends DexterPlugin {
+export class FindSatPlugin extends KeepTrackPlugin {
   readonly id = 'FindSatPlugin';
   protected lastResults_ = <Satellite[]>[];
   protected hasSearchBeenRun_ = false;

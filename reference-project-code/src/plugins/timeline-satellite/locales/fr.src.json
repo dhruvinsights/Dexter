@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteTimeline": {
+      "bottomIconLabel": "Chronologie Satellite",
+      "title": "Menu Chronologie Satellite",
+      "helpBody": "Le menu Chronologie Satellite montre quand un capteur unique a une visibilité sur une liste de satellites. La chronologie est colorée pour indiquer la qualité du passage. Rouge = mauvais passage, jaune = passage moyen, vert = bon passage. Cliquez sur un passage pour changer le satellite et l'heure. <br><br> La chronologie peut être modifiée en changeant l'heure de début et de fin de la simulation, ainsi que la longueur et l'intervalle."
+    }
+  }
+}

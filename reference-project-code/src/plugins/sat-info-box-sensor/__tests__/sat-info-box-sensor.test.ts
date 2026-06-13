@@ -24,7 +24,7 @@ const setupSensorAndSat = (sensor: RfSensor) => {
   // Directly set currentSensors to avoid sensor-database lookup
   ServiceLocator.getSensorManager().currentSensors = [sensor];
   standardSelectSat();
-  Dexter.getInstance().isInitialized = true;
+  KeepTrack.getInstance().isInitialized = true;
 };
 
 /** Triggers a per-frame update so Sun status gets recalculated. */
@@ -42,7 +42,7 @@ describe('SatInfoBoxSensor', () => {
     const plugin = new SatInfoBoxSensor();
 
     plugin.init();
-    Dexter.getInstance().isInitialized = true;
+    KeepTrack.getInstance().isInitialized = true;
     // Simulate browser behavior: getEl returns null instead of throwing in test mode
     const isThisNodeSpy = vi.spyOn(isThisNodeModule, 'isThisNode').mockReturnValue(false);
 
@@ -112,7 +112,7 @@ describe('SatInfoBoxSensor', () => {
       const plugin = new SatInfoBoxSensor();
 
       websiteInit(plugin);
-      Dexter.getInstance().isInitialized = true;
+      KeepTrack.getInstance().isInitialized = true;
 
       // Manually set satellite selection state (selectSat throws in test env)
       const selectSatManager = PluginRegistry.getPlugin(SelectSatManager)!;

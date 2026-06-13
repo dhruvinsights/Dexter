@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "Edytuj satelitę",
+      "title": "Menu edycji satelity",
+      "helpBody": "Menu edycji satelity służy do edycji danych satelity. <br><br> <ul> <li> Numer SCC satelity — unikalny numer przypisany każdemu satelicie przez US Space Force. </li> <li> Rok epoki — rok ostatniej aktualizacji orbitalnej satelity. </li> <li> Dzień epoki — dzień roku ostatniej aktualizacji orbitalnej satelity. </li> <li> Inklinacja — kąt między płaszczyzną orbity satelity a płaszczyzną równikową. </li> <li> Rektascensja — kąt między węzłem wstępującym a pozycją satelity w momencie ostatniej aktualizacji orbitalnej. </li> <li> Mimośród — stopień odchylenia orbity satelity od okręgu. </li> <li> Argument perycentrum — kąt między węzłem wstępującym a najbliższym Ziemi punktem orbity satelity. </li> <li> Anomalia średnia — kąt między pozycją satelity w momencie ostatniej aktualizacji orbitalnej a najbliższym Ziemi punktem orbity. </li> <li> Ruch średni — szybkość zmian anomalii średniej satelity. </li> </ul>",
+      "labels": {
+        "scc": "Numer SCC satelity",
+        "country": "Kraj",
+        "epochYear": "Rok epoki",
+        "epochDay": "Dzień epoki",
+        "inclination": "Inklinacja",
+        "rightAscension": "Rektascensja",
+        "eccentricity": "Mimośród",
+        "argOfPerigee": "Argument perycentrum",
+        "meanAnomaly": "Anomalia średnia",
+        "meanMotion": "Ruch średni",
+        "period": "Okres",
+        "error": "Błąd"
+      },
+      "buttons": {
+        "updateSatellite": "Aktualizuj satelitę",
+        "updateEpoch": "Aktualizuj epokę do teraz",
+        "saveTle": "Zapisz TLE",
+        "loadTle": "Wczytaj TLE"
+      },
+      "contextMenu": {
+        "editSat": "Edytuj sat.",
+        "setPrimarySat": "Ustaw jako główny satelitę",
+        "setSecondarySat": "Ustaw jako drugorzędny satelitę",
+        "editSatellite": "Edytuj satelitę"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "Błąd odczytu pliku!",
+        "satelliteNotFound": "Nie znaleziono satelity {sccNum}!",
+        "failedToPropagate": "Propagacja satelity nie powiodła się. Spróbuj innych parametrów lub zgłoś ten problem, jeśli masz pewność, że parametry są poprawne.",
+        "cannotCalculateDirection": "Nie można obliczyć kierunku satelity. Spróbuj ponownie później.",
+        "notRealSatellite": "To nie jest prawdziwy satelita"
+      }
+    }
+  }
+}

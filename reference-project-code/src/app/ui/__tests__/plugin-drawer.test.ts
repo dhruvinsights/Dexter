@@ -22,7 +22,7 @@ describe('PluginDrawer', () => {
   beforeEach(() => {
     setupStandardEnvironment();
     // Roots the drawer DOM is appended to.
-    for (const id of ['dexter-root', 'nav-wrapper', 'ui-wrapper']) {
+    for (const id of ['keeptrack-root', 'nav-wrapper', 'ui-wrapper']) {
       if (!getEl(id, true)) {
         document.body.insertAdjacentHTML('beforeend', `<div id="${id}"></div>`);
       }

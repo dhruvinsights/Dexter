@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "Satelliten-Sichtfeld",
+      "title": "Satelliten-Sichtfeld",
+      "helpBody": "Das Satelliten-Sichtfeld-Plugin ermöglicht es Ihnen, das Sichtfeld eines Satelliten zu steuern."
+    }
+  }
+}

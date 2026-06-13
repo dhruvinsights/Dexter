@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "Campo de Visión del Satélite",
+      "title": "Campo de Visión del Satélite",
+      "helpBody": "El plugin de Campo de Visión del Satélite te permite controlar el campo de visión de un satélite."
+    }
+  }
+}

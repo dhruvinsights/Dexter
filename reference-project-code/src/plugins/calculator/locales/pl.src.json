@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Transformacje układów odniesienia",
+      "title": "Menu transformacji układów odniesienia",
+      "helpBody": "Menu transformacji układów odniesienia służy do konwersji między różnymi układami odniesienia. <br><br> Menu pozwala na konwersję między następującymi układami odniesienia: <ul style=\"margin-left: 40px;\"> <li> ECI - Geocentryczny inercjalny </li> <li> ECEF - Geocentryczny obrotowy </li> <li> Geodezyjny </li> <li> Topocentryczny </li> </ul>"
+    }
+  }
+}

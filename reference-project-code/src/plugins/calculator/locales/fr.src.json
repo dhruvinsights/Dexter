@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Transformations de repère",
+      "title": "Menu Transformations de repère",
+      "helpBody": "Le menu Transformations de repère permet de convertir entre différents repères de référence. <br><br> Le menu permet de convertir entre les repères suivants : <ul style=\"margin-left: 40px;\"> <li> ECI - Terre centrée inertielle </li> <li> ECEF - Terre centrée fixe </li> <li> Géodésique </li> <li> Topocentrique </li> </ul>"
+    }
+  }
+}

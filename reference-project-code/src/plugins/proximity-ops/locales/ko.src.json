@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "란데부 및 근접 조작",
+      "title": "란데부 및 근접 조작(RPO)",
+      "titleSecondary": "란데부 및 근접 조작 목록",
+      "helpBody": "위성 간의 다가오는 접근을 찾습니다. 거리 임계값, 상대 속도, 궤도 유형(GEO/LEO) 등 검색 매개변수를 구성합니다. 단일 위성 및 전체 대 전체 검색 모드를 지원합니다.",
+      "noradId": "NORAD ID",
+      "maxDistThreshold": "최대 거리 임계값 (km)",
+      "maxRelativeVelocity": "최대 상대 속도 (km/s)",
+      "searchDuration": "검색 기간 (시간)",
+      "geoText": "정지궤도",
+      "leoText": "저지구궤도",
+      "orbitType": "궤도 유형",
+      "geoAllVsAll": "정지궤도 전체 대 전체",
+      "geoAllVsAllTooltip": "모든 정지궤도 위성 간의 RPO를 검색합니다.",
+      "comparePayloadsOnly": "페이로드만 비교",
+      "comparePayloadsOnlyTooltip": "페이로드 간의 RPO만 검색합니다.",
+      "ignoreVimpelRso": "Vimpel RSO 무시",
+      "ignoreVimpelRsoTooltip": "Vimpel 카탈로그에서 가져온 RSO를 무시합니다.",
+      "submitButton": "RPO 검색 \u25b6",
+      "noRposToDownload": "다운로드할 RPO가 없습니다!",
+      "noRposFound": "RPO를 찾을 수 없습니다!",
+      "satNotFound": "NORAD ID {sccNum}인 위성을 찾을 수 없습니다",
+      "geoOrbitsEcf": "GEO 궤도가 ECF로 표시됩니다",
+      "geoOrbitsEci": "GEO 궤도가 ECI로 표시됩니다",
+      "vimpelNotSupported": "Vimpel 위성은 지원되지 않습니다",
+      "table": {
+        "target": "대상",
+        "targetName": "대상 이름",
+        "chaser": "추적기",
+        "chaserName": "추적기 이름",
+        "relDistance": "상대 거리 [km]",
+        "relVelocity": "상대 속도 [km/s]",
+        "date": "날짜"
+      }
+    }
+  }
+}

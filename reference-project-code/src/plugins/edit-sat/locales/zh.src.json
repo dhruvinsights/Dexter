@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "编辑卫星",
+      "title": "编辑卫星菜单",
+      "helpBody": "编辑卫星菜单用于编辑卫星数据。<br><br><ul><li>卫星SCC# - 美国太空军分配的唯一编号</li><li>历元年份 - 卫星最后一次轨道更新的年份</li><li>历元日 - 卫星最后一次轨道更新的儒略日</li><li>倾角 - 卫星轨道面与赤道面的夹角</li><li>升交点赤经 - 升交点与卫星最后一次轨道更新位置的夹角</li><li>偏心率 - 卫星轨道偏离圆形的程度</li><li>近地点幅角 - 升交点与卫星近地点的夹角</li><li>平近点角 - 卫星当前位置与近地点的夹角</li><li>平均运动 - 卫星平近点角变化速率</li></ul>",
+      "labels": {
+        "scc": "卫星 SCC#",
+        "country": "国家",
+        "epochYear": "历元年份",
+        "epochDay": "历元日",
+        "inclination": "倾角",
+        "rightAscension": "升交点赤经",
+        "eccentricity": "偏心率",
+        "argOfPerigee": "近地点幅角",
+        "meanAnomaly": "平近点角",
+        "meanMotion": "平均运动",
+        "period": "周期",
+        "error": "错误"
+      },
+      "buttons": {
+        "updateSatellite": "更新卫星",
+        "updateEpoch": "将历元更新为当前时间",
+        "saveTle": "保存 TLE",
+        "loadTle": "加载 TLE"
+      },
+      "contextMenu": {
+        "editSat": "编辑卫星",
+        "setPrimarySat": "设为主卫星",
+        "setSecondarySat": "设为副卫星",
+        "editSatellite": "编辑卫星"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "读取文件时出错！",
+        "satelliteNotFound": "未找到卫星 {sccNum}！",
+        "failedToPropagate": "卫星传播失败。请尝试不同的参数，或者如果您确信参数正确，请报告此问题。",
+        "cannotCalculateDirection": "无法计算卫星方向。请稍后再试。",
+        "notRealSatellite": "不是真实卫星"
+      }
+    }
+  }
+}

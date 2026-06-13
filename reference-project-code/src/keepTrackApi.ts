@@ -19,7 +19,7 @@ import type { Camera } from './engine/camera/camera';
 import type { Scene } from './engine/core/scene';
 import type { TimeManager } from './engine/core/time-manager';
 import type { InputManager } from './engine/input/input-manager';
-import { DexterPlugin } from './engine/plugins/base-plugin';
+import { KeepTrackPlugin } from './engine/plugins/base-plugin';
 import type { ColorSchemeManager } from './engine/rendering/color-scheme-manager';
 import type { DotsManager } from './engine/rendering/dots-manager';
 import type { LineManager } from './engine/rendering/line-manager';
@@ -34,7 +34,7 @@ declare global {
     gremlins: unknown;
     randomizer: unknown;
     // eslint-disable-next-line no-use-before-define
-    keepTrackApi: DexterApi;
+    keepTrackApi: KeepTrackApi;
     dataLayer?: unknown[]; // For Google Tag Manager / gtag
     _numeric: unknown;
     satellite: SatMath;
@@ -62,7 +62,7 @@ declare global {
   }
 }
 
-export class DexterApi {
+export class KeepTrackApi {
   analytics: { track: (event: string, params?: Record<string, unknown>) => void } = {
     track: () => {
       // no-op when telemetry not initialized
@@ -92,8 +92,8 @@ export class DexterApi {
   methods = EventBus.getInstance().methods;
 
   // Plugin registry methods
-  getPlugin: <T extends DexterPlugin>(pluginClass: new (...args: unknown[]) => T) => T | null =
-    <T extends DexterPlugin>(pluginClass: new (...args: unknown[]) => T) => PluginRegistry.getPlugin(pluginClass);
+  getPlugin: <T extends KeepTrackPlugin>(pluginClass: new (...args: unknown[]) => T) => T | null =
+    <T extends KeepTrackPlugin>(pluginClass: new (...args: unknown[]) => T) => PluginRegistry.getPlugin(pluginClass);
   checkIfLoaded = PluginRegistry.checkIfLoaded.bind(PluginRegistry);
   getPluginByName = PluginRegistry.getPluginByName.bind(PluginRegistry);
   unregisterAllPlugins = PluginRegistry.unregisterAllPlugins.bind(PluginRegistry);
@@ -124,4 +124,4 @@ export class DexterApi {
   saveVariable = saveVariable;
 }
 
-export const keepTrackApi = new DexterApi();
+export const keepTrackApi = new KeepTrackApi();

@@ -2,7 +2,7 @@ import { MenuMode } from '@app/engine/core/interfaces';
 import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import {
   ISettingsContribution,
   ISettingsContributor,
@@ -19,7 +19,7 @@ import { vi } from 'vitest';
  * Designing both flavours into one class keeps the file under the
  * max-classes-per-file lint cap.
  */
-class TestPlugin extends DexterPlugin implements Partial<ISettingsContributor> {
+class TestPlugin extends KeepTrackPlugin implements Partial<ISettingsContributor> {
   readonly id: string;
   dependencies_ = [];
   menuMode: MenuMode[] = [MenuMode.ALL];
@@ -51,7 +51,7 @@ describe('SettingsMenuPlugin.collectPluginContributions_', () => {
   let settingsMenuPlugin: SettingsMenuPlugin;
 
   beforeEach(() => {
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     setupStandardEnvironment();
     settingsMenuPlugin = new SettingsMenuPlugin();
     websiteInit(settingsMenuPlugin);
@@ -130,7 +130,7 @@ describe('SettingsMenuPlugin.collectPluginContributions_', () => {
 
 describe('SettingsMenuPlugin.renderPluginContributions_', () => {
   beforeEach(() => {
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     setupStandardEnvironment();
   });
 

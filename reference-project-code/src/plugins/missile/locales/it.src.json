@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Missili",
+      "title": "Menu Missili",
+      "helpBody": "Il Menu Missili viene utilizzato per generare lanci missilistici teorici tra paesi. <br><br> Quando si utilizzano missili lanciati da sottomarini, il punto di lancio è una latitudine e longitudine personalizzata. Quando si utilizzano missili terrestri, il punto di lancio è una latitudine e longitudine fissa basata su fonti aperte. <br><br> Oltre ai missili personalizzati, sono disponibili alcuni scenari predefiniti che coinvolgono centinaia di missili. <br><br> Tutti i lanci missilistici sono teorici e non intendono rappresentare eventi reali. Le traiettorie di lancio sono tutte basate sullo stesso modello balistico, ma utilizzano gittate minime e massime diverse."
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Draw",
+        "eciAxes": "ECI Axes",
+        "xAxesGrid": "X Axes Grid",
+        "yAxesGrid": "Y Axes Grid",
+        "zAxesGrid": "Z Axes Grid",
+        "xAxesRadialGrid": "X Axes Radial Grid",
+        "yAxesRadialGrid": "Y Axes Radial Grid",
+        "zAxesRadialGrid": "Z Axes Radial Grid",
+        "earthToSatellite": "Earth to Satellite",
+        "sensorToSatellite": "Sensor to Satellite",
+        "satelliteToSatellite": "Satellite to Satellite",
+        "satelliteToSun": "Satellite to Sun",
+        "satelliteToMoon": "Satellite to Moon",
+        "moonOrbit": "Draw Moon's Orbit"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "No primary satellite selected for Satellite to Satellite line."
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "Rapporti",
+      "title": "Menu rapporti",
+      "helpBody": "Il menu Rapporti è una raccolta di strumenti per aiutarti ad analizzare e comprendere i dati che stai visualizzando."
+    }
+  }
+}

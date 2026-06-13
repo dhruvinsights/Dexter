@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "View DOPs",
+      "title": "Dilution of Precision Menu",
+      "helpTitle": "Dilution of Precision (DOP) Menu",
+      "helpBody": "The Dilution of Precision (DOP) Menu is used to calculate the Dilution of Precision (DOP) for a given location and elevation mask.<br><br>HDOP is the Horizontal Dilution of Precision. It is a measure of the accuracy of the horizontal position.<br><br>PDOP is the Position Dilution of Precision. It is a measure of the accuracy of the position.<br><br>GDOP is the Geometric Dilution of Precision. It is a measure of the accuracy of the position.",
+      "labels": {
+        "dopTable": "DOP Table",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "altitude": "Altitude",
+        "mask": "Mask",
+        "updateDopData": "Update DOP Data"
+      },
+      "tooltips": {
+        "latitude": "Latitude in Degrees",
+        "longitude": "Longitude in Degrees",
+        "altitude": "Altitude in KM",
+        "mask": "Minimum Elevation for GPS Lock"
+      },
+      "rmb": {
+        "dops": "DOPs",
+        "currentGpsDops": "Current GPS DOPs",
+        "twentyFourHourGpsDops": "24 Hour GPS DOPs"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Please select a valid location on Earth for 24 Hour DOPs!"
+      }
+    }
+  }
+}

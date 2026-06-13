@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Graf inklinace vs výška",
+      "title": "Menu grafu inklinace vůči výšce",
+      "helpBody": "Menu grafu inklinace vůči výšce slouží k vykreslení inklinace satelitu v závislosti na jeho výšce.",
+      "labels": {
+        "totalLeoPayloads": "Celkový počet LEO nákladů"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Graf inklinace vs délka",
+      "title": "Menu grafu inklinace vůči délce",
+      "helpBody": "Menu grafu inklinace vs délka slouží k vykreslení inklinace vůči zeměpisné délce v pásu GEO.",
+      "labels": {
+        "totalGeoPayloads": "Celkový počet GEO nákladů"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Kaskádový graf",
+      "title": "Menu kaskádového grafu",
+      "helpBody": "Graf čas vůči délce (kaskádový) zobrazuje drift zeměpisné délky GEO satelitů v čase.",
+      "labels": {
+        "totalGeoPayloads": "Celkový počet GEO nákladů"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "Перегляд DOP",
+      "title": "Меню розбавлення точності",
+      "helpTitle": "Меню розбавлення точності (DOP)",
+      "helpBody": "Меню розбавлення точності (DOP) використовується для розрахунку розбавлення точності для заданого місцезнаходження та маски піднесення.<br><br>HDOP — горизонтальне розбавлення точності. Це міра точності горизонтальної позиції.<br><br>PDOP — розбавлення точності позиції. Це міра точності позиції.<br><br>GDOP — геометричне розбавлення точності. Це міра точності позиції.",
+      "labels": {
+        "dopTable": "Таблиця DOP",
+        "latitude": "Широта",
+        "longitude": "Довгота",
+        "altitude": "Висота",
+        "mask": "Маска",
+        "updateDopData": "Оновити дані DOP"
+      },
+      "tooltips": {
+        "latitude": "Широта в градусах",
+        "longitude": "Довгота в градусах",
+        "altitude": "Висота в км",
+        "mask": "Мінімальний кут піднесення для захоплення GPS"
+      },
+      "rmb": {
+        "dops": "DOPs",
+        "currentGpsDops": "Поточні GPS DOPs",
+        "twentyFourHourGpsDops": "GPS DOPs за 24 години"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Будь ласка, виберіть коректне місце на Землі для 24-годинних DOPs!"
+      }
+    }
+  }
+}

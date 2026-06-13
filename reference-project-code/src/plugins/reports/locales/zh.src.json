@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "报告",
+      "title": "报告菜单",
+      "helpBody": "报告菜单包含多种工具，帮助您分析和理解当前查看的数据。"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "座標系変換",
+      "title": "座標系変換メニュー",
+      "helpBody": "座標系変換メニューは、異なる座標系間で変換するために使用されます。<br><br>このメニューでは、以下の座標系間で変換できます：<ul style=\"margin-left: 40px;\"><li>ECI - 地球中心慣性座標系</li><li>ECEF - 地球中心地球固定座標系</li><li>測地座標系</li><li>観測点中心座標系</li></ul>"
+    }
+  }
+}

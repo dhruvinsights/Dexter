@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ScenarioManagementMenu": {
+      "title": "Správa scénářů",
+      "bottomIconLabel": "Správa scénářů",
+      "helpBody": "Plugin správy scénářů umožňuje organizovat práci pro různé projekty nebo kontexty.<br/>Aktuální funkce jsou:<br/><br/>  - Název a popis pro každý scénář<br/>  - Počáteční a koncové datum/čas analytického období<br/>  - Uložení/načtení scénářů<br/><br/>Cílem je nakonec poskytnout jeden soubor obsahující veškeré informace potřebné pro správu scénářů. Další funkce již brzy!"
+    }
+  }
+}

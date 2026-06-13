@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Wykres biegunowy",
+      "title": "Menu wykresu biegunowego",
+      "helpBody": "Menu wykresu biegunowego służy do generowania dwuwymiarowego wykresu biegunowego azymutu i elewacji satelity w czasie."
+    }
+  }
+}

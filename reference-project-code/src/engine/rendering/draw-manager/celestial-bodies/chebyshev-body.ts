@@ -47,17 +47,12 @@ export abstract class ChebyshevBody extends CelestialBody {
    * Get J2000 state for the body.
    * Chebyshev data is heliocentric (Sun-centered); center body adjustment is applied when needed.
    */
-  getJ2000(simTime: Date, centerBody = SolarBody.Earth): J2000 {
+  getJ2000(simTime: Date, centerBody = SolarBody.Earth): J2000 | null {
     const epoch = new EpochUTC((simTime.getTime() / 1000) as Seconds);
     const j2000 = this.interpolator_.interpolate(epoch);
 
     if (!j2000) {
-      // Time is outside the Chebyshev ephemeris range — fall back to last known state
-      return this.lastJ2000 ?? new J2000(
-        epoch,
-        new Vector3D(0 as Kilometers, 0 as Kilometers, 0 as Kilometers),
-        new Vector3D(0 as KilometersPerSecond, 0 as KilometersPerSecond, 0 as KilometersPerSecond),
-      );
+      return null;
     }
 
     // Data is heliocentric — return directly for Sun-centered queries
@@ -109,8 +104,8 @@ export abstract class ChebyshevBody extends CelestialBody {
     return j2000;
   }
 
-  getTeme(simTime: Date, centerBody = SolarBody.Earth): TEME {
-    return this.getJ2000(simTime, centerBody).toTEME();
+  getTeme(simTime: Date, centerBody = SolarBody.Earth): TEME | null {
+    return this.getJ2000(simTime, centerBody)?.toTEME() ?? null;
   }
 
   lastUpdateTime: number = 0;
@@ -152,7 +147,7 @@ export abstract class ChebyshevBody extends CelestialBody {
       for (let i = 0; i < this.orbitPathSegments_; i++) {
         const tMs = startMs + i * timesliceMs;
 
-        this.svCache[i] ??= this.getTeme(new Date(tMs), SolarBody.Sun).position;
+        this.svCache[i] ??= this.getTeme(new Date(tMs), SolarBody.Sun)?.position;
         if (!this.svCache[i]) {
           continue;
         }

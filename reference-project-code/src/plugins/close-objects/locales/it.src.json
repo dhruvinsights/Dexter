@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Oggetti vicini",
+      "title": "Ricerca oggetti vicini",
+      "helpBody": "La ricerca oggetti vicini trova satelliti e detriti in stretta prossimità tra loro. Utilizza un algoritmo di ricerca spaziale a due fasi per identificare oggetti entro 50 km l'uno dall'altro, verificando prima le posizioni attuali e poi confermando con le posizioni proiettate 30 minuti dopo.",
+      "findBtn": "Trova oggetti vicini"
+    }
+  }
+}

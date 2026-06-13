@@ -6,7 +6,8 @@
 import { MissileObject } from '@app/app/data/catalog-manager/MissileObject';
 import { OemSatellite } from '@app/app/objects/oem-satellite';
 import { Planet } from '@app/app/objects/planet';
-import { BaseObject, CatalogSource, Satellite, SpaceObjectType, Star } from '@ootk/src/main';
+import { CatalogSource, Satellite, SpaceObjectType, Star } from '@ootk/src/main';
+import { BaseObject } from '../../ootk/src/objects';
 import { MissionColorScheme } from '../color-schemes/mission-color-scheme';
 import {
   ColorDataArrays,

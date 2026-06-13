@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NextLaunchesPlugin": {
+      "bottomIconLabel": "Next Launches",
+      "title": "Next Launches Menu",
+      "helpBody": "The Next Launches Menu pulls data from <a href=\"https://thespacedevs.com/\" target=\"_blank\">The Space Devs</a> to display upcoming launches."
+    }
+  }
+}

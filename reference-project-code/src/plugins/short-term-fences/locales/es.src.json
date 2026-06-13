@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Cerca a Corto Plazo",
+      "title": "Menú de Cercas a Corto Plazo (STF)",
+      "helpBody": "El Menú de Cercas a Corto Plazo (STF) se usa para visualizar cajas de búsqueda de sensores. <br><br> Es poco probable que esto sea muy útil a menos que poseas/operes un sensor con funcionalidad de caja de búsqueda."
+    }
+  }
+}

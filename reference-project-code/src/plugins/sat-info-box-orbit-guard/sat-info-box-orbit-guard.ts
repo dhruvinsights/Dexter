@@ -9,14 +9,14 @@ import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { getEl, hideEl, setInnerHtml, showEl } from '@app/engine/utils/get-el';
 import { t7e } from '@app/locales/keys';
 import { BaseObject, RADIUS_OF_EARTH, Satellite } from '@ootk/src/main';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { SatInfoBox } from '../sat-info-box/sat-info-box';
 import { EL, SECTIONS } from './sat-info-box-orbit-guard-html';
 
 import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import './sat-info-box-orbit-guard.css';
 
-export class SatInfoBoxOrbitGuard extends DexterPlugin {
+export class SatInfoBoxOrbitGuard extends KeepTrackPlugin {
   readonly id = 'SatInfoBoxOrbitGuard';
   dependencies_: string[] = [SatInfoBox.name];
 

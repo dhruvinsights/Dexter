@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Wiedereintritte",
+      "title": "Wiedereintritte",
+      "helpBody": "Das Wiedereintritte-Menü hat zwei Tabs: <br><br> <b>TIP Nachrichten</b> zeigt aktuelle und bevorstehende Satelliten-Wiedereintritts-Vorhersagen des US Space Command. Durch Klicken auf eine Zeile wird der Satellit ausgewählt und die Zeit auf den vorhergesagten Zerfallszeitpunkt geändert. <br><br> <b>Wiedereintritts-Analyse</b> zeigt Objekte sortiert nach niedrigstem Perigäum, die am wahrscheinlichsten in die Atmosphäre eintreten werden. Klicken Sie auf eine Zeile, um den Satelliten auszuwählen.",
+      "dataSource": "Tracking and Impact Prediction (TIP) Nachrichten bereitgestellt vom US Space Command (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "Keine TIP-Daten gefunden!",
+        "errorFetching": "Fehler beim Abrufen der Wiedereintrittsdaten!",
+        "errorProcessing": "Fehler beim Verarbeiten der Wiedereintrittsdaten!",
+        "satelliteDecayed": "Satellit scheint bereits verglüht zu sein!"
+      }
+    }
+  }
+}

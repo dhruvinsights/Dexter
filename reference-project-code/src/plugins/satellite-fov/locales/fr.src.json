@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "Champ de vision satellite",
+      "title": "Champ de vision satellite",
+      "helpBody": "Le plugin Champ de vision satellite permet de contrôler le champ de vision d’un satellite."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "转发器和频道信息",
+      "title": "卫星频率",
+      "helpBody": "<p>此插件显示地球静止轨道电视卫星的转发器和频道频率信息。选择具有已知频道数据的卫星并打开此面板，以查看其广播频率、频道、波束覆盖和加密详情。</p><p>使用标题栏中的下载按钮将频道数据导出为CSV文件。</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "该卫星没有频道信息",
+        "NotSatellite": "所选对象不是卫星",
+        "FetchFailed": "无法获取 {name} 和 {altName} 的频道信息",
+        "NoData": "没有可用的频道数据"
+      }
+    }
+  }
+}

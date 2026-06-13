@@ -11,7 +11,7 @@ import { PersistenceManager, StorageKey } from '@app/engine/utils/persistence-ma
 import { SettingsManager } from '@app/settings/settings';
 import { SatLabelMode } from '@app/settings/ui-settings';
 import settingsPng from '@public/img/icons/settings.png';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { TimeMachine } from '../time-machine/time-machine';
 import { attachSettingControlListeners, renderSettingsSection } from './settings-control-renderer';
 
@@ -43,7 +43,7 @@ declare module '@app/engine/core/interfaces' {
   }
 }
 
-export class SettingsMenuPlugin extends DexterPlugin {
+export class SettingsMenuPlugin extends KeepTrackPlugin {
   readonly id = 'SettingsMenuPlugin';
   dependencies_ = [];
 

@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "Search Settings",
+      "title": "Search Settings",
+      "labels": {
+        "maxResults": "Maximum Results in Search",
+        "showDecayed": "Show Decayed Satellites"
+      },
+      "tooltips": {
+        "maxResults": "Maximum satellites to display in search",
+        "showDecayed": "Show decayed satellites (position 0,0,0) in search results"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "Invalid max search results value!"
+      }
+    }
+  }
+}

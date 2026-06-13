@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "Transponder- und Kanalinformationen",
+      "title": "Satellitenfrequenzen",
+      "helpBody": "<p>Dieses Plugin zeigt Transponder- und Kanalfrequenzinformationen für geostationäre TV-Satelliten an. Wählen Sie einen Satelliten mit bekannten Kanaldaten aus und öffnen Sie dieses Panel, um seine Sendefrequenzen, Kanäle, Strahlabdeckung und Verschlüsselungsdetails anzuzeigen.</p><p>Verwenden Sie die Download-Schaltfläche in der Titelleiste, um die Kanaldaten als CSV-Datei zu exportieren.</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "Der Satellit hat keine Kanalinformationen",
+        "NotSatellite": "Das ausgewählte Objekt ist kein Satellit",
+        "FetchFailed": "Kanalinformationen für {name} und {altName} konnten nicht abgerufen werden",
+        "NoData": "Keine Kanaldaten verfügbar"
+      }
+    }
+  }
+}

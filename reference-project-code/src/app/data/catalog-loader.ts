@@ -1337,7 +1337,7 @@ export class CatalogLoader {
       if (isAddedToCatalog) {
         // Canonicalize so the keepTrack-bundled TLE catalog and external
         // CelesTrak updates share a single sccIndex entry per satellite.
-        const key = CatalogLoader.canonicalSccKey(resp[i].sccNum ?? '') ?? resp[i].sccNum ?? '';
+        const key = CatalogLoader.canonicalSccKey(resp[i].sccNum) ?? resp[i].sccNum;
 
         catalogManagerInstance.sccIndex[key] = tempObjData.length - 1;
         catalogManagerInstance.cosparIndex[`${resp[i].intlDes}`] = tempObjData.length - 1;

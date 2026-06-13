@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Polární graf",
+      "title": "Menu polárního grafu",
+      "helpBody": "Menu polárního grafu slouží ke generování 2D polárního grafu azimutu a elevace satelitu v čase."
+    }
+  }
+}

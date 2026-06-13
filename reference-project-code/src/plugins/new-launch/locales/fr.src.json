@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Nouveau lancement",
+      "title": "Menu Nouveau lancement",
+      "helpBody": "Le menu Nouveau lancement permet de générer des lancements orbitaux notionnels en modifiant des satellites existants avec des paramètres similaires. <br><br> Après avoir sélectionné un satellite, vous pouvez choisir un site de lancement et un azimut nord/sud. Le satellite sélectionné sera modifié pour l’aligner avec le site de lancement. L’horloge est alors remise à 00:00:00 pour représenter le temps relatif après le lancement. Cela peut aider à calculer la couverture capteur par rapport à l’heure de lancement. La relation de l’objet avec les autres objets orbitaux sera incorrecte."
+    }
+  }
+}

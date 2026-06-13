@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "Info o transpondéru a kanálech",
+      "title": "Frekvence satelitu",
+      "helpBody": "<p>Tento plugin zobrazuje informace o frekvencích transpondéru a kanálech pro geostacionární TV satelity. Vyberte satelit se známými daty o kanálech a otevřete tento panel pro zobrazení vysílacích frekvencí, kanálů, pokrytí paprskem a detailů šifrování.</p><p>Použijte tlačítko stažení v záhlaví pro export dat o kanálech jako CSV soubor.</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "Satelit nemá informace o kanálech",
+        "NotSatellite": "Vybraný objekt není satelit",
+        "FetchFailed": "Nepodařilo se načíst info o kanálech pro {name} a {altName}",
+        "NoData": "Data o kanálech nejsou k dispozici"
+      }
+    }
+  }
+}

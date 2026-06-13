@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "Zdjęcia satelitarne",
+      "title": "Zdjęcia satelitarne",
+      "helpBody": "Wtyczka Zdjęcia satelitarne wyświetla najnowsze obrazy z geostacjonarnych satelitów meteorologicznych i DSCOVR. Kliknij nazwę satelity, aby wyświetlić jego najnowszy obraz.",
+      "defaultImageTitle": "Domyślny tytuł obrazu",
+      "errorMsgs": {
+        "FuturePictures": "Nie można załadować zdjęć z przyszłości. Ładowanie najnowszych zdjęć."
+      }
+    }
+  }
+}

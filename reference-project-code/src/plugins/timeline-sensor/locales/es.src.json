@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorTimeline": {
+      "bottomIconLabel": "Línea de Tiempo del Sensor",
+      "title": "Menú de Línea de Tiempo del Sensor",
+      "helpBody": "El menú de Línea de Tiempo del Sensor muestra cuándo una lista de sensores tiene visibilidad de un satélite. La línea de tiempo está codificada por colores para mostrar la calidad del pase. Rojo es un mal pase, amarillo es un pase promedio y verde es un buen pase. Haz clic en un pase para cambiar el sensor y el tiempo a ese pase. <br><br> La línea de tiempo puede ser modificada cambiando el tiempo de inicio y fin de la simulación. Además, la línea de tiempo puede ser modificada cambiando las opciones de longitud e intervalo."
+    }
+  }
+}

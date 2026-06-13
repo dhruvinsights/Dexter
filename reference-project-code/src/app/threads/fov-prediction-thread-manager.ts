@@ -16,10 +16,6 @@ import {
 export class FovPredictionThreadManager extends WebWorkerThreadManager {
   readonly WEB_WORKER_CODE: string = 'js/fovPredictionWorker.js';
 
-  protected getWorkerUrl(): URL {
-    return new URL('../../webworker/fovPredictionWorker.ts', import.meta.url);
-  }
-
   private minutesToEntry_: Float32Array | null = null;
   private onProgress_: ((progress: number) => void) | null = null;
 

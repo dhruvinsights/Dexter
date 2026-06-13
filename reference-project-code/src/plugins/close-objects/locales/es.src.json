@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Objetos cercanos",
+      "title": "B\u00fasqueda de objetos cercanos",
+      "helpBody": "La búsqueda de objetos cercanos encuentra satélites y escombros en proximidad cercana entre sí. Utiliza un algoritmo de búsqueda espacial de dos fases para identificar objetos dentro de 50 km entre sí, verificando primero las posiciones actuales y luego confirmando con posiciones proyectadas 30 minutos después.",
+      "findBtn": "Buscar objetos cercanos"
+    }
+  }
+}

@@ -19,14 +19,13 @@ import { ServiceLocator } from './engine/core/service-locator';
  * See the GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License along with
- * Dexter. If not, see <http://www.gnu.org/licenses/>.
+ * KeepTrack. If not, see <http://www.gnu.org/licenses/>.
  *
  * /////////////////////////////////////////////////////////////////////////////
  */
 
 import 'material-icons/iconfont/material-icons.css';
 import 'requestidlecallback-polyfill';
-import './styles/dexter-theme.css';
 
 import { Localization } from './locales/locales'; // Ensure localization is imported first
 
@@ -63,8 +62,8 @@ import logoPrimaryPng from '@public/img/logo-primary.png';
 import logoSecondaryPng from '@public/img/logo-secondary.png';
 import { errorManagerInstance } from './engine/utils/errorManager';
 
-export class Dexter {
-  private static instance: Dexter;
+export class KeepTrack {
+  private static instance: KeepTrack;
   private settingsOverride_: SettingsManagerOverride;
 
   isInitialized = false;
@@ -78,16 +77,16 @@ export class Dexter {
     // Singleton
   }
 
-  static getInstance(): Dexter {
-    if (!Dexter.instance) {
-      Dexter.instance = new Dexter();
+  static getInstance(): KeepTrack {
+    if (!KeepTrack.instance) {
+      KeepTrack.instance = new KeepTrack();
     }
 
-    return Dexter.instance;
+    return KeepTrack.instance;
   }
 
   static reset(): void {
-    Dexter.instance = new Dexter();
+    KeepTrack.instance = new KeepTrack();
   }
 
   init(settingsOverride: SettingsManagerOverride = {
@@ -104,11 +103,12 @@ export class Dexter {
 
     settingsManager.init(this.settingsOverride_);
 
-    Dexter.setContainerElement();
+    KeepTrack.setContainerElement();
 
     if (!this.settingsOverride_.isPreventDefaultHtml) {
-      // CSS imports removed - using dexter-theme.css instead
-      Dexter.getDefaultBodyHtml();
+      import(/* webpackMode: "eager" */ '@css/loading-screen.css');
+      import(/* webpackMode: "eager" */ '@css/loading-overlay.css');
+      KeepTrack.getDefaultBodyHtml();
       BottomMenu.init();
 
       if (!isThisNode() && settingsManager.isShowSplashScreen) {
@@ -150,14 +150,14 @@ export class Dexter {
   }
 
   static getDefaultBodyHtml(): void {
-    if (!Dexter.getInstance().containerRoot) {
+    if (!KeepTrack.getInstance().containerRoot) {
       throw new Error('Container root is not set');
     }
 
-    SplashScreen.initLoadingScreen(Dexter.getInstance().containerRoot);
+    SplashScreen.initLoadingScreen(KeepTrack.getInstance().containerRoot);
 
-    Dexter.getInstance().containerRoot.id = 'dexter-root';
-    Dexter.getInstance().containerRoot.innerHTML += html`
+    KeepTrack.getInstance().containerRoot.id = 'keeptrack-root';
+    KeepTrack.getInstance().containerRoot.innerHTML += html`
       <header>
         <div id="keeptrack-header" class="start-hidden"></div>
       </header>
@@ -207,15 +207,15 @@ export class Dexter {
 
   private static setContainerElement() {
     // User provides the container using the settingsManager
-    const containerDom = settingsManager.containerRoot ?? document.getElementById('dexter-root') as HTMLDivElement;
+    const containerDom = settingsManager.containerRoot ?? document.getElementById('keeptrack-root') as HTMLDivElement;
 
     if (!containerDom) {
       throw new Error('Failed to find container');
     }
 
     // If no current shadow DOM, create one - this is mainly for testing
-    if (!Dexter.getInstance().containerRoot) {
-      Dexter.getInstance().containerRoot = containerDom;
+    if (!KeepTrack.getInstance().containerRoot) {
+      KeepTrack.getInstance().containerRoot = containerDom;
     }
   }
 
@@ -223,11 +223,67 @@ export class Dexter {
   static async initCss(): Promise<void> {
     try {
       if (!isThisNode()) {
-        Dexter.printLogoToConsole_();
+        KeepTrack.printLogoToConsole_();
       }
 
-      // CSS loading disabled - using dexter-theme.css loaded in main entry
-      // All styling is now handled by the Dexter theme
+      // Load the CSS
+      if (!settingsManager.isDisableCss) {
+        import('@css/fonts.css');
+        import(/* webpackMode: "eager" */ '@css/materialize.css').catch(() => {
+          // This is intentional
+        });
+        import(/* webpackMode: "eager" */ '@css/astroux/css/astro.css').catch(() => {
+          // This is intentional
+        });
+        import(/* webpackMode: "eager" */ '@css/materialize-local.css').catch(() => {
+          // This is intentional
+        });
+        import(/* webpackMode: "eager" */ '@css/style.css')
+          .then(
+            await import(/* webpackMode: "eager" */ '@css/responsive-sm.css').catch(() => {
+              // This is intentional
+            }),
+          )
+          .catch(() => {
+            // This is intentional
+          })
+          .then(
+            await import(/* webpackMode: "eager" */ '@css/responsive-md.css').catch(() => {
+              // This is intentional
+            }),
+          )
+          .catch(() => {
+            // This is intentional
+          })
+          .then(
+            await import(/* webpackMode: "eager" */ '@css/responsive-lg.css').catch(() => {
+              // This is intentional
+            }),
+          )
+          .catch(() => {
+            // This is intentional
+          })
+          .then(
+            await import(/* webpackMode: "eager" */ '@css/responsive-xl.css').catch(() => {
+              // This is intentional
+            }),
+          )
+          .catch(() => {
+            // This is intentional
+          })
+          .then(
+            await import(/* webpackMode: "eager" */ '@css/responsive-2xl.css').catch(() => {
+              // This is intentional
+            }),
+          )
+          .catch(() => {
+            // This is intentional
+          });
+      } else if (settingsManager.enableLimitedUI) {
+        import(/* webpackMode: "eager" */ '@css/limitedUI.css').catch(() => {
+          // This is intentional
+        });
+      }
     } catch {
       // intentionally left blank
     }
@@ -344,7 +400,7 @@ theodore.kruczek at gmail dot com.
 
       this.postStart_();
     } catch (error) {
-      Dexter.showErrorCode(<Error & { lineNumber: number }>error);
+      KeepTrack.showErrorCode(<Error & { lineNumber: number }>error);
     }
   }
 
@@ -404,10 +460,10 @@ theodore.kruczek at gmail dot com.
     } else {
       this.postStartElapsed_ += 100;
 
-      if (this.postStartElapsed_ >= Dexter.POST_START_TIMEOUT_MS_) {
+      if (this.postStartElapsed_ >= KeepTrack.POST_START_TIMEOUT_MS_) {
         const notReady = this.threads.filter((t) => !t.isReady).map((t) => t.WEB_WORKER_CODE);
 
-        errorManagerInstance.warn(`[KeepTrack] Web workers failed to initialize after ${Dexter.POST_START_TIMEOUT_MS_ / 1000}s. Stalled workers: ${notReady.join(', ')}. Try a hard refresh (Ctrl+Shift+R).`);
+        errorManagerInstance.warn(`[KeepTrack] Web workers failed to initialize after ${KeepTrack.POST_START_TIMEOUT_MS_ / 1000}s. Stalled workers: ${notReady.join(', ')}. Try a hard refresh (Ctrl+Shift+R).`);
         SplashScreen.loadStr('Loading failed — try Ctrl+Shift+R to hard refresh.');
 
         return;

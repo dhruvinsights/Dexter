@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "FOV satelitu",
+      "title": "Zorné pole satelitu",
+      "helpBody": "Plugin zorného pole satelitu umožňuje ovládat zorné pole satelitu."
+    }
+  }
+}

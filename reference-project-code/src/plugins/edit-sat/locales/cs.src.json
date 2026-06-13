@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "Upravit satelit",
+      "title": "Menu úpravy satelitu",
+      "helpBody": "Menu úpravy satelitu slouží k úpravě dat satelitu. <br><br> <ul> <li> SCC# satelitu – Jedinečné číslo přiřazené každému satelitu americkými Vesmírnými silami. </li> <li> Rok epochy – Rok poslední aktualizace dráhy satelitu. </li> <li> Den epochy – Den v roce poslední aktualizace dráhy satelitu. </li> <li> Inklinace – Úhel mezi rovinou dráhy satelitu a rovinou rovníku. </li> <li> Rektascenze – Úhel mezi vzestupným uzlem a polohou satelitu v době poslední aktualizace dráhy. </li> <li> Excentricita – Míra odchylky dráhy satelitu od dokonalé kružnice. </li> <li> Argument perigea – Úhel mezi vzestupným uzlem a nejbližším bodem satelitu k Zemi. </li> <li> Střední anomálie – Úhel mezi polohou satelitu v době poslední aktualizace dráhy a nejbližším bodem satelitu k Zemi. </li> <li> Střední pohyb – Rychlost, jakou se mění střední anomálie satelitu. </li> </ul>",
+      "labels": {
+        "scc": "SCC# satelitu",
+        "country": "Země",
+        "epochYear": "Rok epochy",
+        "epochDay": "Den epochy",
+        "inclination": "Inklinace",
+        "rightAscension": "Rektascenze",
+        "eccentricity": "Excentricita",
+        "argOfPerigee": "Argument perigea",
+        "meanAnomaly": "Střední anomálie",
+        "meanMotion": "Střední pohyb",
+        "period": "Perioda",
+        "error": "Chyba"
+      },
+      "buttons": {
+        "updateSatellite": "Aktualizovat satelit",
+        "updateEpoch": "Aktualizovat epochu na nyní",
+        "saveTle": "Uložit TLE",
+        "loadTle": "Načíst TLE"
+      },
+      "contextMenu": {
+        "editSat": "Upravit sat.",
+        "setPrimarySat": "Nastavit jako primární sat.",
+        "setSecondarySat": "Nastavit jako sekundární sat.",
+        "editSatellite": "Upravit satelit"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "Chyba při čtení souboru!",
+        "satelliteNotFound": "Satelit {sccNum} nebyl nalezen!",
+        "failedToPropagate": "Nepodařilo se propagovat satelit. Zkuste jiné parametry, nebo pokud jste si jisti, že jsou správné, nahlaste tento problém.",
+        "cannotCalculateDirection": "Nelze vypočítat směr satelitu. Zkuste to znovu později.",
+        "notRealSatellite": "Není skutečný satelit"
+      }
+    }
+  }
+}

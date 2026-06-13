@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "title": "Video režisér",
+      "bottomIconLabel": "Video režisér",
+      "helpBody": "Toto menu umožňuje přidávat efekty kamery a ovládat pohyby kamery pro vytváření filmových videí v simulaci."
+    }
+  }
+}

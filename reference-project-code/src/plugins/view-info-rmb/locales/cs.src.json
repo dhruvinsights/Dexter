@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "ViewInfoRmbPlugin": {
+      "rmbMenu": {
+        "title": "Zobrazit",
+        "earthInfo": "Informace o Zemi",
+        "sensorInfo": "Informace o senzoru",
+        "launchSiteInfo": "Informace o startovacím místě",
+        "satelliteInfo": "Informace o satelitu",
+        "relatedSatellites": "Související satelity"
+      },
+      "errorMsgs": {
+        "launchSiteNotFound": "Startovací místo nenalezeno!",
+        "noRelatedSats": "Žádné související satelity nenalezeny!",
+        "sensorNotFound": "Senzor nenalezen! Nejprve vyberte senzor."
+      }
+    }
+  }
+}

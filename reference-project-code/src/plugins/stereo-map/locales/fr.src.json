@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "Carte stéréographique",
+      "title": "Menu Carte stéréographique",
+      "helpBody": "Le menu Carte stéréographique permet de visualiser les traces au sol des satellites en projection stéréographique. <br/><br/> Vous pouvez cliquer sur un point de la trace pour changer l'heure de la simulation à ce moment précis. <br/><br/> Les points jaunes indiquent que le satellite est visible du capteur. Les points rouges indiquent qu'il ne l'est pas. Le point le plus proche du satellite correspond à l'heure actuelle.",
+      "labels": {
+        "orbitsToDisplay": "Orbites à afficher",
+        "showGraticule": "Afficher le graticule",
+        "mapStyle": "Style de carte",
+        "standard": "Standard",
+        "political": "Politique",
+        "nightLights": "Lumières nocturnes"
+      }
+    }
+  }
+}

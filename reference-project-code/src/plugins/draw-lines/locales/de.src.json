@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Zeichnen",
+        "eciAxes": "ECI-Achsen",
+        "xAxesGrid": "X-Achsen-Gitter",
+        "yAxesGrid": "Y-Achsen-Gitter",
+        "zAxesGrid": "Z-Achsen-Gitter",
+        "xAxesRadialGrid": "X-Achsen-Radialgitter",
+        "yAxesRadialGrid": "Y-Achsen-Radialgitter",
+        "zAxesRadialGrid": "Z-Achsen-Radialgitter",
+        "earthToSatellite": "Erde zu Satellit",
+        "sensorToSatellite": "Sensor zu Satellit",
+        "satelliteToSatellite": "Satellit zu Satellit",
+        "satelliteToSun": "Satellit zur Sonne",
+        "satelliteToMoon": "Satellit zum Mond",
+        "moonOrbit": "Mondumlaufbahn zeichnen"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "Kein Primärsatellit für die Satellit-zu-Satellit-Linie ausgewählt."
+      }
+    }
+  }
+}

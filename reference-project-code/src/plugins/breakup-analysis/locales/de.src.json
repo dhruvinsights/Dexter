@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Zerfall-Analyse",
+      "title": "Zerfall-Analyse",
+      "helpBody": "Das Zerfall-Analyse-Plugin bietet eine Datenbank der wichtigsten Satelliten-Zerfallereignisse in der Geschichte. Wählen Sie ein Ereignis aus, um detaillierte Informationen einschließlich des Ursprungsobjekts, der Zerfallursache, des Zeitrahmens vom Start bis zum Zerfall und der Trümmerverteilungsanalyse anzuzeigen. Das Plugin durchsucht den aktuellen Katalog nach verfolgten Trümmern, die mit jedem Ereignis übereinstimmen, und zeigt statistische Analysen der Höhenbereiche, Exzentrizität und Neigungsverteilungen an."
+    }
+  }
+}

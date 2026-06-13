@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "Strażnik orbity",
+      "title": "Strażnik orbity",
+      "helpBody": "Menu wykrywania anomalii Strażnika orbity wyświetla najnowsze zdarzenia manewrów, odchyleń orbity od normy oraz zmian stabilności satelitów."
+    }
+  }
+}

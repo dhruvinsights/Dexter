@@ -187,7 +187,7 @@ export class PluginDrawer {
   }
 
   private createDrawerDom_(): void {
-    const root = getEl('dexter-root', true);
+    const root = getEl('keeptrack-root', true);
 
     if (!root) {
       return;

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "OrbitGuard",
+      "title": "OrbitGuard",
+      "helpBody": "Il menu di rilevamento anomalie OrbitGuard visualizza gli ultimi eventi di manovra, orbita fuori famiglia e cambio di stabilità per i satelliti."
+    }
+  }
+}

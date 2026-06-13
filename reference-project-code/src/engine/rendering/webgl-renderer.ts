@@ -2,7 +2,7 @@ import { SatMath } from '@app/app/analysis/sat-math';
 import { MissileObject } from '@app/app/data/catalog-manager/MissileObject';
 import { OemSatellite } from '@app/app/objects/oem-satellite';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { SelectSatManager } from '@app/plugins/select-sat-manager/select-sat-manager';
 import { WatchlistPlugin } from '@app/plugins/watchlist/watchlist';
 import { BaseObject, CatalogSource, GreenwichMeanSiderealTime, Kilometers, Milliseconds, Satellite, TemeVec3 } from '@ootk/src/main';
@@ -68,10 +68,10 @@ export class WebGLRenderer {
 
   static getCanvasInfo(): { vw: number; vh: number } {
     // Using minimum allows the canvas to be full screen without fighting with scrollbars
-    const cw = Dexter.getInstance().containerRoot?.clientWidth ?? document.documentElement.clientWidth ?? 0;
+    const cw = KeepTrack.getInstance().containerRoot?.clientWidth ?? document.documentElement.clientWidth ?? 0;
     const iw = window.innerWidth || 0;
     const vw = Math.min.apply(null, [cw, iw].filter(Boolean));
-    const vh = Math.min(Dexter.getInstance().containerRoot?.clientHeight ?? document.documentElement.clientHeight ?? 0, window.innerHeight ?? 0);
+    const vh = Math.min(KeepTrack.getInstance().containerRoot?.clientHeight ?? document.documentElement.clientHeight ?? 0, window.innerHeight ?? 0);
 
     return { vw, vh };
   }
@@ -260,7 +260,7 @@ export class WebGLRenderer {
   // eslint-disable-next-line require-await
   async init(settings: SettingsManager): Promise<void> {
     this.settings_ = settings;
-    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in DexterPlugin constructor
+    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in KeepTrackPlugin constructor
 
     ServiceLocator.getHoverManager()?.init();
     this.startWithOrbits();

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteTimeline": {
+      "bottomIconLabel": "Satellite Timeline",
+      "title": "Satellite Timeline Menu",
+      "helpBody": "The Satellite Timeline menu shows when a single sensor has visibility of a list of satellites. The timeline is color-coded to show the quality of the pass. Red is a bad pass, yellow is an average pass, and green is a good pass. Click on a pass to change the satellite and time to that pass. <br><br> The timeline can be modified by changing the start and end time of the simulation. Additionally, the timeline can be modified by changing the length and interval options."
+    }
+  }
+}

@@ -27,7 +27,7 @@ import { mockCameraManager, setupDefaultHtml } from '@test/environment/standard-
  *
  *Flow:
  *1. Import necessary files and libraries
- *2. Define class Dexter with various properties and methods
+ *2. Define class KeepTrack with various properties and methods
  *3. Initialize various managers and plugins in the constructor, including OrbitManager, CatalogManager, UiManager, and ErrorManager
  *4. Set up a game loop in the gameLoop method that updates and draws the application
  *5. Handle errors with a global error trapper and show error messages on the loading screen
@@ -117,8 +117,8 @@ describe('code_snippet', () => {
 
     let keepTrack: KeepTrack;
     const initializationTest = async () => {
-      keepTrack = Dexter.getInstance();
-      Dexter.getInstance().containerRoot = document.body as HTMLDivElement;
+      keepTrack = KeepTrack.getInstance();
+      KeepTrack.getInstance().containerRoot = document.body as HTMLDivElement;
       keepTrack.init(settingsOverride);
       KeepTrack.initCss();
       await keepTrack.run();
@@ -137,7 +137,7 @@ describe('code_snippet', () => {
       throw new Error('Test error');
     };
 
-    const keepTrack = Dexter.getInstance();
+    const keepTrack = KeepTrack.getInstance();
 
     keepTrack.init(settingsOverride);
     keepTrack.run().then(() => {
@@ -150,7 +150,7 @@ describe('code_snippet', () => {
 
   // Tests that the game loop updates and draws the application correctly.
   it('test_game_loop_updates_and_draws_application', () => {
-    const keepTrack = Dexter.getInstance();
+    const keepTrack = KeepTrack.getInstance();
 
     keepTrack.init(settingsOverride);
     const drawManagerInstance = ServiceLocator.getRenderer();
@@ -171,7 +171,7 @@ describe('code_snippet', () => {
 
   // Test if isPreventDefaultHtml disabled
   it('test_isPreventDefaultHtml_disabled', () => {
-    const keepTrack = Dexter.getInstance();
+    const keepTrack = KeepTrack.getInstance();
 
     keepTrack.init({ isPreventDefaultHtml: false } as unknown as SettingsManagerOverride);
     const initializationTest = () => {

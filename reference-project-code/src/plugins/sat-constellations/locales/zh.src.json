@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "\u661f\u5ea7",
+      "title": "\u661f\u5ea7\u83dc\u5355",
+      "helpBody": "\u661f\u5ea7\u83dc\u5355\u5141\u8bb8\u60a8\u67e5\u770b\u536b\u661f\u7fa4\u3002<br><br>\u5bf9\u4e8e\u67d0\u4e9b\u661f\u5ea7\uff0c\u5c06\u5728\u661f\u5ea7\u5185\u7684\u536b\u661f\u4e4b\u95f4\u7ed8\u5236\u5047\u60f3\u7684\u4e0a/\u4e0b\u884c\u94fe\u8def\u548c/\u6216\u661f\u95f4\u94fe\u8def\u3002",
+      "constellations": {
+        "SpaceStations": "\u7a7a\u95f4\u7ad9",
+        "AmateurRadio": "\u4e1a\u4f59\u65e0\u7ebf\u7535",
+        "GPSGroup": "GPS\u536b\u661f",
+        "GalileoGroup": "Galileo\u536b\u661f",
+        "GlonassGroup": "Glonass\u536b\u661f",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar\u548cAEHF",
+        "wgs": "DSCS\u548cWGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "\u536b\u661f",
+        "avgAltitude": "\u5e73\u5747\u9ad8\u5ea6",
+        "incRange": "\u503e\u89d2"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "\u540d\u79f0",
+        "inclination": "\u503e\u89d2",
+        "raan": "RAAN",
+        "perigee": "\u8fd1\u5730\u70b9",
+        "apogee": "\u8fdc\u5730\u70b9"
+      },
+      "filters": {
+        "incMin": "\u6700\u5c0f\u503e\u89d2 (\u00B0)",
+        "incMax": "\u6700\u5927\u503e\u89d2 (\u00B0)",
+        "altMin": "\u6700\u5c0f\u9ad8\u5ea6 (km)",
+        "altMax": "\u6700\u5927\u9ad8\u5ea6 (km)",
+        "raanMin": "\u6700\u5c0fRaan (\u00B0)",
+        "raanMax": "\u6700\u5927RAAN (\u00B0)",
+        "nameFilter": "\u540d\u79f0\u8fc7\u6ee4",
+        "apply": "\u5e94\u7528",
+        "reset": "\u91cd\u7f6e"
+      },
+      "commands": {
+        "category": "\u661f\u5ea7"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "\u672a\u9009\u62e9\u661f\u5ea7"
+      }
+    }
+  }
+}

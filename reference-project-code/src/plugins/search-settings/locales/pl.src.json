@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "Ustawienia wyszukiwania",
+      "title": "Ustawienia wyszukiwania",
+      "labels": {
+        "maxResults": "Maks. wyników wyszukiwania",
+        "showDecayed": "Pokaż rozpadłe satelity"
+      },
+      "tooltips": {
+        "maxResults": "Maksymalna liczba satelitów wyświetlanych w wynikach wyszukiwania",
+        "showDecayed": "Pokaż rozpadłe satelity (pozycja 0,0,0) w wynikach wyszukiwania"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "Nieprawidłowa wartość maks. wyników wyszukiwania!"
+      }
+    }
+  }
+}

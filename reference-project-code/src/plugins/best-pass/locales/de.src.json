@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Beste Überflüge",
+      "title": "Beste Überflugzeiten",
+      "helpBody": "Das Plugin Beste Überflugzeiten berechnet optimale Überflugzeiten für Satelliten basierend auf dem aktuell ausgewählten Sensor. Überflüge werden nach Dauer, maximaler Elevation, minimaler Entfernung und Sonnenposition bewertet. Ergebnisse werden als CSV exportiert.",
+      "satelliteNumbersLabel": "Satellitennummern",
+      "generateButton": "Beste Überflugzeiten berechnen",
+      "selectSensorFirst": "Sensor zuerst auswählen!",
+      "errorMsgs": {
+        "SensorRequired": "Sie müssen zuerst einen Sensor auswählen!",
+        "SensorFormatError": "Sensorformat falsch. Haben Sie einen Sensor ausgewählt?"
+      }
+    }
+  }
+}

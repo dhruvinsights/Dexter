@@ -8,7 +8,7 @@ import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import {
   IBottomIconConfig,
   ICommandPaletteCapable,
@@ -41,7 +41,7 @@ import './countries.css';
  * 2. Select a country from the list to filter satellites by that country.
  * 3. The search box will be populated with the SCC numbers of the satellites from the selected country.
  */
-export class CountriesMenu extends DexterPlugin implements ICommandPaletteCapable {
+export class CountriesMenu extends KeepTrackPlugin implements ICommandPaletteCapable {
   readonly id = 'CountriesMenu';
   dependencies_ = [TopMenu.name];
 

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Rientri",
+      "title": "Rientri",
+      "helpBody": "Il menu Rientri ha due schede: <br><br> <b>Messaggi TIP</b> mostra le previsioni recenti e imminenti di rientro dei satelliti dallo US Space Command. Facendo clic su una riga si selezionerà quel satellite e si cambierà l'orario al tempo di decadimento previsto. <br><br> <b>Analisi dei rientri</b> mostra gli oggetti ordinati per perigeo più basso che hanno maggiori probabilità di rientrare nell'atmosfera. Fare clic su qualsiasi riga per selezionare il satellite.",
+      "dataSource": "Messaggi di tracciamento e previsione d'impatto (TIP) forniti dallo US Space Command (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "Nessun dato TIP trovato!",
+        "errorFetching": "Errore nel recupero dei dati di rientro!",
+        "errorProcessing": "Errore nell'elaborazione dei dati di rientro!",
+        "satelliteDecayed": "Il satellite sembra essere decaduto!"
+      }
+    }
+  }
+}

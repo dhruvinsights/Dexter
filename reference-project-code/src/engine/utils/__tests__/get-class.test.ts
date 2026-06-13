@@ -37,7 +37,7 @@ import { KeepTrack } from '@app/keeptrack';
 describe('getClass', () => {
   beforeEach(() => {
     // Initialize containerRoot for each test
-    const keepTrack = Dexter.getInstance();
+    const keepTrack = KeepTrack.getInstance();
 
     keepTrack.containerRoot = document.createElement('div');
     document.body.appendChild(keepTrack.containerRoot);
@@ -45,7 +45,7 @@ describe('getClass', () => {
 
   afterEach(() => {
     // Clean up after each test
-    const keepTrack = Dexter.getInstance();
+    const keepTrack = KeepTrack.getInstance();
 
     if (keepTrack.containerRoot && keepTrack.containerRoot.parentNode) {
       keepTrack.containerRoot.parentNode.removeChild(keepTrack.containerRoot);
@@ -54,7 +54,7 @@ describe('getClass', () => {
 
   // Tests that the function returns an array of HTMLElements when given a valid id
   it('test_returns_array_of_elements', () => {
-    Dexter.getInstance().containerRoot.innerHTML = '<div class="test"></div>';
+    KeepTrack.getInstance().containerRoot.innerHTML = '<div class="test"></div>';
     const result = getClass('test');
 
     expect(result).toHaveLength(1);
@@ -64,7 +64,7 @@ describe('getClass', () => {
   // Tests that the function returns an empty array when no elements with the given id are found
   it('test_returns_empty_array_when_no_elements_found', () => {
     vi.spyOn(isThisNode, 'isThisNode').mockReturnValueOnce(false);
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     const result = getClass('test');
 
     expect(result).toHaveLength(0);
@@ -73,7 +73,7 @@ describe('getClass', () => {
   // Tests that the function returns an empty array when no elements with the given id are found and not running in Jest environment
   it('test_returns_empty_array_when_no_elements_found_and_not_running_in_jest', () => {
     vi.spyOn(isThisNode, 'isThisNode').mockReturnValueOnce(false);
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     const result = getClass('test');
 
     expect(result).toHaveLength(0);
@@ -82,7 +82,7 @@ describe('getClass', () => {
   // Tests that the function returns a single-element array containing an empty div when no elements with the given id are found and running in Jest environment
   it('test_returns_single_element_array_containing_empty_div_when_no_elements_found_and_running_in_jest', () => {
     vi.spyOn(isThisNode, 'isThisNode').mockReturnValueOnce(true);
-    Dexter.getInstance().containerRoot.innerHTML = '<div class="test"></div>';
+    KeepTrack.getInstance().containerRoot.innerHTML = '<div class="test"></div>';
     const result = getClass('test');
 
     expect(result).toHaveLength(1);

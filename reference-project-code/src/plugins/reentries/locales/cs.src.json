@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Vstupy do atmosféry",
+      "title": "Vstupy do atmosféry",
+      "helpBody": "Menu vstupů do atmosféry má dvě záložky: <br><br> <b>TIP zprávy</b> zobrazují nedávné a nadcházející předpovědi vstupů satelitů do atmosféry od US Space Command. Kliknutím na řádek vyberete daný satelit a změníte čas na předpokládaný čas rozpadu. <br><br> <b>Analýza vstupů</b> zobrazuje objekty seřazené podle nejnižšího perigea, které s největší pravděpodobností vstoupí do atmosféry. Kliknutím na řádek vyberete satelit.",
+      "dataSource": "Zprávy Tracking and Impact Prediction (TIP) poskytované US Space Command (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "Nebyla nalezena žádná TIP data!",
+        "errorFetching": "Chyba při načítání dat o vstupech do atmosféry!",
+        "errorProcessing": "Chyba při zpracování dat o vstupech do atmosféry!",
+        "satelliteDecayed": "Zdá se, že satelit zanikl!"
+      }
+    }
+  }
+}

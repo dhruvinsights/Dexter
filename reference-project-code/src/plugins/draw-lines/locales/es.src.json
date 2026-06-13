@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Dibujar",
+        "eciAxes": "Ejes ECI",
+        "xAxesGrid": "Cuadrícula de ejes X",
+        "yAxesGrid": "Cuadrícula de ejes Y",
+        "zAxesGrid": "Cuadrícula de ejes Z",
+        "xAxesRadialGrid": "Cuadrícula radial de ejes X",
+        "yAxesRadialGrid": "Cuadrícula radial de ejes Y",
+        "zAxesRadialGrid": "Cuadrícula radial de ejes Z",
+        "earthToSatellite": "Tierra a satélite",
+        "sensorToSatellite": "Sensor a satélite",
+        "satelliteToSatellite": "Satélite a satélite",
+        "satelliteToSun": "Satélite al Sol",
+        "satelliteToMoon": "Satélite a la Luna",
+        "moonOrbit": "Dibujar órbita de la Luna"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "No se ha seleccionado un satélite primario para la línea de satélite a satélite."
+      }
+    }
+  }
+}

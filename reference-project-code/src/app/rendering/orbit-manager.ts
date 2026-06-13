@@ -2,7 +2,7 @@ import { OemSatellite } from '@app/app/objects/oem-satellite';
 import { OrbitCruncherThreadManager } from '@app/app/threads/orbit-cruncher-thread-manager';
 import { CameraType } from '@app/engine/camera/camera-type';
 import { ToastMsgType } from '@app/engine/core/interfaces';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { SelectSatManager } from '@app/plugins/select-sat-manager/select-sat-manager';
 import { SettingsMenuPlugin } from '@app/plugins/settings-menu/settings-menu';
 import { SettingsManager } from '@app/settings/settings';
@@ -36,7 +36,7 @@ export class OrbitManager {
   private updateAllThrottle_ = 0;
   orbitCache = new Map<number, Float32Array>();
 
-  orbitThreadMgr = new OrbitCruncherThreadManager(Dexter.getInstance().threads);
+  orbitThreadMgr = new OrbitCruncherThreadManager(KeepTrack.getInstance().threads);
   playNextSatellite = null;
   tempTransColor: [number, number, number, number] = [0, 0, 0, 0];
 

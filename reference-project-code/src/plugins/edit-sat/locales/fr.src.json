@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "Modifier le satellite",
+      "title": "Menu Modifier le satellite",
+      "helpBody": "Le menu Modifier le satellite permet de modifier les données du satellite. <br><br> <ul> <li> SCC# du satellite - Numéro unique attribué à chaque satellite par l'US Space Force. </li> <li> Année de l'époque - Année de la dernière mise à jour orbitale du satellite. </li> <li> Jour de l'époque - Jour de l'année de la dernière mise à jour orbitale. </li> <li> Inclinaison - Angle entre le plan orbital du satellite et le plan équatorial. </li> <li> Ascension droite - Angle entre le nœud ascendant et la position du satellite à la dernière mise à jour. </li> <li> Excentricité - Degré d'écart de l'orbite par rapport à un cercle parfait. </li> <li> Argument du périgée - Angle entre le nœud ascendant et le point le plus proche de la Terre. </li> <li> Anomalie moyenne - Angle entre la position du satellite à la dernière mise à jour et son point le plus proche de la Terre. </li> <li> Mouvement moyen - Taux de variation de l'anomalie moyenne du satellite. </li> </ul>",
+      "labels": {
+        "scc": "SCC# du satellite",
+        "country": "Pays",
+        "epochYear": "Année de l'époque",
+        "epochDay": "Jour de l'époque",
+        "inclination": "Inclinaison",
+        "rightAscension": "Ascension droite",
+        "eccentricity": "Excentricité",
+        "argOfPerigee": "Argument du périgée",
+        "meanAnomaly": "Anomalie moyenne",
+        "meanMotion": "Mouvement moyen",
+        "period": "Période",
+        "error": "Erreur"
+      },
+      "buttons": {
+        "updateSatellite": "Mettre à jour le satellite",
+        "updateEpoch": "Mettre l'époque à maintenant",
+        "saveTle": "Enregistrer TLE",
+        "loadTle": "Charger TLE"
+      },
+      "contextMenu": {
+        "editSat": "Modifier Sat",
+        "setPrimarySat": "Définir comme Sat primaire",
+        "setSecondarySat": "Définir comme Sat secondaire",
+        "editSatellite": "Modifier le satellite"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "Erreur lors de la lecture du fichier !",
+        "satelliteNotFound": "Satellite {sccNum} introuvable !",
+        "failedToPropagate": "Échec de la propagation du satellite. Essayez des paramètres différents ou, si vous êtes sûr qu'ils sont corrects, signalez ce problème.",
+        "cannotCalculateDirection": "Impossible de calculer la direction du satellite. Réessayez plus tard.",
+        "notRealSatellite": "Pas un vrai satellite"
+      }
+    }
+  }
+}

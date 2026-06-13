@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorTimeline": {
+      "bottomIconLabel": "Časová osa senzoru",
+      "title": "Menu časové osy senzoru",
+      "helpBody": "Menu časové osy senzoru zobrazuje, kdy má seznam senzorů viditelnost jednoho satelitu. Časová osa je barevně kódována pro zobrazení kvality přeletu. Červená je špatný přelet, žlutá je průměrný přelet a zelená je dobrý přelet. Kliknutím na přelet změníte senzor a čas na daný přelet. <br><br> Časovou osu lze upravit změnou počátečního a koncového času simulace. Dále lze časovou osu upravit změnou možností délky a intervalu."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Pocisk",
+      "title": "Menu pocisków",
+      "helpBody": "Menu pocisków służy do generowania hipotetycznych startów pocisków między krajami. <br><br> W przypadku pocisków wystrzeliwanych z okrętów podwodnych punkt startu jest określony przez niestandardową szerokość i długość geograficzną. W przypadku pocisków lądowych punkt startu jest stałą szerokością i długością geograficzną opartą na raportach z otwartych źródeł. <br><br> Oprócz niestandardowych pocisków dostępnych jest kilka predefiniowanych scenariuszy obejmujących setki pocisków. <br><br> Wszystkie starty pocisków są hipotetyczne i nie mają na celu przedstawiania rzeczywistych wydarzeń. Trajektorie startów opierają się na tym samym modelu balistycznym, ale wykorzystują różne minimalne i maksymalne zasięgi."
+    }
+  }
+}

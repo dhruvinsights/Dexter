@@ -9,9 +9,9 @@ import {
 import { PersistenceManager, StorageKey } from '@app/engine/utils/persistence-manager';
 import { t7e } from '@app/locales/keys';
 import historyPng from '@public/img/icons/history.png';
-import { DexterPlugin } from '../../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 
-export class TimeMachine extends DexterPlugin implements ISettingsContributor {
+export class TimeMachine extends KeepTrackPlugin implements ISettingsContributor {
   readonly id = 'TimeMachine';
   static readonly TIME_BETWEEN_SATELLITES = 10000;
   dependencies_ = [];

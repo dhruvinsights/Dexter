@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "최적 통과",
+      "title": "최적 통과 시간",
+      "helpBody": "최적 통과 시간 플러그인은 현재 선택된 센서를 기반으로 위성의 최적 통과 시간을 계산합니다. 통과는 지속 시간, 최대 앙각, 최소 거리 및 태양 위치에 따라 평가됩니다. 결과는 CSV로 내보내집니다.",
+      "satelliteNumbersLabel": "위성 번호",
+      "generateButton": "최적 통과 시간 생성",
+      "selectSensorFirst": "먼저 센서를 선택하세요!",
+      "errorMsgs": {
+        "SensorRequired": "먼저 센서를 선택해야 합니다!",
+        "SensorFormatError": "센서 형식이 올바르지 않습니다. 센서를 선택하셨나요?"
+      }
+    }
+  }
+}

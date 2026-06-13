@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "立体地图",
+      "title": "立体投影地图菜单",
+      "helpBody": "立体投影地图菜单用于以立体投影方式可视化卫星地面轨迹。<br/><br/>可点击轨迹上的任意点，将仿真时间切换到卫星到达该点的时刻。<br/><br/>黄色点表示卫星在传感器视场内，红色点表示不在视场内，距离卫星最近的点为当前时间。",
+      "labels": {
+        "orbitsToDisplay": "显示轨道数",
+        "showGraticule": "显示经纬网",
+        "mapStyle": "地图样式",
+        "standard": "标准",
+        "political": "政区",
+        "nightLights": "夜间灯光"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "衛星画像",
+      "title": "衛星画像",
+      "helpBody": "衛星画像プラグインは、静止気象衛星とDSCOVRの最新画像を表示します。衛星名をクリックすると最新の画像が表示されます。",
+      "defaultImageTitle": "最新の衛星画像",
+      "errorMsgs": {
+        "FuturePictures": "未来の画像は読み込めません。最新の画像を読み込んでいます。"
+      }
+    }
+  }
+}

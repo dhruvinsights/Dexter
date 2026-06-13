@@ -1,4 +1,4 @@
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 
 /**
  * Retrieves an array of HTMLElements with the specified class name.
@@ -7,7 +7,7 @@ import { Dexter } from '@app/keeptrack';
  *
  */
 export const getClass = (id: string): HTMLElement[] => {
-  const els = Array.from(Dexter.getInstance().containerRoot.querySelectorAll(`.${id}`));
+  const els = Array.from(KeepTrack.getInstance().containerRoot.querySelectorAll(`.${id}`));
 
   if (els.length) {
     return els as HTMLElement[];
@@ -19,7 +19,7 @@ export const getClass = (id: string): HTMLElement[] => {
    *   // TODO - This is a hack. Tests should provide the right environment.
    *   const el = document.createElement('div');
    *   el.id = id;
-   *   Dexter.getInstance().containerRoot.appendChild(el);
+   *   KeepTrack.getInstance().containerRoot.appendChild(el);
    *   return [<HTMLElement>(<unknown>el)];
    * }
    */

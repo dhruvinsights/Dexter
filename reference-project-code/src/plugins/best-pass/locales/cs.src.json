@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Nejlepší průlety",
+      "title": "Časy nejlepších průletů",
+      "helpBody": "Plugin Časy nejlepších průletů vypočítá optimální časy průletů satelitů na základě aktuálně vybraného senzoru. Průlety jsou hodnoceny podle doby trvání, maximální elevace, minimální vzdálenosti a polohy Slunce. Výsledky se exportují jako CSV.",
+      "satelliteNumbersLabel": "Čísla satelitů",
+      "generateButton": "Generovat časy nejlepších průletů",
+      "selectSensorFirst": "Nejprve vyberte senzor!",
+      "errorMsgs": {
+        "SensorRequired": "Nejprve musíte vybrat senzor!",
+        "SensorFormatError": "Formát senzoru je nesprávný. Vybrali jste senzor?"
+      }
+    }
+  }
+}

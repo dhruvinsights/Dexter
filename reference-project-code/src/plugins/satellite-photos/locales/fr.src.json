@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "Imagerie Satellite",
+      "title": "Imagerie Satellite",
+      "helpBody": "Le plugin Imagerie Satellite affiche les dernières images des satellites météorologiques géostationnaires et de DSCOVR. Cliquez sur le nom d'un satellite pour voir son image la plus récente.",
+      "defaultImageTitle": "Dernière image satellite",
+      "errorMsgs": {
+        "FuturePictures": "Impossible de charger des images du futur. Chargement des images les plus récentes."
+      }
+    }
+  }
+}

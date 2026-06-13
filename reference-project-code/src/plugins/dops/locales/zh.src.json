@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "查看DOP",
+      "title": "精度因子菜单",
+      "helpTitle": "精度因子（DOP）菜单",
+      "helpBody": "精度因子（DOP）菜单用于计算给定位置和仰角遮罩的精度因子（DOP）。<br><br>HDOP 是水平精度因子，衡量水平位置的精度。<br><br>PDOP 是位置精度因子，衡量位置的精度。<br><br>GDOP 是几何精度因子，衡量几何位置的精度。",
+      "labels": {
+        "dopTable": "DOP 表",
+        "latitude": "纬度",
+        "longitude": "经度",
+        "altitude": "高度",
+        "mask": "遮罩",
+        "updateDopData": "更新 DOP 数据"
+      },
+      "tooltips": {
+        "latitude": "纬度（度）",
+        "longitude": "经度（度）",
+        "altitude": "高度（km）",
+        "mask": "GPS 锁定的最低仰角"
+      },
+      "rmb": {
+        "dops": "DOPs",
+        "currentGpsDops": "当前 GPS DOPs",
+        "twentyFourHourGpsDops": "24 小时 GPS DOPs"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "请在地球上选择一个有效位置以查看 24 小时 DOPs！"
+      }
+    }
+  }
+}

@@ -29,7 +29,7 @@ import { ToastMsgType } from '@app/engine/core/interfaces';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EngineEventMap, EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import { KeyboardComponent } from '@app/engine/plugins/components/keyboard/keyboard-component';
 import { isThisNode } from '@app/engine/utils/isThisNode';
 import '@materializecss/materialize';
@@ -356,8 +356,8 @@ export class UiManager {
   private sortBottomIcons() {
     const bottomIcons = document.querySelectorAll('#bottom-icons > div');
     const sortedIcons = Array.from(bottomIcons).sort((a, b) => {
-      const aOrder = parseInt(a.getAttribute('data-order') ?? DexterPlugin.MAX_BOTTOM_ICON_ORDER.toString(), 10);
-      const bOrder = parseInt(b.getAttribute('data-order') ?? DexterPlugin.MAX_BOTTOM_ICON_ORDER.toString(), 10);
+      const aOrder = parseInt(a.getAttribute('data-order') ?? KeepTrackPlugin.MAX_BOTTOM_ICON_ORDER.toString(), 10);
+      const bOrder = parseInt(b.getAttribute('data-order') ?? KeepTrackPlugin.MAX_BOTTOM_ICON_ORDER.toString(), 10);
 
       return aOrder - bOrder;
     });

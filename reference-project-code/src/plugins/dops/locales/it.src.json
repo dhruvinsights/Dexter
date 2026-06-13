@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "Visualizza DOP",
+      "title": "Menu diluizione della precisione",
+      "helpTitle": "Menu diluizione della precisione (DOP)",
+      "helpBody": "Il menu Diluizione della precisione (DOP) viene utilizzato per calcolare la diluizione della precisione (DOP) per una determinata posizione e maschera di elevazione.<br><br>HDOP è la diluizione orizzontale della precisione. È una misura dell'accuratezza della posizione orizzontale.<br><br>PDOP è la diluizione posizionale della precisione. È una misura dell'accuratezza della posizione.<br><br>GDOP è la diluizione geometrica della precisione. È una misura dell'accuratezza della posizione.",
+      "labels": {
+        "dopTable": "Tabella DOP",
+        "latitude": "Latitudine",
+        "longitude": "Longitudine",
+        "altitude": "Altitudine",
+        "mask": "Maschera",
+        "updateDopData": "Aggiorna dati DOP"
+      },
+      "tooltips": {
+        "latitude": "Latitudine in gradi",
+        "longitude": "Longitudine in gradi",
+        "altitude": "Altitudine in km",
+        "mask": "Elevazione minima per aggancio GPS"
+      },
+      "rmb": {
+        "dops": "DOP",
+        "currentGpsDops": "DOP GPS attuali",
+        "twentyFourHourGpsDops": "DOP GPS 24 ore"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Selezionare una posizione valida sulla Terra per i DOP a 24 ore!"
+      }
+    }
+  }
+}

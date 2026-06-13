@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Reference Frame Transforms",
+      "title": "Reference Frame Transforms Menu",
+      "helpBody": "The Reference Frame Transforms Menu is used to convert between different reference frames. <br><br> The menu allows you to convert between the following reference frames: <ul style=\"margin-left: 40px;\"> <li> ECI - Earth Centered Inertial </li> <li> ECEF - Earth Centered Earth Fixed </li> <li> Geodetic </li> <li> Topocentric </li> </ul>"
+    }
+  }
+}

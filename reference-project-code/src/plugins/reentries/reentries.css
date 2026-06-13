@@ -1,0 +1,23 @@
+.re-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+#reentries-analysis-table .reentry-critical {
+  background-color: rgba(211, 47, 47, 0.35);
+}
+
+#reentries-analysis-table .reentry-critical:hover {
+  background-color: rgba(211, 47, 47, 0.5);
+}
+
+#reentries-analysis-table .reentry-warning {
+  background-color: rgba(251, 192, 45, 0.25);
+}
+
+#reentries-analysis-table .reentry-warning:hover {
+  background-color: rgba(251, 192, 45, 0.4);
+}

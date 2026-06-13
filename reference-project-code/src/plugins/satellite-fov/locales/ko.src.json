@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "위성 FOV",
+      "title": "위성 시야각",
+      "helpBody": "위성 시야각 플러그인을 사용하면 위성의 시야각을 제어할 수 있습니다."
+    }
+  }
+}

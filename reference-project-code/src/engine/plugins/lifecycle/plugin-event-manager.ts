@@ -39,7 +39,7 @@ interface EventSubscription<T extends EventBusEvent = EventBusEvent> {
  *
  * @example
  * ```typescript
- * class MyPlugin extends DexterPlugin {
+ * class MyPlugin extends KeepTrackPlugin {
  *   private events = new PluginEventManager();
  *
  *   init() {

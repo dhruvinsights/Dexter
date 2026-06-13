@@ -25,9 +25,9 @@ import { EventBus } from '../events/event-bus';
 import { EventBusEvent } from '../events/event-bus-events';
 import { html } from '../utils/development/formatter';
 import { getEl } from '../utils/get-el';
-import { DexterPlugin } from './base-plugin';
+import { KeepTrackPlugin } from './base-plugin';
 
-export abstract class TopMenuPlugin extends DexterPlugin {
+export abstract class TopMenuPlugin extends KeepTrackPlugin {
   id: string = '';
   protected dependencies_ = [TopMenu.name];
 

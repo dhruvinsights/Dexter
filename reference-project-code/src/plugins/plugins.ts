@@ -1,7 +1,7 @@
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { isThisNode } from '@app/engine/utils/isThisNode';
-import { DexterPlugin } from '../engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '../engine/plugins/base-plugin';
 import { errorManagerInstance } from '../engine/utils/errorManager';
 import { getEl } from '../engine/utils/get-el';
 import type { KeepTrackPluginsConfiguration } from './keeptrack-plugins-configuration';
@@ -44,7 +44,7 @@ export class PluginManager {
       return;
     }
 
-    const PluginClass = resolved.mod[className] as new () => DexterPlugin;
+    const PluginClass = resolved.mod[className] as new () => KeepTrackPlugin;
     const plugin = new PluginClass();
 
     if (descriptor.isLoginRequired && resolved.usedPro) {
@@ -113,7 +113,7 @@ export class PluginManager {
         EventBusEvent.uiManagerFinal,
         () => {
           this.uiManagerFinal_();
-          DexterPlugin.hideUnusedMenuModes();
+          KeepTrackPlugin.hideUnusedMenuModes();
         },
       );
     } catch (e) {

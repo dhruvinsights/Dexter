@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Migliori passaggi",
+      "title": "Orari migliori passaggi",
+      "helpBody": "Il plugin Migliori passaggi calcola gli orari di passaggio ottimali per i satelliti in base al sensore attualmente selezionato. I passaggi vengono valutati in base alla durata, all'elevazione massima, alla distanza minima e alla posizione del sole. I risultati vengono esportati come CSV.",
+      "satelliteNumbersLabel": "Numeri satellite",
+      "generateButton": "Genera orari migliori passaggi",
+      "selectSensorFirst": "Seleziona prima un sensore!",
+      "errorMsgs": {
+        "SensorRequired": "Devi prima selezionare un sensore!",
+        "SensorFormatError": "Formato del sensore non corretto. Hai selezionato un sensore?"
+      }
+    }
+  }
+}

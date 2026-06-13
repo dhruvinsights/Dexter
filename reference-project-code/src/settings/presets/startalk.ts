@@ -7,7 +7,7 @@ import { getEl, hideEl, setInnerHtml } from '../../engine/utils/get-el';
 import { lat2pitch, lon2yaw } from '../../engine/utils/transforms';
 import { TimeMachine } from '../../plugins/time-machine/time-machine';
 import { SettingsManager } from '../settings';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 
 export const starTalk = (settingsManager: SettingsManager) => {
   const DEFAULT_LATITUDE = <Degrees>5; // NOTE: 0 will make the geosynchronous satellites more apparent
@@ -95,7 +95,7 @@ export const starTalk = (settingsManager: SettingsManager) => {
     const textOverlay = document.createElement('div');
 
     textOverlay.id = 'textOverlay';
-    Dexter.getInstance().containerRoot.appendChild(textOverlay);
+    KeepTrack.getInstance().containerRoot.appendChild(textOverlay);
 
     // Update CSS
     const toastCss = `

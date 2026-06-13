@@ -1,0 +1,26 @@
+{
+  "plugins": {
+    "WatchlistPlugin": {
+      "bottomIconLabel": "Lista di osservazione",
+      "title": "Lista di osservazione",
+      "helpBody": "Il menu Lista di osservazione consente di creare un elenco di satelliti prioritari da tracciare. Questo permette di recuperare rapidamente i satelliti di maggiore interesse. L'elenco viene salvato nella memoria locale del browser e sarà disponibile alla prossima visita del sito. <br><br> Quando i satelliti nella lista di osservazione entrano nel campo visivo del sensore selezionato, verrà visualizzata una notifica, verrà tracciata una linea dal sensore al satellite e il numero del satellite verrà visualizzato sul globo. <br><br> La funzione di sovrapposizione si basa sulla lista di osservazione compilata."
+,
+      "settings": {
+        "satLabelMode": {
+          "label": "Satellite Label Mode",
+          "helpText": "Controls satellite label rendering on watchlist satellites.",
+          "options": {
+            "off": "Off",
+            "fovOnly": "FOV Only",
+            "all": "All Watchlist"
+          }
+        }
+      }
+    },
+    "WatchlistOverlay": {
+      "bottomIconLabel": "Sovrapposizione",
+      "title": "Menu sovrapposizione",
+      "helpBody": "<p> La sovrapposizione della lista di osservazione mostra l'orario del prossimo passaggio per ogni satellite nella lista di osservazione. La sovrapposizione viene aggiornata ogni 10 secondi. </p> <p> La sovrapposizione è codificata a colori per mostrare il tempo al prossimo passaggio. I colori sono i seguenti: </p> <ul> <li>Giallo - In vista</li> <li>Blu - Il tempo al prossimo passaggio è fino a 30 minuti dopo l'orario corrente o 10 minuti prima dell'orario corrente</li> <li>Bianco - Qualsiasi passaggio futuro che non soddisfa i requisiti precedenti</li> </ul> <p> Facendo clic su un satellite nella sovrapposizione la mappa verrà centrata su quel satellite. </p>"
+    }
+  }
+}

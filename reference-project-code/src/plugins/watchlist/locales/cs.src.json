@@ -1,0 +1,26 @@
+{
+  "plugins": {
+    "WatchlistPlugin": {
+      "bottomIconLabel": "Seznam sledovaných",
+      "title": "Seznam sledovaných",
+      "helpBody": "Menu seznamu sledovaných umožňuje vytvořit seznam prioritních satelitů ke sledování. To vám umožní rychle načíst satelity, které vás nejvíce zajímají. Seznam je uložen v místním úložišti vašeho prohlížeče a bude k dispozici při příští návštěvě stránky. <br><br> Když satelity na seznamu sledovaných vstoupí do zorného pole vybraného senzoru, zobrazí se oznámení, nakreslí se čára od senzoru k satelitu a číslo satelitu se zobrazí na glóbu. <br><br> Funkce překryvu závisí na vyplněném seznamu sledovaných."
+,
+      "settings": {
+        "satLabelMode": {
+          "label": "Satellite Label Mode",
+          "helpText": "Controls satellite label rendering on watchlist satellites.",
+          "options": {
+            "off": "Off",
+            "fovOnly": "FOV Only",
+            "all": "All Watchlist"
+          }
+        }
+      }
+    },
+    "WatchlistOverlay": {
+      "bottomIconLabel": "Překryv",
+      "title": "Menu překryvu",
+      "helpBody": "<p> Překryv seznamu sledovaných zobrazuje čas dalšího průletu pro každý satelit ve vašem seznamu sledovaných. Překryv se aktualizuje každých 10 sekund. </p> <p> Překryv je barevně rozlišen podle času do dalšího průletu. Barvy jsou následující: </p> <ul> <li>Žlutá – v zorném poli</li> <li>Modrá – čas do dalšího průletu je do 30 minut po aktuálním čase nebo 10 minut před aktuálním časem</li> <li>Bílá – jakýkoli budoucí průlet nesplňující výše uvedené požadavky</li> </ul> <p> Kliknutím na satelit v překryvu se mapa vycentruje na daný satelit. </p>"
+    }
+  }
+}

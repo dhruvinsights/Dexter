@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Nahe Objekte",
+      "title": "Suche nach nahen Objekten",
+      "helpBody": "Die Suche nach nahen Objekten findet Satelliten und Trümmer in unmittelbarer Nähe zueinander. Sie verwendet einen zweiphasigen räumlichen Suchalgorithmus, um Objekte innerhalb von 50 km voneinander zu identifizieren, wobei zuerst aktuelle Positionen geprüft und dann mit projizierten Positionen 30 Minuten später verifiziert wird.",
+      "findBtn": "Nahe Objekte suchen"
+    }
+  }
+}

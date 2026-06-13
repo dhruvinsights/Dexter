@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "交会与近距离操作",
+      "title": "交会与近距离操作（RPO）",
+      "titleSecondary": "交会与近距离操作列表",
+      "helpBody": "查找卫星之间即将发生的接近事件。配置搜索参数包括距离阈值、相对速度和轨道类型（GEO/LEO）。支持单卫星和全部对全部搜索模式。",
+      "noradId": "NORAD编号",
+      "maxDistThreshold": "最大距离阈值（公里）",
+      "maxRelativeVelocity": "最大相对速度（公里/秒）",
+      "searchDuration": "搜索时长（小时）",
+      "geoText": "地球同步轨道",
+      "leoText": "近地轨道",
+      "orbitType": "轨道类型",
+      "geoAllVsAll": "地球同步轨道全部对全部",
+      "geoAllVsAllTooltip": "搜索所有地球同步轨道卫星之间的RPO",
+      "comparePayloadsOnly": "仅比较有效载荷",
+      "comparePayloadsOnlyTooltip": "仅搜索有效载荷之间的RPO",
+      "ignoreVimpelRso": "忽略Vimpel RSO",
+      "ignoreVimpelRsoTooltip": "忽略来自Vimpel目录的RSO",
+      "submitButton": "查找RPO \u25b6",
+      "noRposToDownload": "没有可下载的RPO！",
+      "noRposFound": "未找到RPO！",
+      "satNotFound": "未找到NORAD编号为{sccNum}的卫星",
+      "geoOrbitsEcf": "GEO轨道以ECF显示",
+      "geoOrbitsEci": "GEO轨道以ECI显示",
+      "vimpelNotSupported": "不支持Vimpel卫星",
+      "table": {
+        "target": "目标",
+        "targetName": "目标名称",
+        "chaser": "追踪器",
+        "chaserName": "追踪器名称",
+        "relDistance": "相对距离 [公里]",
+        "relVelocity": "相对速度 [公里/秒]",
+        "date": "日期"
+      }
+    }
+  }
+}

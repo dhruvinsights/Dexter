@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "Strážce orbity",
+      "title": "Strážce orbity",
+      "helpBody": "Menu detekce anomálií Strážce orbity zobrazuje nejnovější události manévrů, odchylek od orbity a změn stability satelitů."
+    }
+  }
+}

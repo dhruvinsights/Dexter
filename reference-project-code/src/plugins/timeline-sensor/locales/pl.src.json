@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorTimeline": {
+      "bottomIconLabel": "Oś czasu czujnika",
+      "title": "Menu osi czasu czujnika",
+      "helpBody": "Menu osi czasu czujnika pokazuje, kiedy lista czujników ma widoczność jednego satelity. Oś czasu jest oznaczona kolorami, aby pokazać jakość przelotu. Czerwony oznacza słaby przelot, żółty przeciętny, a zielony dobry. Kliknij przelot, aby zmienić czujnik i czas na ten przelot. <br><br> Oś czasu można modyfikować, zmieniając czas rozpoczęcia i zakończenia symulacji. Dodatkowo oś czasu można modyfikować, zmieniając opcje długości i interwału."
+    }
+  }
+}

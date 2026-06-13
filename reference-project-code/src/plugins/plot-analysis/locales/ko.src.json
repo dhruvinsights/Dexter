@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "경사각 대 고도 플롯",
+      "title": "경사각-고도 플롯 메뉴",
+      "helpBody": "경사각-고도 플롯 메뉴는 위성의 경사각을 고도에 대해 플롯하는 데 사용됩니다.",
+      "labels": {
+        "totalLeoPayloads": "총 LEO 페이로드"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "경사각 대 경도 플롯",
+      "title": "경사각-경도 플롯 메뉴",
+      "helpBody": "경사각-경도 플롯 메뉴는 GEO 벨트에서 경사각 대 경도를 플롯하는 데 사용됩니다.",
+      "labels": {
+        "totalGeoPayloads": "총 GEO 페이로드"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "워터폴 플롯",
+      "title": "워터폴 플롯 메뉴",
+      "helpBody": "시간-경도 (워터폴) 플롯은 GEO 위성의 경도 드리프트를 시간에 따라 표시합니다.",
+      "labels": {
+        "totalGeoPayloads": "총 GEO 페이로드"
+      }
+    }
+  }
+}

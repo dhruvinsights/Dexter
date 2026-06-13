@@ -12,9 +12,9 @@ import { getEl, hideEl, showEl } from '@app/engine/utils/get-el';
 import { keepTrackApi } from '@app/keepTrackApi';
 import { SpaceObjectType } from '@ootk/src/main';
 import sensorInfoPng from '@public/img/icons/sensor-info.png';
-import { ClickDragOptions, DexterPlugin } from '../../engine/plugins/base-plugin';
+import { ClickDragOptions, KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 
-export class SensorInfoPlugin extends DexterPlugin {
+export class SensorInfoPlugin extends KeepTrackPlugin {
   readonly id = 'SensorInfoPlugin';
   dependencies_ = [];
   isRequireSensorSelected = true;

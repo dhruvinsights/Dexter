@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "Transponder and Channel Info",
+      "title": "Satellite Frequencies",
+      "helpBody": "<p>This plugin displays transponder and channel frequency information for geostationary TV satellites. Select a satellite with known channel data and open this panel to view its broadcast frequencies, channels, beam coverage, and encryption details.</p><p>Use the download button in the title bar to export the channel data as a CSV file.</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "Satellite does not have channel information",
+        "NotSatellite": "Selected object is not a satellite",
+        "FetchFailed": "Failed to fetch channel info for {name} and {altName}",
+        "NoData": "No channel data available"
+      }
+    }
+  }
+}

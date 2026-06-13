@@ -1,15 +1,15 @@
 import { Constructor } from '@app/engine/core/interfaces';
-import { DexterPlugin } from '../plugins/base-plugin';
+import { KeepTrackPlugin } from '../plugins/base-plugin';
 
 export class PluginRegistry {
   private static readonly instance_ = new PluginRegistry();
 
-  loadedPlugins = <DexterPlugin[]>[];
+  loadedPlugins = <KeepTrackPlugin[]>[];
 
   /**
    * Gets the list of all loaded plugins.
    */
-  static get plugins(): readonly DexterPlugin[] {
+  static get plugins(): readonly KeepTrackPlugin[] {
     return this.instance_.loadedPlugins;
   }
 
@@ -18,16 +18,16 @@ export class PluginRegistry {
     this.instance_.loadedPlugins = [];
   }
 
-  static getPlugin<T extends DexterPlugin>(pluginClass: Constructor<T>): T | null {
-    if (this.instance_.loadedPlugins.some((plugin: DexterPlugin) => plugin instanceof pluginClass)) {
-      return this.instance_.loadedPlugins.find((plugin: DexterPlugin) => plugin instanceof pluginClass) as T;
+  static getPlugin<T extends KeepTrackPlugin>(pluginClass: Constructor<T>): T | null {
+    if (this.instance_.loadedPlugins.some((plugin: KeepTrackPlugin) => plugin instanceof pluginClass)) {
+      return this.instance_.loadedPlugins.find((plugin: KeepTrackPlugin) => plugin instanceof pluginClass) as T;
     }
 
     return null;
   }
 
-  static addPlugin(plugin: DexterPlugin) {
-    if (this.instance_.loadedPlugins.some((p: DexterPlugin) => p.id === plugin.id)) {
+  static addPlugin(plugin: KeepTrackPlugin) {
+    if (this.instance_.loadedPlugins.some((p: KeepTrackPlugin) => p.id === plugin.id)) {
       throw new Error(`Plugin with id ${plugin.id} is already registered.`);
     }
 
@@ -51,9 +51,9 @@ export class PluginRegistry {
    * @param pluginName - The name of the plugin to retrieve.
    * @returns The plugin with the specified name, or null if not found.
    */
-  static getPluginByName<T extends DexterPlugin>(pluginName: string): T | null {
-    if (this.instance_.loadedPlugins.some((plugin: DexterPlugin) => plugin.id === pluginName)) {
-      return this.instance_.loadedPlugins.find((plugin: DexterPlugin) => plugin.id === pluginName) as T;
+  static getPluginByName<T extends KeepTrackPlugin>(pluginName: string): T | null {
+    if (this.instance_.loadedPlugins.some((plugin: KeepTrackPlugin) => plugin.id === pluginName)) {
+      return this.instance_.loadedPlugins.find((plugin: KeepTrackPlugin) => plugin.id === pluginName) as T;
     }
 
     return null;

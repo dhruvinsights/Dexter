@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Bliskie obiekty",
+      "title": "Wyszukiwanie bliskich obiektów",
+      "helpBody": "Wyszukiwanie bliskich obiektów znajduje satelity i odłamki w bliskiej odległości od siebie. Wykorzystuje dwufazowy algorytm przeszukiwania przestrzennego do identyfikacji obiektów w odległości 50 km od siebie, najpierw sprawdzając bieżące pozycje, a następnie weryfikując z prognozowanymi pozycjami 30 minut później.",
+      "findBtn": "Znajdź bliskie obiekty"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Constelaciones",
+      "title": "Men\u00fa de Constelaciones",
+      "helpBody": "El men\u00fa de Constelaciones te permite ver grupos de sat\u00e9lites. <br><br> Para algunas constelaciones, se dibujar\u00e1n enlaces ascendentes/descendentes y/o enlaces cruzados nocionales entre los sat\u00e9lites de la constelaci\u00f3n.",
+      "constellations": {
+        "SpaceStations": "Estaciones Espaciales",
+        "AmateurRadio": "Radio Amateur",
+        "GPSGroup": "Sat\u00e9lites GPS",
+        "GalileoGroup": "Sat\u00e9lites Galileo",
+        "GlonassGroup": "Sat\u00e9lites Glonass",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar y AEHF",
+        "wgs": "DSCS y WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Sat\u00e9lites",
+        "avgAltitude": "Alt Media",
+        "incRange": "Inc"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Nombre",
+        "inclination": "Inc",
+        "raan": "RAAN",
+        "perigee": "Perigeo",
+        "apogee": "Apogeo"
+      },
+      "filters": {
+        "incMin": "Inc M\u00edn (\u00B0)",
+        "incMax": "Inc M\u00e1x (\u00B0)",
+        "altMin": "Alt M\u00edn (km)",
+        "altMax": "Alt M\u00e1x (km)",
+        "raanMin": "RAAN M\u00edn (\u00B0)",
+        "raanMax": "RAAN M\u00e1x (\u00B0)",
+        "nameFilter": "Filtro de Nombre",
+        "apply": "Aplicar",
+        "reset": "Restablecer"
+      },
+      "commands": {
+        "category": "Constelaciones"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "No se ha seleccionado constelaci\u00f3n"
+      }
+    }
+  }
+}

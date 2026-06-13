@@ -4,7 +4,7 @@ import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import {
   IBottomIconConfig,
   IContextMenuConfig,
@@ -23,7 +23,7 @@ import planetPng from '@public/img/icons/planet.png';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 import './planets-menu.css';
 
-export class PlanetsMenuPlugin extends DexterPlugin {
+export class PlanetsMenuPlugin extends KeepTrackPlugin {
   readonly id = 'PlanetsMenuPlugin';
   dependencies_ = [];
 

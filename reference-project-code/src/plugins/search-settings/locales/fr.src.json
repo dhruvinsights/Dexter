@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "Paramètres de recherche",
+      "title": "Paramètres de recherche",
+      "labels": {
+        "maxResults": "Nombre maximum de résultats de recherche",
+        "showDecayed": "Afficher les satellites désintégrés"
+      },
+      "tooltips": {
+        "maxResults": "Nombre maximum de satellites à afficher dans la recherche",
+        "showDecayed": "Afficher les satellites désintégrés (position 0,0,0) dans les résultats de recherche"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "Valeur non valide pour le nombre maximum de résultats de recherche !"
+      }
+    }
+  }
+}

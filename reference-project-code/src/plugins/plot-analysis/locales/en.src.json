@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Inc vs Alt Plot",
+      "title": "Inclination to Altitude Plot Menu",
+      "helpBody": "The Inclination to Altitude Plot Menu is used to plot the satellite's inclination against its altitude.",
+      "labels": {
+        "totalLeoPayloads": "Total LEO Payloads"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Inc Vs Lon Plot",
+      "title": "Inclination to Longitude Plot Menu",
+      "helpBody": "The Inc Vs Lon Plot Menu is used for plotting the inclination vs longitude in the GEO belt.",
+      "labels": {
+        "totalGeoPayloads": "Total GEO Payloads"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Waterfall Plot",
+      "title": "Waterfall Plot Menu",
+      "helpBody": "The Time to Longitude (Waterfall) Plot displays GEO satellite longitude drift over time.",
+      "labels": {
+        "totalGeoPayloads": "Total GEO Payloads"
+      }
+    }
+  }
+}

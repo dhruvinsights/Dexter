@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "bottomIconLabel": "Réalisateur vidéo",
+      "title": "Menu Réalisateur vidéo",
+      "helpBody": "Le menu Réalisateur vidéo permet de manipuler la caméra et les objets de la scène pour créer une vidéo."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Najlepsze przeloty",
+      "title": "Czasy najlepszych przelotów",
+      "helpBody": "Wtyczka czasów najlepszych przelotów oblicza optymalne czasy przelotów satelitów na podstawie aktualnie wybranego czujnika. Przeloty są oceniane na podstawie czasu trwania, maksymalnej elewacji, minimalnego zasięgu i pozycji Słońca. Wyniki są eksportowane jako CSV.",
+      "satelliteNumbersLabel": "Numery satelitów",
+      "generateButton": "Generuj czasy najlepszych przelotów",
+      "selectSensorFirst": "Najpierw wybierz czujnik!",
+      "errorMsgs": {
+        "SensorRequired": "Najpierw musisz wybrać czujnik!",
+        "SensorFormatError": "Nieprawidłowy format czujnika. Czy najpierw wybrałeś czujnik?"
+      }
+    }
+  }
+}

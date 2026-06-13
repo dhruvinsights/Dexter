@@ -1,0 +1,97 @@
+#breakup-analysis-event-table {
+  line-height: 1.4;
+  font-size: 13px;
+}
+
+#breakup-analysis-event-table th {
+  text-decoration: underline;
+  padding: 4px 6px;
+}
+
+#breakup-analysis-event-table td {
+  padding: 4px 6px;
+}
+
+.breakup-analysis-event-row:hover {
+  background-color: var(--color-dark-border);
+}
+
+.breakup-info-card,
+.breakup-stats-card,
+.breakup-debris-card {
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid var(--color-dark-border);
+  border-radius: 4px;
+}
+
+.breakup-description {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 8px 0;
+  color: var(--color-dark-text-accent);
+}
+
+.breakup-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+}
+
+.breakup-info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.breakup-info-label {
+  font-size: 11px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.breakup-info-value {
+  font-size: 13px;
+}
+
+.breakup-dispersion-table {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+.breakup-dispersion-table th {
+  text-decoration: underline;
+  padding: 3px 4px;
+}
+
+.breakup-dispersion-table td {
+  padding: 3px 4px;
+}
+
+.breakup-debris-table-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.breakup-debris-table {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.breakup-debris-table th {
+  text-decoration: underline;
+  padding: 3px 4px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-dark-background);
+}
+
+.breakup-debris-table td {
+  padding: 3px 4px;
+}
+
+.breakup-analysis-debris-row:hover {
+  background-color: var(--color-dark-border);
+}

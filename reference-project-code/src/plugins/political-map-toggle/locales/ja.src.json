@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "PoliticalMapToggle": {
+      "bottomIconLabel": "\u653f\u6cbb\u5730\u56f3",
+      "commandPalette": {
+        "toggle": "\u653f\u6cbb\u7684\u5883\u754c\u7dda\u306e\u5207\u308a\u66ff\u3048"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Short Term Fence",
+      "title": "Short Term Fences (STF) Menu",
+      "helpBody": "The Short Term Fences (STF) Menu is used for visualizing sensor search boxes. <br><br> This is unlikely to be very helpful unless you own/operate a sensor with a search box functionality."
+    }
+  }
+}

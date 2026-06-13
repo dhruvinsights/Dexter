@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Sensores",
+      "title": "Menú de Lista de Sensores",
+      "helpBody": "El menú de Sensores te permite seleccionar un sensor para usar en cálculos y funciones de otros menús. Los sensores están agrupados según las redes que principalmente respaldan. En el lado izquierdo del menú está el nombre del sensor y en el lado derecho está el país/organización que lo posee. <br><br> Seleccionar una opción \"Todos...Sensores\" seleccionará todos los sensores en ese grupo. Esto es útil para visualizar la cobertura de las redes, pero actualmente no funciona para todos los cálculos. Si estás tratando de calcular ángulos de visión para una red, es mejor usar la herramienta de ángulos de visión multi-sitio o usar ángulos de visión para cada uno de los sensores individuales en la red. <br><br> Los sensores en esta lista incluyen Radares Mecánicos y de Array en Fase, además de sensores Ópticos: <ul style=\"margin-left: 40px;\"> <li> Los Radares de Array en Fase típicamente están limitados a la Órbita Terrestre Baja (LEO). </li> <li> Los Radares Mecánicos pueden usarse tanto para LEO como para la Órbita Geoestacionaria (GEO). </li> <li> Los sensores Ópticos se usan típicamente para GEO, pero también pueden usarse para LEO. </li> <li> Los sensores Ópticos están limitados a observaciones nocturnas en cielos despejados, mientras que los radares pueden usarse tanto de día como de noche. </li> </ul> <br> La información del sensor se basa en datos públicamente disponibles y puede verificarse en el menú de Información del Sensor. Si tienes datos públicos sobre sensores adicionales o correcciones a la información de sensores existentes, por favor contáctame en <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

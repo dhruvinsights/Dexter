@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "Stereografická mapa",
+      "title": "Menu stereografické mapy",
+      "helpBody": "Menu stereografické mapy slouží k vizualizaci pozemních stop satelitů ve stereografické projekci. <br/><br/> Kliknutím na místo podél pozemní stopy změníte čas simulace na okamžik, kdy satelit dosáhne daného místa. <br/><br/> Žluté body označují, kdy je satelit v zorném poli senzoru. Červené body označují, kdy satelit není v zorném poli senzoru. Bod nejblíže satelitu odpovídá aktuálnímu času.",
+      "labels": {
+        "orbitsToDisplay": "Počet orbit k zobrazení",
+        "showGraticule": "Zobrazit síť souřadnic",
+        "mapStyle": "Styl mapy",
+        "standard": "Standardní",
+        "political": "Politická",
+        "nightLights": "Noční světla"
+      }
+    }
+  }
+}

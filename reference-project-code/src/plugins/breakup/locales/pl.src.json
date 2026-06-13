@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "Breakup": {
+      "bottomIconLabel": "Utwórz rozpad",
+      "title": "Menu rozpadu",
+      "helpBody": "Menu rozpadu to narzędzie do symulacji rozpadu satelity. <br><br> Poprzez duplikowanie i modyfikowanie orbity satelity możemy modelować rozpad satelity. Po wybraniu satelity i otwarciu menu użytkownik może wybrać: <ul style=\"margin-left: 40px;\"> <li>Zmienność inklinacji</li> <li>Zmienność RAAN</li> <li>Zmienność okresu</li> <li>Liczbę fragmentów rozpadu</li> </ul> Im większa zmienność, tym większe rozproszenie w symulowanym rozpadzie. Domyślne wartości zmienności są wystarczające do symulacji rozpadu z rozsądnym rozproszeniem.",
+      "errorMsgs": {
+        "SatelliteNotFound": "Nie znaleziono satelity!",
+        "CannotCreateBreakupForNonCircularOrbits": "Nie można utworzyć rozpadu dla orbit niekołowych. Pracujemy nad poprawką.",
+        "CannotCalcDirectionOfSatellite": "Nie można obliczyć kierunku satelity. Spróbuj ponownie później.",
+        "ErrorCreatingBreakup": "Błąd tworzenia rozpadu!",
+        "InvalidStartNum": "Nieprawidłowy numer początkowy satelity! Ustawiono domyślnie na 90000!",
+        "BreakupGeneratorFailed": "Generator rozpadu nie powiódł się!"
+      }
+    }
+  }
+}

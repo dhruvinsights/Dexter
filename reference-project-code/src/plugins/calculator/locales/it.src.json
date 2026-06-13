@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Trasformazioni di riferimento",
+      "title": "Menu trasformazioni di riferimento",
+      "helpBody": "Il menu Trasformazioni di riferimento viene utilizzato per convertire tra diversi sistemi di riferimento. <br><br> Il menu consente di convertire tra i seguenti sistemi di riferimento: <ul style=\"margin-left: 40px;\"> <li> ECI - Earth Centered Inertial </li> <li> ECEF - Earth Centered Earth Fixed </li> <li> Geodetico </li> <li> Topocentrico </li> </ul>"
+    }
+  }
+}

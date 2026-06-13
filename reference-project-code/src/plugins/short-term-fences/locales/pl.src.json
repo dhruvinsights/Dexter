@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ShortTermFences": {
+      "bottomIconLabel": "Krótkoterminowe ogrodzenie",
+      "title": "Menu krótkoterminowych ogrodzeń (STF)",
+      "helpBody": "Menu krótkoterminowych ogrodzeń (STF) służy do wizualizacji obszarów przeszukiwania czujników. <br><br> Jest to mało przydatne, chyba że posiadasz/obsługujesz czujnik z funkcją obszaru przeszukiwania."
+    }
+  }
+}

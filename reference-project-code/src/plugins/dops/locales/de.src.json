@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "DOPs anzeigen",
+      "title": "Präzisionsverdünnungs-Menü",
+      "helpTitle": "Präzisionsverdünnungs-Menü (DOP)",
+      "helpBody": "Das Präzisionsverdünnungs-Menü (DOP) wird verwendet, um die Präzisionsverdünnung (DOP) für einen bestimmten Standort und eine Elevationsmaske zu berechnen.<br><br>HDOP ist die Horizontale Präzisionsverdünnung. Sie ist ein Maß für die Genauigkeit der horizontalen Position.<br><br>PDOP ist die Positions-Präzisionsverdünnung. Sie ist ein Maß für die Genauigkeit der Position.<br><br>GDOP ist die Geometrische Präzisionsverdünnung. Sie ist ein Maß für die Genauigkeit der Position.",
+      "labels": {
+        "dopTable": "DOP-Tabelle",
+        "latitude": "Breitengrad",
+        "longitude": "Längengrad",
+        "altitude": "Höhe",
+        "mask": "Maske",
+        "updateDopData": "DOP-Daten aktualisieren"
+      },
+      "tooltips": {
+        "latitude": "Breitengrad in Grad",
+        "longitude": "Längengrad in Grad",
+        "altitude": "Höhe in km",
+        "mask": "Minimale Elevation für GPS-Empfang"
+      },
+      "rmb": {
+        "dops": "DOPs",
+        "currentGpsDops": "Aktuelle GPS-DOPs",
+        "twentyFourHourGpsDops": "24-Stunden GPS-DOPs"
+      },
+      "toast": {
+        "dopValues": "HDOP-Wert: {hdop}<br/>VDOP-Wert: {vdop}<br/>PDOP-Wert: {pdop}<br/>GDOP-Wert: {gdop}<br/>TDOP-Wert: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Bitte wählen Sie einen gültigen Standort auf der Erde für 24-Stunden-DOPs!"
+      }
+    }
+  }
+}

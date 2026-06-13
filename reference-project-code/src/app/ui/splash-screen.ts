@@ -5,7 +5,6 @@ import { MobileManager } from './mobileManager';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { html } from '@app/engine/utils/development/formatter';
-import { settingsManager } from '@app/settings/settings';
 import logoPng from '@public/img/logo.png';
 import { wallpapers } from '@wallpapers';
 

@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "VideoDirectorPlugin": {
+      "bottomIconLabel": "비디오 디렉터",
+      "title": "비디오 디렉터 메뉴",
+      "helpBody": "비디오 디렉터 메뉴는 비디오를 만들기 위해 장면의 카메라와 객체를 조작하는 데 사용됩니다."
+    }
+  }
+}

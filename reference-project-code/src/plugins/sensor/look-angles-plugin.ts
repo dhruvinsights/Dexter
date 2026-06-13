@@ -15,19 +15,19 @@ import { saveXlsx } from '@app/engine/utils/saveVariable';
 import { showLoading } from '@app/engine/utils/showLoading';
 import { BaseObject, Satellite, SpaceObjectType } from '@ootk/src/main';
 import tableChartPng from '@public/img/icons/table-chart.png';
-import { ClickDragOptions, fileExcelPng, DexterPlugin } from '../../engine/plugins/base-plugin';
+import { ClickDragOptions, fileExcelPng, KeepTrackPlugin } from '../../engine/plugins/base-plugin';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 
 type LookAngleData = TearrData & { canStationObserve: boolean };
 
-export class LookAnglesPlugin extends DexterPlugin {
+export class LookAnglesPlugin extends KeepTrackPlugin {
   readonly id = 'LookAnglesPlugin';
   dependencies_ = [SelectSatManager.name];
   private readonly selectSatManager_: SelectSatManager;
 
   constructor() {
     super();
-    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in DexterPlugin constructor
+    this.selectSatManager_ = PluginRegistry.getPlugin(SelectSatManager) as unknown as SelectSatManager; // this will be validated in KeepTrackPlugin constructor
   }
 
   menuMode: MenuMode[] = [MenuMode.SENSORS, MenuMode.ALL];

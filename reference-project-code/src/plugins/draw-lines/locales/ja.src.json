@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "描画",
+        "eciAxes": "ECI 座標軸",
+        "xAxesGrid": "X 軸グリッド",
+        "yAxesGrid": "Y 軸グリッド",
+        "zAxesGrid": "Z 軸グリッド",
+        "xAxesRadialGrid": "X 軸放射グリッド",
+        "yAxesRadialGrid": "Y 軸放射グリッド",
+        "zAxesRadialGrid": "Z 軸放射グリッド",
+        "earthToSatellite": "地球から衛星",
+        "sensorToSatellite": "センサーから衛星",
+        "satelliteToSatellite": "衛星から衛星",
+        "satelliteToSun": "衛星から太陽",
+        "satelliteToMoon": "衛星から月",
+        "moonOrbit": "月の軌道を描画"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "衛星間ラインの主衛星が選択されていません。"
+      }
+    }
+  }
+}

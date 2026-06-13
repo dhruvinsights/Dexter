@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "搜索设置",
+      "title": "搜索设置",
+      "labels": {
+        "maxResults": "搜索最大结果数",
+        "showDecayed": "显示已陨落卫星"
+      },
+      "tooltips": {
+        "maxResults": "搜索中显示的最大卫星数量",
+        "showDecayed": "在搜索结果中显示已陨落卫星（位置 0,0,0）"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "搜索最大结果数值无效！"
+      }
+    }
+  }
+}

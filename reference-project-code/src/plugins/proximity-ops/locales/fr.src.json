@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Rendez-vous et opérations de proximité",
+      "title": "Rendez-vous et opérations de proximité (RPO)",
+      "titleSecondary": "Liste des opérations de proximité",
+      "helpBody": "Trouver les approches entre satellites. Configurez les paramètres de recherche incluant le seuil de distance, la vitesse relative et le type d'orbite (GEO/LEO). Supporte les modes de recherche par satellite individuel et tous contre tous.",
+      "noradId": "ID NORAD",
+      "maxDistThreshold": "Seuil de distance max (km)",
+      "maxRelativeVelocity": "Vitesse relative max (km/s)",
+      "searchDuration": "Durée de recherche (heures)",
+      "geoText": "Géostationnaire",
+      "leoText": "Orbite basse (LEO)",
+      "orbitType": "Type d'orbite",
+      "geoAllVsAll": "Géostationnaire tous vs tous",
+      "geoAllVsAllTooltip": "Chercher les RPO entre tous les satellites géostationnaires",
+      "comparePayloadsOnly": "Comparer uniquement les charges utiles",
+      "comparePayloadsOnlyTooltip": "Chercher uniquement les RPO entre charges utiles",
+      "ignoreVimpelRso": "Ignorer Vimpel RSO",
+      "ignoreVimpelRsoTooltip": "Ignorer les RSOs issus du catalogue Vimpel",
+      "submitButton": "Trouver RPOs \u25b6",
+      "noRposToDownload": "Aucun RPO à télécharger !",
+      "noRposFound": "Aucun RPO trouvé !",
+      "satNotFound": "Satellite avec ID NORAD {sccNum} non trouvé",
+      "geoOrbitsEcf": "Orbites GEO affichées en ECF",
+      "geoOrbitsEci": "Orbites GEO affichées en ECI",
+      "vimpelNotSupported": "Les satellites Vimpel ne sont pas pris en charge",
+      "table": {
+        "target": "Cible",
+        "targetName": "Nom de la cible",
+        "chaser": "Chasseur",
+        "chaserName": "Nom du chasseur",
+        "relDistance": "Dist. rel. [km]",
+        "relVelocity": "Vit. rel. [km/s]",
+        "date": "Date"
+      }
+    }
+  }
+}

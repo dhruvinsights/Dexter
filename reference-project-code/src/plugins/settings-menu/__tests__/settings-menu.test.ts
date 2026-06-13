@@ -30,7 +30,7 @@ describe('SettingsMenuPlugin', () => {
 
 describe('SettingsMenuPlugin_class', () => {
   beforeEach(() => {
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     setupStandardEnvironment();
   });
 
@@ -75,7 +75,7 @@ describe('SettingsMenuPlugin form handlers', () => {
   };
 
   beforeEach(() => {
-    Dexter.getInstance().containerRoot.innerHTML = '';
+    KeepTrack.getInstance().containerRoot.innerHTML = '';
     setupStandardEnvironment();
     plugin = new SettingsMenuPlugin();
     websiteInit(plugin);

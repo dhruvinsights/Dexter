@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "검색 설정",
+      "title": "검색 설정",
+      "labels": {
+        "maxResults": "검색 최대 결과 수",
+        "showDecayed": "소멸된 위성 표시"
+      },
+      "tooltips": {
+        "maxResults": "검색에 표시할 최대 위성 수",
+        "showDecayed": "검색 결과에 소멸된 위성(위치 0,0,0) 표시"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "검색 최대 결과 수 값이 유효하지 않습니다!"
+      }
+    }
+  }
+}

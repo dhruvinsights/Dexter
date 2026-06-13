@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "DopsPlugin": {
+      "bottomIconLabel": "Просмотр DOP",
+      "title": "Меню разбавления точности",
+      "helpTitle": "Меню разбавления точности (DOP)",
+      "helpBody": "Меню разбавления точности (DOP) используется для расчёта значений DOP для заданного местоположения и маски возвышения.<br><br>HDOP — горизонтальное разбавление точности. Это мера точности горизонтального положения.<br><br>PDOP — позиционное разбавление точности. Это мера точности положения.<br><br>GDOP — геометрическое разбавление точности. Это мера точности положения.",
+      "labels": {
+        "dopTable": "Таблица DOP",
+        "latitude": "Широта",
+        "longitude": "Долгота",
+        "altitude": "Высота",
+        "mask": "Маска",
+        "updateDopData": "Обновить данные DOP"
+      },
+      "tooltips": {
+        "latitude": "Широта в градусах",
+        "longitude": "Долгота в градусах",
+        "altitude": "Высота в км",
+        "mask": "Минимальная высота для приёма GPS"
+      },
+      "rmb": {
+        "dops": "DOP",
+        "currentGpsDops": "Текущие GPS DOP",
+        "twentyFourHourGpsDops": "GPS DOP за 24 часа"
+      },
+      "toast": {
+        "dopValues": "HDOP: {hdop}<br/>VDOP: {vdop}<br/>PDOP: {pdop}<br/>GDOP: {gdop}<br/>TDOP: {tdop}"
+      },
+      "errorMsgs": {
+        "invalidLocation": "Пожалуйста, выберите допустимое местоположение на Земле для 24-часовых DOP!"
+      }
+    }
+  }
+}

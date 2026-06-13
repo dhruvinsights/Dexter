@@ -4,7 +4,7 @@ import { PluginRegistry } from '@app/engine/core/plugin-registry';
 import { ServiceLocator } from '@app/engine/core/service-locator';
 import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { DexterPlugin } from '@app/engine/plugins/base-plugin';
+import { KeepTrackPlugin } from '@app/engine/plugins/base-plugin';
 import {
   IBottomIconConfig,
   ICommandPaletteCapable,
@@ -24,7 +24,7 @@ import { settingsManager } from '@app/settings/settings';
 import palettePng from '@public/img/icons/palette.png';
 import { SelectSatManager } from '../select-sat-manager/select-sat-manager';
 
-export class ColorMenu extends DexterPlugin implements ICommandPaletteCapable {
+export class ColorMenu extends KeepTrackPlugin implements ICommandPaletteCapable {
   readonly id = 'ColorMenu';
   dependencies_ = [];
 

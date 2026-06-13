@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "SatellitePhotos": {
+      "bottomIconLabel": "Satellite Imagery",
+      "title": "Satellite Imagery",
+      "helpBody": "The Satellite Imagery plugin displays the latest images from geostationary weather satellites and DSCOVR. Click a satellite name to view its most recent image.",
+      "defaultImageTitle": "Latest Satellite Image",
+      "errorMsgs": {
+        "FuturePictures": "Can't load images from the future. Loading most recent imagery."
+      }
+    }
+  }
+}

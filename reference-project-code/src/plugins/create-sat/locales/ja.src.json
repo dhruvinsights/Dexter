@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "CreateSat": {
+      "bottomIconLabel": "衛星を作成",
+      "title": "衛星を作成",
+      "helpBody": "衛星作成メニューでは、軌道要素を手動で入力するか、STKエフェメリスファイル (.e) をインポートして衛星を作成できます。<br><br><b>基本タブ</b>：遠地点、近地点、軌道傾斜角を入力して素早く衛星を作成します。<br><br><b>詳細タブ</b>：完全なケプラー要素（軌道傾斜角、昇交点赤経、離心率、近地点引数、平均近点角、平均運動）を入力します。<br><br><b>STK .eインポート</b>：STKエフェメリスファイルをメニューにドラッグ＆ドロップします。対応形式：EphemerisTimePosVel、EphemerisTimePos、EphemerisTimePosVelAcc（慣性座標系：J2000、ICRF、TEMEなど）。時刻形式はEpSecとUTCGに対応。キーワードは大文字小文字を区別しません。<br><br><b>非対応</b>：測地形式（LLA、LLR、MSL、Terrain）、非慣性座標系（Fixed、TrueOfDate）、共分散データには対応していません。",
+      "tabs": {
+        "basic": "基本",
+        "advanced": "詳細"
+      },
+      "labels": {
+        "noradId": "衛星NORAD ID (90000-99999)",
+        "satelliteName": "衛星名",
+        "inclinationDeg": "軌道傾斜角 (度)",
+        "apogeeAltKm": "遠地点高度 (km)",
+        "perigeeAltKm": "近地点高度 (km)",
+        "objectType": "物体タイプ",
+        "country": "国",
+        "epochYear": "元期年",
+        "epochDay": "元期日",
+        "inclination": "軌道傾斜角",
+        "rightAscension": "昇交点赤経",
+        "eccentricity": "離心率",
+        "argOfPerigee": "近地点引数",
+        "meanAnomaly": "平均近点角",
+        "meanMotion": "平均運動",
+        "period": "周期",
+        "dataSource": "データソース",
+        "calculatedParameters": "計算パラメータ",
+        "apogeeKm": "遠地点 (km)",
+        "perigeeKm": "近地点 (km)",
+        "smaKm": "軌道長半径 (km)",
+        "velocityKms": "軌道速度 (km/s)"
+      },
+      "buttons": {
+        "createSatellite": "衛星を作成",
+        "saveTle": "TLEを保存"
+      },
+      "options": {
+        "payload": "ペイロード",
+        "rocketBody": "ロケット本体",
+        "debris": "デブリ",
+        "special": "特殊",
+        "unknown": "不明"
+      },
+      "errorMsgs": {
+        "errorCreatingSat": "衛星の作成中にエラーが発生しました！",
+        "invalidNumericValues": "有効な数値を入力してください",
+        "perigeeTooLow": "近地点が低すぎます — 衛星は急速に減衰します",
+        "apogeeMustBeGtePerigee": "遠地点は近地点以上である必要があります",
+        "inclinationRange": "軌道傾斜角は0〜180度の範囲で入力してください",
+        "invalidInputParams": "入力パラメータが無効です",
+        "invalidSatObject": "無効な衛星オブジェクトです",
+        "propagationFailed": "衛星の軌道伝播に失敗しました。別のパラメータを試すか、パラメータが正しい場合はこの問題を報告してください。",
+        "noValidTle": "エクスポート可能な有効なTLEがありません",
+        "exportFailed": "TLEのエクスポートに失敗しました",
+        "invalidNoradId": "無効なNORAD IDです。90000〜99999の5桁の数字を入力してください。",
+        "invalidType": "無効なタイプです。1（ペイロード）、2（ロケット本体）、3（デブリ）、または4（特殊）を指定してください。",
+        "invalidCountry": "無効な国です。リストから選択してください。",
+        "invalidEpochYear": "無効な元期年です。2桁の数字を入力してください。",
+        "invalidEpochDay": "無効な元期日です。NNN.NNNNNNNN形式で入力してください（例：001.00000000）。",
+        "invalidInclination": "無効な軌道傾斜角です。NNN.NNNN形式で入力してください（例：000.0000）。",
+        "invalidRasc": "無効な昇交点赤経です。NNN.NNNN形式で入力してください（例：000.0000）。",
+        "invalidEccentricity": "無効な離心率です。7桁の数字を入力してください（例：0000000）。",
+        "invalidArgPe": "無効な近地点引数です。NNN.NNNN形式で入力してください（例：000.0000）。",
+        "invalidMeanAnomaly": "無効な平均近点角です。NNN.NNNN形式で入力してください（例：000.0000）。",
+        "invalidMeanMotion": "無効な平均運動です。NN.NNNNN形式で入力してください（例：16.00000）。",
+        "invalidPeriod": "無効な周期です。NN.NNNN〜NNNN.NNNN形式（例：90.0000、9999.9999）で合計8桁の数字を入力してください。",
+        "invalidSource": "無効なソースです。空にすることはできません。",
+        "invalidName": "無効な名前です。空にすることはできません。"
+      },
+      "successMsgs": {
+        "satCreated": "衛星 {name} ({scc}) が正常に作成されました",
+        "tleExported": "TLEが正常にエクスポートされました"
+      }
+    }
+  }
+}

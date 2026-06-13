@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "TransponderChannelData": {
+      "bottomIconLabel": "Informations transpondeur et canal",
+      "title": "Fréquences satellite",
+      "helpBody": "<p>Ce plugin affiche les informations de fréquence des transpondeurs et des canaux pour les satellites TV géostationnaires. Sélectionnez un satellite avec des données de canal connues et ouvrez ce panneau pour voir ses fréquences de diffusion, canaux, couverture de faisceau et détails de chiffrement.</p><p>Utilisez le bouton de téléchargement dans la barre de titre pour exporter les données de canal en fichier CSV.</p>",
+      "errorMsgs": {
+        "NoChannelInfo": "Le satellite n'a pas d'informations de canal",
+        "NotSatellite": "L'objet sélectionné n'est pas un satellite",
+        "FetchFailed": "Impossible de récupérer les informations de canal pour {name} et {altName}",
+        "NoData": "Aucune donnée de canal disponible"
+      }
+    }
+  }
+}

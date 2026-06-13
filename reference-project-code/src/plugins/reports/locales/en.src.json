@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "Reports",
+      "title": "Reports Menu",
+      "helpBody": "The Reports Menu is a collection of tools to help you analyze and understand the data you are viewing."
+    }
+  }
+}

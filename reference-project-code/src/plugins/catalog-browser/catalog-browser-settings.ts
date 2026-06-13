@@ -1,8 +1,11 @@
-/**
- * Stub for the OSS build — the full Catalog Browser plugin is a Pro feature.
- * Kept so the settings type reference in keeptrack-plugins-configuration.ts resolves.
- */
-export interface CatalogBrowserConfiguration {
-  enabled?: boolean;
-  [key: string]: unknown;
+// Ensure imports are type only to avoid circular dependencies
+import type { PluginConfiguration } from '../keeptrack-plugins-configuration';
+
+export interface CatalogBrowserConfiguration extends PluginConfiguration {
+  hideKeepTrackCatalogs: boolean;
 }
+
+export const catalogBrowserConfigurationDefaults: CatalogBrowserConfiguration = {
+  enabled: true,
+  hideKeepTrackCatalogs: false,
+};

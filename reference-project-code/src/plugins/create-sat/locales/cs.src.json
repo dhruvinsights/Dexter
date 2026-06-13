@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "CreateSat": {
+      "bottomIconLabel": "Vytvořit satelit",
+      "title": "Vytvořit satelit",
+      "helpBody": "Menu Vytvořit satelit umožňuje vytvořit satelit zadáním orbitálních elementů ručně nebo importem souboru efemerid STK (.e).<br><br><b>Základní karta</b>: Zadejte apogeum, perigeum a inklinaci pro rychlé vytvoření satelitu.<br><br><b>Pokročilá karta</b>: Zadejte úplné Keplerovské elementy (inklinace, RAAN, excentricita, argument perigea, střední anomálie, střední pohyb).<br><br><b>Import STK .e</b>: Přetáhněte soubor efemerid STK do menu. Podporované formáty: EphemerisTimePosVel, EphemerisTimePos a EphemerisTimePosVelAcc v inerciálních souřadnicových systémech (J2000, ICRF, TEME atd.). Jsou podporovány časové formáty EpSec a UTCG. Klíčová slova nerozlišují velká a malá písmena.<br><br><b>Nepodporováno</b>: Geodetické formáty (LLA, LLR, MSL, Terrain), neinerciální soustavy (Fixed, TrueOfDate) a kovarianční data nejsou podporovány.",
+      "tabs": {
+        "basic": "Základní",
+        "advanced": "Pokročilé"
+      },
+      "labels": {
+        "noradId": "NORAD ID satelitu (90000-99999)",
+        "satelliteName": "Název satelitu",
+        "inclinationDeg": "Inklinace (stupně)",
+        "apogeeAltKm": "Výška apogea (km)",
+        "perigeeAltKm": "Výška perigea (km)",
+        "objectType": "Typ objektu",
+        "country": "Země",
+        "epochYear": "Rok epochy",
+        "epochDay": "Den epochy",
+        "inclination": "Inklinace",
+        "rightAscension": "Rektascenze",
+        "eccentricity": "Excentricita",
+        "argOfPerigee": "Argument perigea",
+        "meanAnomaly": "Střední anomálie",
+        "meanMotion": "Střední pohyb",
+        "period": "Perioda",
+        "dataSource": "Zdroj dat",
+        "calculatedParameters": "Vypočtené parametry",
+        "apogeeKm": "Apogeum (km)",
+        "perigeeKm": "Perigeum (km)",
+        "smaKm": "Hlavní poloosa (km)",
+        "velocityKms": "Orbitální rychlost (km/s)"
+      },
+      "buttons": {
+        "createSatellite": "Vytvořit satelit",
+        "saveTle": "Uložit TLE"
+      },
+      "options": {
+        "payload": "Užitečné zatížení",
+        "rocketBody": "Těleso rakety",
+        "debris": "Trosky",
+        "special": "Speciální",
+        "unknown": "Neznámý"
+      },
+      "errorMsgs": {
+        "errorCreatingSat": "Chyba při vytváření satelitu!",
+        "invalidNumericValues": "Zadejte prosím platné číselné hodnoty",
+        "perigeeTooLow": "Perigeum je příliš nízké – satelit by rychle zanikl",
+        "apogeeMustBeGtePerigee": "Apogeum musí být >= perigeum",
+        "inclinationRange": "Inklinace musí být mezi 0 a 180 stupni",
+        "invalidInputParams": "Neplatné vstupní parametry",
+        "invalidSatObject": "Neplatný objekt satelitu",
+        "propagationFailed": "Nepodařilo se propagovat satelit. Zkuste jiné parametry nebo nahlaste tento problém, pokud jsou parametry správné.",
+        "noValidTle": "Žádné platné TLE k exportu",
+        "exportFailed": "Nepodařilo se exportovat TLE",
+        "invalidNoradId": "Neplatné NORAD ID. Musí to být 5místné číslo mezi 90000 a 99999.",
+        "invalidType": "Neplatný typ. Musí být 1 (Užitečné zatížení), 2 (Těleso rakety), 3 (Trosky) nebo 4 (Speciální).",
+        "invalidCountry": "Neplatná země. Musí být vybrána ze seznamu.",
+        "invalidEpochYear": "Neplatný rok epochy. Musí to být 2místné číslo.",
+        "invalidEpochDay": "Neplatný den epochy. Musí být ve formátu NNN.NNNNNNNN (např. 001.00000000).",
+        "invalidInclination": "Neplatná inklinace. Musí být ve formátu NNN.NNNN (např. 000.0000).",
+        "invalidRasc": "Neplatná rektascenze. Musí být ve formátu NNN.NNNN (např. 000.0000).",
+        "invalidEccentricity": "Neplatná excentricita. Musí to být 7místné číslo (např. 0000000).",
+        "invalidArgPe": "Neplatný argument perigea. Musí být ve formátu NNN.NNNN (např. 000.0000).",
+        "invalidMeanAnomaly": "Neplatná střední anomálie. Musí být ve formátu NNN.NNNN (např. 000.0000).",
+        "invalidMeanMotion": "Neplatný střední pohyb. Musí být ve formátu NN.NNNNN (např. 16.00000).",
+        "invalidPeriod": "Neplatná perioda. Musí být ve formátu NN.NNNN až NNNN.NNNN (např. 90.0000, 9999.9999) s celkem 8 číslicemi.",
+        "invalidSource": "Neplatný zdroj. Nesmí být prázdný.",
+        "invalidName": "Neplatný název. Nesmí být prázdný."
+      },
+      "successMsgs": {
+        "satCreated": "Satelit {name} ({scc}) byl úspěšně vytvořen",
+        "tleExported": "TLE bylo úspěšně exportováno"
+      }
+    }
+  }
+}

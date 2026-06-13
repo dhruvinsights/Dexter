@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Konstelacje",
+      "title": "Menu konstelacji",
+      "helpBody": "Menu konstelacji umożliwia przeglądanie grup satelitów. <br><br> Dla niektórych konstelacji rysowane są schematyczne łącza uplink/downlink i/lub łącza krzyżowe między satelitami w konstelacji.",
+      "constellations": {
+        "SpaceStations": "Stacje kosmiczne",
+        "AmateurRadio": "Radio amatorskie",
+        "GPSGroup": "Satelity GPS",
+        "GalileoGroup": "Satelity Galileo",
+        "GlonassGroup": "Satelity GLONASS",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar i AEHF",
+        "wgs": "DSCS i WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Satelity",
+        "avgAltitude": "Śr. wys.",
+        "incRange": "Inkl."
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Nazwa",
+        "inclination": "Inkl.",
+        "raan": "RAAN",
+        "perigee": "Perygeum",
+        "apogee": "Apogeum"
+      },
+      "filters": {
+        "incMin": "Inkl. min (°)",
+        "incMax": "Inkl. maks (°)",
+        "altMin": "Wys. min (km)",
+        "altMax": "Wys. maks (km)",
+        "raanMin": "RAAN min (°)",
+        "raanMax": "RAAN maks (°)",
+        "nameFilter": "Filtr nazwy",
+        "apply": "Zastosuj",
+        "reset": "Resetuj"
+      },
+      "commands": {
+        "category": "Konstelacje"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "Nie wybrano konstelacji"
+      }
+    }
+  }
+}

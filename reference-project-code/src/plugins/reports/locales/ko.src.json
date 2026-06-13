@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ReportsPlugin": {
+      "bottomIconLabel": "보고서",
+      "title": "보고서 메뉴",
+      "helpBody": "보고서 메뉴는 보고 있는 데이터를 분석하고 이해하는 데 도움이 되는 도구 모음입니다."
+    }
+  }
+}

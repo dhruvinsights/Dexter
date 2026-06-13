@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Analyse de Fragmentation",
+      "title": "Analyse de Fragmentation",
+      "helpBody": "Le plugin d'Analyse de Fragmentation fournit une base de données des principaux événements de fragmentation de satellites dans l'histoire. Sélectionnez un événement pour voir des informations détaillées, y compris l'objet parent, la cause de la fragmentation, la chronologie du lancement à la fragmentation et l'analyse de la dispersion des fragments. Le plugin recherche dans le catalogue actuel les débris suivis correspondant à chaque événement et affiche des analyses statistiques des plages d'altitude, d'excentricité et des distributions d'inclinaison."
+    }
+  }
+}

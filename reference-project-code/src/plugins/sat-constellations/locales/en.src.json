@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "SatConstellations": {
+      "bottomIconLabel": "Constellations",
+      "title": "Constellations Menu",
+      "helpBody": "The Constellations menu allows you to view groups of satellites. <br><br> For some constellations, notional uplink/downlinks and/or crosslinks will be drawn between satellites in the constellation.",
+      "constellations": {
+        "SpaceStations": "Space Stations",
+        "AmateurRadio": "Amateur Radio",
+        "GPSGroup": "GPS Satellites",
+        "GalileoGroup": "Galileo Satellites",
+        "GlonassGroup": "Glonass Satellites",
+        "iridium": "Iridium",
+        "orbcomm": "Orbcomm",
+        "globalstar": "Globalstar",
+        "ses": "SES",
+        "aehf": "Milstar and AEHF",
+        "wgs": "DSCS and WGS",
+        "starlink": "Starlink",
+        "sbirs": "SBIRS"
+      },
+      "stats": {
+        "satellites": "Satellites",
+        "avgAltitude": "Avg Alt",
+        "incRange": "Inc"
+      },
+      "table": {
+        "norad": "NORAD",
+        "name": "Name",
+        "inclination": "Inc",
+        "raan": "RAAN",
+        "perigee": "Perigee",
+        "apogee": "Apogee"
+      },
+      "filters": {
+        "incMin": "Min Inc (\u00B0)",
+        "incMax": "Max Inc (\u00B0)",
+        "altMin": "Min Alt (km)",
+        "altMax": "Max Alt (km)",
+        "raanMin": "Min RAAN (\u00B0)",
+        "raanMax": "Max RAAN (\u00B0)",
+        "nameFilter": "Name Filter",
+        "apply": "Apply",
+        "reset": "Reset"
+      },
+      "commands": {
+        "category": "Constellations"
+      },
+      "errorMsgs": {
+        "NoConstellationSelected": "No constellation selected"
+      }
+    }
+  }
+}

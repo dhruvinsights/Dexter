@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "BreakupAnalysis": {
+      "bottomIconLabel": "Analýza rozpadu",
+      "title": "Analýza rozpadu",
+      "helpBody": "Plugin Analýza rozpadu poskytuje databázi hlavních událostí rozpadu satelitů v historii. Vyberte událost pro zobrazení podrobných informací včetně mateřského objektu, příčiny rozpadu, časové osy od startu po rozpad a analýzy rozptylu úlomků. Plugin prohledává aktuální katalog sledovaných úlomků odpovídajících každé události a zobrazuje statistickou analýzu rozsahů výšek, excentricity a distribuce sklonu."
+    }
+  }
+}

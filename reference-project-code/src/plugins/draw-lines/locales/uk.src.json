@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Малювати",
+        "eciAxes": "Осі ECI",
+        "xAxesGrid": "Сітка осей X",
+        "yAxesGrid": "Сітка осей Y",
+        "zAxesGrid": "Сітка осей Z",
+        "xAxesRadialGrid": "Радіальна сітка осей X",
+        "yAxesRadialGrid": "Радіальна сітка осей Y",
+        "zAxesRadialGrid": "Радіальна сітка осей Z",
+        "earthToSatellite": "Земля до супутника",
+        "sensorToSatellite": "Датчик до супутника",
+        "satelliteToSatellite": "Супутник до супутника",
+        "satelliteToSun": "Супутник до Сонця",
+        "satelliteToMoon": "Супутник до Місяця",
+        "moonOrbit": "Намалювати орбіту Місяця"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "Не вибрано основний супутник для лінії між супутниками."
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "plugins": {
+    "DebrisScreening": {
+      "bottomIconLabel": "Przegląd odłamków",
+      "title": "Przegląd odłamków",
+      "helpBody": "Narzędzie Przegląd odłamków analizuje wybrany satelitę względem katalogu w celu identyfikacji potencjalnych zbliżeń. <br><br> Skonfiguruj okno czasowe analizy i kliknij \u201EPrzeglądaj odłamki\u201C, aby uruchomić analizę. Wyniki zostaną wyświetlone w tabeli pokazującej: <ul style=\"margin-left: 40px;\"> <li><b>TCA</b> - Czas najbliższego zbliżenia</li> <li><b>Odległość minięcia</b> - Całkowita oraz składowe RIC (radialna, wzdłużna, poprzeczna)</li> <li><b>Pc</b> - Prawdopodobieństwo kolizji</li> <li><b>Poziom ryzyka</b> - Krytyczny/Wysoki/Średni/Niski na podstawie Pc</li> </ul> Kliknij dowolny identyfikator satelity, aby go wybrać. Eksportuj wyniki do CSV za pomocą przycisku pobierania.",
+      "resultsTitle": "Wyniki przeglądu",
+      "resultsCount": "Znaleziono {count} zbliżeń",
+      "exportCsv": "Eksportuj CSV",
+      "riskLevels": {
+        "critical": "Krytyczny",
+        "high": "Wysoki",
+        "medium": "Średni",
+        "low": "Niski",
+        "unknown": "N/D"
+      },
+      "uLabel": "U (radialna)",
+      "vLabel": "V (wzdłużna)",
+      "wLabel": "W (poprzeczna)",
+      "drawBox": "Rysuj ramkę",
+      "clearBox": "Wyczyść ramkę",
+      "errorMsgs": {
+        "InvalidSatellite": "Nieprawidłowy satelita",
+        "ScreeningFailed": "Przegląd nie powiódł się",
+        "NoResultsToExport": "Brak wyników do eksportu"
+      }
+    }
+  }
+}

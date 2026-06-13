@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Transformace souřadnicových soustav",
+      "title": "Menu transformace souřadnicových soustav",
+      "helpBody": "Menu transformace souřadnicových soustav slouží k převodu mezi různými souřadnicovými soustavami. <br><br> Menu umožňuje převod mezi následujícími souřadnicovými soustavami: <ul style=\"margin-left: 40px;\"> <li> ECI - Earth Centered Inertial </li> <li> ECEF - Earth Centered Earth Fixed </li> <li> Geodetická </li> <li> Topocentrická </li> </ul>"
+    }
+  }
+}

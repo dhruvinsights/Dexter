@@ -1,36 +1,39 @@
 /**
- * Dexter - Main Entry Point
- * Orbital Visualization Engine for Orbital Sentinel
+ *!
+ * /////////////////////////////////////////////////////////////////////////////
+ *
+ * https://keeptrack.space
+ *
+ * @Copyright (C) 2025 Kruczek Labs LLC
+ *
+ * KeepTrack is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * KeepTrack is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * KeepTrack. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * /////////////////////////////////////////////////////////////////////////////
  */
 
-import { Dexter } from './index';
+import { KeepTrack } from './keeptrack';
+import { registerServiceWorker } from './pwa/service-worker-registration';
 
-// Initialize Dexter when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initDexter);
-} else {
-  initDexter();
-}
+const keepTrackInstance = KeepTrack.getInstance();
 
-async function initDexter() {
-  try {
-    const dexter = Dexter.getInstance();
-    dexter.init({
-      isPreventDefaultHtml: false,
-      isShowSplashScreen: true,
-    });
+// Load the main website class
+keepTrackInstance.init(window.settingsOverride);
 
-    await dexter.run();
+// Expose to window for debugging
+window.keepTrack = keepTrackInstance;
 
-    console.log('🚀 Dexter initialized successfully');
-  } catch (error) {
-    console.error('❌ Failed to initialize Dexter:', error);
-  }
-}
+// Initialize the website
+KeepTrack.initCss().then(() => {
+  keepTrackInstance.run();
+});
 
-// Make Dexter available globally for debugging
-if (typeof window !== 'undefined') {
-  (window as any).Dexter = Dexter;
-}
-
-// Made with Bob
+registerServiceWorker();

@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "傾斜角-高度プロット",
+      "title": "傾斜角-高度プロットメニュー",
+      "helpBody": "傾斜角-高度プロットメニューは、衛星の傾斜角を高度に対してプロットするために使用されます。",
+      "labels": {
+        "totalLeoPayloads": "LEOペイロード合計"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "傾斜角-経度プロット",
+      "title": "傾斜角-経度プロットメニュー",
+      "helpBody": "傾斜角-経度プロットメニューは、GEOベルトにおける傾斜角と経度の関係をプロットするために使用されます。",
+      "labels": {
+        "totalGeoPayloads": "GEOペイロード合計"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "ウォーターフォールプロット",
+      "title": "ウォーターフォールプロットメニュー",
+      "helpBody": "時間-経度（ウォーターフォール）プロットは、GEO衛星の経度ドリフトを時間経過で表示します。",
+      "labels": {
+        "totalGeoPayloads": "GEOペイロード合計"
+      }
+    }
+  }
+}

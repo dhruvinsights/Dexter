@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "CloseObjectsPlugin": {
+      "bottomIconLabel": "Blízké objekty",
+      "title": "Hledání blízkých objektů",
+      "helpBody": "Hledání blízkých objektů nachází satelity a trosky v těsné blízkosti. Používá dvoufázový algoritmus prostorového vyhledávání k identifikaci objektů do vzdálenosti 50 km od sebe, nejprve kontroluje aktuální polohy a poté ověřuje s předpokládanými polohami o 30 minut později.",
+      "findBtn": "Najít blízké objekty"
+    }
+  }
+}

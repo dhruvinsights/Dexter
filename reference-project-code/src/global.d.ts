@@ -1,4 +1,4 @@
-import { Dexter } from './keeptrack';
+import { KeepTrack } from './keeptrack';
 
 declare global {
   const __VERSION__: string;
@@ -7,7 +7,7 @@ declare global {
   const __IS_PRO__: boolean;
 
   interface Window {
-    keepTrack: Dexter;
+    keepTrack: KeepTrack;
     zaraz?: {
       consent?: {
         get: (key: string) => boolean;

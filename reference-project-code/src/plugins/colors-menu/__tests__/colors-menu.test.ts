@@ -216,7 +216,7 @@ describe('ColorMenu_class', () => {
       EventBus.getInstance().emit(EventBusEvent.uiManagerFinal);
 
       // Create a list of elements based on the li elements with data-color attributes
-      const elements = Array.from(Dexter.getInstance().containerRoot.querySelectorAll<HTMLElement>('li[data-color]'));
+      const elements = Array.from(KeepTrack.getInstance().containerRoot.querySelectorAll<HTMLElement>('li[data-color]'));
 
       // Click each element and make sure no errors are thrown
       elements.forEach((element) => {

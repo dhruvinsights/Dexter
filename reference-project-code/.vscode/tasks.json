@@ -1,0 +1,241 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "App: Start All",
+      "dependsOn": [
+        "App: Build and Serve",
+        "App: Open in Brave"
+      ],
+      "icon": {
+        "id": "server",
+        "color": "terminal.ansiCyan"
+      }
+    },
+    {
+      "label": "App: Build and Serve",
+      "dependsOn": [
+        "App: Build",
+        "App: Serve Server"
+      ],
+      "icon": {
+        "id": "server-environment",
+        "color": "terminal.ansiCyan"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "App: Update Translations",
+      "command": "npm run generate-t7e",
+      "type": "shell",
+      "args": [],
+      "isBackground": true,
+      "problemMatcher": [],
+      "icon": {
+        "id": "symbol-key",
+        "color": "terminal.ansiCyan"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true,
+        "group": "dev"
+      }
+    },
+    {
+      "label": "App: Build",
+      "command": "npm run build:watch",
+      "type": "shell",
+      "args": [],
+      "isBackground": true,
+      "problemMatcher": [],
+      "icon": {
+        "id": "package",
+        "color": "terminal.ansiCyan"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true,
+        "group": "dev"
+      }
+    },
+    {
+      "label": "App: Serve Server",
+      "command": "npm run start",
+      "type": "shell",
+      "args": [],
+      "isBackground": true,
+      "problemMatcher": [],
+      "icon": {
+        "id": "server-process",
+        "color": "terminal.ansiCyan"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true,
+        "group": "dev"
+      }
+    },
+    {
+      "label": "App: Open in Brave",
+      "type": "process",
+      "command": "",
+      "windows": {
+        "command": "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe",
+        "args": [
+          "http://localhost:5544"
+        ]
+      },
+      "icon": {
+        "id": "browser",
+        "color": "terminal.ansiCyan"
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "Github: KeepTrack.Space",
+      "type": "process",
+      "command": "",
+      "windows": {
+        "command": "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe",
+        "args": [
+          "https://github.com/thkruz/keeptrack.space"
+        ]
+      },
+      "icon": {
+        "id": "browser",
+        "color": "terminal.ansiRed"
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "never",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "Test with Jest",
+      "command": "npm test",
+      "type": "shell",
+      "args": [],
+      "icon": {
+        "id": "beaker",
+        "color": "terminal.ansiGreen"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Create Empty Test File",
+      "command": "npm run createtest",
+      "type": "shell",
+      "args": [],
+      "icon": {
+        "id": "repo-create",
+        "color": "terminal.ansiGreen"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Open Test Coverage",
+      "command": "npm run lcov",
+      "type": "shell",
+      "args": [],
+      "icon": {
+        "id": "file-code",
+        "color": "terminal.ansiGreen"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Generate Translation Keys",
+      "command": "npm run generate-t7e-keys",
+      "type": "shell",
+      "args": [],
+      "icon": {
+        "id": "symbol-key",
+        "color": "terminal.ansiGreen"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "prettier.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "steoates.autoimport",
+      "vivaxy.vscode-conventional-commits",
+      "usernamehw.errorlens",
+      "Orta.vscode-jest",
+      "firsttris.vscode-jest-runner",
+      "sburg.vscode-javascript-booster",
+      "VisualStudioExptTeam.vscodeintellicode",
+      "usernamehw.remove-empty-lines",
+      "aljazsim.tsco"
+    ]
+  },
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": [
+      ".vscode",
+      ".git",
+      "node_modules"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}

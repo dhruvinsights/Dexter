@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteFov": {
+      "bottomIconLabel": "衛星視野",
+      "title": "衛星視野",
+      "helpBody": "衛星視野プラグインでは、衛星の視野を制御できます。"
+    }
+  }
+}

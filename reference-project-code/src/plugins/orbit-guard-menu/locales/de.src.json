@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "OrbitGuard",
+      "title": "OrbitGuard",
+      "helpBody": "Das OrbitGuard-Anomalieerkennungsmenü zeigt die neuesten Manöver-, Orbit-außerhalb-der-Norm- und Stabilitätsänderungsereignisse für Satelliten an."
+    }
+  }
+}

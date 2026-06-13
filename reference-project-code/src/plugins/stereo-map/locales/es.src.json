@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "StereoMap": {
+      "bottomIconLabel": "Mapa Estéreo",
+      "title": "Menú de Mapa Estereográfico",
+      "helpBody": "El Menú de Mapa Estereográfico se usa para visualizar trazas terrestres de satélites en una proyección estereográfica. <br/><br/> Puedes hacer clic en un punto a lo largo de la traza terrestre para cambiar el tiempo de la simulación a cuando el satélite alcanza ese punto. <br/><br/> Los puntos amarillos indican cuándo el satélite está a la vista del sensor. Los puntos rojos indican cuándo el satélite no está a la vista del sensor. El punto más cercano al satélite es el tiempo actual.",
+      "labels": {
+        "orbitsToDisplay": "Órbitas a mostrar",
+        "showGraticule": "Mostrar retícula",
+        "mapStyle": "Estilo de mapa",
+        "standard": "Estándar",
+        "political": "Político",
+        "nightLights": "Luces nocturnas"
+      }
+    }
+  }
+}

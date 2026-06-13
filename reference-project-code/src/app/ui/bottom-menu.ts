@@ -6,7 +6,6 @@ import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { html } from '@app/engine/utils/development/formatter';
 import { errorManagerInstance } from '@app/engine/utils/errorManager';
 import { getEl, hideEl, showEl } from '@app/engine/utils/get-el';
-import { settingsManager } from '@app/settings/settings';
 import addSatellitePng from '@public/img/icons/add-satellite.png';
 import barChart4BarsPng from '@public/img/icons/bar-chart-4-bars.png';
 import buildCirclePng from '@public/img/icons/build-circle.png';

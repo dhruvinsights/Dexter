@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SatelliteTimeline": {
+      "bottomIconLabel": "Satelliten-Zeitachse",
+      "title": "Satelliten-Zeitachsen-Menü",
+      "helpBody": "Das Satelliten-Zeitachsen-Menü zeigt, wann ein einzelner Sensor Sichtbarkeit zu einer Liste von Satelliten hat. Die Zeitachse ist farbcodiert, um die Qualität des Durchgangs anzuzeigen. Rot ist ein schlechter Durchgang, Gelb ist ein durchschnittlicher Durchgang und Grün ist ein guter Durchgang. Klicken Sie auf einen Durchgang, um den Satelliten und die Zeit für diesen Durchgang zu ändern. <br><br> Die Zeitachse kann durch Ändern der Start- und Endzeit der Simulation modifiziert werden. Zusätzlich kann die Zeitachse durch Ändern der Längen- und Intervalloptionen modifiziert werden."
+    }
+  }
+}

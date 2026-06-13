@@ -16,9 +16,9 @@ import { PositionCruncherOutgoingMsg } from '@app/webworker/constants';
 import { Degrees, Kilometers, SpaceObjectType, ZoomValue } from '@ootk/src/main';
 import bookmarkRemovePng from '@public/img/icons/bookmark-remove.png';
 import sensorAddPng from '@public/img/icons/sensor-add.png';
-import { ClickDragOptions, DexterPlugin, SideMenuSettingsOptions } from '../../engine/plugins/base-plugin';
+import { ClickDragOptions, KeepTrackPlugin, SideMenuSettingsOptions } from '../../engine/plugins/base-plugin';
 
-export class CustomSensorPlugin extends DexterPlugin {
+export class CustomSensorPlugin extends KeepTrackPlugin {
   readonly id = 'CustomSensorPlugin';
   dependencies_ = [];
 

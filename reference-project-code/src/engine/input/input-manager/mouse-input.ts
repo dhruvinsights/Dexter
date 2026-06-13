@@ -8,7 +8,7 @@ import { EventBus } from '@app/engine/events/event-bus';
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
 import { UrlManager } from '@app/engine/input/url-manager';
 import { lineManagerInstance } from '@app/engine/rendering/line-manager';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { SelectSatManager } from '@app/plugins/select-sat-manager/select-sat-manager';
 import { TimeMachine } from '@app/plugins/time-machine/time-machine';
 import { Kilometers, eci2lla } from '@ootk/src/main';
@@ -38,8 +38,8 @@ export class MouseInput {
         }
       };
 
-      Dexter.getInstance().containerRoot.addEventListener('mousewheel', stopWheelZoom, { passive: false });
-      Dexter.getInstance().containerRoot.addEventListener('DOMMouseScroll', stopWheelZoom, { passive: false });
+      KeepTrack.getInstance().containerRoot.addEventListener('mousewheel', stopWheelZoom, { passive: false });
+      KeepTrack.getInstance().containerRoot.addEventListener('DOMMouseScroll', stopWheelZoom, { passive: false });
     }
 
     if (settingsManager.disableWindowScroll || settingsManager.disableNormalEvents) {
@@ -207,7 +207,7 @@ export class MouseInput {
 
   private canvasMouseMoveFire_(mainCameraInstance: Camera, evt: MouseEvent) {
     // Cache DOM lookups
-    const container = Dexter.getInstance().containerRoot;
+    const container = KeepTrack.getInstance().containerRoot;
     const offsetX = container.scrollLeft - window.scrollX + container.offsetLeft;
     const offsetY = container.scrollTop - window.scrollY + container.offsetTop;
 

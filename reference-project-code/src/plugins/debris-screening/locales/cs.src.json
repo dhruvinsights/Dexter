@@ -1,0 +1,29 @@
+{
+  "plugins": {
+    "DebrisScreening": {
+      "bottomIconLabel": "Screening trosek",
+      "title": "Screening trosek",
+      "helpBody": "Nástroj Screening trosek prověřuje vybraný satelit proti katalogu za účelem identifikace potenciálních konjunkcí. <br><br> Nastavte časové okno hodnocení a klikněte na 'Screening trosek' pro spuštění analýzy. Výsledky se zobrazí v tabulce obsahující: <ul style=\"margin-left: 40px;\"> <li><b>TCA</b> – Čas nejbližšího přiblížení</li> <li><b>Miss Distance</b> – Celková a RIC složky (radiální, podélná, příčná)</li> <li><b>Pc</b> – Pravděpodobnost kolize</li> <li><b>Úroveň rizika</b> – Kritická/Vysoká/Střední/Nízká na základě Pc</li> </ul> Kliknutím na ID satelitu jej vyberete. Exportujte výsledky do CSV pomocí tlačítka stažení.",
+      "resultsTitle": "Výsledky screeningu",
+      "resultsCount": "Nalezeno {count} konjunkcí",
+      "exportCsv": "Exportovat CSV",
+      "riskLevels": {
+        "critical": "Kritická",
+        "high": "Vysoká",
+        "medium": "Střední",
+        "low": "Nízká",
+        "unknown": "N/A"
+      },
+      "uLabel": "U (radiální)",
+      "vLabel": "V (podélná)",
+      "wLabel": "W (příčná)",
+      "drawBox": "Nakreslit rámeček",
+      "clearBox": "Vymazat rámeček",
+      "errorMsgs": {
+        "InvalidSatellite": "Vybrán neplatný satelit",
+        "ScreeningFailed": "Screening selhal",
+        "NoResultsToExport": "Žádné výsledky k exportu"
+      }
+    }
+  }
+}

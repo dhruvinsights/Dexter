@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "MissilePlugin": {
+      "bottomIconLabel": "Rakete",
+      "title": "Raketen-Menü",
+      "helpBody": "Das Raketen-Menü wird verwendet, um fiktive Raketenstarts zwischen Ländern zu generieren. <br><br> Bei U-Boot-gestützten Raketen ist der Startpunkt ein benutzerdefinierter Breiten- und Längengrad. Bei landgestützten Raketen ist der Startpunkt ein fester Breiten- und Längengrad, der auf öffentlich zugänglichen Berichten basiert. <br><br> Zusätzlich zu benutzerdefinierten Raketen sind einige vordefinierte Szenarien mit Hunderten von Raketen verfügbar. <br><br> Alle Raketenstarts sind fiktiv und sollen keine realen Ereignisse darstellen. Die Startflugbahnen basieren alle auf dem gleichen ballistischen Modell, verwenden aber unterschiedliche Mindest- und Höchstreichweiten."
+    }
+  }
+}

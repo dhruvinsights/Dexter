@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "OrbitGuardMenuPlugin": {
+      "bottomIconLabel": "OrbitGuard",
+      "title": "OrbitGuard",
+      "helpBody": "OrbitGuard 이상 탐지 메뉴는 위성의 최근 기동, 궤도 이탈 및 안정성 변화 이벤트를 표시합니다."
+    }
+  }
+}

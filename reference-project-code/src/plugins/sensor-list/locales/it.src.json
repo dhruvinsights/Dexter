@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Sensori",
+      "title": "Menu elenco sensori",
+      "helpBody": "Il menu Sensori consente di selezionare un sensore da utilizzare nei calcoli e nelle funzioni di altri menu. I sensori sono raggruppati in base alle reti che supportano principalmente. Sul lato sinistro del menu è presente il nome del sensore e sul lato destro il paese/organizzazione proprietario. <br><br> Selezionando l'opzione \"Tutti i...sensori\" verranno selezionati tutti i sensori di quel gruppo. Questo è utile per visualizzare la copertura delle reti, ma attualmente non funziona per tutti i calcoli. Se si desidera calcolare gli angoli di osservazione per una rete, è meglio utilizzare lo strumento di angoli di osservazione multi-sito o calcolare gli angoli di osservazione per ciascun singolo sensore nella rete. <br><br> I sensori in questo elenco includono radar meccanici e a scansione elettronica, oltre a sensori ottici: <ul style=\"margin-left: 40px;\"> <li> I radar a scansione elettronica sono generalmente limitati all'orbita terrestre bassa (LEO). </li> <li> I radar meccanici possono essere utilizzati sia per LEO che per l'orbita geostazionaria (GEO). </li> <li> I sensori ottici sono generalmente utilizzati per GEO, ma possono anche essere usati per LEO. </li> <li> I sensori ottici sono limitati alle osservazioni notturne con cieli sereni, mentre i radar possono essere utilizzati sia di giorno che di notte. </li> </ul> <br> Le informazioni sui sensori si basano su dati pubblicamente disponibili e possono essere verificate nel menu Info sensore. Se disponi di dati pubblici su sensori aggiuntivi o correzioni alle informazioni sui sensori esistenti, contattami all'indirizzo <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

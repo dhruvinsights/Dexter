@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "Reentries": {
+      "bottomIconLabel": "Rentrées",
+      "title": "Rentrées",
+      "helpBody": "Le menu des Rentrées comporte deux onglets : <br><br> <b>Messages TIP</b> affiche les prédictions récentes et à venir de rentrée de satellites du Commandement spatial américain. Cliquer sur une ligne sélectionnera le satellite et changera l'heure au moment de désintégration prévu. <br><br> <b>Analyse de Rentrée</b> affiche les objets triés par périgée le plus bas qui sont les plus susceptibles de rentrer dans l'atmosphère. Cliquez sur une ligne pour sélectionner le satellite.",
+      "dataSource": "Messages de Suivi et Prediction d'Impact (TIP) fournis par le Commandement spatial americain (USSPACECOM).",
+      "errorMsgs": {
+        "noTipData": "Aucune donnee TIP trouvee!",
+        "errorFetching": "Erreur lors de la recuperation des donnees de reentree!",
+        "errorProcessing": "Erreur lors du traitement des donnees de reentree!",
+        "satelliteDecayed": "Le satellite semble avoir brule!"
+      }
+    }
+  }
+}

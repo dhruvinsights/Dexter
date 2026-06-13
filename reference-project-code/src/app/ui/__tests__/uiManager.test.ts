@@ -18,7 +18,7 @@ describe('uiManager', () => {
 
   // Should process getsensorinfo
   it('process_getsensorinfo', () => {
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML = `
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML = `
     <div id="sensor-latitude"></div>
     <div id="sensor-longitude"></div>
     <div id="sensor-minazimuth"></div>
@@ -40,7 +40,7 @@ describe('uiManager', () => {
 
   // Should process updateSensorPosition
   it('process_updateSensorPosition', () => {
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML = `
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML = `
       <input id="cs-lat" />
       <input id="cs-lon" />
       <input id="cs-hei" />
@@ -76,7 +76,7 @@ describe('uiManager', () => {
     expect((<HTMLInputElement>getEl('cs-lon')).value).toBe('22');
     expect((<HTMLInputElement>getEl('cs-hei')).value).toBe('0.022');
 
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML = '<div id="search"></div>';
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML = '<div id="search"></div>';
     disableConsoleErrors();
     expect(() =>
       UiGeolocation.updateSensorPosition({
@@ -112,7 +112,7 @@ describe('uiManager', () => {
   // Should process footerToggle and hideUi
   it('process_footerToggle_hideUi', () => {
     setupMinimumHtml();
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML += `
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML += `
     <div id="sat-infobox"></div>
     <div id="nav-footer"></div>
     <div id="nav-footer-toggle"></div>
@@ -129,7 +129,7 @@ describe('uiManager', () => {
   // Should process initMenuController
   it('process_initMenuController', () => {
     setupStandardEnvironment();
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML += `
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML += `
     <div id="fullscreen-icon"></div>
     <div id="layers-menu-btn"></div>
     <div id="layers-hover-menu"></div>
@@ -161,7 +161,7 @@ describe('uiManager', () => {
   // Should process postStart
   it('process_postStart', () => {
     setupStandardEnvironment();
-    (Dexter.getInstance().containerRoot as HTMLDivElement).innerHTML += `
+    (KeepTrack.getInstance().containerRoot as HTMLDivElement).innerHTML += `
     <div id="editSat"></div>
     <div id="cs-geolocation"></div>
     <div id="es-ecen"></div>

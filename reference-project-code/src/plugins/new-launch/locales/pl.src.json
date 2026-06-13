@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Nowy start",
+      "title": "Menu nowego startu",
+      "helpBody": "Menu nowego startu służy do generowania hipotetycznych startów orbitalnych poprzez modyfikację istniejących satelitów o podobnych parametrach. <br><br> Po wybraniu satelity możesz wybrać miejsce startu oraz azymut północny/południowy. Wybrany satelita zostanie zmodyfikowany, aby dopasować go do miejsca startu. Zegar zostanie zmieniony na 00:00:00, aby reprezentować czas względny po starcie. Może to być pomocne przy obliczaniu zasięgu czujników względem czasu startu. Relacja obiektu z innymi obiektami orbitalnymi będzie nieprawidłowa."
+    }
+  }
+}

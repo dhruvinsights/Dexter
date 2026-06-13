@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "LaunchCalendar": {
+      "bottomIconLabel": "Kalendarz startów",
+      "title": "Kalendarz startów",
+      "helpBody": "Otwiera kalendarz startów ze strony Gunter's Space Page na bieżący rok. Zapewnia kompleksową listę startów orbitalnych, w tym daty, pojazdy, ładunki i miejsca startu.",
+      "commands": {
+        "open": "Otwórz kalendarz startów"
+      }
+    }
+  }
+}

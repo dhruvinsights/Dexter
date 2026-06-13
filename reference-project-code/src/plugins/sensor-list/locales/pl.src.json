@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Czujniki",
+      "title": "Menu listy czujników",
+      "helpBody": "Menu czujników umożliwia wybranie czujnika do wykorzystania w obliczeniach i funkcjach innych menu. Czujniki są pogrupowane według sieci, które głównie obsługują. Po lewej stronie menu znajduje się nazwa czujnika, a po prawej stronie kraj/organizacja, która jest jego właścicielem. <br><br> Wybranie opcji \"Wszystkie...czujniki\" spowoduje wybranie wszystkich czujników w danej grupie. Jest to przydatne do wizualizacji zasięgu sieci, ale obecnie nie działa dla wszystkich obliczeń. Jeśli próbujesz obliczyć kąty obserwacji dla sieci, najlepiej użyć narzędzia wielostanowiskowych kątów obserwacji lub obliczyć kąty obserwacji dla każdego z czujników w sieci osobno. <br><br> Czujniki na tej liście obejmują radary mechaniczne i z anteną fazowaną, a także czujniki optyczne: <ul style=\"margin-left: 40px;\"> <li> Radary z anteną fazowaną są zazwyczaj ograniczone do niskiej orbity околoziemskiej (LEO). </li> <li> Radary mechaniczne mogą być używane zarówno na LEO, jak i na orbicie geostacjonarnej (GEO). </li> <li> Czujniki optyczne są zazwyczaj używane na GEO, ale mogą być również używane na LEO. </li> <li> Czujniki optyczne są ograniczone do obserwacji nocnych przy bezchmurnym niebie, podczas gdy radary mogą być używane zarówno w dzień, jak i w nocy. </li> </ul> <br> Informacje o czujnikach oparte są na publicznie dostępnych danych i można je zweryfikować w menu informacji o czujniku. Jeśli posiadasz publiczne dane o dodatkowych czujnikach lub poprawki do istniejących informacji o czujnikach, skontaktuj się ze mną pod adresem <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

@@ -19,7 +19,7 @@
  */
 
 import { EventBusEvent } from '@app/engine/events/event-bus-events';
-import { Dexter } from '@app/keeptrack';
+import { KeepTrack } from '@app/keeptrack';
 import { EventBus } from '../events/event-bus';
 import { html } from './development/formatter';
 import { getEl } from './get-el';
@@ -46,7 +46,7 @@ export class AdviceManager {
       return;
     }
 
-    Dexter.getInstance().containerRoot?.insertAdjacentHTML(
+    KeepTrack.getInstance().containerRoot?.insertAdjacentHTML(
       'beforeend',
       html`
         <div id="help-outer-container" class="valign">

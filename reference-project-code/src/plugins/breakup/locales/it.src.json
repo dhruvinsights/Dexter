@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "Breakup": {
+      "bottomIconLabel": "Crea frammentazione",
+      "title": "Menu frammentazione",
+      "helpBody": "Il menu Frammentazione è uno strumento per simulare la frammentazione di un satellite. <br><br> Duplicando e modificando l'orbita di un satellite possiamo modellare la frammentazione di un satellite. Dopo aver selezionato un satellite e aperto il menu, l'utente può selezionare: <ul style=\"margin-left: 40px;\"> <li>Variazione di inclinazione</li> <li>Variazione di RAAN</li> <li>Variazione di periodo</li> <li>Numero di frammenti</li> </ul> Maggiore è la variazione, più ampia è la dispersione nella frammentazione simulata. Le variazioni predefinite sono sufficienti per simulare una frammentazione con una dispersione ragionevole.",
+      "errorMsgs": {
+        "SatelliteNotFound": "Satellite non trovato!",
+        "CannotCreateBreakupForNonCircularOrbits": "Impossibile creare una frammentazione per orbite non circolari. Correzione in corso.",
+        "CannotCalcDirectionOfSatellite": "Impossibile calcolare la direzione del satellite. Riprova più tardi.",
+        "ErrorCreatingBreakup": "Errore nella creazione della frammentazione!",
+        "InvalidStartNum": "Numero iniziale del satellite non valido! Impostazione predefinita a 90000!",
+        "BreakupGeneratorFailed": "Generatore di frammentazione fallito!"
+      }
+    }
+  }
+}

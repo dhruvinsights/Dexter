@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "BestPassPlugin": {
+      "bottomIconLabel": "Mejores pases",
+      "title": "Mejores tiempos de pase",
+      "helpBody": "El plugin de Mejores tiempos de pase calcula los tiempos \u00f3ptimos de paso de sat\u00e9lites seg\u00fan el sensor seleccionado actualmente. Los pases se eval\u00faan por duraci\u00f3n, elevaci\u00f3n m\u00e1xima, alcance m\u00ednimo y posici\u00f3n del sol. Los resultados se exportan como CSV.",
+      "satelliteNumbersLabel": "N\u00fameros de sat\u00e9lite",
+      "generateButton": "Generar mejores tiempos de pase",
+      "selectSensorFirst": "\u00a1Seleccione sensor primero!",
+      "errorMsgs": {
+        "SensorRequired": "\u00a1Debe seleccionar un sensor primero!",
+        "SensorFormatError": "Formato del sensor incorrecto. \u00bfSeleccion\u00f3 un sensor primero?"
+      }
+    }
+  }
+}

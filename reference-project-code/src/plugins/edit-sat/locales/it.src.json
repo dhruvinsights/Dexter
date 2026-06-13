@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "Modifica satellite",
+      "title": "Menu modifica satellite",
+      "helpBody": "Il menu Modifica satellite viene utilizzato per modificare i dati del satellite. <br><br> <ul> <li> SCC# satellite - Un numero univoco assegnato a ogni satellite dalla US Space Force. </li> <li> Anno epoca - L'anno dell'ultimo aggiornamento orbitale del satellite. </li> <li> Giorno epoca - Il giorno dell'anno dell'ultimo aggiornamento orbitale del satellite. </li> <li> Inclinazione - L'angolo tra il piano orbitale del satellite e il piano equatoriale. </li> <li> Ascensione retta - L'angolo tra il nodo ascendente e la posizione del satellite al momento dell'ultimo aggiornamento orbitale. </li> <li> Eccentricità - La misura in cui l'orbita del satellite devia da un cerchio perfetto. </li> <li> Argomento del perigeo - L'angolo tra il nodo ascendente e il punto più vicino del satellite alla Terra. </li> <li> Anomalia media - L'angolo tra la posizione del satellite al momento dell'ultimo aggiornamento orbitale e il punto più vicino del satellite alla Terra. </li> <li> Moto medio - La velocità con cui cambia l'anomalia media del satellite. </li> </ul>",
+      "labels": {
+        "scc": "SCC# satellite",
+        "country": "Paese",
+        "epochYear": "Anno epoca",
+        "epochDay": "Giorno epoca",
+        "inclination": "Inclinazione",
+        "rightAscension": "Ascensione retta",
+        "eccentricity": "Eccentricità",
+        "argOfPerigee": "Argomento del perigeo",
+        "meanAnomaly": "Anomalia media",
+        "meanMotion": "Moto medio",
+        "period": "Periodo",
+        "error": "Errore"
+      },
+      "buttons": {
+        "updateSatellite": "Aggiorna satellite",
+        "updateEpoch": "Aggiorna epoca a ora",
+        "saveTle": "Salva TLE",
+        "loadTle": "Carica TLE"
+      },
+      "contextMenu": {
+        "editSat": "Modifica sat",
+        "setPrimarySat": "Imposta come sat primario",
+        "setSecondarySat": "Imposta come sat secondario",
+        "editSatellite": "Modifica satellite"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "Errore durante la lettura del file!",
+        "satelliteNotFound": "Satellite {sccNum} non trovato!",
+        "failedToPropagate": "Impossibile propagare il satellite. Provare parametri diversi o segnalare il problema se si è certi che siano corretti.",
+        "cannotCalculateDirection": "Impossibile calcolare la direzione del satellite. Riprovare più tardi.",
+        "notRealSatellite": "Non è un satellite reale"
+      }
+    }
+  }
+}

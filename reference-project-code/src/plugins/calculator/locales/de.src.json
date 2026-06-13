@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "Calculator": {
+      "bottomIconLabel": "Referenzrahmen-Transformationen",
+      "title": "Referenzrahmen-Transformationen-Menü",
+      "helpBody": "Das Referenzrahmen-Transformationen-Menü wird verwendet, um zwischen verschiedenen Referenzrahmen zu konvertieren. <br><br> Das Menü ermöglicht es Ihnen, zwischen den folgenden Referenzrahmen zu konvertieren: <ul style=\"margin-left: 40px;\"> <li> ECI - Erdzentriert Inertial </li> <li> ECEF - Erdzentriert Erd-Fest </li> <li> Geodätisch </li> <li> Topozentrisch </li> </ul>"
+    }
+  }
+}

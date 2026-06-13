@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Polardiagramm",
+      "title": "Polardiagramm-Menü",
+      "helpBody": "Das Polardiagramm-Menü wird verwendet, um ein 2D-Polardiagramm des Azimuts und der Elevation des Satelliten im Zeitverlauf zu generieren."
+    }
+  }
+}

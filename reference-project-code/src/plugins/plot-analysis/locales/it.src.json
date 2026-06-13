@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "Inc2AltPlots": {
+      "bottomIconLabel": "Grafico Inc vs Alt",
+      "title": "Menu grafico inclinazione-altitudine",
+      "helpBody": "Il menu Grafico inclinazione-altitudine viene utilizzato per tracciare l'inclinazione del satellite rispetto alla sua altitudine.",
+      "labels": {
+        "totalLeoPayloads": "Totale carichi utili LEO"
+      }
+    },
+    "Inc2LonPlots": {
+      "bottomIconLabel": "Grafico Inc vs Lon",
+      "title": "Menu grafico inclinazione-longitudine",
+      "helpBody": "Il menu Grafico Inc vs Lon viene utilizzato per tracciare l'inclinazione rispetto alla longitudine nella fascia GEO.",
+      "labels": {
+        "totalGeoPayloads": "Totale carichi utili GEO"
+      }
+    },
+    "Time2LonPlots": {
+      "bottomIconLabel": "Grafico a cascata",
+      "title": "Menu grafico a cascata",
+      "helpBody": "Il grafico Tempo-Longitudine (a cascata) mostra la deriva in longitudine dei satelliti GEO nel tempo.",
+      "labels": {
+        "totalGeoPayloads": "Totale carichi utili GEO"
+      }
+    }
+  }
+}

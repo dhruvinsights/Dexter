@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "PoliticalMapToggle": {
+      "bottomIconLabel": "Carte politique",
+      "commandPalette": {
+        "toggle": "Basculer les frontieres politiques"
+      }
+    }
+  }
+}

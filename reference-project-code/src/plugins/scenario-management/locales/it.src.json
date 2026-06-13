@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "ScenarioManagementMenu": {
+      "title": "Gestione scenari",
+      "bottomIconLabel": "Gestione scenari",
+      "helpBody": "Il plugin di gestione scenari consente di organizzare il lavoro per diversi progetti o contesti.<br/>Le funzionalità attuali sono:<br/><br/>  - Nome e descrizione per ogni scenario<br/>  - Data/ora di inizio e fine del periodo di analisi<br/>  - Salva/Carica scenari<br/><br/>L'obiettivo è fornire eventualmente un singolo file che contenga tutte le informazioni necessarie per la gestione degli scenari. Altre funzionalità in arrivo!"
+    }
+  }
+}

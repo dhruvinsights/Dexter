@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "PolarPlotPlugin": {
+      "bottomIconLabel": "Polar Plot",
+      "title": "Polar Plot Menu",
+      "helpBody": "The Polar Plot Menu is used to generate a 2D polar plot of the satellite's azimuth and elevation over time."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "ランデブー・近接運用",
+      "title": "ランデブー・近接運用（RPO）",
+      "titleSecondary": "ランデブー・近接運用リスト",
+      "helpBody": "衛星間の今後の接近を検索します。距離閾値、相対速度、軌道タイプ（GEO/LEO）などの検索パラメータを設定できます。単一衛星検索と全対全検索モードをサポートしています。",
+      "noradId": "NORAD ID",
+      "maxDistThreshold": "最大距離閾値（km）",
+      "maxRelativeVelocity": "最大相対速度（km/s）",
+      "searchDuration": "検索期間（時間）",
+      "geoText": "静止軌道",
+      "leoText": "低軌道",
+      "orbitType": "軌道タイプ",
+      "geoAllVsAll": "静止軌道 全て対全て",
+      "geoAllVsAllTooltip": "全ての静止軌道衛星間でRPOを検索",
+      "comparePayloadsOnly": "ペイロードのみ比較",
+      "comparePayloadsOnlyTooltip": "ペイロード間のみRPOを検索",
+      "ignoreVimpelRso": "Vimpel RSOを無視",
+      "ignoreVimpelRsoTooltip": "Vimpelカタログ由来のRSOを無視",
+      "submitButton": "RPOを検索 \u25b6",
+      "noRposToDownload": "ダウンロードするRPOがありません！",
+      "noRposFound": "RPOが見つかりませんでした！",
+      "satNotFound": "NORAD ID {sccNum} の衛星が見つかりません",
+      "geoOrbitsEcf": "GEO軌道をECFで表示",
+      "geoOrbitsEci": "GEO軌道をECIで表示",
+      "vimpelNotSupported": "Vimpel衛星はサポートされていません",
+      "table": {
+        "target": "ターゲット",
+        "targetName": "ターゲット名",
+        "chaser": "チェイサー",
+        "chaserName": "チェイサー名",
+        "relDistance": "相対距離 [km]",
+        "relVelocity": "相対速度 [km/s]",
+        "date": "日付"
+      }
+    }
+  }
+}

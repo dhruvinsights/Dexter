@@ -67,7 +67,7 @@ import { DISTANCE_TO_SUN } from '../../engine/utils/constants';
 import { errorManagerInstance } from '../../engine/utils/errorManager';
 import { jday, lon2yaw } from '../../engine/utils/transforms';
 
-if (typeof global === 'undefined') {
+if (!global) {
   window._numeric = numeric; // numeric will break if it is not available globally
 }
 

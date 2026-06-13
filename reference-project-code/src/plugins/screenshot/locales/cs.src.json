@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "Screenshot": {
+      "bottomIconLabel": "Pořídit snímek",
+      "rmbMenu": {
+        "title": "Uložit obrázek",
+        "hd": "HD (1920 x 1080)",
+        "fourK": "4K (3840 x 2160)",
+        "eightK": "8K (7680 x 4320)"
+      },
+      "commands": {
+        "take4k": "Snímek obrazovky (4K)",
+        "takeHd": "Snímek obrazovky (HD)",
+        "take8k": "Snímek obrazovky (8K)"
+      }
+    }
+  }
+}

@@ -11,10 +11,6 @@ import { MarkerMode, PosCruncherMsgType } from '@app/webworker/position-cruncher
 export class SatCruncherThreadManager extends WebWorkerThreadManager {
   readonly WEB_WORKER_CODE: string = 'js/positionCruncher.js';
 
-  protected getWorkerUrl(): URL {
-    return new URL('../../webworker/positionCruncher.ts', import.meta.url);
-  }
-
   private currentSeqNum_ = 0;
 
   // ─── Typed Send Methods ─────────────────────────────────────────────

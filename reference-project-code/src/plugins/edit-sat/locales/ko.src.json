@@ -1,0 +1,42 @@
+{
+  "plugins": {
+    "EditSat": {
+      "bottomIconLabel": "위성 편집",
+      "title": "위성 편집 메뉴",
+      "helpBody": "위성 편집 메뉴는 위성 데이터를 편집하는 데 사용됩니다. <br><br> <ul> <li> 위성 SCC# - 미 우주군에서 각 위성에 할당한 고유 번호입니다. </li> <li> 에포크 연도 - 위성의 마지막 궤도 업데이트 연도입니다. </li> <li> 에포크 일 - 위성의 마지막 궤도 업데이트 날짜입니다. </li> <li> 경사각 - 위성의 궤도 평면과 적도 평면 사이의 각도입니다. </li> <li> 적경 - 상승 노드와 위성의 마지막 궤도 업데이트 시 위치 사이의 각도입니다. </li> <li> 이심률 - 위성의 궤도가 완벽한 원에서 얼마나 벗어나는지를 나타냅니다. </li> <li> 근지점 인수 - 상승 노드와 지구에 가장 가까운 위성 지점 사이의 각도입니다. </li> <li> 평균 근점 이각 - 위성의 마지막 궤도 업데이트 시 위치와 지구에 가장 가까운 위성 지점 사이의 각도입니다. </li> <li> 평균 운동 - 위성의 평균 근점 이각이 변하는 속도입니다. </li> </ul>",
+      "labels": {
+        "scc": "위성 SCC#",
+        "country": "국가",
+        "epochYear": "에포크 연도",
+        "epochDay": "에포크 일",
+        "inclination": "경사각",
+        "rightAscension": "적경",
+        "eccentricity": "이심률",
+        "argOfPerigee": "근지점 인수",
+        "meanAnomaly": "평균 근점 이각",
+        "meanMotion": "평균 운동",
+        "period": "주기",
+        "error": "오류"
+      },
+      "buttons": {
+        "updateSatellite": "위성 업데이트",
+        "updateEpoch": "에포크를 현재로 업데이트",
+        "saveTle": "TLE 저장",
+        "loadTle": "TLE 불러오기"
+      },
+      "contextMenu": {
+        "editSat": "위성 편집",
+        "setPrimarySat": "기본 위성으로 설정",
+        "setSecondarySat": "보조 위성으로 설정",
+        "editSatellite": "위성 편집"
+      },
+      "errorMsgs": {
+        "errorReadingFile": "파일 읽기 중 오류 발생!",
+        "satelliteNotFound": "위성 {sccNum}을(를) 찾을 수 없습니다!",
+        "failedToPropagate": "위성 전파에 실패했습니다. 다른 매개변수를 시도하거나, 올바르다고 확신하는 경우 이 문제를 보고해 주세요.",
+        "cannotCalculateDirection": "위성 방향을 계산할 수 없습니다. 나중에 다시 시도해 주세요.",
+        "notRealSatellite": "실제 위성이 아닙니다"
+      }
+    }
+  }
+}

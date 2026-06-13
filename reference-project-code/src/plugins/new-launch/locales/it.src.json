@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "NewLaunch": {
+      "bottomIconLabel": "Nuovo lancio",
+      "title": "Menu nuovo lancio",
+      "helpBody": "Il menu Nuovo lancio viene utilizzato per generare lanci orbitali ipotetici modificando satelliti esistenti con parametri simili. <br><br> Dopo aver selezionato un satellite, è possibile selezionare un sito di lancio e un azimut nord/sud. Il satellite selezionato verrà modificato per allinearlo al sito di lancio. L'orologio viene quindi impostato su 00:00:00 per rappresentare il tempo relativo dopo il lancio. Questo può essere utile per calcolare la copertura dei sensori rispetto al tempo di lancio. La relazione dell'oggetto con altri oggetti orbitali non sarà corretta."
+    }
+  }
+}

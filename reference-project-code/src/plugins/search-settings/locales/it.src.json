@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "SearchSettingsPlugin": {
+      "bottomIconLabel": "Impostazioni di ricerca",
+      "title": "Impostazioni di ricerca",
+      "labels": {
+        "maxResults": "Risultati massimi nella ricerca",
+        "showDecayed": "Mostra satelliti decaduti"
+      },
+      "tooltips": {
+        "maxResults": "Numero massimo di satelliti da visualizzare nella ricerca",
+        "showDecayed": "Mostra satelliti decaduti (posizione 0,0,0) nei risultati di ricerca"
+      },
+      "errorMsgs": {
+        "InvalidMaxResults": "Valore massimo dei risultati di ricerca non valido!"
+      }
+    }
+  }
+}

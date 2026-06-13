@@ -1,0 +1,29 @@
+{
+  "plugins": {
+    "DebrisScreening": {
+      "bottomIconLabel": "Screening detriti",
+      "title": "Screening detriti",
+      "helpBody": "Lo strumento Screening detriti analizza un satellite selezionato rispetto al catalogo per identificare potenziali congiunzioni. <br><br> Configurare la finestra temporale di valutazione e fare clic su 'Screening detriti' per eseguire l'analisi. I risultati verranno visualizzati in una tabella che mostra: <ul style=\"margin-left: 40px;\"> <li><b>TCA</b> - Tempo di massimo avvicinamento</li> <li><b>Distanza di mancato impatto</b> - Componenti totali e RIC (radiale, lungo la traccia, trasversale)</li> <li><b>Pc</b> - Probabilità di collisione</li> <li><b>Livello di rischio</b> - Critico/Alto/Medio/Basso basato su Pc</li> </ul> Fare clic su qualsiasi ID satellite per selezionarlo. Esportare i risultati in CSV utilizzando il pulsante di download.",
+      "resultsTitle": "Risultati dello screening",
+      "resultsCount": "{count} congiunzioni trovate",
+      "exportCsv": "Esporta CSV",
+      "riskLevels": {
+        "critical": "Critico",
+        "high": "Alto",
+        "medium": "Medio",
+        "low": "Basso",
+        "unknown": "N/D"
+      },
+      "uLabel": "U (Radiale)",
+      "vLabel": "V (Lungo la traccia)",
+      "wLabel": "W (Trasversale)",
+      "drawBox": "Disegna riquadro",
+      "clearBox": "Cancella riquadro",
+      "errorMsgs": {
+        "InvalidSatellite": "Satellite selezionato non valido",
+        "ScreeningFailed": "Screening fallito",
+        "NoResultsToExport": "Nessun risultato da esportare"
+      }
+    }
+  }
+}

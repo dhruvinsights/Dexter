@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "SensorListPlugin": {
+      "bottomIconLabel": "Sensoren",
+      "title": "Sensorlistenmenü",
+      "helpBody": "Das Sensorenmenü ermöglicht es Ihnen, einen Sensor für Berechnungen und andere Menüfunktionen auszuwählen. Die Sensoren sind in Gruppen basierend auf den Netzwerken, die sie hauptsächlich unterstützen, eingeteilt. Auf der linken Seite des Menüs befindet sich der Name des Sensors und auf der rechten Seite das Land/die Organisation, dem/der er gehört. <br><br> Die Auswahl einer \"Alle...Sensoren\"-Option wählt alle Sensoren in dieser Gruppe aus. Dies ist nützlich, um die Netzwerkabdeckung zu visualisieren, funktioniert aber derzeit nicht für alle Berechnungen. Wenn Sie versuchen, Blickwinkel für ein Netzwerk zu berechnen, ist es am besten, das Multi-Site-Blickwinkel-Tool zu verwenden oder Blickwinkel für jeden einzelnen Sensor im Netzwerk zu berechnen. <br><br> Zu den Sensoren auf dieser Liste gehören mechanische und Phased-Array-Radare sowie optische Sensoren: <ul style=\"margin-left: 40px;\"> <li> Phased-Array-Radare sind typischerweise auf den niedrigen Erdorbit (LEO) beschränkt. </li> <li> Mechanische Radare können sowohl für LEO als auch für den geostationären Orbit (GEO) verwendet werden. </li> <li> Optische Sensoren werden typischerweise für GEO verwendet, können aber auch für LEO eingesetzt werden. </li> <li> Optische Sensoren sind auf nächtliche Beobachtungen bei klarem Himmel beschränkt, während Radare sowohl tagsüber als auch nachts eingesetzt werden können. </li> </ul> <br> Die Sensorinformationen basieren auf öffentlich zugänglichen Daten und können im Sensorinfo-Menü überprüft werden. Wenn Sie öffentliche Daten zu zusätzlichen Sensoren oder Korrekturen zu bestehenden Sensorinformationen haben, kontaktieren Sie mich bitte unter <a href=\"mailto:admin@keeptrack.space\">admin@keeptrack.space</a>."
+    }
+  }
+}

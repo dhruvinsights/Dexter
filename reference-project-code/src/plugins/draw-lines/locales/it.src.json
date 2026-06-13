@@ -1,0 +1,25 @@
+{
+  "plugins": {
+    "DrawLinesPlugin": {
+      "rmbMenu": {
+        "title": "Disegna",
+        "eciAxes": "Assi ECI",
+        "xAxesGrid": "Griglia asse X",
+        "yAxesGrid": "Griglia asse Y",
+        "zAxesGrid": "Griglia asse Z",
+        "xAxesRadialGrid": "Griglia radiale asse X",
+        "yAxesRadialGrid": "Griglia radiale asse Y",
+        "zAxesRadialGrid": "Griglia radiale asse Z",
+        "earthToSatellite": "Terra-Satellite",
+        "sensorToSatellite": "Sensore-Satellite",
+        "satelliteToSatellite": "Satellite-Satellite",
+        "satelliteToSun": "Satellite-Sole",
+        "satelliteToMoon": "Satellite-Luna",
+        "moonOrbit": "Disegna orbita della Luna"
+      },
+      "errorMsgs": {
+        "noPrimarySat": "Nessun satellite primario selezionato per la linea satellite-satellite."
+      }
+    }
+  }
+}

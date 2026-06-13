@@ -1,0 +1,39 @@
+{
+  "plugins": {
+    "ProximityOps": {
+      "bottomIconLabel": "Rendezvous- und Annäherungsoperationen",
+      "title": "Rendezvous- und Annäherungsoperationen (RPO)",
+      "titleSecondary": "Rendezvous- und Annäherungsoperationen-Liste",
+      "helpBody": "Finde bevorstehende Annäherungen zwischen Satelliten. Konfiguriere Suchparameter wie Abstandsschwelle, Relativgeschwindigkeit und Orbittyp (GEO/LEO). Unterstützt Einzelsatelliten- und Alle-gegen-Alle-Suchmodi.",
+      "noradId": "NORAD-ID",
+      "maxDistThreshold": "Maximaler Abstandsschwellenwert (km)",
+      "maxRelativeVelocity": "Maximale Relativgeschwindigkeit (km/s)",
+      "searchDuration": "Suchdauer (Stunden)",
+      "geoText": "Geostationär",
+      "leoText": "Niedrige Erdumlaufbahn",
+      "orbitType": "Orbittyp",
+      "geoAllVsAll": "Geostationär Alle gegen Alle",
+      "geoAllVsAllTooltip": "Suche nach RPOs zwischen allen geostationären Satelliten",
+      "comparePayloadsOnly": "Nur Nutzlasten vergleichen",
+      "comparePayloadsOnlyTooltip": "Nur nach RPOs zwischen Nutzlasten suchen",
+      "ignoreVimpelRso": "Vimpel-RSO ignorieren",
+      "ignoreVimpelRsoTooltip": "RSOs aus dem Vimpel-Katalog ignorieren",
+      "submitButton": "RPOs finden \u25b6",
+      "noRposToDownload": "Keine RPOs zum Herunterladen!",
+      "noRposFound": "Keine RPOs gefunden!",
+      "satNotFound": "Satellit mit NORAD-ID {sccNum} nicht gefunden",
+      "geoOrbitsEcf": "GEO-Orbits in ECF angezeigt",
+      "geoOrbitsEci": "GEO-Orbits in ECI angezeigt",
+      "vimpelNotSupported": "Vimpel-Satelliten werden nicht unterstützt",
+      "table": {
+        "target": "Ziel",
+        "targetName": "Zielname",
+        "chaser": "Jäger",
+        "chaserName": "Jägername",
+        "relDistance": "Rel. Entfernung [km]",
+        "relVelocity": "Rel. Geschwindigkeit [km/s]",
+        "date": "Datum"
+      }
+    }
+  }
+}
