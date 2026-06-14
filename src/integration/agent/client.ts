@@ -143,3 +143,56 @@ export async function* streamAnalysis(
     }
   }
 }
+
+/**
+ * Configure AI provider settings dynamically
+ */
+export async function configureAI(config: {
+  provider: string;
+  ollama_url?: string;
+  ollama_model?: string;
+  openai_api_key?: string;
+  openai_model?: string;
+  openai_base_url?: string;
+  gemini_api_key?: string;
+  gemini_model?: string;
+  temperature?: number;
+  max_tokens?: number;
+  top_p?: number;
+}, signal?: AbortSignal): Promise<{ success: boolean; message: string }> {
+  try {
+    const res = await fetch(`${baseUrl()}/api/ai/configure`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config),
+      signal,
+    });
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(error.detail || `${res.status} ${res.statusText}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error('Failed to configure AI:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get current AI configuration
+ */
+export async function getAIConfiguration(signal?: AbortSignal): Promise<{
+  success: boolean;
+  configuration: Record<string, unknown>;
+  current_model: string;
+  current_provider: string;
+}> {
+  try {
+    const res = await fetch(`${baseUrl()}/api/ai/configuration`, { signal });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return await res.json();
+  } catch (error) {
+    console.error('Failed to get AI configuration:', error);
+    throw error;
+  }
+}

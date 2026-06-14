@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PanelShell } from '@/features/shell/PanelShell';
-import { getApiUrl, setApiUrl, health, type AgentHealthCheck } from '@/integration/agent/client';
+import { getApiUrl, setApiUrl, health, configureAI, type AgentHealthCheck } from '@/integration/agent/client';
 import { play } from '@/lib/sound';
 
 /**
@@ -12,7 +12,7 @@ import { play } from '@/lib/sound';
  * Values are persisted to localStorage and read by the backend config form;
  * the backend's actual driver is selected server-side.
  */
-type Provider = 'ollama' | 'openai' | 'custom';
+type Provider = 'ollama' | 'openai' | 'gemini' | 'custom';
 
 interface Conf {
   apiUrl: string;
@@ -21,6 +21,8 @@ interface Conf {
   ollamaModel: string;
   openaiKey: string;
   openaiModel: string;
+  geminiKey: string;
+  geminiModel: string;
   vdb: {
     driver: string;
     host: string;
@@ -41,6 +43,8 @@ const DEFAULTS: Conf = {
   ollamaModel: 'llama3.1',
   openaiKey: '',
   openaiModel: 'gpt-4o-mini',
+  geminiKey: '',
+  geminiModel: 'gemini-1.5-flash',
   vdb: { driver: 'qdrant', host: 'localhost', port: '6333', database: 'orbital', ssl: false, username: '', password: '' },
 };
 
@@ -63,14 +67,38 @@ export function SettingsPanel() {
     health().then(setHc).catch(() => {});
   }, []);
 
-  const save = () => {
+  const save = async () => {
     play('button', 0.4);
     setApiUrl(conf.apiUrl);
+    
+    // Save to localStorage
     try {
       localStorage.setItem(KEY, JSON.stringify(conf));
     } catch {
       /* ignore */
     }
+    
+    // Send configuration to backend
+    try {
+      const aiConfig = {
+        provider: conf.provider,
+        ollama_url: conf.ollamaUrl,
+        ollama_model: conf.ollamaModel,
+        openai_api_key: conf.openaiKey,
+        openai_model: conf.openaiModel,
+        openai_base_url: conf.provider === 'custom' ? conf.apiUrl : undefined,
+        gemini_api_key: conf.geminiKey,
+        gemini_model: conf.geminiModel,
+        temperature: 0.3,
+        max_tokens: 1024,
+        top_p: 0.9,
+      };
+      
+      await configureAI(aiConfig);
+    } catch (error) {
+      console.error('Failed to configure backend:', error);
+    }
+    
     setSaved(true);
     setTimeout(() => setSaved(false), 1500);
     health().then(setHc).catch(() => {});
@@ -101,12 +129,12 @@ export function SettingsPanel() {
         </Section>
 
         <Section title="Model Provider">
-          <div className="flex gap-1.5">
-            {(['ollama', 'openai', 'custom'] as Provider[]).map((p) => (
+          <div className="grid grid-cols-2 gap-1.5">
+            {(['ollama', 'openai', 'gemini', 'custom'] as Provider[]).map((p) => (
               <button
                 key={p}
                 onClick={() => set('provider', p)}
-                className={`flex-1 rounded border px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+                className={`rounded border px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
                   conf.provider === p
                     ? 'border-[#00ff88]/40 bg-[#00ff88]/10 text-[#00ff88]'
                     : 'border-[#1f1f1f] text-neutral-500 hover:text-white'
@@ -138,6 +166,19 @@ export function SettingsPanel() {
               <Field label="Model">
                 <input className={inputCls} value={conf.openaiModel} onChange={(e) => set('openaiModel', e.target.value)} />
               </Field>
+            </>
+          )}
+          {conf.provider === 'gemini' && (
+            <>
+              <Field label="API key">
+                <input type="password" className={inputCls} value={conf.geminiKey} onChange={(e) => set('geminiKey', e.target.value)} placeholder="AIzaSy..." />
+              </Field>
+              <Field label="Model">
+                <input className={inputCls} value={conf.geminiModel} onChange={(e) => set('geminiModel', e.target.value)} />
+              </Field>
+              <p className="font-mono text-[9px] text-neutral-600">
+                Get your API key from Google AI Studio (ai.google.dev)
+              </p>
             </>
           )}
           {conf.provider === 'custom' && (
