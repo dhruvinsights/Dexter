@@ -30,6 +30,10 @@ interface SimStore {
   liveSpeed: number; // seconds of sim time per real second
   liveCount: number;
 
+  // ── boot / data loading ──
+  catalogueReady: boolean; // SGP4 catalogue parsed + first positions propagated
+  catalogueLoadMsg: string; // human-readable boot status
+
   // ── shared ──
   isPlaying: boolean;
   speed: number; // scenario: years per second
@@ -54,6 +58,7 @@ interface SimStore {
   setLiveSpeed: (s: number) => void;
   resetLiveToNow: () => void;
   setLiveCount: (n: number) => void;
+  setCatalogueReady: (ready: boolean, msg?: string) => void;
 
   play: () => void;
   pause: () => void;
@@ -85,6 +90,9 @@ export const useSimStore = create<SimStore>((set) => ({
   liveTimeMs: Date.now(),
   liveSpeed: 60,
   liveCount: 0,
+
+  catalogueReady: false,
+  catalogueLoadMsg: 'Initialising…',
 
   isPlaying: true,
   speed: 2,
@@ -119,6 +127,8 @@ export const useSimStore = create<SimStore>((set) => ({
   setLiveSpeed: (s) => set({ liveSpeed: s }),
   resetLiveToNow: () => set({ liveTimeMs: Date.now() }),
   setLiveCount: (n) => set({ liveCount: n }),
+  setCatalogueReady: (ready, msg) =>
+    set((st) => ({ catalogueReady: ready, catalogueLoadMsg: msg ?? st.catalogueLoadMsg })),
 
   play: () => set({ isPlaying: true }),
   pause: () => set({ isPlaying: false }),

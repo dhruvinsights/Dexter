@@ -19,7 +19,7 @@ of Orbital Sentinel — an orbital sustainability simulation & decision-support 
 
 ## The three ideas that matter most
 
-1. **Reuse the art, rebuild the engine.** KeepTrack's Earth/skybox textures and satellite models are
+1. **Reuse the art, rebuild the engine.** the reference project's Earth/skybox textures and satellite models are
    assets we keep; its WebGL renderer and tracking UI are not our foundation. The original codebase is
    preserved in [`../reference-project-code/`](../reference-project-code/) for reference only.
 

@@ -84,7 +84,7 @@ three layers deep.
 ### Resilience
 - `/status` gates features: show "Scenarios precomputing…" until `scenarios_ready`.
 - On a failed live call, fall back to last-good cached response (or mock) and surface a quiet banner —
-  never a blank 3D scene. (We learned this lesson from KeepTrack's hard splash-screen hang.)
+  never a blank 3D scene. (We learned this lesson from the reference project's hard splash-screen hang.)
 
 ---
 

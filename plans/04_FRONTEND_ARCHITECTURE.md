@@ -119,7 +119,7 @@ not a tab within it.
 
 The deliberate aesthetic: **monochrome, high-contrast, restrained** — so the orbital environment (and
 the one or two risk-accent colours) carry all the visual weight. This is also what makes it feel
-"clean and modern" vs KeepTrack's busy expert UI.
+"clean and modern" vs the reference project's busy expert UI.
 
 ### Tokens (`tailwind.config` + CSS vars)
 

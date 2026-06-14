@@ -1,6 +1,6 @@
 /**
- * Lightweight SFX layer — KeepTrack-style audio cues on select / zoom / UI.
- * Assets live in public/audio (ported from reference-project-code).
+ * Lightweight SFX layer — audio cues on select / zoom / UI.
+ * Assets live in public/audio.
  * Honors a user mute flag persisted in localStorage.
  */
 

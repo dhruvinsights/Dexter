@@ -7,11 +7,12 @@ import { TimeMachineOverlay } from '@/features/live/TimeMachineOverlay';
 import { Sidebar } from '@/features/shell/Sidebar';
 import { PanelHost } from '@/features/shell/PanelHost';
 import { CustomizeDrawer } from '@/features/shell/CustomizeDrawer';
+import { LoadingOverlay } from '@/features/shell/LoadingOverlay';
 import { useSimStore } from '@/state/useSimStore';
 
 /**
  * Explore — Dexter's primary screen. The 3D orbital environment fills the
- * viewport; a persistent left icon rail (KeepTrack-style) drives one slide-in
+ * viewport; a persistent left icon rail drives one slide-in
  * feature panel at a time. See plans/04_FRONTEND_ARCHITECTURE.md.
  */
 export function App() {
@@ -49,6 +50,8 @@ export function App() {
 
       {/* Draggable satellite readout (starts left, out of the panels' way) */}
       {mode === 'live' && selection && <SatelliteInfoPanel />}
+
+      <LoadingOverlay />
     </div>
   );
 }

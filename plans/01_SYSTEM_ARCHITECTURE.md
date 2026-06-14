@@ -58,25 +58,25 @@
         └─────────────────────────────────────────────────────────────────┘
 ```
 
-## The Decision: Native Renderer, Not KeepTrack Embed
+## The Decision: Native Renderer, Not the reference project Embed
 
-The original WS6 plan ([reference-project-code/plans/06_KEEPTRACK_FRONTEND.md](../reference-project-code/plans/06_KEEPTRACK_FRONTEND.md))
-chose to run KeepTrack on a second port and embed it in an `<iframe>`, driving it over `postMessage`.
+The original WS6 plan ([reference-project-code/plans/06_the reference project_FRONTEND.md](../reference-project-code/plans/06_the reference project_FRONTEND.md))
+chose to run the reference project on a second port and embed it in an `<iframe>`, driving it over `postMessage`.
 
 **We are superseding that decision.** We build the visualization natively in **React Three Fiber**
-and reuse only KeepTrack's *art assets* (Earth/skybox textures, satellite models).
+and reuse only the reference project's *art assets* (Earth/skybox textures, satellite models).
 
 Why:
 
-| iframe-embed KeepTrack (old plan) | Native R3F (this plan) |
+| iframe-embed the reference project (old plan) | Native R3F (this plan) |
 |---|---|
-| KeepTrack's tracking UI + errors leak through | We control every pixel; B&W, non-technical |
+| the reference project's tracking UI + errors leak through | We control every pixel; B&W, non-technical |
 | `postMessage` bridge is fragile, async, untyped | Scene is bound directly to typed React state |
-| Carries KeepTrack's whole heavy pipeline (catalog, workers, API-key failures) | We render only what we need |
+| Carries the reference project's whole heavy pipeline (catalog, workers, API-key failures) | We render only what we need |
 | Can't faithfully render MOCAT shell-density data | Custom renderer designed for exactly this |
 | Two build systems, two dev servers | One app, one build |
 
-The full KeepTrack/Dexter codebase is preserved in [`reference-project-code/`](../reference-project-code/)
+The full the reference project/Dexter codebase is preserved in [`reference-project-code/`](../reference-project-code/)
 as a reference for rendering techniques and a source of assets — **not** as a runtime dependency.
 
 ## The Two Critical Boundaries
@@ -121,7 +121,7 @@ provider — the renderer and UI are untouched. See [02_SIMULATOR_AND_VISUALIZAT
 ```
 Dexter/                      ← repo root (this project)
 ├── plans/                   ← these documents
-├── reference-project-code/  ← original KeepTrack/Dexter (assets + reference only)
+├── reference-project-code/  ← original the reference project/Dexter (assets + reference only)
 ├── public/                  ← assets copied from reference (Earth, skybox, models)
 ├── src/                     ← the new application (see 04_FRONTEND_ARCHITECTURE.md)
 ├── index.html

@@ -18,7 +18,7 @@ const MU = 398600.4418;
 const RE = 6378.137;
 
 /**
- * Create Satellite — KeepTrack-style. BASIC builds a TLE from altitude +
+ * Create Satellite. BASIC builds a TLE from altitude +
  * inclination; ADVANCED exposes the full element set with live-calculated
  * apogee/perigee/SMA/velocity; TLE IMPORT pastes a raw two-line set. Every
  * created object is rendered in the 3D scene (CustomSatField) at its real

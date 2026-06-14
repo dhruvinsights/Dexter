@@ -1,13 +1,13 @@
-# KeepTrack Feature Extraction Plan for Dexter
+# the reference project Feature Extraction Plan for Dexter
 
 **Date**: 2026-06-13  
-**Purpose**: Comprehensive analysis of KeepTrack reference code to identify features, assets, and components to port to the Dexter project.
+**Purpose**: Comprehensive analysis of the reference project reference code to identify features, assets, and components to port to the Dexter project.
 
 ---
 
 ## Executive Summary
 
-KeepTrack is a sophisticated satellite tracking and visualization platform with extensive 3D rendering capabilities, advanced color schemes, comprehensive camera controls, and a rich plugin ecosystem. This document catalogs all notable features that should be considered for integration into Dexter.
+the reference project is a sophisticated satellite tracking and visualization platform with extensive 3D rendering capabilities, advanced color schemes, comprehensive camera controls, and a rich plugin ecosystem. This document catalogs all notable features that should be considered for integration into Dexter.
 
 ---
 
@@ -299,7 +299,7 @@ KeepTrack is a sophisticated satellite tracking and visualization platform with 
 ### 5.1 Plugin Architecture
 
 **Base Plugin System**:
-- `KeepTrackPlugin` base class
+- `the reference projectPlugin` base class
 - Lifecycle hooks: `addHtml()`, `addJs()`, `addCss()`
 - Event bus integration
 - Dependency management
@@ -844,7 +844,7 @@ Audio: reference-project-code/public/audio/
 
 ## 12. Conclusion
 
-KeepTrack provides a comprehensive reference implementation with:
+the reference project provides a comprehensive reference implementation with:
 - **40+ 3D satellite models** ready to use
 - **10+ color schemes** for different visualization needs
 - **9 camera modes** for various perspectives

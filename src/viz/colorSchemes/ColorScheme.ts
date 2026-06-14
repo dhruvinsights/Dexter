@@ -1,6 +1,6 @@
 /**
  * Base Color Scheme System
- * Adapted from KeepTrack's color scheme architecture for React Three Fiber
+ * Color scheme architecture for the React Three Fiber renderer.
  */
 
 export type RGBAColor = [number, number, number, number];

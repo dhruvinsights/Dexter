@@ -121,16 +121,26 @@ export function LiveField() {
         launchYearsRef.current = Int16Array.from(msg.launchYears as number[]);
         points.geometry.setDrawRange(0, msg.count);
         useSimStore.getState().setLiveCount(msg.count);
-        console.info(`[livefield] catalogue ready: ${msg.count} objects (SGP4)`);
-        // Colour once now (white), then re-paint when SATCAT arrives.
+        useSimStore.getState().setCatalogueReady(false, `Propagating ${msg.count.toLocaleString()} objects…`);
+        console.info(`[boot] catalogue parsed: ${msg.count} objects — propagating first epoch (SGP4)`);
+        // Colour once now, then re-paint when the catalogue metadata arrives.
         paintColors();
-        loadSatcat().then(paintColors);
+        loadSatcat().then(() => {
+          paintColors();
+          console.info('[boot] object metadata applied (owners, types)');
+        });
       } else if (msg.type === 'positions') {
         const arr = new Float32Array(msg.buffer);
         const attr = points.geometry.getAttribute('position') as THREE.BufferAttribute;
         (attr.array as Float32Array).set(arr.subarray(0, MAX_OBJECTS * 3));
         attr.needsUpdate = true;
         busy.current = false;
+
+        // First propagated frame → the sky is populated; release the loader.
+        if (!useSimStore.getState().catalogueReady) {
+          useSimStore.getState().setCatalogueReady(true, 'Ready');
+          console.info('[boot] first positions propagated — live sky ready');
+        }
 
         // Feed the selected object's real scene position to the store so the
         // 3D model + camera fly-to can track it.
@@ -194,10 +204,16 @@ export function LiveField() {
 
     gl.domElement.addEventListener('click', handleClick);
 
-    // load the real catalogue
+    // load the real catalogue (GP/TLE data)
+    useSimStore.getState().setCatalogueReady(false, 'Downloading orbital catalogue…');
+    console.info('[boot] downloading GP catalogue (/tle/TLE.txt)…');
     fetch('/tle/TLE.txt')
       .then((r) => r.text())
-      .then((text) => worker.postMessage({ type: 'init', text, max: MAX_OBJECTS }));
+      .then((text) => {
+        useSimStore.getState().setCatalogueReady(false, 'Parsing element sets…');
+        console.info(`[boot] catalogue downloaded (${(text.length / 1e6).toFixed(1)} MB) — parsing`);
+        worker.postMessage({ type: 'init', text, max: MAX_OBJECTS });
+      });
 
     return () => {
       gl.domElement.removeEventListener('click', handleClick);

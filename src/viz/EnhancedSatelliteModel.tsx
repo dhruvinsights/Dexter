@@ -88,7 +88,7 @@ export function EnhancedSatelliteModel({ position }: SatelliteModelProps) {
             const center = box.getCenter(new THREE.Vector3());
             object.position.sub(center);
             const size = box.getSize(new THREE.Vector3()).length() || 1;
-            const norm = 0.12 / size; // normalise to ~0.12 scene units across
+            const norm = 0.22 / size; // normalise to ~0.22 scene units across (clearly visible)
             object.scale.setScalar(norm);
 
             console.info(`[satmodel] loaded ${modelInfo.obj} for "${selection.label}"`);
@@ -146,7 +146,7 @@ export function EnhancedSatelliteModel({ position }: SatelliteModelProps) {
 
       {/* Selection indicator ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.09, 0.105, 48]} />
+        <ringGeometry args={[0.16, 0.185, 48]} />
         <meshBasicMaterial color="#00ff88" transparent opacity={0.7} side={THREE.DoubleSide} />
       </mesh>
     </group>

@@ -8,7 +8,7 @@ import { ownerInfo } from '@/lib/owners';
 import { play } from '@/lib/sound';
 
 /**
- * Rich, draggable satellite readout (KeepTrack-style) shown on selection in
+ * Rich, draggable satellite readout shown on selection in
  * Live Sky mode. Computes real orbital elements from the TLE and streams live
  * geodetic position, altitude and velocity off the same SGP4 record.
  */

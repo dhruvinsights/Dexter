@@ -15,7 +15,7 @@ interface CameraTransition {
 
 /**
  * Enhanced camera controls with smooth transitions and zoom-to-satellite
- * Inspired by KeepTrack's camera system
+ * Smooth fly-to and zoom-to-object camera transitions.
  */
 export function EnhancedCameraControls() {
   const { camera, gl } = useThree();

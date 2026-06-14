@@ -24,7 +24,7 @@ let sats: SatEntry[] = [];
 /**
  * The TLE international designator (columns 10-11 of line 1) encodes the
  * launch year as 2 digits. Sputnik-era objects (>= 57) are 19xx, everything
- * else is 20xx — same convention KeepTrack's Time Machine uses.
+ * else is 20xx — the standard TLE epoch-year convention.
  */
 function launchYearFromTle(l1: string): number {
   const yy = parseInt(l1.slice(9, 11), 10);

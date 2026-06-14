@@ -46,7 +46,7 @@ story.
 | Insurers / risk analysts | Comparative risk under different futures |
 
 Primary design constraint that follows: **the interface must be legible to someone non-technical.**
-This is why we are leaving the KeepTrack UI behind — it is an expert tool dense with tracking jargon.
+This is why we are leaving the the reference project UI behind — it is an expert tool dense with tracking jargon.
 
 ## What Success Looks Like (long term, not a demo)
 
@@ -87,6 +87,6 @@ FastAPI services, and the AI analyst. See [01_SYSTEM_ARCHITECTURE.md](01_SYSTEM_
 2. **The contract is the product boundary.** Frontend and backend meet only at a documented data
    contract ([03_DATA_CONTRACTS.md](03_DATA_CONTRACTS.md)). Either side can be mocked or replaced.
 3. **Legible to a non-expert.** Every screen should be understandable without a glossary.
-4. **Reuse the art, rebuild the engine.** KeepTrack's textures/models are assets; its WebGL renderer
+4. **Reuse the art, rebuild the engine.** the reference project's textures/models are assets; its WebGL renderer
    and tracking UI are not our foundation.
 5. **Build for replacement, not permanence.** Providers, scenarios, and backends are swappable.

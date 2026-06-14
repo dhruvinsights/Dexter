@@ -17,7 +17,7 @@ interface OrbitPathProps {
 
 /**
  * Enhanced orbit path rendering with fade effects and color customization
- * Inspired by KeepTrack's orbit line system
+ * Renders a sampled orbit path as a line.
  */
 export function OrbitPath({
   positions,

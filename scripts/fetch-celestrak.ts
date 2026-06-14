@@ -3,9 +3,9 @@
  * and write it to public/tle/TLE.txt — the catalogue Dexter's Live Sky mode
  * propagates with SGP4.
  *
- * This is the same upstream data KeepTrack uses (CelesTrak republishes the
- * USSF 18th Space Defense Squadron catalogue). We pull it directly rather than
- * through a 3rd-party proxy, so there is no API key and no mock layer.
+ * CelesTrak republishes the USSF 18th Space Defense Squadron catalogue. We pull
+ * it directly rather than through a 3rd-party proxy, so there is no API key and
+ * no mock layer.
  *
  *   Usage:
  *     npx tsx scripts/fetch-celestrak.ts                 # GROUP=active (default)

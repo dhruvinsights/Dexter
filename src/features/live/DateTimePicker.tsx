@@ -12,7 +12,7 @@ function dayOfYear(d: Date): number {
 }
 
 /**
- * KeepTrack-style date/time picker. Sets the live simulation clock to any
+ * Date/time picker. Sets the live simulation clock to any
  * instant; SGP4 propagates the real CelesTrak catalogue to that time (forward
  * or backward from each TLE epoch), so you can scrub the whole sky through time.
  */

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 /**
  * UI shell state — which sidebar panel is open. Only one feature panel is
- * mounted at a time (KeepTrack-style slide-in), keeping the 3D viewport clear.
+ * mounted at a time (slide-in), keeping the 3D viewport clear.
  */
 export type PanelId =
   | 'live'

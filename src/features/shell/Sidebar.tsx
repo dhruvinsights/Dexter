@@ -38,7 +38,7 @@ const TOP: NavItem[] = [
 ];
 
 /**
- * Persistent left icon rail — KeepTrack-style. Click an icon to slide its
+ * Persistent left icon rail. Click an icon to slide its
  * feature panel in; only one panel is mounted at a time.
  */
 export function Sidebar() {
