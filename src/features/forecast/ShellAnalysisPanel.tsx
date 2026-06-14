@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Layers } from 'lucide-react';
 import { PanelShell } from '@/features/shell/PanelShell';
 import { useSimStore } from '@/state/useSimStore';
-import type { ShellStatus } from '@/sim/mocat';
+import type { ShellStatus } from '@/sim/debrisEngine';
 
 /**
  * Shell Analysis — the real current state of the LEO environment, binned by

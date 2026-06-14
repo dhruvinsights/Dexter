@@ -3,7 +3,7 @@ import type { RawMOCATOutput } from '@/integration/contracts';
 import { MOCK_RESULTS, SCENARIOS } from '@/integration/mocks';
 import type { ColorSchemeId } from '@/viz/colorSchemes';
 import type { PhysicsBundle } from '@/sim/loadPhysics';
-import type { shellStability } from '@/sim/mocat';
+import type { shellStability } from '@/sim/debrisEngine';
 
 type StabilityRow = ReturnType<typeof shellStability>[number];
 

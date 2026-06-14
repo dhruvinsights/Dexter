@@ -1,6 +1,6 @@
 /**
  * Altitude shell discretisation shared by the seed builder (scripts/build-shells.ts)
- * and the MOCAT-style physics engine (src/sim/mocat.ts).
+ * and the source–sink debris engine (src/sim/debrisEngine.ts).
  *
  * LEO is the debris-critical regime, so the bands are finer there and coarser
  * toward MEO. Altitudes are mean altitude above Earth's surface, in km.

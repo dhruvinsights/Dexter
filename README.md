@@ -57,12 +57,12 @@ A few plain-language terms used throughout Dexter:
 
 ## Why this matters
 
-- **More than 130 million** fragments larger than 1 mm are estimated to be in orbit; about **36,500** are larger than 10 cm and individually tracked (ESA Space Environment Report).
-- A single collision can be catastrophic: in 2009 the defunct **Cosmos 2251** struck the active **Iridium 33**, producing over 2,000 trackable fragments that still threaten other spacecraft today.
-- Anti-satellite weapon tests have made it worse: China's **Fengyun-1C** test (2007) created ~3,500 tracked fragments; Russia's **Cosmos 1408** test (2021) forced the ISS crew to shelter.
+- **More than 130 million** fragments larger than 1 mm are estimated to be in orbit; roughly **36,500** are larger than 10 cm and individually tracked ([ESA, *Space debris by the numbers*](https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers)).
+- A single collision can be catastrophic: in 2009 the defunct **Cosmos 2251** struck the active **Iridium 33**, producing over 2,000 trackable fragments that still threaten other spacecraft today ([NASA ODPO Orbital Debris Quarterly News](https://orbitaldebris.jsc.nasa.gov/quarterly-news/)).
+- Anti-satellite weapon tests have made it worse: China's **Fengyun-1C** test (2007) created ~3,500 tracked fragments — the single largest debris-generating event on record — and Russia's **Cosmos 1408** test (2021) forced the ISS crew to shelter ([NASA Orbital Debris Program Office](https://orbitaldebris.jsc.nasa.gov/)).
 - The economy now depends on space: GPS timing underpins financial markets and power grids; Earth-observation satellites drive agriculture, climate science, and disaster response. The orbital environment is shared infrastructure with no owner — a textbook tragedy of the commons.
 
-The 700–900 km band — visible as the densest belt in Dexter's Shell Analysis — is the region scientists most worry about, because it is high enough that atmospheric drag barely cleans it, yet crowded enough that collisions are likely.
+The 700–900 km band — visible as the densest belt in Dexter's Shell Analysis — is the region scientists most worry about, because it is high enough that atmospheric drag barely cleans it, yet crowded enough that collisions are likely. This is precisely the regime [Kessler and Cour-Palais (1978)](https://doi.org/10.1029/JA083iA06p02637) identified as prone to a self-sustaining collision cascade.
 
 ---
 
@@ -74,8 +74,8 @@ Renders the real tracked catalogue propagated with genuine orbital mechanics (SG
 ### Shell Analysis
 The current state of low Earth orbit, binned by altitude from the real catalogue. For each shell it shows the live object and debris counts, the atmospheric-drag clearing time, and a **Kessler stability indicator** — a physically computed flag for whether a shell produces collision fragments faster than drag can remove them. Shells in that regime are marked *Critical*: debris there accumulates indefinitely.
 
-### Physics Engine (MOCAT-style)
-A real orbital-debris **source–sink model** projects the population forward in time. It is the same *class* of model used by MIT's MOCAT and ESA's MASTER/DELTA tools, seeded from Dexter's real current data. See [The science inside](#the-science-inside).
+### Physics Engine
+A real orbital-debris **source–sink model** projects the population forward in time, built directly on the peer-reviewed physics of orbital collisions and atmospheric decay and seeded from Dexter's real current data. See [The science inside](#the-science-inside).
 
 ### Scenario and Forecasting
 Compare intervention strategies — Active Debris Removal, launch-rate caps, improved post-mission disposal, AI traffic management, or a hybrid — and watch 30-year outcomes diverge: object growth, cumulative collisions, cost, and a sustainability grade. Every number flows from the physics engine, seeded from reality.
@@ -97,42 +97,56 @@ Dexter is deliberately transparent about provenance. Nothing fabricated is prese
 
 | Feature | Source | Status |
 |---|---|---|
-| Live Sky objects and positions | CelesTrak GP catalogue + SGP4 (`satellite.js`) | **Real data, real physics** |
+| Live Sky objects and positions | CelesTrak GP catalogue + SGP4 propagation | **Real data, real physics** |
 | Object types and owning nations | CelesTrak SATCAT | **Real data** |
 | Shell Analysis (current debris by altitude) | SATCAT apogee/perigee binned into shells | **Real current state** |
-| Scenario / Forecasting projections | MOCAT-style source–sink model, seeded from the real catalogue | **Physics model** — a deterministic projection, not telemetry |
+| Scenario / Forecasting projections | Source–sink debris model, seeded from the real catalogue | **Physics model** — a deterministic projection, not telemetry |
 | Kessler stability indicator | Collision rate vs. drag-decay rate from real seed | **Physics model** |
 | AI Agent responses | Local/hosted LLM you configure | Depends on your provider; offline until set up |
 
-A projection is not a measurement, and Dexter says so directly in the relevant panels. This is the same honesty principle real debris tools follow: MOCAT and MASTER are *models*, and their value is in the rigour of the model, not a false claim of certainty.
+A projection is not a measurement, and Dexter says so directly in the relevant panels. Every long-term debris study in the published literature is a *model*; its value lies in the rigour of the physics, not in a false claim of certainty. Dexter follows that same principle.
 
 ---
 
 ## The science inside
 
+### How the model works, in plain language
+
+Picture low Earth orbit as a stack of shelves, each shelf a band of altitude. On every shelf sit three kinds of things: working satellites, dead rocket parts, and broken fragments (debris). Each year the model asks one simple question for each shelf — *what gets added, and what gets removed?*
+
+Things are **added** when a new satellite is launched onto a shelf, when a satellite dies and is not cleaned up (becoming junk), or when two objects crash and shatter into hundreds of new fragments.
+
+Things are **removed** when air drag pulls a low object down until it burns up in the atmosphere (this only works on the bottom shelves — higher up the air is far too thin), when a satellite steers itself down at the end of its life, or when a cleanup mission removes debris.
+
+The chance of a crash on a shelf rises sharply with how crowded it is: roughly, double the objects and you quadruple the collision risk, because any object can hit any other. That is the core danger — once a shelf is crowded enough, crashes make fragments, fragments cause more crashes, and the shelf can spiral out of control. That runaway is the **Kessler Syndrome** ([Kessler & Cour-Palais, 1978](https://doi.org/10.1029/JA083iA06p02637)), and Dexter's Shell Analysis flags exactly which shelves are heading that way today.
+
+Dexter starts each shelf with the *real* number of objects counted from today's catalogue, then plays the years forward using these rules. The result is not a guess pulled from thin air — it is arithmetic on real starting conditions, using the physical laws scientists have published since the 1970s.
+
+The technical detail follows.
+
 ### Orbital propagation — SGP4
-Live Sky positions come from **SGP4**, the Simplified General Perturbations model maintained by the United States Space Force and used with the public Two-Line Element catalogue. SGP4 accounts for Earth's oblateness (J2), atmospheric drag, and lunar/solar perturbations to the accuracy the public catalogue supports. Implementation: `satellite.js`, run in a Web Worker so 15,000+ objects propagate without blocking the interface (`src/sim/liveSky.worker.ts`).
+Live Sky positions come from **SGP4**, the Simplified General Perturbations model defined in [*Spacetrack Report No. 3* (Hoots & Roehrich, 1980)](https://celestrak.org/NORAD/documentation/spacetrk.pdf) and maintained for the public Two-Line Element catalogue by the United States Space Force 18th Space Defense Squadron via [Space-Track.org](https://www.space-track.org/) and [CelesTrak](https://celestrak.org/). SGP4 accounts for Earth's oblateness (J2), atmospheric drag, and lunar/solar perturbations to the accuracy the public catalogue supports. It runs in a Web Worker so 15,000+ objects propagate without blocking the interface (`src/sim/liveSky.worker.ts`).
 
 ### Debris evolution — a source–sink model
-The engine (`src/sim/mocat.ts`) discretises LEO into altitude shells and advances each shell's payload / debris / rocket-body counts year by year under explicit physical terms:
+The engine (`src/sim/debrisEngine.ts`) discretises LEO into altitude shells and advances each shell's payload / debris / rocket-body counts year by year under explicit physical terms:
 
 **Sources** (what adds objects)
 - **Launches** — new payloads, distributed across shells by real launch demand.
 - **Post-mission derelicts** — satellites that reach end of life and fail to de-orbit (governed by a PMD-compliance fraction).
-- **Collision fragments** — modelled with a NASA-standard-breakup-style trackable-fragment yield per catastrophic collision.
+- **Collision fragments** — modelled with a trackable-fragment yield per catastrophic collision, following the approach of the [NASA Standard Breakup Model](https://orbitaldebris.jsc.nasa.gov/modeling/) (Johnson et al., 2001).
 
 **Sinks** (what removes objects)
 - **Atmospheric drag decay** — altitude-dependent; objects sink to lower shells and eventually re-enter. This is the dominant natural cleaner below ~600 km and negligible above ~900 km.
 - **Post-mission disposal (PMD)** — compliant satellites de-orbit themselves.
 - **Active Debris Removal (ADR)** — modelled removal of debris from targeted shells.
 
-**Collision frequency** uses the particle-in-a-box kinetic rate, the standard first-order approximation for a well-mixed shell:
+**Collision frequency** uses the particle-in-a-box kinetic rate — the standard first-order approximation for a well-mixed shell, introduced for orbital debris by [Kessler & Cour-Palais (1978)](https://doi.org/10.1029/JA083iA06p02637) and developed analytically by Talent (1992), *Analytic Model for Orbital Debris Environmental Management*, Journal of Spacecraft and Rockets:
 
 ```
 λ_ij = ⟨σ · v_rel⟩ · N_i · N_j / V_shell
 ```
 
-where `⟨σ·v_rel⟩` is the collision cross-section times relative velocity (~10 km/s in LEO), `N_i, N_j` are population counts, and `V_shell` is the shell volume. Maneuverable active payloads receive a collision-avoidance discount.
+where `⟨σ·v_rel⟩` is the collision cross-section times relative velocity (~10 km/s in LEO), `N_i, N_j` are population counts, and `V_shell` is the shell volume. Maneuverable active payloads receive a collision-avoidance discount. The intervention strategies (active debris removal, post-mission disposal compliance) mirror the parametric remediation studies published by NASA's Orbital Debris Program Office — Liou (2011), *An active debris removal parametric study for LEO environment remediation*, Advances in Space Research 47(11) — searchable via the [NASA Technical Reports Server](https://ntrs.nasa.gov/).
 
 ### Kessler stability indicator
 For each shell, Dexter compares the collisional fragment-production rate to the drag-removal rate. A ratio above 1 means the shell generates trackable debris faster than the atmosphere clears it — the physical signature of an incipient Kessler cascade. With real 2026 data this correctly flags the 700–1500 km bands as critical, matching the published consensus.
@@ -149,7 +163,7 @@ The model is seeded from `public/shells.json`, built by `scripts/build-shells.ts
 │  Frontend — React + React Three Fiber (Three.js)            │
 │                                                              │
 │  • Live Sky        SGP4 propagation in a Web Worker          │
-│  • Physics engine  MOCAT-style source–sink model (TS)        │
+│  • Physics engine  source–sink debris model (TypeScript)     │
 │  • Shell Analysis  real debris-by-altitude + Kessler flag    │
 │  • Scenario/Forecast, Time Machine, Create Satellite         │
 │  • State: Zustand   Styling: Tailwind                        │
@@ -178,8 +192,8 @@ The frontend is fully functional on its own. The backend is an optional intellig
 |---|---|
 | UI / 3D | React, TypeScript, Vite, React Three Fiber, Three.js, Tailwind |
 | State | Zustand |
-| Orbital mechanics | `satellite.js` (SGP4), Web Workers |
-| Physics model | TypeScript source–sink engine (`src/sim/mocat.ts`) |
+| Orbital mechanics | SGP4 propagation, Web Workers |
+| Physics model | TypeScript source–sink engine (`src/sim/debrisEngine.ts`) |
 | Backend (optional) | FastAPI, Python, Server-Sent Events |
 | AI providers | Ollama, OpenAI, Google Gemini, OpenAI-compatible endpoints |
 | Vector stores | Qdrant, pgvector, Milvus, Weaviate, Chroma, IBM Db2 |
@@ -262,9 +276,9 @@ Dexter is a research and education platform today. The architecture is built to 
 
 - **Higher-fidelity data.** Swap the public TLE catalogue for the authoritative Space-Track.org feed or a commercial SSA provider (LeoLabs, Slingshot) with no change to the rendering or physics interfaces.
 - **Conjunction screening.** The same propagation pipeline can compute pairwise close approaches and produce Conjunction Data Messages (CDM), the operational currency of NASA's Conjunction Assessment Risk Analysis (CARA) and the U.S. Space Force's collision-warning service.
-- **Validated physics.** The source–sink engine can be calibrated against NASA's LEGEND and ESA's DELTA long-term evolutionary models, and against the published NASA Standard Breakup Model, to move from indicative to decision-grade projections.
+- **Validated physics.** The source–sink engine can be calibrated against the published long-term evolutionary studies of NASA's Orbital Debris Program Office and ESA's Space Debris Office, and against the published NASA Standard Breakup Model, to move from indicative to decision-grade projections.
 - **GPU-scale rendering.** The Three.js point-cloud renderer already handles the full tracked catalogue at interactive frame rates and extends to the projected 100,000+ object catalogues of the next decade.
-- **Compute back end.** The browser engine can be promoted to a server-side or WebAssembly Monte-Carlo ensemble for uncertainty quantification, matching how MOCAT is run for policy studies.
+- **Compute back end.** The browser engine can be promoted to a server-side or WebAssembly Monte-Carlo ensemble for uncertainty quantification, matching how long-term debris models are run for policy studies.
 
 The goal: a tool that a student can open in a browser and a mission planner can trust in a control room, sharing one honest data model.
 
@@ -301,16 +315,23 @@ Space sustainability is moving from a niche concern to a licensing requirement a
 
 ## References
 
-- Kessler, D. J., and Cour-Palais, B. G. (1978). *Collision Frequency of Artificial Satellites: The Creation of a Debris Belt.* Journal of Geophysical Research, 83(A6). — The foundational Kessler Syndrome paper.
-- NASA Orbital Debris Program Office (ODPO): https://orbitaldebris.jsc.nasa.gov/ — quarterly news, the Standard Breakup Model, and the LEGEND evolutionary model.
-- Johnson, N. L., et al. (2001). *NASA's New Breakup Model of EVOLVE 4.0.* Advances in Space Research. — The NASA Standard Breakup Model underpinning fragment-yield assumptions.
-- ESA Space Debris Office — Annual *Space Environment Report* and the MASTER / DRAMA / DELTA toolset: https://www.esa.int/Space_Safety/Space_Debris
-- MIT Astrodynamics, Space Robotics, and Controls Lab — MOCAT (MIT Orbital Capacity Assessment Toolbox), the source–sink methodology Dexter's engine follows.
-- Inter-Agency Space Debris Coordination Committee (IADC) — *Space Debris Mitigation Guidelines.*
-- NASA Conjunction Assessment Risk Analysis (CARA): https://www.nasa.gov/conjunction-assessment/
-- CelesTrak (Dr. T. S. Kelso): https://celestrak.org/ — public GP/TLE catalogue and SATCAT.
-- United States Space Force, 18th Space Defense Squadron / Space-Track.org: https://www.space-track.org/ — the authoritative tracking catalogue.
-- `satellite.js` — open-source SGP4 implementation: https://github.com/shashwatak/satellite-js
+Every physical assumption in Dexter traces to a published, citable source.
+
+**Peer-reviewed research**
+- Kessler, D. J., & Cour-Palais, B. G. (1978). *Collision Frequency of Artificial Satellites: The Creation of a Debris Belt.* Journal of Geophysical Research, 83(A6), 2637–2646. https://doi.org/10.1029/JA083iA06p02637 — the foundational Kessler Syndrome paper and the origin of the particle-in-a-box collision rate.
+- Talent, D. L. (1992). *Analytic Model for Orbital Debris Environmental Management.* Journal of Spacecraft and Rockets, 29(4), 508–513. — the analytic source–sink / particle-in-a-box treatment.
+- Johnson, N. L., Krisko, P. H., Liou, J.-C., & Anz-Meador, P. D. (2001). *NASA's New Breakup Model of EVOLVE 4.0.* Advances in Space Research, 28(9), 1377–1384. — the NASA Standard Breakup Model behind the collision-fragment yield.
+- Liou, J.-C. (2011). *An active debris removal parametric study for LEO environment remediation.* Advances in Space Research, 47(11), 1865–1876. — the basis for the ADR and remediation scenarios. Searchable at https://ntrs.nasa.gov/
+- Kessler, D. J., Johnson, N. L., Liou, J.-C., & Matney, M. (2010). *The Kessler Syndrome: Implications to Future Space Operations.* Advances in the Astronautical Sciences, 137. — a modern restatement of the cascade risk.
+
+**Authoritative data and standards**
+- NASA Orbital Debris Program Office (ODPO): https://orbitaldebris.jsc.nasa.gov/ — modeling resources and the *Orbital Debris Quarterly News*.
+- NASA Technical Reports Server (NTRS): https://ntrs.nasa.gov/ — open access to the NASA debris-modeling literature.
+- ESA Space Debris Office: https://www.esa.int/Space_Safety/Space_Debris — the annual *Space Environment Report* and population statistics.
+- Inter-Agency Space Debris Coordination Committee (IADC) — *Space Debris Mitigation Guidelines* (IADC-02-01): https://www.iadc-home.org/
+- Hoots, F. R., & Roehrich, R. L. (1980). *Spacetrack Report No. 3: Models for Propagation of NORAD Element Sets.* https://celestrak.org/NORAD/documentation/spacetrk.pdf — the definitive SGP4 specification.
+- CelesTrak (Dr. T. S. Kelso): https://celestrak.org/ — the public GP/TLE catalogue and SATCAT used as Dexter's live data source.
+- United States Space Force, 18th Space Defense Squadron — Space-Track.org: https://www.space-track.org/ — the authoritative tracking catalogue.
 
 *Imagery: NASA Orbital Debris Program Office, public domain, via Wikimedia Commons.*
 
@@ -324,7 +345,7 @@ Dexter/
 │   ├── viz/                 3D scene, Earth, Live Sky field, orbits, camera
 │   ├── sim/
 │   │   ├── liveSky.worker.ts   SGP4 propagation (Web Worker)
-│   │   ├── mocat.ts            MOCAT-style debris source–sink engine
+│   │   ├── debrisEngine.ts     source–sink debris evolution engine
 │   │   ├── shellDefs.ts        altitude shells, drag-lifetime model
 │   │   └── loadPhysics.ts      seed loader + scenario runner
 │   ├── features/            UI panels (live, forecast, shells, ai, settings, …)
@@ -351,7 +372,7 @@ Dexter/
 - Pairwise conjunction screening and CDM-style close-approach alerts.
 - Monte-Carlo ensembles for projection uncertainty bands.
 - Authoritative-data mode (Space-Track / commercial SSA feeds).
-- Physics calibration against NASA LEGEND and ESA DELTA reference runs.
+- Physics calibration against published NASA and ESA long-term debris-evolution reference studies.
 
 ---
 

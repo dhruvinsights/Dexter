@@ -6,7 +6,7 @@
  */
 import type { RawMOCATOutput } from '@/integration/contracts';
 import { SCENARIOS } from '@/integration/mocks';
-import { runMocat, shellStability, type ShellSeed } from './mocat';
+import { runMocat, shellStability, type ShellSeed } from './debrisEngine';
 
 /** Baked-in fallback: real on-orbit distribution from CelesTrak SATCAT (2026-06). */
 const FALLBACK_SEED: ShellSeed[] = [
