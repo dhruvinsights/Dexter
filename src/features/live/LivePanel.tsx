@@ -1,11 +1,25 @@
 import { useSimStore } from '@/state/useSimStore';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 /** Left panel in Live Sky mode — context about the real catalogue being propagated. */
 export function LivePanel() {
   const liveCount = useSimStore((s) => s.liveCount);
+  const catalogue = useSimStore((s) => s.catalogue);
   const [tleEpoch, setTleEpoch] = useState<string>('');
   const [tleAge, setTleAge] = useState<string>('');
+
+  // Real object-type breakdown, counted from the actual catalogue (SATCAT).
+  const breakdown = useMemo(() => {
+    let pay = 0;
+    let deb = 0;
+    let rb = 0;
+    for (const e of catalogue) {
+      if (e.type === 'DEB') deb++;
+      else if (e.type === 'R/B') rb++;
+      else if (e.type === 'PAY') pay++;
+    }
+    return { pay, deb, rb };
+  }, [catalogue]);
 
   useEffect(() => {
     // Parse TLE.txt to extract epoch from first TLE line
@@ -64,6 +78,17 @@ export function LivePanel() {
         </div>
       </div>
 
+      {breakdown.pay + breakdown.deb + breakdown.rb > 0 && (
+        <div className="space-y-1.5">
+          <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">
+            object types (real)
+          </div>
+          <TypeRow color="#4dff80" label="Payloads" value={breakdown.pay} />
+          <TypeRow color="#ffb433" label="Rocket bodies" value={breakdown.rb} />
+          <TypeRow color="#ff5950" label="Debris" value={breakdown.deb} />
+        </div>
+      )}
+
       <div className="space-y-2 text-xs text-neutral-400">
         <Row label="Source" value="CelesTrak GP" valueClass="text-white" />
         <Row label="Epoch" value={tleEpoch || '…'} />
@@ -77,6 +102,18 @@ export function LivePanel() {
         Live data from CelesTrak (USSF 18 SDS catalogue). These are genuine cataloged objects
         at physically propagated positions — distinct from Scenario mode's statistical projection.
       </p>
+    </div>
+  );
+}
+
+function TypeRow({ color, label, value }: { color: string; label: string; value: number }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-neutral-400">
+        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
+        {label}
+      </span>
+      <span className="font-mono text-[11px] text-white">{value.toLocaleString()}</span>
     </div>
   );
 }

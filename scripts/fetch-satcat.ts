@@ -11,8 +11,9 @@ import { resolve } from 'node:path';
 
 const URL = 'https://celestrak.org/pub/satcat.csv';
 
-// OBJECT_TYPE → compact code
-const TYPE: Record<string, string> = { PAYLOAD: 'PAY', 'ROCKET BODY': 'R/B', DEBRIS: 'DEB', UNKNOWN: 'UNK' };
+// CelesTrak's OBJECT_TYPE column already uses compact codes (PAY / R/B / DEB / UNK),
+// so we pass them through directly. Anything unexpected falls back to UNK.
+const VALID_TYPES = new Set(['PAY', 'R/B', 'DEB', 'UNK']);
 
 async function main() {
   console.log(`Fetching ${URL} …`);
@@ -28,7 +29,7 @@ async function main() {
     const type = cols[3]?.trim();
     const owner = cols[5]?.trim();
     if (!norad) continue;
-    out[norad] = [owner || 'TBD', TYPE[type] || 'UNK'];
+    out[norad] = [owner || 'TBD', VALID_TYPES.has(type) ? type : 'UNK'];
   }
   const path = resolve(process.cwd(), 'public/satcat.json');
   writeFileSync(path, JSON.stringify(out));

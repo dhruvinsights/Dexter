@@ -173,7 +173,10 @@ export function LiveField() {
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
-      raycaster.params.Points!.threshold = 0.05;
+      // Scale the pick radius with camera distance so dots stay clickable when
+      // zoomed out (a fixed threshold misses tiny far-away points).
+      const camDist = camera.position.length();
+      raycaster.params.Points!.threshold = Math.max(0.04, camDist * 0.012);
 
       const intersects = raycaster.intersectObject(points);
       if (intersects.length > 0 && intersects[0].index !== undefined) {
