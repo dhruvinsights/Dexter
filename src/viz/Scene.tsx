@@ -48,7 +48,7 @@ export function Scene() {
         {mode === 'live' && <CustomSatField />}
         {mode === 'live' && selection && (
           <>
-            <SelectedOrbit />
+            {showOrbits && <SelectedOrbit />}
             <EnhancedSatelliteModel />
           </>
         )}

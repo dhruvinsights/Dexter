@@ -36,7 +36,7 @@ export function SelectedOrbit() {
     }
     if (pts.length < 2) return null;
     const geo = new THREE.BufferGeometry().setFromPoints(pts);
-    const mat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.55 });
+    const mat = new THREE.LineBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.7 });
     return new THREE.Line(geo, mat);
   }, [selection?.line1, selection?.line2, minuteBucket]);
 
