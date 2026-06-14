@@ -1,4 +1,4 @@
-# Dexter — Orbital Sustainability Platform
+# Dexter: Orbital Sustainability Platform
 
 **A real-time map of everything humanity has left in orbit, and a physics engine that projects where it is heading.**
 
@@ -6,8 +6,11 @@ Dexter renders the genuine catalogue of objects circling Earth — live, with re
 
 ![Low Earth Orbit debris field — NASA Orbital Debris Program Office](https://commons.wikimedia.org/wiki/Special:FilePath/Debris-LEO1280.jpg)
 
-Watch Complete Video Tutorial here: https://www.youtube.com/watch?v=fS5bWz9dX-U
+## 🎥 Demo Video
 
+[![Dexter Demo](dexter.png)](https://www.youtube.com/watch?v=fS5bWz9dX-U)
+
+**Watch Complete Video Tutorial:** https://www.youtube.com/watch?v=fS5bWz9dX-U
 > *Every white dot is a tracked object in low Earth orbit. This is a NASA Orbital Debris Program Office visualisation — not artistic licence. Dexter renders this same population from live data.*
 
 ---
