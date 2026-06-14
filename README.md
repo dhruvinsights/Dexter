@@ -8,7 +8,7 @@ Dexter renders the genuine catalogue of objects circling Earth — live, with re
 
 ## 🎥 Demo Video
 
-[![Dexter Demo]("https://github.com/user-attachments/assets/deebb53e-4c0d-4a4a-a98b-134066260c79)](https://www.youtube.com/watch?v=fS5bWz9dX-U)
+[![Dexter Demo](https://github.com/user-attachments/assets/deebb53e-4c0d-4a4a-a98b-134066260c79)](https://www.youtube.com/watch?v=fS5bWz9dX-U)
 
 **Watch Complete Video Tutorial:** https://www.youtube.com/watch?v=fS5bWz9dX-U
 > *Every white dot is a tracked object in low Earth orbit. This is a NASA Orbital Debris Program Office visualisation — not artistic licence. Dexter renders this same population from live data.*
