@@ -3,6 +3,8 @@ import { X, GripVertical, Crosshair } from 'lucide-react';
 import * as satellite from 'satellite.js';
 import { useSimStore } from '@/state/useSimStore';
 import { elementsFromRec, liveStateAt, flagFromName, type LiveState } from '@/lib/orbital';
+import { satcatOwner, satcatType } from '@/lib/satcat';
+import { ownerInfo } from '@/lib/owners';
 import { play } from '@/lib/sound';
 
 /**
@@ -27,7 +29,18 @@ export function SatelliteInfoPanel() {
   }, [selection?.line1, selection?.line2]);
 
   const elements = useMemo(() => (rec ? elementsFromRec(rec) : null), [rec]);
-  const flag = useMemo(() => (selection ? flagFromName(selection.label) : null), [selection]);
+  // Real owner from SATCAT when available; fall back to a name heuristic
+  // (e.g. for user-created satellites not in the catalogue).
+  const flag = useMemo(() => {
+    if (!selection) return null;
+    const owner = satcatOwner(selection.norad);
+    if (owner) {
+      const info = ownerInfo(owner);
+      return { emoji: info.flag, country: info.name };
+    }
+    return flagFromName(selection.label);
+  }, [selection]);
+  const objType = useMemo(() => (selection ? satcatType(selection.norad) : undefined), [selection]);
 
   // Stream live position once per second from the sim clock.
   useEffect(() => {
@@ -107,6 +120,10 @@ export function SatelliteInfoPanel() {
         )}
 
         <Section title="Object">
+          <Row
+            label="Type"
+            value={objType === 'DEB' ? 'Debris' : objType === 'R/B' ? 'Rocket body' : objType === 'PAY' ? 'Payload' : 'Object'}
+          />
           <Row label="Propagator" value="SGP4" />
           <Row label="Source" value="CelesTrak" />
           {!elements && <Row label="Note" value="No TLE for this object" />}

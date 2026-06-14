@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useSimStore, TIME_MACHINE_END_YEAR } from '@/state/useSimStore';
-import { COLOR_SCHEMES } from '@/viz/colorSchemes';
-import type { SatelliteData } from '@/viz/colorSchemes';
+import { loadSatcat, satcatOwner, satcatType } from '@/lib/satcat';
+import { ownerInfo } from '@/lib/owners';
 
 // Removed MAX_OBJECTS limit to load all available satellites from CelesTrak
 const MAX_OBJECTS = 20000; // Increased to accommodate all CelesTrak satellites (~15,699)
@@ -43,6 +43,7 @@ export function LiveField() {
   const line1Ref = useRef<string[]>([]);
   const line2Ref = useRef<string[]>([]);
   const launchYearsRef = useRef<Int16Array>(new Int16Array(0));
+  const paintColorsRef = useRef<() => void>(() => {});
   const lastTMYear = useRef(-1);
   const lastUpdate = useRef(0);
   const pendingTime = useRef(0);
@@ -83,6 +84,33 @@ export function LiveField() {
   useEffect(() => {
     points.frustumCulled = false;
 
+    // Paint the FULL catalogue's colours from the active scheme (was capped at
+    // 100 dots before). country → owner colour, objectType → PAY/R&B/DEB.
+    const paintColors = () => {
+      const norads = noradsRef.current;
+      if (norads.length === 0) return;
+      const scheme = useSimStore.getState().colorScheme;
+      const colorAttr = points.geometry.getAttribute('aColor') as THREE.BufferAttribute;
+      const colors = colorAttr.array as Float32Array;
+      for (let i = 0; i < norads.length; i++) {
+        let c: [number, number, number];
+        if (scheme === 'country') {
+          c = ownerInfo(satcatOwner(norads[i])).color;
+        } else if (scheme === 'objectType') {
+          const t = satcatType(norads[i]);
+          c = t === 'DEB' ? [1, 0.35, 0.3] : t === 'R/B' ? [1, 0.7, 0.2] : [0.3, 1, 0.5];
+        } else {
+          c = [1, 1, 1];
+        }
+        colors[i * 3] = c[0];
+        colors[i * 3 + 1] = c[1];
+        colors[i * 3 + 2] = c[2];
+      }
+      colorAttr.needsUpdate = true;
+      console.info(`[livefield] painted ${norads.length} dots · scheme=${scheme}`);
+    };
+    paintColorsRef.current = paintColors;
+
     worker.onmessage = (e: MessageEvent) => {
       const msg = e.data;
       if (msg.type === 'ready') {
@@ -93,6 +121,10 @@ export function LiveField() {
         launchYearsRef.current = Int16Array.from(msg.launchYears as number[]);
         points.geometry.setDrawRange(0, msg.count);
         useSimStore.getState().setLiveCount(msg.count);
+        console.info(`[livefield] catalogue ready: ${msg.count} objects (SGP4)`);
+        // Colour once now (white), then re-paint when SATCAT arrives.
+        paintColors();
+        loadSatcat().then(paintColors);
       } else if (msg.type === 'positions') {
         const arr = new Float32Array(msg.buffer);
         const attr = points.geometry.getAttribute('position') as THREE.BufferAttribute;
@@ -125,6 +157,10 @@ export function LiveField() {
         const norad = noradsRef.current[idx];
         const name = namesRef.current[idx];
         if (norad && name) {
+          const owner = ownerInfo(satcatOwner(norad));
+          console.info(
+            `[livefield] selected #${norad} "${name}" idx=${idx} owner=${satcatOwner(norad) ?? '?'} ${owner.flag} ${owner.name}`,
+          );
           useSimStore.getState().select({
             index: idx,
             norad,
@@ -132,44 +168,27 @@ export function LiveField() {
             line1: line1Ref.current[idx],
             line2: line2Ref.current[idx],
           });
-          
-          // Highlight selected satellite
+
+          // Restore the scheme colours, then highlight the selected dot.
+          paintColorsRef.current();
           const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
           const colorAttr = points.geometry.getAttribute('aColor') as THREE.BufferAttribute;
           const sizes = sizeAttr.array as Float32Array;
           const colors = colorAttr.array as Float32Array;
-          
-          // Reset all sizes and colors
-          for (let i = 0; i < sizes.length; i++) {
-            sizes[i] = POINT_SIZE;
-            colors[i * 3] = 1;
-            colors[i * 3 + 1] = 1;
-            colors[i * 3 + 2] = 1;
-          }
-          
-          // Highlight selected
           sizes[idx] = SELECTED_POINT_SIZE;
           colors[idx * 3] = 0.2;
           colors[idx * 3 + 1] = 1.0;
           colors[idx * 3 + 2] = 0.3;
-          
           sizeAttr.needsUpdate = true;
           colorAttr.needsUpdate = true;
         }
       } else {
-        // Deselect
+        // Deselect — restore scheme colours + default sizes.
         useSimStore.getState().select(null);
         const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
-        const colorAttr = points.geometry.getAttribute('aColor') as THREE.BufferAttribute;
         (sizeAttr.array as Float32Array).fill(POINT_SIZE);
-        const colors = colorAttr.array as Float32Array;
-        for (let i = 0; i < colors.length; i += 3) {
-          colors[i] = 1;
-          colors[i + 1] = 1;
-          colors[i + 2] = 1;
-        }
         sizeAttr.needsUpdate = true;
-        colorAttr.needsUpdate = true;
+        paintColorsRef.current();
       }
     };
 
@@ -187,6 +206,14 @@ export function LiveField() {
       (points.material as THREE.Material).dispose();
     };
   }, [worker, points, gl, camera, raycaster, mouse]);
+
+  // Repaint all dots when the user changes the colour scheme.
+  useEffect(() => {
+    const unsub = useSimStore.subscribe((s, prev) => {
+      if (s.colorScheme !== prev.colorScheme) paintColorsRef.current();
+    });
+    return unsub;
+  }, []);
 
   useFrame((_, delta) => {
     const st = useSimStore.getState();
@@ -206,33 +233,8 @@ export function LiveField() {
       worker.postMessage({ type: 'tick', time: t });
     }
 
-    // Update colors based on active color scheme
-    const colorScheme = COLOR_SCHEMES[st.colorScheme];
-    if (colorScheme && noradsRef.current.length > 0) {
-      const colorAttr = points.geometry.getAttribute('aColor') as THREE.BufferAttribute;
-      const colors = colorAttr.array as Float32Array;
-      
-      // Apply color scheme (simplified - in production, get full satellite data)
-      for (let i = 0; i < Math.min(noradsRef.current.length, 100); i++) {
-        const satData: SatelliteData = {
-          id: i,
-          norad: noradsRef.current[i],
-          name: namesRef.current[i],
-          type: 'PAYLOAD', // Simplified - would need actual type data
-        };
-        
-        const colorInfo = colorScheme.getColor(satData, {
-          satellites: [],
-          selectedId: st.selection?.index
-        });
-        
-        colors[i * 3] = colorInfo.color[0];
-        colors[i * 3 + 1] = colorInfo.color[1];
-        colors[i * 3 + 2] = colorInfo.color[2];
-      }
-      
-      colorAttr.needsUpdate = true;
-    }
+    // Colours are painted once on catalogue/SATCAT load and on scheme change
+    // (see paintColors / the colorScheme subscription) — not per frame.
 
     // Time Machine — sweep through real launch history, hiding objects
     // that haven't reached orbit yet (by real TLE launch year).

@@ -54,9 +54,11 @@ export function CustomSatField() {
       const marker = markers[i];
       if (p && typeof p !== 'boolean') {
         marker.position.set(p.x * KM_TO_SCENE, p.z * KM_TO_SCENE, -p.y * KM_TO_SCENE);
-        marker.visible = true;
-        // Feed selectedPos for a selected custom sat so the camera tracks it.
-        if (st.selection && st.selection.index === -1 && st.selection.norad === entry.sat.id) {
+        const isSelected = st.selection?.index === -1 && st.selection?.norad === entry.sat.id;
+        // Hide the dot when selected — the real 3D model (EnhancedSatelliteModel)
+        // renders in its place.
+        marker.visible = !isSelected;
+        if (isSelected) {
           st.setSelectedPos([marker.position.x, marker.position.y, marker.position.z]);
         }
       } else {
