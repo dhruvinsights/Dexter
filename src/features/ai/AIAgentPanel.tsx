@@ -51,12 +51,37 @@ export function AIAgentPanel() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages]);
 
-  const currentMetrics = (): Record<string, unknown> => ({
-    scenario_id: scenarioId,
-    simulation_years: output.simulation_years,
-    final_total: output.total_objects_per_year.at(-1) ?? null,
-    total_collisions: output.total_collisions_per_year.reduce((a, b) => a + b, 0),
-  });
+  // Derive the indicator fields the backend prompt expects (see
+  // backend/ai/prompts.py → validate_metrics) from the real physics output.
+  const currentMetrics = (): Record<string, unknown> => {
+    const years = output.simulation_years || 1;
+    const objs = output.total_objects_per_year;
+    const cols = output.total_collisions_per_year;
+    const sum = (rows: number[][], t: number) => rows[t]?.reduce((a, b) => a + b, 0) ?? 0;
+
+    const initialObj = objs[0] ?? 0;
+    const finalObj = objs.at(-1) ?? initialObj;
+    const debris0 = sum(output.debris_per_shell, 0);
+    const debrisN = sum(output.debris_per_shell, output.debris_per_shell.length - 1);
+    const totalCollisions = cols.reduce((a, b) => a + b, 0);
+
+    const collisionFrequency = Number((totalCollisions / years).toFixed(2)); // avg collisions/yr
+    const debrisGrowthPct = debris0 > 0 ? Number((((debrisN - debris0) / debris0) * 100).toFixed(1)) : 0;
+    // Survivability: inverse-risk proxy from collision pressure (0–100).
+    const survivabilityPct = Number(Math.max(0, 100 - collisionFrequency * 4).toFixed(1));
+    // Congestion: object count relative to a heavily-congested reference (~70k).
+    const congestionIndex = Number(Math.min(1, finalObj / 70000).toFixed(2));
+
+    return {
+      scenario_id: scenarioId,
+      collision_frequency: collisionFrequency,
+      debris_growth_pct: debrisGrowthPct,
+      survivability_pct: survivabilityPct,
+      congestion_index: congestionIndex,
+      simulation_years: years,
+      final_total: finalObj,
+    };
+  };
 
   const runAnalysis = async (type: AnalysisType) => {
     if (busy) return;

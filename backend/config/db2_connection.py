@@ -7,8 +7,20 @@ import time
 import logging
 from typing import Optional, Any
 from contextlib import contextmanager
-import ibm_db
-import ibm_db_dbi
+
+# ibm_db requires the IBM Db2 client libraries, which are not always present
+# (e.g. local macOS dev without the clidriver). Import it lazily/optionally so
+# the API server can still boot and serve the AI/Ollama endpoints; only the
+# RAG/persistence paths that actually touch Db2 will be unavailable.
+try:
+    import ibm_db  # type: ignore
+    import ibm_db_dbi  # type: ignore
+    IBM_DB_AVAILABLE = True
+except ImportError:  # pragma: no cover - environment dependent
+    ibm_db = None  # type: ignore
+    ibm_db_dbi = None  # type: ignore
+    IBM_DB_AVAILABLE = False
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -231,12 +243,18 @@ def get_db_connection() -> Db2Connection:
         Db2Connection instance
     """
     global _db_instance
-    
+
+    if not IBM_DB_AVAILABLE:
+        raise RuntimeError(
+            "ibm_db is not installed — Db2-backed features (RAG/persistence) are "
+            "unavailable. Install the IBM Db2 client + `pip install ibm-db` to enable them."
+        )
+
     if _db_instance is None:
         _db_instance = Db2Connection()
         if not _db_instance.connect():
             raise RuntimeError("Failed to establish database connection")
-    
+
     return _db_instance
 
 

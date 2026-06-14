@@ -4,8 +4,12 @@ pydantic>=2.0.0
 pydantic-settings>=2.0.0
 
 # Database
-ibm-db>=3.1.0
-ibm-db-dbi>=3.1.0
+# Requires Python >= 3.10 on Apple Silicon (arm64 wheels ship from 3.10+; 3.9
+# has no arm64 wheel and falls back to a source build needing the CLI driver).
+# Note: ibm_db_dbi is bundled INSIDE the ibm-db wheel — not a separate package.
+ibm-db>=3.2.0
+ollama>=0.3.0
+python-multipart>=0.0.6
 
 # AI/ML
 httpx>=0.24.0
