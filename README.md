@@ -1,3 +1,4 @@
+<img width="1536" height="1024" alt="Dexter" src="https://github.com/user-attachments/assets/deebb53e-4c0d-4a4a-a98b-134066260c79" />
 # Dexter: Orbital Sustainability Platform
 
 **A real-time map of everything humanity has left in orbit, and a physics engine that projects where it is heading.**
