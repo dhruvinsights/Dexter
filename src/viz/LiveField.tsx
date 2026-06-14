@@ -8,8 +8,8 @@ import { ownerInfo } from '@/lib/owners';
 // Removed MAX_OBJECTS limit to load all available satellites from CelesTrak
 const MAX_OBJECTS = 20000; // Increased to accommodate all CelesTrak satellites (~15,699)
 const UPDATE_INTERVAL_MS = 300; // re-propagate ~3×/s (screen motion is slow at this scale)
-const POINT_SIZE = 0.035;
-const SELECTED_POINT_SIZE = 0.08;
+const POINT_SIZE = 0.05;
+const SELECTED_POINT_SIZE = 0.1;
 
 const vertexShader = /* glsl */ `
   attribute float aSize;
@@ -18,7 +18,7 @@ const vertexShader = /* glsl */ `
   void main() {
     vColor = aColor;
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = aSize * (300.0 / -mv.z);
+    gl_PointSize = max(aSize * (300.0 / -mv.z), 2.0);
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -121,7 +121,7 @@ export function LiveField() {
         launchYearsRef.current = Int16Array.from(msg.launchYears as number[]);
         points.geometry.setDrawRange(0, msg.count);
         useSimStore.getState().setLiveCount(msg.count);
-        useSimStore.getState().setCatalogueReady(false, `Propagating ${msg.count.toLocaleString()} objects…`);
+        useSimStore.getState().setCatalogueReady(true, 'Ready');
         console.info(`[boot] catalogue parsed: ${msg.count} objects — propagating first epoch (SGP4)`);
         // Colour once now, then re-paint when the catalogue metadata arrives.
         paintColors();
@@ -155,12 +155,6 @@ export function LiveField() {
         (attr.array as Float32Array).set(arr.subarray(0, MAX_OBJECTS * 3));
         attr.needsUpdate = true;
         busy.current = false;
-
-        // First propagated frame → the sky is populated; release the loader.
-        if (!useSimStore.getState().catalogueReady) {
-          useSimStore.getState().setCatalogueReady(true, 'Ready');
-          console.info('[boot] first positions propagated — live sky ready');
-        }
 
         // Feed the selected object's real scene position to the store so the
         // 3D model + camera fly-to can track it.
