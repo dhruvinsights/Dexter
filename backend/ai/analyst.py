@@ -1,10 +1,10 @@
 """
-Analysis Service - Orchestrates AI Agent Analysis
+Analysis Service - Orchestrates AI Agent Analysis with RAG
 Routes requests to appropriate agents and manages response generation
 """
 import logging
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List, Dict, Any
 import sys
 from pathlib import Path
 
@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from ai.llm_client import get_llm_client
+from ai.data_service import AIDataService
 from ai.prompts import (
     build_risk_assessment_prompt,
     build_recommendation_prompt,
@@ -31,16 +32,17 @@ logger = logging.getLogger(__name__)
 
 
 class AnalysisService:
-    """Service for orchestrating AI analysis"""
+    """Service for orchestrating AI analysis with RAG"""
     
     def __init__(self):
         """Initialize analysis service"""
         self.llm = get_llm_client()
-        logger.info("Analysis service initialized")
+        self.data_service = AIDataService()
+        logger.info("Analysis service initialized with RAG support")
     
     async def run_analysis(self, request: AnalysisRequest) -> AnalysisResponse:
         """
-        Run AI analysis based on request type
+        Run AI analysis based on request type with RAG
         
         Args:
             request: Analysis request with type and metrics
@@ -52,11 +54,17 @@ class AnalysisService:
         
         try:
             # Build appropriate prompt based on analysis type
-            prompt = self._build_prompt(request)
+            base_prompt = self._build_prompt(request)
             
-            # Generate response using LLM
-            logger.info(f"Generating {request.analysis_type} analysis...")
-            content = await self.llm.generate(prompt)
+            # Retrieve relevant documents from database (RAG)
+            relevant_docs = self._retrieve_relevant_documents(request.analysis_type)
+            
+            # Enhance prompt with retrieved context
+            enhanced_prompt = self._enhance_prompt_with_context(base_prompt, relevant_docs)
+            
+            # Generate response using LLM with enhanced prompt
+            logger.info(f"Generating {request.analysis_type} analysis with RAG context...")
+            content = await self.llm.generate(enhanced_prompt)
             
             # Calculate latency
             latency = (datetime.utcnow() - start_time).total_seconds()
@@ -71,12 +79,97 @@ class AnalysisService:
                 latency_seconds=round(latency, 2)
             )
             
-            logger.info(f"✓ Analysis complete in {latency:.2f}s")
+            logger.info(f"✓ Analysis complete in {latency:.2f}s (with RAG)")
             return response
             
         except Exception as e:
             logger.error(f"Error during analysis: {e}", exc_info=True)
             raise
+    
+    def _retrieve_relevant_documents(self, analysis_type: AnalysisType) -> List[Dict[str, Any]]:
+        """
+        Retrieve relevant documents from database based on analysis type
+        
+        Args:
+            analysis_type: Type of analysis being performed
+            
+        Returns:
+            List of relevant document dictionaries
+        """
+        try:
+            # Define search terms based on analysis type
+            search_terms = {
+                AnalysisType.RISK_ASSESSMENT: "risk collision debris mitigation",
+                AnalysisType.SUSTAINABILITY_ANALYSIS: "sustainability orbital environment guidelines",
+                AnalysisType.RECOMMENDATION: "policy recommendation standards",
+                AnalysisType.EXECUTIVE_SUMMARY: "orbital debris space sustainability"
+            }
+            
+            search_term = search_terms.get(analysis_type, "orbital debris")
+            
+            # Retrieve documents from database
+            logger.info(f"Retrieving documents from DB2 for: {search_term}")
+            documents = self.data_service.get_policy_documents(search_term=search_term)
+            
+            if documents:
+                logger.info(f"✓ Retrieved {len(documents)} relevant documents from DB2")
+            else:
+                logger.warning("No documents found in database - proceeding without RAG context")
+            
+            return documents[:3]  # Limit to top 3 most relevant documents
+            
+        except Exception as e:
+            logger.error(f"Error retrieving documents: {e}")
+            return []  # Return empty list if retrieval fails
+    
+    def _enhance_prompt_with_context(self, base_prompt: str, documents: List[Dict[str, Any]]) -> str:
+        """
+        Enhance prompt with retrieved document context
+        
+        Args:
+            base_prompt: Original prompt
+            documents: Retrieved documents from database
+            
+        Returns:
+            Enhanced prompt with context
+        """
+        if not documents:
+            return base_prompt
+        
+        # Build context section from retrieved documents
+        context_parts = []
+        for i, doc in enumerate(documents, 1):
+            title = doc.get('title', 'Unknown Document')
+            content = doc.get('content', '')
+            
+            # Truncate content to avoid token limits (max 1000 chars per doc)
+            content_preview = content[:1000] + "..." if len(content) > 1000 else content
+            
+            context_parts.append(f"""
+Document {i}: {title}
+---
+{content_preview}
+""")
+        
+        context_section = "\n".join(context_parts)
+        
+        # Combine context with original prompt
+        enhanced_prompt = f"""You are an expert orbital sustainability analyst. Use the following authoritative documents as context for your analysis:
+
+=== KNOWLEDGE BASE CONTEXT ===
+{context_section}
+
+=== END CONTEXT ===
+
+Now, based on the above context and your expertise, please provide the following analysis:
+
+{base_prompt}
+
+Remember to cite specific guidelines, standards, or recommendations from the context documents when relevant.
+"""
+        
+        logger.info(f"✓ Enhanced prompt with {len(documents)} documents ({len(context_section)} chars of context)")
+        return enhanced_prompt
     
     def _build_prompt(self, request: AnalysisRequest) -> str:
         """
@@ -119,7 +212,7 @@ class AnalysisService:
     
     async def stream_analysis(self, request: AnalysisRequest):
         """
-        Stream analysis tokens in real-time
+        Stream analysis tokens in real-time with RAG
         
         Args:
             request: Analysis request
@@ -128,12 +221,18 @@ class AnalysisService:
             Text tokens as they are generated
         """
         try:
-            # Build prompt
-            prompt = self._build_prompt(request)
+            # Build base prompt
+            base_prompt = self._build_prompt(request)
             
-            # Stream response
-            logger.info(f"Streaming {request.analysis_type} analysis...")
-            async for token in self.llm.stream(prompt):
+            # Retrieve relevant documents (RAG)
+            relevant_docs = self._retrieve_relevant_documents(request.analysis_type)
+            
+            # Enhance prompt with context
+            enhanced_prompt = self._enhance_prompt_with_context(base_prompt, relevant_docs)
+            
+            # Stream response with enhanced prompt
+            logger.info(f"Streaming {request.analysis_type} analysis with RAG context...")
+            async for token in self.llm.stream(enhanced_prompt):
                 yield token
                 
         except Exception as e:
