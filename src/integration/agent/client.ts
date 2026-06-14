@@ -38,56 +38,142 @@ export interface AgentHealthCheck {
   timestamp: string;
 }
 
-const DEFAULT_BASE = (import.meta.env.VITE_AI_API_URL as string | undefined) ?? 'http://localhost:8000';
+// Backend resolution with automatic failover. Render is the hosted default,
+// Railway is the hosted fallback, and localhost remains available for local
+// backend development. A manual Settings override always wins.
+export const RENDER_BACKEND_URL = 'https://dexter-space.onrender.com';
+export const RAILWAY_BACKEND_URL = 'https://dexter-production-ff80.up.railway.app';
+export const LOCAL_BACKEND_URL = 'http://localhost:8000';
 
-function baseUrl(): string {
-  // Allow runtime override from the Settings panel without a rebuild.
-  try {
-    return localStorage.getItem('dexter.aiApiUrl') || DEFAULT_BASE;
-  } catch {
-    return DEFAULT_BASE;
-  }
+const PRIMARY_BASE =
+  (import.meta.env.VITE_AI_API_URL as string | undefined)?.replace(/\/+$/, '') || RENDER_BACKEND_URL;
+const FALLBACK_BASE =
+  (import.meta.env.VITE_AI_API_FALLBACK_URL as string | undefined)?.replace(/\/+$/, '') || RAILWAY_BACKEND_URL;
+
+let activeBase = PRIMARY_BASE;
+
+function normalizeBase(url: string): string {
+  return url.replace(/\/+$/, '');
 }
 
-export function setApiUrl(url: string): void {
+/** Ordered, de-duped candidates: manual override → primary → fallback → localhost. */
+function candidates(): string[] {
+  const list: string[] = [];
   try {
-    localStorage.setItem('dexter.aiApiUrl', url);
+    const override = localStorage.getItem('dexter.aiApiUrl');
+    if (override) list.push(normalizeBase(override));
   } catch {
     /* ignore */
   }
+  list.push(PRIMARY_BASE, FALLBACK_BASE, LOCAL_BACKEND_URL);
+  return [...new Set(list.filter(Boolean).map(normalizeBase))];
+}
+
+export function getBackendOptions(): Array<{ label: string; url: string }> {
+  return [
+    { label: 'Render (default)', url: RENDER_BACKEND_URL },
+    { label: 'Railway', url: RAILWAY_BACKEND_URL },
+    { label: 'Local development', url: LOCAL_BACKEND_URL },
+  ];
+}
+
+export function setApiUrl(url: string): void {
+  const clean = normalizeBase(url);
+  try {
+    localStorage.setItem('dexter.aiApiUrl', clean);
+  } catch {
+    /* ignore */
+  }
+  activeBase = clean;
 }
 
 export function getApiUrl(): string {
-  return baseUrl();
+  try {
+    const override = localStorage.getItem('dexter.aiApiUrl');
+    if (override) {
+      activeBase = normalizeBase(override);
+    }
+  } catch {
+    /* ignore */
+  }
+  return activeBase;
+}
+
+function baseUrl(): string {
+  return getApiUrl();
+}
+
+/** HTTP error from a *reachable* backend — distinct from a network failure. */
+class HttpError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
+
+/**
+ * Run a request against the active backend; on a network failure (backend
+ * unreachable) transparently retry the next candidate and pin it as active.
+ * A real HTTP error (429/500/…) is surfaced as-is — both backends share the
+ * same provider, so failing over wouldn't help.
+ */
+async function withFailover<T>(run: (base: string) => Promise<T>): Promise<T> {
+  const ordered = [activeBase, ...candidates().filter((b) => b !== activeBase)];
+  let lastErr: unknown;
+  for (const base of ordered) {
+    try {
+      const out = await run(base);
+      activeBase = base;
+      return out;
+    } catch (e) {
+      lastErr = e;
+      if (e instanceof HttpError) {
+        activeBase = base; // reachable — stop probing other bases
+        throw e;
+      }
+      // network error → try the next candidate
+    }
+  }
+  throw lastErr;
+}
+
+async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
+  return withFailover(async (base) => {
+    const res = await fetch(`${base}${path}`, init);
+    if (!res.ok) throw new HttpError(res.status, `${res.status} ${res.statusText}`);
+    return res.json() as Promise<T>;
+  });
 }
 
 async function postJson<T>(path: string, body: unknown, signal?: AbortSignal): Promise<T> {
-  const res = await fetch(`${baseUrl()}${path}`, {
+  return fetchJson<T>(path, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
     signal,
   });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  return res.json() as Promise<T>;
 }
 
 export async function health(signal?: AbortSignal): Promise<AgentHealthCheck> {
-  try {
-    const res = await fetch(`${baseUrl()}/api/ai/health`, { signal });
-    if (!res.ok) throw new Error(String(res.status));
-    return (await res.json()) as AgentHealthCheck;
-  } catch {
-    return {
-      status: 'offline',
-      llm_available: false,
-      embedding_available: false,
-      db_available: false,
-      model_name: 'unknown',
-      embedding_model: 'unknown',
-      timestamp: new Date().toISOString(),
-    };
+  // Probe candidates in order; first reachable one becomes the active backend.
+  for (const base of candidates()) {
+    try {
+      const res = await fetch(`${base}/api/ai/health`, { signal });
+      if (!res.ok) continue;
+      activeBase = base;
+      return (await res.json()) as AgentHealthCheck;
+    } catch {
+      /* unreachable — try next candidate */
+    }
   }
+  return {
+    status: 'offline',
+    llm_available: false,
+    embedding_available: false,
+    db_available: false,
+    model_name: 'unknown',
+    embedding_model: 'unknown',
+    timestamp: new Date().toISOString(),
+  };
 }
 
 export async function analyze(

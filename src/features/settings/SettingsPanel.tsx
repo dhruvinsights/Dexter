@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { PanelShell } from '@/features/shell/PanelShell';
-import { getApiUrl, setApiUrl, health, configureAI, type AgentHealthCheck } from '@/integration/agent/client';
+import {
+  getApiUrl,
+  setApiUrl,
+  health,
+  configureAI,
+  getBackendOptions,
+  type AgentHealthCheck,
+} from '@/integration/agent/client';
 import { play } from '@/lib/sound';
 
 /**
@@ -112,9 +119,34 @@ export function SettingsPanel() {
     <PanelShell title="Settings" subtitle="AI · models · vector database" width="w-96">
       <div className="space-y-6 p-4">
         <Section title="AI Backend">
+          <Field label="Hosted backends">
+            <div className="grid gap-2">
+              {getBackendOptions().map((option) => {
+                const selected = conf.apiUrl.replace(/\/+$/, '') === option.url;
+                return (
+                  <button
+                    key={option.url}
+                    type="button"
+                    onClick={() => set('apiUrl', option.url)}
+                    className={`rounded border px-3 py-2 text-left transition-colors ${
+                      selected
+                        ? 'border-[#00ff88]/40 bg-[#00ff88]/10 text-[#00ff88]'
+                        : 'border-[#1f1f1f] bg-black/30 text-neutral-400 hover:text-white'
+                    }`}
+                  >
+                    <div className="font-mono text-[10px] uppercase tracking-wider">{option.label}</div>
+                    <div className="mt-1 font-mono text-[10px] normal-case tracking-normal text-inherit">{option.url}</div>
+                  </button>
+                );
+              })}
+            </div>
+          </Field>
           <Field label="API endpoint">
             <input className={inputCls} value={conf.apiUrl} onChange={(e) => set('apiUrl', e.target.value)} />
           </Field>
+          <p className="font-mono text-[9px] text-neutral-600">
+            Switch between Render and Railway at runtime from this panel, then save configuration to make the selected backend active.
+          </p>
           <div className="flex items-center justify-between rounded border border-[#1f1f1f] bg-black/40 px-3 py-2">
             <span className="font-mono text-[10px] text-neutral-400">backend status</span>
             <span className="flex items-center gap-1.5 font-mono text-[10px] text-white">
