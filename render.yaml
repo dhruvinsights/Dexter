@@ -23,8 +23,9 @@ services:
         value: gemini
       - key: GEMINI_API_KEY
         sync: false
+      # Use a FLASH model — gemini-*-pro has a free-tier quota of 0 (needs billing).
       - key: GEMINI_MODEL
-        value: gemini-1.5-flash-latest
+        value: gemini-2.5-flash
 
       - key: ENVIRONMENT
         value: production

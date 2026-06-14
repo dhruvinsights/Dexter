@@ -36,6 +36,23 @@ The AI provider **cannot be Ollama** in the cloud (Ollama is local-only), so the
 
 ---
 
+## 1b. Backend → Railway (alternative to Render)
+
+Railway reads [`backend/railway.json`](backend/railway.json) and pins Python via [`backend/.python-version`](backend/.python-version).
+
+1. Railway → **New Project** → **Deploy from GitHub repo** → pick this repo.
+2. Open the service → **Settings** → set **Root Directory** to `backend` (so Nixpacks finds `requirements.txt`, not the frontend's `package.json`).
+3. **Variables** tab — add these manually (Railway does **not** read `render.yaml`, so unlike Render you set all three, not just the key):
+   - `AI_PROVIDER` = `gemini`
+   - `GEMINI_MODEL` = `gemini-2.5-flash`
+   - `GEMINI_API_KEY` = your key (secret)
+4. **Networking** → **Generate Domain** to get a public URL (`https://…up.railway.app`). Railway injects `$PORT` automatically; the start command in `railway.json` uses it.
+5. Same cloud behaviour/limits as the Render section above (AI works via Gemini; DB2/RAG off; do **not** set `DB2_*` or `OLLAMA_*`).
+
+> Whichever host you keep (Render *or* Railway), use **its** URL as the frontend's `VITE_AI_API_URL`.
+
+---
+
 ## 2. Frontend → Vercel **or** Netlify
 
 Pick one. Both configs are included and both handle the SPA fallback.
@@ -71,3 +88,4 @@ Pick one. Both configs are included and both handle the SPA fallback.
 - **Backend build fails on `ibm-db`** — it's only used for DB2/RAG, which is disabled in the cloud anyway. Comment out `ibm-db` in [`backend/requirements.txt`](backend/requirements.txt) and redeploy; everything else still works.
 - **AI panel says "offline"** — check `VITE_AI_API_URL` is set and matches the Render URL (no trailing slash), and that `GEMINI_API_KEY` is set on Render. The Render free tier may also be cold-starting (wait ~50s).
 - **Blank 3D scene / no satellites** — confirm `public/tle/TLE.txt` and `public/satcat.json` are committed (they are) so the build includes them.
+- **AI returns `429 ... limit: 0, model: gemini-*-pro`** — the Gemini **free tier allows 0 requests for `pro` models**. Set `GEMINI_MODEL=gemini-2.5-flash` (or `gemini-2.0-flash`) on the host and restart.
