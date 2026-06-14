@@ -44,38 +44,35 @@ class AIDataService:
             List of shell statistics dictionaries
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            if shell_name:
-                query = """
-                    SELECT shell_name, altitude_min_km, altitude_max_km,
-                           total_objects, active_satellites, debris_count,
-                           collision_probability, last_updated
-                    FROM orbital_shell_stats
-                    WHERE shell_name = ?
-                    ORDER BY last_updated DESC
-                    LIMIT 1
-                """
-                cursor.execute(query, (shell_name,))
-            else:
-                query = """
-                    SELECT shell_name, altitude_min_km, altitude_max_km,
-                           total_objects, active_satellites, debris_count,
-                           collision_probability, last_updated
-                    FROM orbital_shell_stats
-                    ORDER BY altitude_min_km
-                """
-                cursor.execute(query)
-            
-            columns = [desc[0] for desc in cursor.description]
-            results = []
-            
-            for row in cursor.fetchall():
-                results.append(dict(zip(columns, row)))
-            
-            cursor.close()
-            return results
+            with self.db.get_cursor() as cursor:
+                if shell_name:
+                    query = """
+                        SELECT shell_name, altitude_min_km, altitude_max_km,
+                               total_objects, active_satellites, debris_count,
+                               collision_probability, last_updated
+                        FROM orbital_shell_stats
+                        WHERE shell_name = ?
+                        ORDER BY last_updated DESC
+                        LIMIT 1
+                    """
+                    cursor.execute(query, (shell_name,))
+                else:
+                    query = """
+                        SELECT shell_name, altitude_min_km, altitude_max_km,
+                               total_objects, active_satellites, debris_count,
+                               collision_probability, last_updated
+                        FROM orbital_shell_stats
+                        ORDER BY altitude_min_km
+                    """
+                    cursor.execute(query)
+                
+                columns = [desc[0] for desc in cursor.description]
+                results = []
+                
+                for row in cursor.fetchall():
+                    results.append(dict(zip(columns, row)))
+                
+                return results
             
         except Exception as e:
             logger.error(f"Error fetching shell stats: {e}")
@@ -92,26 +89,23 @@ class AIDataService:
             List of debris event dictionaries
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            query = """
-                SELECT event_id, event_type, event_date, parent_object_id,
-                       altitude_km, debris_count, event_description
-                FROM debris_events
-                ORDER BY event_date DESC
-                LIMIT ?
-            """
-            cursor.execute(query, (limit,))
-            
-            columns = [desc[0] for desc in cursor.description]
-            results = []
-            
-            for row in cursor.fetchall():
-                results.append(dict(zip(columns, row)))
-            
-            cursor.close()
-            return results
+            with self.db.get_cursor() as cursor:
+                query = """
+                    SELECT event_id, event_type, event_date, parent_object_id,
+                           altitude_km, debris_count, event_description
+                    FROM debris_events
+                    ORDER BY event_date DESC
+                    LIMIT ?
+                """
+                cursor.execute(query, (limit,))
+                
+                columns = [desc[0] for desc in cursor.description]
+                results = []
+                
+                for row in cursor.fetchall():
+                    results.append(dict(zip(columns, row)))
+                
+                return results
             
         except Exception as e:
             logger.error(f"Error fetching debris events: {e}")
@@ -133,28 +127,25 @@ class AIDataService:
             Cached analysis dictionary or None
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            query = """
-                SELECT analysis_id, scenario_id, analysis_type,
-                       analysis_content, model_used, generated_at,
-                       confidence_score
-                FROM ai_analysis_cache
-                WHERE scenario_id = ? AND analysis_type = ?
-                ORDER BY generated_at DESC
-                LIMIT 1
-            """
-            cursor.execute(query, (scenario_id, analysis_type))
-            
-            row = cursor.fetchone()
-            cursor.close()
-            
-            if row:
-                columns = [desc[0] for desc in cursor.description]
-                return dict(zip(columns, row))
-            
-            return None
+            with self.db.get_cursor() as cursor:
+                query = """
+                    SELECT analysis_id, scenario_id, analysis_type,
+                           analysis_content, model_used, generated_at,
+                           confidence_score
+                    FROM ai_analysis_cache
+                    WHERE scenario_id = ? AND analysis_type = ?
+                    ORDER BY generated_at DESC
+                    LIMIT 1
+                """
+                cursor.execute(query, (scenario_id, analysis_type))
+                
+                row = cursor.fetchone()
+                
+                if row:
+                    columns = [desc[0] for desc in cursor.description]
+                    return dict(zip(columns, row))
+                
+                return None
             
         except Exception as e:
             logger.error(f"Error fetching cached analysis: {e}")
@@ -182,30 +173,25 @@ class AIDataService:
             True if successful
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            query = """
-                INSERT INTO ai_analysis_cache
-                (scenario_id, analysis_type, analysis_content, model_used,
-                 generated_at, confidence_score)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """
-            
-            cursor.execute(query, (
-                scenario_id,
-                analysis_type,
-                content,
-                model_used,
-                datetime.utcnow(),
-                confidence_score
-            ))
-            
-            conn.commit()
-            cursor.close()
-            
-            logger.info(f"Cached analysis: {scenario_id}/{analysis_type}")
-            return True
+            with self.db.get_cursor() as cursor:
+                query = """
+                    INSERT INTO ai_analysis_cache
+                    (scenario_id, analysis_type, analysis_content, model_used,
+                     generated_at, confidence_score)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """
+                
+                cursor.execute(query, (
+                    scenario_id,
+                    analysis_type,
+                    content,
+                    model_used,
+                    datetime.utcnow(),
+                    confidence_score
+                ))
+                
+                logger.info(f"Cached analysis: {scenario_id}/{analysis_type}")
+                return True
             
         except Exception as e:
             logger.error(f"Error caching analysis: {e}")
@@ -225,34 +211,31 @@ class AIDataService:
             List of policy document dictionaries
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            if search_term:
-                query = """
-                    SELECT doc_id, title, source, content, created_at
-                    FROM policy_documents
-                    WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ?
-                    ORDER BY created_at DESC
-                """
-                search_pattern = f"%{search_term.lower()}%"
-                cursor.execute(query, (search_pattern, search_pattern))
-            else:
-                query = """
-                    SELECT doc_id, title, source, content, created_at
-                    FROM policy_documents
-                    ORDER BY created_at DESC
-                """
-                cursor.execute(query)
-            
-            columns = [desc[0] for desc in cursor.description]
-            results = []
-            
-            for row in cursor.fetchall():
-                results.append(dict(zip(columns, row)))
-            
-            cursor.close()
-            return results
+            with self.db.get_cursor() as cursor:
+                if search_term:
+                    query = """
+                        SELECT doc_id, title, source, content, created_at
+                        FROM policy_documents
+                        WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ?
+                        ORDER BY created_at DESC
+                    """
+                    search_pattern = f"%{search_term.lower()}%"
+                    cursor.execute(query, (search_pattern, search_pattern))
+                else:
+                    query = """
+                        SELECT doc_id, title, source, content, created_at
+                        FROM policy_documents
+                        ORDER BY created_at DESC
+                    """
+                    cursor.execute(query)
+                
+                columns = [desc[0] for desc in cursor.description]
+                results = []
+                
+                for row in cursor.fetchall():
+                    results.append(dict(zip(columns, row)))
+                
+                return results
             
         except Exception as e:
             logger.error(f"Error fetching policy documents: {e}")
@@ -266,22 +249,19 @@ class AIDataService:
             Dictionary mapping shell names to satellite counts
         """
         try:
-            conn = self.db.get_connection()
-            cursor = conn.cursor()
-            
-            query = """
-                SELECT shell_name, active_satellites
-                FROM orbital_shell_stats
-                ORDER BY altitude_min_km
-            """
-            cursor.execute(query)
-            
-            result = {}
-            for row in cursor.fetchall():
-                result[row[0]] = row[1]
-            
-            cursor.close()
-            return result
+            with self.db.get_cursor() as cursor:
+                query = """
+                    SELECT shell_name, active_satellites
+                    FROM orbital_shell_stats
+                    ORDER BY altitude_min_km
+                """
+                cursor.execute(query)
+                
+                result = {}
+                for row in cursor.fetchall():
+                    result[row[0]] = row[1]
+                
+                return result
             
         except Exception as e:
             logger.error(f"Error fetching satellite counts: {e}")
