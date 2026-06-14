@@ -1,196 +1,190 @@
 """
-Ollama LLM Client for Orbital Sentinel
-Provides text generation using Ollama with Granite model
+Universal LLM Client for Orbital Sentinel
+Supports Ollama, OpenAI, Gemini, and custom providers with runtime reconfiguration
 """
-import os
 import logging
 from typing import Optional, AsyncGenerator
-import ollama
-from dotenv import load_dotenv
-
-load_dotenv()
+from .runtime_config import get_runtime_config, AIProviderConfig
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class OllamaLLMClient:
-    """Client for LLM text generation using Ollama"""
+class UniversalLLMClient:
+    """Universal client that supports multiple LLM providers with runtime reconfiguration"""
     
     def __init__(self):
-        """Initialize Ollama LLM client with configuration from environment"""
-        self.base_url = os.getenv('OLLAMA_BASE_URL', 'http://localhost:11434')
-        self.model = os.getenv('OLLAMA_MODEL', 'granite-code:8b')
-        self.temperature = float(os.getenv('AI_TEMPERATURE', '0.3'))
-        self.max_tokens = int(os.getenv('AI_MAX_TOKENS', '1024'))
-        self.top_p = float(os.getenv('AI_TOP_P', '0.9'))
-        self.timeout = int(os.getenv('OLLAMA_TIMEOUT', '120'))
+        """Initialize LLM client based on runtime configuration"""
+        self._client = None
+        self._current_config = None
+        self._initialize_client()
+    
+    def _initialize_client(self):
+        """Initialize or reinitialize the client based on current configuration"""
+        config = get_runtime_config().get_config()
         
-        # Initialize client
-        self.client = ollama.Client(host=self.base_url)
+        # Skip reinitialization if config hasn't changed
+        if self._current_config == config:
+            return
         
-        logger.info(f"Ollama LLM client initialized")
-        logger.info(f"  Base URL: {self.base_url}")
-        logger.info(f"  Model: {self.model}")
-        logger.info(f"  Temperature: {self.temperature}")
-        logger.info(f"  Max tokens: {self.max_tokens}")
+        self._current_config = config
+        provider = config.provider.lower()
+        
+        logger.info(f"Initializing LLM client with provider: {provider}")
+        
+        try:
+            if provider == 'ollama':
+                self._init_ollama(config)
+            elif provider == 'openai':
+                self._init_openai(config)
+            elif provider == 'gemini':
+                self._init_gemini(config)
+            elif provider == 'custom':
+                self._init_custom(config)
+            else:
+                raise ValueError(f"Unsupported AI provider: {provider}")
+            
+            logger.info(f"✓ LLM client initialized successfully with {provider}")
+        except Exception as e:
+            logger.error(f"Failed to initialize {provider} client: {e}")
+            raise
+    
+    def _init_ollama(self, config: AIProviderConfig):
+        """Initialize Ollama client"""
+        try:
+            from .ollama_client import OllamaLLMClient
+            self._client = OllamaLLMClient(
+                base_url=config.ollama_url or "http://localhost:11434",
+                model=config.ollama_model or "llama3.1",
+                temperature=config.temperature,
+                max_tokens=config.max_tokens,
+                top_p=config.top_p
+            )
+        except ImportError:
+            logger.error("Ollama not installed. Install with: pip install ollama")
+            raise
+    
+    def _init_openai(self, config: AIProviderConfig):
+        """Initialize OpenAI client"""
+        if not config.openai_api_key:
+            raise ValueError("OpenAI API key is required")
+        
+        from .openai_client import OpenAICompatibleClient
+        self._client = OpenAICompatibleClient(
+            api_key=config.openai_api_key,
+            model=config.openai_model or "gpt-4o-mini",
+            base_url=config.openai_base_url,
+            temperature=config.temperature,
+            max_tokens=config.max_tokens,
+            top_p=config.top_p
+        )
+    
+    def _init_gemini(self, config: AIProviderConfig):
+        """Initialize Gemini client (uses native Google SDK)"""
+        if not config.gemini_api_key:
+            raise ValueError("Gemini API key is required")
+        
+        from .gemini_client import GeminiLLMClient
+        self._client = GeminiLLMClient(
+            api_key=config.gemini_api_key,
+            model=config.gemini_model or "gemini-1.5-flash",
+            temperature=config.temperature,
+            max_tokens=config.max_tokens
+        )
+    
+    def _init_custom(self, config: AIProviderConfig):
+        """Initialize custom OpenAI-compatible endpoint"""
+        if not config.openai_api_key:
+            raise ValueError("API key is required for custom endpoint")
+        if not config.openai_base_url:
+            raise ValueError("Base URL is required for custom endpoint")
+        
+        from .openai_client import OpenAICompatibleClient
+        self._client = OpenAICompatibleClient(
+            api_key=config.openai_api_key,
+            model=config.openai_model or "default",
+            base_url=config.openai_base_url,
+            temperature=config.temperature,
+            max_tokens=config.max_tokens,
+            top_p=config.top_p
+        )
+    
+    def reconfigure(self, config: AIProviderConfig):
+        """
+        Reconfigure the client with new settings
+        
+        Args:
+            config: New AI provider configuration
+        """
+        logger.info(f"Reconfiguring LLM client to provider: {config.provider}")
+        get_runtime_config().update_config(config)
+        self._current_config = None  # Force reinitialization
+        self._initialize_client()
+    
+    @property
+    def model(self) -> str:
+        """Get the model name from the underlying client"""
+        self._initialize_client()  # Ensure client is initialized
+        return getattr(self._client, 'model', 'unknown')
+    
+    @property
+    def provider(self) -> str:
+        """Get the current provider name"""
+        return get_runtime_config().get_config().provider
     
     async def health_check(self) -> bool:
-        """
-        Check if Ollama service is available
-        
-        Returns:
-            True if service is healthy
-        """
+        """Check if LLM service is available"""
         try:
-            models = self.client.list()
-            logger.info(f"✓ Ollama service is healthy ({len(models.get('models', []))} models available)")
-            return True
+            self._initialize_client()
+            return await self._client.health_check()
         except Exception as e:
-            logger.error(f"✗ Ollama health check failed: {e}")
+            logger.error(f"Health check failed: {e}")
             return False
     
     def check_model_availability(self) -> bool:
-        """
-        Check if the configured model is available
-        
-        Returns:
-            True if model is available
-        """
+        """Check if the configured model is available"""
         try:
-            models = self.client.list()
-            model_names = [m['name'] for m in models.get('models', [])]
-            
-            if self.model in model_names:
-                logger.info(f"✓ Model {self.model} is available")
-                return True
-            else:
-                logger.warning(f"⚠ Model {self.model} not found")
-                logger.info(f"Available models: {', '.join(model_names)}")
-                return False
+            self._initialize_client()
+            return self._client.check_model_availability()
         except Exception as e:
-            logger.error(f"Error checking model availability: {e}")
+            logger.error(f"Model availability check failed: {e}")
             return False
     
     async def generate(self, prompt: str, system_prompt: Optional[str] = None) -> str:
-        """
-        Generate text completion for a prompt
-        
-        Args:
-            prompt: User prompt
-            system_prompt: Optional system prompt to set context
-            
-        Returns:
-            Generated text
-        """
-        try:
-            messages = []
-            
-            if system_prompt:
-                messages.append({
-                    'role': 'system',
-                    'content': system_prompt
-                })
-            
-            messages.append({
-                'role': 'user',
-                'content': prompt
-            })
-            
-            response = self.client.chat(
-                model=self.model,
-                messages=messages,
-                options={
-                    'temperature': self.temperature,
-                    'num_predict': self.max_tokens,
-                    'top_p': self.top_p,
-                }
-            )
-            
-            return response['message']['content']
-            
-        except Exception as e:
-            logger.error(f"Error generating text: {e}")
-            raise
+        """Generate text completion for a prompt"""
+        self._initialize_client()
+        return await self._client.generate(prompt, system_prompt)
     
     async def stream(self, prompt: str, system_prompt: Optional[str] = None) -> AsyncGenerator[str, None]:
-        """
-        Stream text generation token by token
-        
-        Args:
-            prompt: User prompt
-            system_prompt: Optional system prompt
-            
-        Yields:
-            Generated text tokens
-        """
-        try:
-            messages = []
-            
-            if system_prompt:
-                messages.append({
-                    'role': 'system',
-                    'content': system_prompt
-                })
-            
-            messages.append({
-                'role': 'user',
-                'content': prompt
-            })
-            
-            stream = self.client.chat(
-                model=self.model,
-                messages=messages,
-                stream=True,
-                options={
-                    'temperature': self.temperature,
-                    'num_predict': self.max_tokens,
-                    'top_p': self.top_p,
-                }
-            )
-            
-            for chunk in stream:
-                if 'message' in chunk and 'content' in chunk['message']:
-                    yield chunk['message']['content']
-                    
-        except Exception as e:
-            logger.error(f"Error streaming text: {e}")
-            raise
-    
-    def pull_model(self) -> bool:
-        """
-        Pull the configured model if not available
-        
-        Returns:
-            True if model is now available
-        """
-        try:
-            logger.info(f"Pulling model {self.model}...")
-            self.client.pull(self.model)
-            logger.info(f"✓ Model {self.model} pulled successfully")
-            return True
-        except Exception as e:
-            logger.error(f"Error pulling model: {e}")
-            return False
+        """Stream text generation token by token"""
+        self._initialize_client()
+        async for token in self._client.stream(prompt, system_prompt):
+            yield token
 
 
 # Singleton instance
-_llm_client: Optional[OllamaLLMClient] = None
+_llm_client: Optional[UniversalLLMClient] = None
 
 
-def get_llm_client() -> OllamaLLMClient:
+def get_llm_client() -> UniversalLLMClient:
     """
     Get singleton LLM client instance
     
     Returns:
-        OllamaLLMClient instance
+        UniversalLLMClient instance
     """
     global _llm_client
     
     if _llm_client is None:
-        _llm_client = OllamaLLMClient()
+        _llm_client = UniversalLLMClient()
     
     return _llm_client
+
+
+def reset_llm_client():
+    """Reset the singleton client (useful for testing or reconfiguration)"""
+    global _llm_client
+    _llm_client = None
 
 
 if __name__ == "__main__":
@@ -198,20 +192,20 @@ if __name__ == "__main__":
     import asyncio
     
     print("=" * 80)
-    print("OLLAMA LLM CLIENT TEST")
+    print("UNIVERSAL LLM CLIENT TEST")
     print("=" * 80)
     
     async def test():
         try:
-            client = OllamaLLMClient()
+            client = UniversalLLMClient()
             
             # Health check
             if await client.health_check():
-                print("✓ Health check passed")
+                print(f"✓ Health check passed (provider: {client.provider})")
             
             # Check model availability
             if client.check_model_availability():
-                print("✓ Model is available")
+                print(f"✓ Model is available: {client.model}")
                 
                 # Test generation
                 print("\nGenerating test response...")
@@ -230,11 +224,11 @@ if __name__ == "__main__":
                 
             else:
                 print("✗ Model not available")
-                print(f"\nTo use the LLM, ensure Ollama is running and pull the model:")
-                print(f"  ollama pull {client.model}")
             
         except Exception as e:
             print(f"✗ Error: {e}")
+            import traceback
+            traceback.print_exc()
     
     asyncio.run(test())
     print("=" * 80)
