@@ -6,9 +6,10 @@ import sys
 import json
 import logging
 from pathlib import Path
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from datetime import datetime
+import hashlib
 
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent.parent))
@@ -20,8 +21,11 @@ from ai.models.ai_models import (
     AnalysisType,
     AgentHealthCheck
 )
-from ai.llm_client import get_llm_client
+from ai.llm_client import get_llm_client, reset_llm_client
+from ai.runtime_config import get_runtime_config, AIProviderConfig
 from ai.embeddings.ollama_client import get_embedding_client
+from ai.embeddings.document_processor import DocumentProcessor
+from ai.data_service import AIDataService
 from config.db2_connection import get_db_connection
 
 logging.basicConfig(level=logging.INFO)
@@ -267,6 +271,106 @@ async def health_check():
         )
 
 
+@router.post("/configure")
+async def configure_ai(config: AIProviderConfig):
+    """
+    Configure AI provider settings dynamically
+    
+    Allows frontend to update AI provider (Ollama, OpenAI, Gemini, Custom)
+    and related settings without restarting the backend.
+    
+    Args:
+        config: AI provider configuration
+        
+    Returns:
+        Success message and current configuration
+    """
+    try:
+        logger.info(f"Received configuration request for provider: {config.provider}")
+        
+        # Validate configuration based on provider
+        if config.provider == 'ollama':
+            if not config.ollama_url or not config.ollama_model:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Ollama URL and model are required for Ollama provider"
+                )
+        elif config.provider == 'openai':
+            if not config.openai_api_key or not config.openai_model:
+                raise HTTPException(
+                    status_code=400,
+                    detail="OpenAI API key and model are required for OpenAI provider"
+                )
+        elif config.provider == 'gemini':
+            if not config.gemini_api_key or not config.gemini_model:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Gemini API key and model are required for Gemini provider"
+                )
+        elif config.provider == 'custom':
+            if not config.openai_api_key or not config.openai_base_url:
+                raise HTTPException(
+                    status_code=400,
+                    detail="API key and base URL are required for custom provider"
+                )
+        else:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Unsupported provider: {config.provider}"
+            )
+        
+        # Update runtime configuration
+        get_runtime_config().update_config(config)
+        
+        # Reset LLM client to force reinitialization with new config
+        reset_llm_client()
+        
+        # Test the new configuration
+        llm = get_llm_client()
+        health_ok = await llm.health_check()
+        
+        if not health_ok:
+            logger.warning(f"Health check failed for new configuration: {config.provider}")
+        
+        return {
+            "success": True,
+            "message": f"AI provider configured successfully: {config.provider}",
+            "provider": config.provider,
+            "model": llm.model,
+            "health_check": health_ok,
+            "configuration": get_runtime_config().to_dict()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Configuration error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Configuration failed: {str(e)}")
+
+
+@router.get("/configuration")
+async def get_configuration():
+    """
+    Get current AI provider configuration
+    
+    Returns:
+        Current configuration (without sensitive data like API keys)
+    """
+    try:
+        config_dict = get_runtime_config().to_dict()
+        llm = get_llm_client()
+        
+        return {
+            "success": True,
+            "configuration": config_dict,
+            "current_model": llm.model,
+            "current_provider": llm.provider
+        }
+    except Exception as e:
+        logger.error(f"Failed to get configuration: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/models")
 async def list_models():
     """
@@ -289,6 +393,170 @@ async def list_models():
     except Exception as e:
         logger.error(f"Model list error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/documents")
+async def list_documents():
+    """
+    List all documents in the knowledge base
+    
+    Returns:
+        List of documents with metadata
+    """
+    try:
+        data_service = AIDataService()
+        documents = data_service.get_policy_documents()
+        
+        return {
+            "success": True,
+            "count": len(documents),
+            "documents": [
+                {
+                    "doc_id": doc.get("doc_id") or doc.get("DOC_ID"),
+                    "title": doc.get("title") or doc.get("TITLE"),
+                    "filename": doc.get("source") or doc.get("SOURCE"),
+                    "size": len(doc.get("content", "") or doc.get("CONTENT", "")),
+                    "chunk_count": len(doc.get("content", "").split("\n\n")) if doc.get("content") else 0,
+                    "created_at": str(doc.get("created_at") or doc.get("CREATED_AT", ""))
+                }
+                for doc in documents
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Error listing documents: {e}", exc_info=True)
+        # Return empty list if DB not available
+        return {
+            "success": False,
+            "count": 0,
+            "documents": [],
+            "error": str(e)
+        }
+
+
+@router.post("/upload-document")
+async def upload_document(file: UploadFile = File(...)):
+    """
+    Upload and process a document for RAG
+    
+    Supports: PDF, MD, TXT, JSON
+    
+    Args:
+        file: Uploaded file
+        
+    Returns:
+        Document metadata and processing status
+    """
+    try:
+        # Validate file type
+        allowed_extensions = {'.pdf', '.md', '.txt', '.json'}
+        file_ext = Path(file.filename).suffix.lower()
+        
+        if file_ext not in allowed_extensions:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Unsupported file type: {file_ext}. Allowed: {allowed_extensions}"
+            )
+        
+        # Read file content
+        content_bytes = await file.read()
+        
+        # Generate document ID
+        doc_id = hashlib.md5(f"{file.filename}{datetime.utcnow()}".encode()).hexdigest()[:16]
+        
+        # Process document
+        processor = DocumentProcessor()
+        
+        # Extract text based on file type
+        if file_ext == '.pdf':
+            # For PDF, we need to save temporarily and use pypdf
+            import tempfile
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp:
+                tmp.write(content_bytes)
+                tmp_path = tmp.name
+            try:
+                text = processor.load_pdf(tmp_path)
+            finally:
+                Path(tmp_path).unlink()
+        elif file_ext == '.json':
+            text = content_bytes.decode('utf-8')
+        else:  # .md, .txt
+            text = content_bytes.decode('utf-8')
+        
+        # Chunk the document
+        chunks = processor.chunk_text(text)
+        
+        # Store in database
+        try:
+            db = get_db_connection()
+            with db.get_cursor() as cursor:
+                # Insert document
+                query = """
+                    INSERT INTO policy_documents
+                    (doc_id, title, source, content, created_at)
+                    VALUES (?, ?, ?, ?, ?)
+                """
+                cursor.execute(query, (
+                    doc_id,
+                    file.filename,
+                    file.filename,
+                    text,
+                    datetime.utcnow()
+                ))
+                
+                logger.info(f"✓ Stored document in DB2: {file.filename} ({len(chunks)} chunks)")
+        except Exception as db_error:
+            logger.warning(f"Could not store in DB2: {db_error}")
+            # Continue anyway - document is processed
+        
+        return {
+            "success": True,
+            "doc_id": doc_id,
+            "filename": file.filename,
+            "size": len(content_bytes),
+            "chunks": len(chunks),
+            "message": f"Document processed successfully: {len(chunks)} chunks created"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Document upload error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
+
+@router.delete("/documents/{doc_id}")
+async def delete_document(doc_id: str):
+    """
+    Delete a document from the knowledge base
+    
+    Args:
+        doc_id: Document identifier
+        
+    Returns:
+        Success status
+    """
+    try:
+        db = get_db_connection()
+        with db.get_cursor() as cursor:
+            # Delete document
+            query = "DELETE FROM policy_documents WHERE doc_id = ?"
+            cursor.execute(query, (doc_id,))
+            
+            if cursor.rowcount == 0:
+                raise HTTPException(status_code=404, detail="Document not found")
+            
+            logger.info(f"✓ Deleted document: {doc_id}")
+            
+        return {
+            "success": True,
+            "message": f"Document deleted: {doc_id}"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Document deletion error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Deletion failed: {str(e)}")
 
 
 if __name__ == "__main__":
