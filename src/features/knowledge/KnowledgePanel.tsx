@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { FileText, Upload, Trash2 } from 'lucide-react';
+import { FileText, Upload, Trash2, AlertCircle } from 'lucide-react';
 import { PanelShell } from '@/features/shell/PanelShell';
 import { play } from '@/lib/sound';
 
@@ -20,6 +20,7 @@ const API_BASE = 'http://localhost:8000';
 export function KnowledgePanel() {
   const [docs, setDocs] = useState<Doc[]>([]);
   const [loading, setLoading] = useState(false);
+  const [backendOffline, setBackendOffline] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   // Load documents from backend on mount
@@ -41,15 +42,18 @@ export function KnowledgePanel() {
           id: doc.doc_id || doc.id,
         })) || [];
         setDocs(backendDocs);
+        setBackendOffline(false);
       } else {
         // Backend reachable but errored — show nothing rather than fake docs.
         console.warn('[knowledge] backend returned', response.status);
         setDocs([]);
+        setBackendOffline(false);
       }
     } catch (error) {
       // Backend offline — honest empty state, no placeholder documents.
       console.warn('[knowledge] backend offline — configure it in Settings', error);
       setDocs([]);
+      setBackendOffline(true);
     }
   };
 
@@ -149,14 +153,26 @@ export function KnowledgePanel() {
   return (
     <PanelShell title="Knowledge Base" subtitle={`${docs.length} docs · ${totalChunks} chunks`} width="w-96">
       <div className="space-y-4 p-4">
+        {backendOffline && (
+          <div className="flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">
+            <AlertCircle size={16} className="shrink-0 text-amber-400 mt-0.5" />
+            <div className="flex-1">
+              <p className="font-mono text-[10px] text-amber-400 mb-1">Backend Offline</p>
+              <p className="font-mono text-[9px] text-neutral-400 leading-relaxed">
+                AI backend not running. Start it with configured API keys to upload documents.
+              </p>
+            </div>
+          </div>
+        )}
+
         <button
           onClick={() => fileRef.current?.click()}
-          disabled={loading}
+          disabled={loading || backendOffline}
           className="flex w-full flex-col items-center gap-2 rounded-lg border border-dashed border-[#1f1f1f] py-6 text-neutral-500 transition-colors hover:border-[#00ff88]/40 hover:text-[#00ff88] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Upload size={20} />
           <span className="font-mono text-[11px]">
-            {loading ? 'Uploading...' : 'Upload documents to embed'}
+            {loading ? 'Uploading...' : backendOffline ? 'Backend offline' : 'Upload documents to embed'}
           </span>
           <span className="font-mono text-[9px] text-neutral-600">PDF · MD · TXT · JSON</span>
         </button>
@@ -167,7 +183,7 @@ export function KnowledgePanel() {
           accept=".pdf,.md,.txt,.json"
           className="hidden"
           onChange={(e) => onFiles(e.target.files)}
-          disabled={loading}
+          disabled={loading || backendOffline}
         />
 
         <div className="space-y-1.5">
@@ -198,7 +214,7 @@ export function KnowledgePanel() {
           ))}
         </div>
 
-        {docs.length === 0 && (
+        {docs.length === 0 && !backendOffline && (
           <div className="text-center py-8 text-neutral-600 font-mono text-[10px]">
             No documents uploaded yet
           </div>

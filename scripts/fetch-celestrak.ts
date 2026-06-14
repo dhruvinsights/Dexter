@@ -34,7 +34,14 @@ const USER_AGENT = 'Dexter/0.1 (orbital sustainability simulator; contact: visia
 function parseArgs(argv: string[]): { groups: string[]; force: boolean } {
   const force = argv.includes('--force');
   const positional = argv.filter((a) => !a.startsWith('--'));
-  const groups = (positional[0] ?? 'active')
+  // Default: operational payloads (active) PLUS the major real debris clouds that
+  // CelesTrak publishes as SGP4-propagatable element sets — so Live Sky shows a
+  // genuine debris field, not just working satellites. The Fengyun-1C cloud
+  // (2007 ASAT test) sits in the critical 800-900 km belt and is the most
+  // visually significant. These are real objects, not synthesised positions.
+  const DEFAULT_GROUPS =
+    'active,fengyun-1c-debris,cosmos-2251-debris,iridium-33-debris,cosmos-1408-debris,analyst';
+  const groups = (positional[0] ?? DEFAULT_GROUPS)
     .split(',')
     .map((g) => g.trim())
     .filter(Boolean);
