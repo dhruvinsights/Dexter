@@ -85,13 +85,19 @@ export function AIAgentPanel() {
           return copy;
         });
       }
-    } catch {
+    } catch (error) {
       setMessages((m) => {
         const copy = [...m];
         copy[copy.length - 1] = {
           role: 'assistant',
           content:
-            '⚠ AI backend offline. Start it with `cd backend && uvicorn api.main:app --reload` and configure the endpoint in Settings.',
+            '⚠️ AI backend offline or not configured.\n\n' +
+            '**To use AI features:**\n' +
+            '1. Click the Settings icon (⚙️) in the sidebar\n' +
+            '2. Choose your AI provider (Ollama, OpenAI, or Gemini)\n' +
+            '3. Enter your API key or configure Ollama endpoint\n' +
+            '4. Click "Save Configuration"\n\n' +
+            'The backend will automatically connect once configured.',
         };
         return copy;
       });
