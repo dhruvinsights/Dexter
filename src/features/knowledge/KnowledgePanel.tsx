@@ -42,20 +42,14 @@ export function KnowledgePanel() {
         })) || [];
         setDocs(backendDocs);
       } else {
-        // Fallback to mock data if backend not available
-        console.warn('Backend not available, using mock data');
-        setDocs([
-          { name: 'IADC-debris-mitigation.pdf', chunks: 142, size: '2.1 MB', status: 'ready' },
-          { name: 'celestrak-catalog-notes.md', chunks: 38, size: '64 KB', status: 'ready' },
-        ]);
+        // Backend reachable but errored — show nothing rather than fake docs.
+        console.warn('[knowledge] backend returned', response.status);
+        setDocs([]);
       }
     } catch (error) {
-      console.error('Error loading documents:', error);
-      // Fallback to mock data
-      setDocs([
-        { name: 'IADC-debris-mitigation.pdf', chunks: 142, size: '2.1 MB', status: 'ready' },
-        { name: 'celestrak-catalog-notes.md', chunks: 38, size: '64 KB', status: 'ready' },
-      ]);
+      // Backend offline — honest empty state, no placeholder documents.
+      console.warn('[knowledge] backend offline — configure it in Settings', error);
+      setDocs([]);
     }
   };
 

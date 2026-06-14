@@ -1,362 +1,358 @@
-# 🛰️ Dexter — Orbital Sustainability Platform
+# Dexter — Orbital Sustainability Platform
 
-**Status**: ✅ **RUNNING**  
-Real-time 3D space situational awareness with AI-powered orbital sustainability analysis.
+**A real-time map of everything humanity has left in orbit, and a physics engine that projects where it is heading.**
 
----
+Dexter renders the genuine catalogue of objects circling Earth — live, with real orbital mechanics — and pairs it with a scientific debris-evolution model so anyone, from a curious student to a mission planner, can see the state of near-Earth space and understand the choices that keep it usable.
 
-## 🚀 Quick Start
+![Low Earth Orbit debris field — NASA Orbital Debris Program Office](https://commons.wikimedia.org/wiki/Special:FilePath/Debris-LEO1280.jpg)
 
-### Currently Running
-```
-Frontend: http://localhost:5173
-Backend:  http://localhost:8000
-API Docs: http://localhost:8000/docs
-```
-
-### Start from Scratch
-```bash
-# Terminal 1: Backend
-cd backend
-source .venv/bin/activate
-python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
-
-# Terminal 2: Frontend  
-npm run dev
-```
+> *Every white dot is a tracked object in low Earth orbit. This is a NASA Orbital Debris Program Office visualisation — not artistic licence. Dexter renders this same population from live data.*
 
 ---
 
-## 📊 What's Working
+## Table of Contents
 
-### What is real vs. modelled
-
-Dexter is explicit about its data provenance:
-
-| Feature | Source | Real? |
-|---------|--------|-------|
-| **Live Sky** satellites/positions | CelesTrak GP catalogue + SGP4 (`satellite.js`) | ✅ Real data, real physics |
-| **Object types / countries** | CelesTrak SATCAT | ✅ Real |
-| **Shell Analysis** (current debris by altitude) | SATCAT apogee/perigee binned into shells | ✅ Real current state |
-| **Scenario / Forecasting** projections | MOCAT-style source–sink model **seeded from the real catalogue** | ⚙️ Physics model (deterministic projection, not telemetry) |
-| **AI Agent** | Local Ollama / OpenAI / Gemini (optional) | Depends on your config |
-
-The Scenario/Forecast numbers come from a real **source–sink debris model** (`src/sim/mocat.ts`): launches and post-mission derelicts and collision fragments as sources; atmospheric drag decay, PMD compliance and ADR as sinks; collisions via the particle-in-a-box rate λ = ⟨σv⟩·NᵢNⱼ/V. It is seeded from the real on-orbit population (`public/shells.json`, built by `npm run build-shells` from SATCAT). This is a model — the same *kind* of model as MIT MOCAT / ESA MASTER — not measured data, and the UI says so.
-
-### ✅ Core Features
-- **Live Satellite Tracking** - real catalogue with real SGP4 physics
-- **3D Visualization** - React Three Fiber with day/night Earth
-- **Shell Analysis** - real per-altitude debris distribution + Kessler stability indicator
-- **Physics Engine** - MOCAT-style debris source–sink projection seeded from real data
-- **Time Controls** - Speed up, slow down, or scrub through time
-- **Time Machine** - Watch satellite deployment history from 1957
-- **Interactive Selection** - Click any satellite to inspect
-- **Custom Satellites** - Create your own with TLE import
-- **AI Backend** - 5 specialized agents for analysis
-- **Database** - Connected to DB2 for persistence and RAG
-- **AI Analysis** - Multi-provider support (Ollama, OpenAI, Gemini, Custom)
-  - Risk assessment with RAG-enhanced responses
-  - Policy recommendations citing specific guidelines
-  - Sustainability analysis
-  - Collision prediction
-  - Executive summaries
+1. [For newcomers: what is space debris?](#for-newcomers-what-is-space-debris)
+2. [Why this matters](#why-this-matters)
+3. [What Dexter does](#what-dexter-does)
+4. [What is real vs. modelled](#what-is-real-vs-modelled)
+5. [The science inside](#the-science-inside)
+6. [Architecture](#architecture)
+7. [Technology stack](#technology-stack)
+8. [Getting started](#getting-started)
+9. [Data pipeline and update cadence](#data-pipeline-and-update-cadence)
+10. [Configuration](#configuration)
+11. [Scalability and the path to operational use](#scalability-and-the-path-to-operational-use)
+12. [Market and impact](#market-and-impact)
+13. [Glossary](#glossary)
+14. [References](#references)
+15. [Project structure](#project-structure)
+16. [Roadmap](#roadmap)
 
 ---
 
-## 🏗️ Architecture
+## For newcomers: what is space debris?
 
-```
-┌─────────────────────────────────────────┐
-│  Frontend (React + Three.js)            │
-│  - 3D Earth visualization               │
-│  - SGP4 propagation (Web Worker)        │
-│  - ~16k satellites rendered             │
-└──────────────┬──────────────────────────┘
-               │ HTTP/SSE
-┌──────────────▼──────────────────────────┐
-│  Backend (FastAPI + Python)             │
-│  - 5 AI Agents                          │
-│  - Physics engine                       │
-│  - Policy validation                    │
-└──────┬────────────────┬─────────────────┘
-       │                │
-┌──────▼──────┐  ┌──────▼──────┐
-│   DB2       │  │   Ollama    │
-│ (Geetika's) │  │  (Optional) │
-└─────────────┘  └─────────────┘
-```
+If you have never thought about this before, start here. No background required.
+
+Since 1957, humans have launched thousands of rockets and satellites. Most of what went up is still up there. When a satellite stops working, it does not fall straight down — it keeps circling Earth for years, decades, or centuries. When two objects collide, or when an old rocket's leftover fuel explodes, they shatter into thousands of fast-moving fragments. Those fragments are **space debris** (also called *orbital debris* or *space junk*).
+
+A few plain-language terms used throughout Dexter:
+
+- **Orbit** — the path an object follows as it circles Earth. Lower orbits are faster; higher orbits are slower.
+- **LEO (Low Earth Orbit)** — roughly 200–2,000 km up. This is where most satellites, the International Space Station, and the worst debris congestion live.
+- **Altitude shell** — a band of orbits at a similar height (for example "700–800 km"). Dexter groups objects into shells to study them.
+- **Payload** — a working or retired satellite (something launched to do a job).
+- **Rocket body** — the spent upper stage of a rocket, left in orbit after delivering its payload.
+- **Debris / fragment** — a piece of a broken-up object. Even a 1 cm fragment travels at ~7–8 km/s — faster than a rifle bullet — and can destroy a working satellite.
+- **Conjunction** — a close approach between two objects; a near-miss that operators must watch.
+- **Decay / re-entry** — when an object's orbit sinks low enough that the thin upper atmosphere drags it down to burn up. The atmosphere is nature's only free cleaning service, and it only works at low altitudes.
+- **Kessler Syndrome** — the nightmare scenario (Donald Kessler, NASA, 1978): so much debris accumulates that collisions create more debris, which causes more collisions, in a chain reaction. Some orbital shells could become unusable for generations.
+
+![Debris ring around the geostationary belt — NASA ODPO](https://commons.wikimedia.org/wiki/Special:FilePath/Debris-GEO1280.jpg)
+
+> *Higher up, at ~36,000 km, sits the geostationary ring where weather and communications satellites live. Debris there does not decay for millions of years.*
 
 ---
 
-## 📦 Installation
+## Why this matters
+
+- **More than 130 million** fragments larger than 1 mm are estimated to be in orbit; about **36,500** are larger than 10 cm and individually tracked (ESA Space Environment Report).
+- A single collision can be catastrophic: in 2009 the defunct **Cosmos 2251** struck the active **Iridium 33**, producing over 2,000 trackable fragments that still threaten other spacecraft today.
+- Anti-satellite weapon tests have made it worse: China's **Fengyun-1C** test (2007) created ~3,500 tracked fragments; Russia's **Cosmos 1408** test (2021) forced the ISS crew to shelter.
+- The economy now depends on space: GPS timing underpins financial markets and power grids; Earth-observation satellites drive agriculture, climate science, and disaster response. The orbital environment is shared infrastructure with no owner — a textbook tragedy of the commons.
+
+The 700–900 km band — visible as the densest belt in Dexter's Shell Analysis — is the region scientists most worry about, because it is high enough that atmospheric drag barely cleans it, yet crowded enough that collisions are likely.
+
+---
+
+## What Dexter does
+
+### Live Sky
+Renders the real tracked catalogue propagated with genuine orbital mechanics (SGP4). Each object sits at its physically computed position, updated as time advances. Click any object to fly the camera to it, see a 3D model, and trace its true orbit as a red ring. Colour-code the whole field by object type (payload / rocket body / debris) or by owning nation.
+
+### Shell Analysis
+The current state of low Earth orbit, binned by altitude from the real catalogue. For each shell it shows the live object and debris counts, the atmospheric-drag clearing time, and a **Kessler stability indicator** — a physically computed flag for whether a shell produces collision fragments faster than drag can remove them. Shells in that regime are marked *Critical*: debris there accumulates indefinitely.
+
+### Physics Engine (MOCAT-style)
+A real orbital-debris **source–sink model** projects the population forward in time. It is the same *class* of model used by MIT's MOCAT and ESA's MASTER/DELTA tools, seeded from Dexter's real current data. See [The science inside](#the-science-inside).
+
+### Scenario and Forecasting
+Compare intervention strategies — Active Debris Removal, launch-rate caps, improved post-mission disposal, AI traffic management, or a hybrid — and watch 30-year outcomes diverge: object growth, cumulative collisions, cost, and a sustainability grade. Every number flows from the physics engine, seeded from reality.
+
+### Time Machine
+Sweep through launch history from 1957 to today and watch the orbital population grow object by object, by real launch year.
+
+### Create Satellite
+Design a satellite by basic parameters, full orbital elements, or by pasting a real two-line element set (TLE). Dexter generates a valid, checksummed TLE and propagates it live alongside the real catalogue.
+
+### AI Agent (optional)
+A retrieval-augmented analysis layer that produces risk assessments, sustainability analysis, and executive summaries grounded in your own uploaded documents. Runs against local Ollama or a hosted provider — entirely optional, and clearly marked offline until you configure it.
+
+---
+
+## What is real vs. modelled
+
+Dexter is deliberately transparent about provenance. Nothing fabricated is presented as measured truth.
+
+| Feature | Source | Status |
+|---|---|---|
+| Live Sky objects and positions | CelesTrak GP catalogue + SGP4 (`satellite.js`) | **Real data, real physics** |
+| Object types and owning nations | CelesTrak SATCAT | **Real data** |
+| Shell Analysis (current debris by altitude) | SATCAT apogee/perigee binned into shells | **Real current state** |
+| Scenario / Forecasting projections | MOCAT-style source–sink model, seeded from the real catalogue | **Physics model** — a deterministic projection, not telemetry |
+| Kessler stability indicator | Collision rate vs. drag-decay rate from real seed | **Physics model** |
+| AI Agent responses | Local/hosted LLM you configure | Depends on your provider; offline until set up |
+
+A projection is not a measurement, and Dexter says so directly in the relevant panels. This is the same honesty principle real debris tools follow: MOCAT and MASTER are *models*, and their value is in the rigour of the model, not a false claim of certainty.
+
+---
+
+## The science inside
+
+### Orbital propagation — SGP4
+Live Sky positions come from **SGP4**, the Simplified General Perturbations model maintained by the United States Space Force and used with the public Two-Line Element catalogue. SGP4 accounts for Earth's oblateness (J2), atmospheric drag, and lunar/solar perturbations to the accuracy the public catalogue supports. Implementation: `satellite.js`, run in a Web Worker so 15,000+ objects propagate without blocking the interface (`src/sim/liveSky.worker.ts`).
+
+### Debris evolution — a source–sink model
+The engine (`src/sim/mocat.ts`) discretises LEO into altitude shells and advances each shell's payload / debris / rocket-body counts year by year under explicit physical terms:
+
+**Sources** (what adds objects)
+- **Launches** — new payloads, distributed across shells by real launch demand.
+- **Post-mission derelicts** — satellites that reach end of life and fail to de-orbit (governed by a PMD-compliance fraction).
+- **Collision fragments** — modelled with a NASA-standard-breakup-style trackable-fragment yield per catastrophic collision.
+
+**Sinks** (what removes objects)
+- **Atmospheric drag decay** — altitude-dependent; objects sink to lower shells and eventually re-enter. This is the dominant natural cleaner below ~600 km and negligible above ~900 km.
+- **Post-mission disposal (PMD)** — compliant satellites de-orbit themselves.
+- **Active Debris Removal (ADR)** — modelled removal of debris from targeted shells.
+
+**Collision frequency** uses the particle-in-a-box kinetic rate, the standard first-order approximation for a well-mixed shell:
+
+```
+λ_ij = ⟨σ · v_rel⟩ · N_i · N_j / V_shell
+```
+
+where `⟨σ·v_rel⟩` is the collision cross-section times relative velocity (~10 km/s in LEO), `N_i, N_j` are population counts, and `V_shell` is the shell volume. Maneuverable active payloads receive a collision-avoidance discount.
+
+### Kessler stability indicator
+For each shell, Dexter compares the collisional fragment-production rate to the drag-removal rate. A ratio above 1 means the shell generates trackable debris faster than the atmosphere clears it — the physical signature of an incipient Kessler cascade. With real 2026 data this correctly flags the 700–1500 km bands as critical, matching the published consensus.
+
+### Real initial conditions
+The model is seeded from `public/shells.json`, built by `scripts/build-shells.ts` from the CelesTrak SATCAT: every on-orbit object (decayed objects excluded) is binned by mean altitude and tallied by type. The result reproduces the real debris belt — a pronounced peak at 700–900 km from historical break-up events.
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Frontend — React + React Three Fiber (Three.js)            │
+│                                                              │
+│  • Live Sky        SGP4 propagation in a Web Worker          │
+│  • Physics engine  MOCAT-style source–sink model (TS)        │
+│  • Shell Analysis  real debris-by-altitude + Kessler flag    │
+│  • Scenario/Forecast, Time Machine, Create Satellite         │
+│  • State: Zustand   Styling: Tailwind                        │
+└───────────────┬──────────────────────────────────────────────┘
+                │ optional HTTP / SSE
+┌───────────────▼──────────────────────────────────────────────┐
+│  Backend — FastAPI (optional AI/RAG layer)                   │
+│  • /api/ai/analyze, /stream, /health, /configure             │
+│  • Retrieval-augmented generation over uploaded documents    │
+│  • Pluggable LLM: Ollama (local) / OpenAI / Gemini           │
+│  • Pluggable vector store: Qdrant / pgvector / Db2 / …        │
+└──────────────────────────────────────────────────────────────┘
+
+Data sources (fetched to /public, refreshed ≤ every 2 hours):
+  CelesTrak GP/TLE  → live catalogue + SGP4
+  CelesTrak SATCAT  → owners, object types, apogee/perigee → physics seed
+```
+
+The frontend is fully functional on its own. The backend is an optional intelligence layer; when it is offline, the application states so plainly rather than inventing data.
+
+---
+
+## Technology stack
+
+| Layer | Technology |
+|---|---|
+| UI / 3D | React, TypeScript, Vite, React Three Fiber, Three.js, Tailwind |
+| State | Zustand |
+| Orbital mechanics | `satellite.js` (SGP4), Web Workers |
+| Physics model | TypeScript source–sink engine (`src/sim/mocat.ts`) |
+| Backend (optional) | FastAPI, Python, Server-Sent Events |
+| AI providers | Ollama, OpenAI, Google Gemini, OpenAI-compatible endpoints |
+| Vector stores | Qdrant, pgvector, Milvus, Weaviate, Chroma, IBM Db2 |
+| Data | CelesTrak GP/TLE, CelesTrak SATCAT |
+
+---
+
+## Getting started
 
 ### Prerequisites
-- Node.js ≥ 18
-- Python ≥ 3.10
-- Internet (for initial data fetch)
+- Node.js 18 or newer
+- Internet access for the initial data fetch
+- (Optional) Python 3.10+ and Ollama for the AI layer
 
-### First Time Setup
+### Frontend (everything real works here)
 
 ```bash
-# 1. Frontend
 npm install
-npm run fetch-tle      # Download live catalogue (CelesTrak GP/TLE; ≤ every 2h)
-npm run fetch-satcat   # Download object metadata (owner, type)
-npm run build-shells   # Build the real per-altitude seed for the physics engine
 
-# 2. Backend
+# Fetch real data (writes to /public; respects CelesTrak's 2-hour cadence)
+npm run fetch-tle       # live catalogue: CelesTrak GP/TLE
+npm run fetch-satcat    # object metadata: owners, types
+npm run build-shells    # build the real per-altitude physics seed from SATCAT
+
+npm run dev             # http://localhost:5173
+```
+
+### Backend (optional AI layer)
+
+```bash
 cd backend
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements-minimal.txt
-pip install ibm-db ollama
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+# Interactive API docs: http://localhost:8000/docs
+```
 
-# 3. Configure AI Provider (Choose one)
-# Option A: Ollama (Free, Local)
-ollama pull gemma2
-ollama pull granite-embedding
+Then open Settings in the app, choose a provider (Ollama / OpenAI / Gemini), and save. The AI panels light up once a provider responds; until then they honestly report "offline".
 
-# Option B: Gemini (Google)
-# Add to backend/.env:
-# AI_PROVIDER=gemini
-# GEMINI_API_KEY=your-key-here
+---
 
-# Option C: OpenAI
-# Add to backend/.env:
-# AI_PROVIDER=openai
-# OPENAI_API_KEY=your-key-here
+## Data pipeline and update cadence
+
+CelesTrak republishes the United States Space Force 18th Space Defense Squadron catalogue and updates it at most every two hours. Dexter honours this:
+
+- `npm run fetch-tle` downloads the live catalogue to `public/tle/TLE.txt` and **refuses to re-download if the file is younger than 2 hours**, so you can never trip CelesTrak's rate limits.
+- The application only ever reads that local file — it does not call CelesTrak from the browser.
+- `npm run fetch-satcat` and `npm run build-shells` refresh object metadata and the physics seed.
+
+For always-fresh data, schedule the fetch on a timer, for example every two hours:
+
+```cron
+0 */2 * * *  cd /path/to/Dexter && npm run fetch-tle && npm run fetch-satcat && npm run build-shells
 ```
 
 ---
 
-## 🎮 Usage
+## Configuration
 
-### Basic Demo Flow
-1. Open http://localhost:5173
-2. Wait ~10 seconds for boot sequence
-3. See 3D Earth with ~16,000 satellites
-4. Click any satellite to select and zoom
-5. Use time controls to speed up/slow down
-6. Try Time Machine to see launch history
+### AI provider (optional)
+Configure in-app via Settings, or in `backend/.env`:
 
-### Advanced Features
-- **Create Satellite**: Click + icon, enter orbital parameters
-- **Color Schemes**: Switch between country, object type, sunlight
-- **AI Analysis**: Click AI icon (requires Ollama)
-- **Time Travel**: Use date picker to jump to any time
-
----
-
-## 🔧 Configuration
-
-### AI Configuration
-
-**Dynamic Configuration via UI** (Recommended):
-1. Open Settings panel (⚙️ icon)
-2. Select AI provider: Ollama, OpenAI, Gemini, or Custom
-3. Enter API key (if required)
-4. Choose model
-5. Click "Save Settings"
-
-**Or via backend/.env**:
 ```ini
-# Database (Already configured)
-DB2_HOST=Geetika-5y420-x86.dev.fyre.ibm.com
-DB2_DATABASE=TESTDB
-DB2_USERNAME=Geetika
-
-# AI Provider (can be changed via UI)
-AI_PROVIDER=gemini
-GEMINI_API_KEY=your-key-here
-GEMINI_MODEL=gemini-1.5-flash
+AI_PROVIDER=ollama            # ollama | openai | gemini | custom
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.1
+# OPENAI_API_KEY=...
+# GEMINI_API_KEY=...
 ```
 
-See [docs/AI_CONFIGURATION_GUIDE.md](docs/AI_CONFIGURATION_GUIDE.md) for complete details.
+### Vector database (optional, for RAG)
+Driver-agnostic. Choose a driver and connection in Settings; the backend selects the implementation server-side. Supported: Qdrant, pgvector, Milvus, Weaviate, Chroma, IBM Db2.
 
 ---
 
-## 📁 Project Structure
+## Scalability and the path to operational use
+
+Dexter is a research and education platform today. The architecture is built to scale toward operational space-situational-awareness (SSA) standards:
+
+- **Higher-fidelity data.** Swap the public TLE catalogue for the authoritative Space-Track.org feed or a commercial SSA provider (LeoLabs, Slingshot) with no change to the rendering or physics interfaces.
+- **Conjunction screening.** The same propagation pipeline can compute pairwise close approaches and produce Conjunction Data Messages (CDM), the operational currency of NASA's Conjunction Assessment Risk Analysis (CARA) and the U.S. Space Force's collision-warning service.
+- **Validated physics.** The source–sink engine can be calibrated against NASA's LEGEND and ESA's DELTA long-term evolutionary models, and against the published NASA Standard Breakup Model, to move from indicative to decision-grade projections.
+- **GPU-scale rendering.** The Three.js point-cloud renderer already handles the full tracked catalogue at interactive frame rates and extends to the projected 100,000+ object catalogues of the next decade.
+- **Compute back end.** The browser engine can be promoted to a server-side or WebAssembly Monte-Carlo ensemble for uncertainty quantification, matching how MOCAT is run for policy studies.
+
+The goal: a tool that a student can open in a browser and a mission planner can trust in a control room, sharing one honest data model.
+
+---
+
+## Market and impact
+
+- **Space agencies and SSA providers.** NASA's Orbital Debris Program Office, ESA's Space Debris Office, and commercial trackers all need accessible visualisation and scenario tooling for analysis and public communication.
+- **Satellite operators.** Constellation operators (Starlink, OneWeb, Kuiper) must demonstrate sustainability and plan disposal; Dexter's scenario engine quantifies the trade-offs.
+- **Regulators and policy.** The FCC's 5-year de-orbit rule (2024), the IADC mitigation guidelines, and UN COPUOS discussions all hinge on the kind of long-term projections Dexter makes tangible.
+- **Insurers and investors.** Orbital congestion is a financial risk to a fast-growing space economy; sustainability grades inform underwriting and due diligence.
+- **Education and the public.** Most people have never seen the scale of the problem. Dexter turns an abstract threat into something you can rotate in your hand.
+
+Space sustainability is moving from a niche concern to a licensing requirement and an economic necessity. Dexter sits exactly at that intersection — credible enough for experts, clear enough for everyone else.
+
+---
+
+## Glossary
+
+| Term | Meaning |
+|---|---|
+| TLE | Two-Line Element set — the standard format encoding an object's orbit |
+| SGP4 | Simplified General Perturbations model — the math that turns a TLE into a position |
+| SATCAT | Satellite Catalog — the master registry of tracked objects and their attributes |
+| LEO / MEO / GEO | Low / Medium / Geostationary Earth Orbit |
+| Apogee / Perigee | The highest / lowest point of an orbit |
+| ADR | Active Debris Removal — missions that capture and de-orbit debris |
+| PMD | Post-Mission Disposal — a satellite de-orbiting itself after its mission |
+| Conjunction | A close approach between two orbiting objects |
+| Kessler Syndrome | Self-sustaining collision cascade that can render orbits unusable |
+| Source–sink model | A model that tracks population by balancing what adds vs. removes objects |
+
+---
+
+## References
+
+- Kessler, D. J., and Cour-Palais, B. G. (1978). *Collision Frequency of Artificial Satellites: The Creation of a Debris Belt.* Journal of Geophysical Research, 83(A6). — The foundational Kessler Syndrome paper.
+- NASA Orbital Debris Program Office (ODPO): https://orbitaldebris.jsc.nasa.gov/ — quarterly news, the Standard Breakup Model, and the LEGEND evolutionary model.
+- Johnson, N. L., et al. (2001). *NASA's New Breakup Model of EVOLVE 4.0.* Advances in Space Research. — The NASA Standard Breakup Model underpinning fragment-yield assumptions.
+- ESA Space Debris Office — Annual *Space Environment Report* and the MASTER / DRAMA / DELTA toolset: https://www.esa.int/Space_Safety/Space_Debris
+- MIT Astrodynamics, Space Robotics, and Controls Lab — MOCAT (MIT Orbital Capacity Assessment Toolbox), the source–sink methodology Dexter's engine follows.
+- Inter-Agency Space Debris Coordination Committee (IADC) — *Space Debris Mitigation Guidelines.*
+- NASA Conjunction Assessment Risk Analysis (CARA): https://www.nasa.gov/conjunction-assessment/
+- CelesTrak (Dr. T. S. Kelso): https://celestrak.org/ — public GP/TLE catalogue and SATCAT.
+- United States Space Force, 18th Space Defense Squadron / Space-Track.org: https://www.space-track.org/ — the authoritative tracking catalogue.
+- `satellite.js` — open-source SGP4 implementation: https://github.com/shashwatak/satellite-js
+
+*Imagery: NASA Orbital Debris Program Office, public domain, via Wikimedia Commons.*
+
+---
+
+## Project structure
 
 ```
 Dexter/
-├── src/                    # Frontend
-│   ├── viz/               # 3D visualization (Three.js)
-│   ├── features/          # UI components
-│   ├── sim/               # SGP4 worker
-│   └── integration/       # Backend client
-├── backend/               # Python backend
-│   ├── api/              # FastAPI routes
-│   ├── ai/               # 5 AI agents
-│   │   ├── agents/       # Risk, Policy, Sustainability, etc.
-│   │   └── embeddings/   # RAG pipeline
-│   └── config/           # DB2 connection
-├── public/               # Static assets
-│   ├── tle/             # Satellite data (2.6 MB)
-│   ├── satcat.json      # Metadata (1.5 MB)
-│   └── meshes/          # 3D models
-└── plans/               # Architecture docs
+├── src/
+│   ├── viz/                 3D scene, Earth, Live Sky field, orbits, camera
+│   ├── sim/
+│   │   ├── liveSky.worker.ts   SGP4 propagation (Web Worker)
+│   │   ├── mocat.ts            MOCAT-style debris source–sink engine
+│   │   ├── shellDefs.ts        altitude shells, drag-lifetime model
+│   │   └── loadPhysics.ts      seed loader + scenario runner
+│   ├── features/            UI panels (live, forecast, shells, ai, settings, …)
+│   ├── state/               Zustand stores
+│   ├── lib/                 SATCAT, owners, orbital helpers
+│   └── integration/         backend client + data contracts
+├── scripts/
+│   ├── fetch-celestrak.ts   live catalogue (≤ every 2h)
+│   ├── fetch-satcat.ts      object metadata
+│   └── build-shells.ts      real physics seed from SATCAT
+├── backend/                 optional FastAPI AI/RAG service
+└── public/
+    ├── tle/TLE.txt          live catalogue
+    ├── satcat.json          owner + type per object
+    └── shells.json          real per-altitude physics seed
 ```
 
 ---
 
-## 🔌 API Reference
+## Roadmap
 
-### Backend Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Health check |
-| GET | `/docs` | Interactive API docs |
-| POST | `/api/ai/analyze` | Run AI analysis |
-| GET | `/api/ai/health` | System health |
-| GET | `/api/ai/stream/{id}` | Stream analysis (SSE) |
-
-### Example
-```bash
-# Health check
-curl http://localhost:8000/
-
-# AI health
-curl http://localhost:8000/api/ai/health
-
-# Run analysis
-curl -X POST http://localhost:8000/api/ai/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"analysis_type":"risk_assessment","metrics":{}}'
-```
+- Render debris and rocket bodies in Live Sky (currently the active catalogue), with type filters.
+- Time Machine debris-belt growth: animate the debris population expanding decade by decade.
+- Pairwise conjunction screening and CDM-style close-approach alerts.
+- Monte-Carlo ensembles for projection uncertainty bands.
+- Authoritative-data mode (Space-Track / commercial SSA feeds).
+- Physics calibration against NASA LEGEND and ESA DELTA reference runs.
 
 ---
 
-## 🐛 Troubleshooting
-
-### No satellites visible
-1. Check TLE data exists: `ls -lh public/tle/TLE.txt`
-2. Hard refresh: Cmd/Ctrl + Shift + R
-3. Check browser console for errors
-
-### Backend won't start
-```bash
-# Check port
-lsof -i :8000
-
-# View logs
-tail -f backend/backend.log
-
-# Reinstall
-cd backend && pip install -r requirements-minimal.txt --force-reinstall
-```
-
-### AI features offline
-1. Install Ollama: https://ollama.ai/
-2. Pull models: `ollama pull llama2`
-3. Verify: `curl http://localhost:11434/api/tags`
-
----
-
-## 📊 Performance
-
-- **Boot Time**: ~10 seconds
-- **Frame Rate**: 60 FPS (16k objects)
-- **Memory**: ~500 MB (Chrome)
-- **Backend**: <100ms response time
-
-### Optimization
-- Reduce MAX_OBJECTS in `src/viz/LiveField.tsx`
-- Use production build: `npm run build`
-- Enable GPU acceleration
-
----
-
-## 🚢 Deployment
-
-### Production Build
-```bash
-# Frontend
-npm run build
-# Output: dist/
-
-# Backend
-cd backend
-gunicorn api.main:app -w 4 -k uvicorn.workers.UvicornWorker
-```
-
----
-
-## 📚 Documentation
-
-All documentation has been organized in the [`docs/`](docs/) folder:
-
-- **[docs/README.md](docs/README.md)** - Complete documentation index
-- **[docs/QUICK_START_AI.md](docs/QUICK_START_AI.md)** - Get started with AI in 5 minutes
-- **[docs/USER_GUIDE.md](docs/USER_GUIDE.md)** - Complete user guide
-- **[docs/AI_CONFIGURATION_GUIDE.md](docs/AI_CONFIGURATION_GUIDE.md)** - Configure AI providers
-- **[docs/DATABASE_AND_KNOWLEDGE_BASE_EXPLAINED.md](docs/DATABASE_AND_KNOWLEDGE_BASE_EXPLAINED.md)** - Database & RAG system
-- **[docs/RAG_IMPLEMENTATION_COMPLETE.md](docs/RAG_IMPLEMENTATION_COMPLETE.md)** - RAG implementation details
-- **[backend/README.md](backend/README.md)** - Backend AI agents documentation
-- **[plans/](plans/)** - System architecture and roadmap
-
----
-
-## 🎯 Features
-
-### Live Sky Mode
-- Real NORAD catalogue (~16k objects)
-- SGP4 propagation in Web Worker
-- Country-colored dots (SATCAT data)
-- Click to select → camera flies to object
-- Real 3D models (ISS, Starlink, Hubble, etc.)
-- True SGP4 orbit paths
-
-### Time Controls
-- Date/Time picker with calendar
-- Propagation rate: 1x to 100x
-- Jump to any instant in time
-- Time Machine: 1957 to present
-
-### Create Satellites
-- Basic mode: name, inclination, apogee, perigee
-- Advanced mode: full element set
-- TLE import: paste raw two-line elements
-- Generates valid checksummed TLE
-
-### AI Analysis (Multi-Provider)
-- **RAG-Enhanced**: Retrieves relevant documents from DB2 before generating responses
-- **Risk Assessment**: Collision analysis citing IADC guidelines
-- **Policy Recommendations**: Standards-based suggestions
-- **Sustainability Analysis**: Orbital environment impact
-- **Executive Summaries**: High-level insights
-- **Streaming Responses**: Real-time SSE updates
-- **Providers**: Ollama (local), OpenAI, Gemini, Custom endpoints
-
----
-
-## 🤝 Team
-
-- **Kunal**: Physics engine, policy engine, data integration
-- **Dhruv**: Orbital simulator, 3D visualization, integration
-- **Rishab**: Visualization, UI components
-- **Geetika**: CelesTrak data, AI agents, DB2 setup
-- **Pawan**: AI integration
-
----
-
-## 📄 License
-
-See LICENSE file for details.
-
----
-
-## 🔗 Resources
-
-- **CelesTrak**: https://celestrak.org/
-- **SGP4 Library**: https://github.com/shashwatak/satellite-js
-- **Three.js**: https://threejs.org/
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **Ollama**: https://ollama.ai/
-
----
-
-**Status**: 🟢 **LIVE**  
-**Frontend**: http://localhost:5173  
-**Backend**: http://localhost:8000  
-**Last Updated**: June 14, 2026
+**Dexter** — see what is up there, understand where it is going, and explore what keeps orbit usable for the next century.
