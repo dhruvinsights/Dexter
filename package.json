@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "fetch-tle": "tsx scripts/fetch-celestrak.ts",
+    "fetch-fullcat": "tsx scripts/fetch-spacetrack.ts",
     "fetch-satcat": "tsx scripts/fetch-satcat.ts",
     "build-shells": "tsx scripts/build-shells.ts"
   },

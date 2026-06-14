@@ -19,7 +19,18 @@ export interface Selection {
   line2?: string;
 }
 
+export interface HoverInfo {
+  norad: string;
+  label: string;
+  launchYear: number;
+  /** Cursor position in CSS pixels, for placing the floating tooltip. */
+  x: number;
+  y: number;
+}
+
 export interface CatalogueEntry {
+  /** Index into the LiveField point cloud — used to select + fly-to from the table. */
+  index: number;
   norad: string;
   name: string;
   owner: string;
@@ -27,6 +38,8 @@ export interface CatalogueEntry {
   ownerName: string;
   type: string;
   launchYear: number;
+  line1?: string;
+  line2?: string;
 }
 
 interface SimStore {
@@ -63,6 +76,8 @@ interface SimStore {
   selection: Selection | null;
   /** Live scene-space position of the selected object, fed by LiveField. */
   selectedPos: [number, number, number] | null;
+  /** Object under the cursor + screen position, for the hover tooltip. */
+  hovered: HoverInfo | null;
   colorScheme: ColorSchemeId;
 
   // ── time machine (live mode) ──
@@ -91,6 +106,7 @@ interface SimStore {
   toggleOrbits: () => void;
   select: (s: Selection | null) => void;
   setSelectedPos: (p: [number, number, number] | null) => void;
+  setHovered: (h: HoverInfo | null) => void;
   setColorScheme: (scheme: ColorSchemeId) => void;
 
   toggleTimeMachine: () => void;
@@ -127,6 +143,7 @@ export const useSimStore = create<SimStore>((set) => ({
   showOrbits: true,
   selection: null,
   selectedPos: null,
+  hovered: null,
   colorScheme: 'objectType',
 
   timeMachineActive: false,
@@ -176,6 +193,7 @@ export const useSimStore = create<SimStore>((set) => ({
   toggleOrbits: () => set((st) => ({ showOrbits: !st.showOrbits })),
   select: (s) => set({ selection: s, selectedPos: null }),
   setSelectedPos: (p) => set({ selectedPos: p }),
+  setHovered: (h) => set({ hovered: h }),
   setColorScheme: (scheme) => set({ colorScheme: scheme }),
 
   toggleTimeMachine: () =>

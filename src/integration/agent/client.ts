@@ -99,6 +99,24 @@ export async function analyze(
   return postJson<AnalysisResponse>('/api/ai/analyze', { analysis_type, metrics, scenario_name }, signal);
 }
 
+export interface ChatResponse {
+  content: string;
+  scenario_id?: string;
+  model_used?: string;
+  generated_at?: string;
+  latency_seconds?: number;
+}
+
+/** Free-text conversational reply (answers the message, not a canned report). */
+export async function chat(
+  question: string,
+  metrics: Record<string, unknown>,
+  scenario_name?: string,
+  signal?: AbortSignal,
+): Promise<ChatResponse> {
+  return postJson<ChatResponse>('/api/ai/chat', { question, metrics, scenario_name }, signal);
+}
+
 export async function quickSummary(scenarioId: string, signal?: AbortSignal): Promise<AnalysisResponse> {
   const res = await fetch(`${baseUrl()}/api/ai/quick-summary/${encodeURIComponent(scenarioId)}`, { signal });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);

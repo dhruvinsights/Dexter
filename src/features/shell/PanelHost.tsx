@@ -1,6 +1,6 @@
 import { useUIStore } from '@/state/useUIStore';
 import { LivePanel } from '@/features/live/LivePanel';
-import { PolicyRail } from '@/features/policies/PolicyRail';
+import { ScenarioWorkspace } from '@/features/scenario/ScenarioWorkspace';
 import { ForecastingPanel } from '@/features/forecast/ForecastingPanel';
 import { AIAgentPanel } from '@/features/ai/AIAgentPanel';
 import { KnowledgePanel } from '@/features/knowledge/KnowledgePanel';
@@ -28,11 +28,7 @@ export function PanelHost() {
         </div>
       );
     case 'scenario':
-      return (
-        <div className="panel-in">
-          <PolicyRail />
-        </div>
-      );
+      return <ScenarioWorkspace />;
     case 'timeMachine':
       // The Time Machine renders as a full-width overlay (TimeMachineOverlay);
       // its controls live there, so the side column stays empty.

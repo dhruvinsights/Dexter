@@ -14,12 +14,14 @@ import hashlib
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from ai.analyst import run_analysis, get_analysis_service
+from ai.analyst import run_analysis, run_chat, get_analysis_service
 from ai.models.ai_models import (
     AnalysisRequest,
     AnalysisResponse,
     AnalysisType,
-    AgentHealthCheck
+    AgentHealthCheck,
+    ChatRequest,
+    ChatResponse,
 )
 from ai.llm_client import get_llm_client, reset_llm_client
 from ai.runtime_config import get_runtime_config, AIProviderConfig
@@ -61,6 +63,24 @@ async def analyze(request: AnalysisRequest):
     except Exception as e:
         logger.error(f"Analysis error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+
+
+@router.post("/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    """
+    Conversational reply to a free-text message. Answers what the user actually
+    asked instead of always running a structured risk assessment.
+    """
+    try:
+        logger.info(f"Received chat message: {request.question[:80]!r}")
+        return await run_chat(
+            request.question,
+            metrics=request.metrics,
+            scenario_name=request.scenario_name,
+        )
+    except Exception as e:
+        logger.error(f"Chat error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Chat failed: {str(e)}")
 
 
 @router.get("/stream/{scenario_id}")

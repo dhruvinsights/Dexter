@@ -57,9 +57,9 @@ export function OrbitRings() {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const mat = new THREE.LineBasicMaterial({
-      color: 0x6699cc,
+      color: 0x2a3a4a, // darker steel-blue so the orbit web reads as a faint backdrop
       transparent: true,
-      opacity: 0.1,
+      opacity: 0.04,
       depthWrite: false,
     });
     return new THREE.LineSegments(geo, mat);

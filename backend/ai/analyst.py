@@ -86,6 +86,59 @@ class AnalysisService:
             logger.error(f"Error during analysis: {e}", exc_info=True)
             raise
     
+    async def chat(
+        self,
+        question: str,
+        metrics: Optional[Dict[str, Any]] = None,
+        scenario_name: Optional[str] = None,
+    ) -> "ChatResponse":
+        """
+        Free-text conversational reply. Unlike run_analysis, this does NOT force a
+        structured report — it answers the user's actual message, using the current
+        simulation metrics only when relevant (so "hi" gets a greeting, not a risk
+        assessment).
+        """
+        from ai.models.ai_models import ChatResponse  # local import avoids cycle
+
+        start_time = datetime.utcnow()
+        metrics = metrics or {}
+
+        # Compact, human-readable context of the loaded scenario.
+        keys = [
+            "scenario_id", "collision_frequency", "debris_growth_pct",
+            "survivability_pct", "congestion_index", "simulation_years", "final_total",
+        ]
+        ctx = "\n".join(f"- {k}: {metrics[k]}" for k in keys if metrics.get(k) is not None)
+        ctx = ctx or "(no scenario currently loaded)"
+
+        system_prompt = (
+            "You are Dexter's orbital-sustainability assistant. Reply conversationally "
+            "and concisely to the user's message. For greetings or general questions, "
+            "answer naturally in 1-3 sentences. Only produce a structured, numbered risk "
+            "report when the user explicitly asks for an analysis. Use the simulation "
+            "context only when it is relevant to what was asked."
+        )
+        prompt = f"Current simulation context:\n{ctx}\n\nUser: {question}\nAssistant:"
+
+        # Best-effort RAG grounding; never let a missing DB table break chat.
+        try:
+            docs = self.data_service.get_policy_documents(search_term=question)
+            if docs:
+                prompt = self._enhance_prompt_with_context(prompt, docs[:3])
+        except Exception as e:  # noqa: BLE001
+            logger.warning(f"Chat RAG skipped: {e}")
+
+        content = await self.llm.generate(prompt, system_prompt=system_prompt)
+        latency = (datetime.utcnow() - start_time).total_seconds()
+        logger.info(f"✓ Chat reply in {latency:.2f}s")
+        return ChatResponse(
+            content=content.strip(),
+            scenario_id=metrics.get("scenario_id"),
+            model_used=self.llm.model,
+            generated_at=datetime.utcnow().isoformat(),
+            latency_seconds=round(latency, 2),
+        )
+
     def _retrieve_relevant_documents(self, analysis_type: AnalysisType) -> List[Dict[str, Any]]:
         """
         Retrieve relevant documents from database based on analysis type
@@ -139,8 +192,9 @@ class AnalysisService:
         # Build context section from retrieved documents
         context_parts = []
         for i, doc in enumerate(documents, 1):
-            title = doc.get('title', 'Unknown Document')
-            content = doc.get('content', '')
+            # DB2 returns UPPERCASE column names; accept either case.
+            title = doc.get('title') or doc.get('TITLE') or 'Unknown Document'
+            content = doc.get('content') or doc.get('CONTENT') or ''
             
             # Truncate content to avoid token limits (max 1000 chars per doc)
             content_preview = content[:1000] + "..." if len(content) > 1000 else content
@@ -271,6 +325,12 @@ async def run_analysis(request: AnalysisRequest) -> AnalysisResponse:
     """
     service = get_analysis_service()
     return await service.run_analysis(request)
+
+
+async def run_chat(question: str, metrics=None, scenario_name=None):
+    """Convenience function for a conversational reply."""
+    service = get_analysis_service()
+    return await service.chat(question, metrics=metrics, scenario_name=scenario_name)
 
 
 if __name__ == "__main__":

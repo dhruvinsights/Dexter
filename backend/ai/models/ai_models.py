@@ -32,6 +32,21 @@ class AnalysisResponse(BaseModel):
     latency_seconds: Optional[float] = None
 
 
+class ChatRequest(BaseModel):
+    """Free-text conversational message to the orbital-intelligence assistant."""
+    question: str
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    scenario_name: Optional[str] = None
+
+
+class ChatResponse(BaseModel):
+    content: str
+    scenario_id: Optional[str] = None
+    model_used: Optional[str] = None
+    generated_at: Optional[str] = None
+    latency_seconds: Optional[float] = None
+
+
 class AgentHealthCheck(BaseModel):
     status: str
     llm_available: bool

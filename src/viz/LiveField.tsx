@@ -5,8 +5,10 @@ import { useSimStore, TIME_MACHINE_END_YEAR } from '@/state/useSimStore';
 import { loadSatcat, satcatOwner, satcatType } from '@/lib/satcat';
 import { ownerInfo } from '@/lib/owners';
 
-// Removed MAX_OBJECTS limit to load all available satellites from CelesTrak
-const MAX_OBJECTS = 20000; // Increased to accommodate all CelesTrak satellites (~15,699)
+// Holds the full Space-Track 18 SDS catalogue (~28k objects) as well as the
+// smaller CelesTrak feed (~18k). Buffers scale linearly with this; 40k leaves
+// headroom as the catalogue grows.
+const MAX_OBJECTS = 40000;
 const UPDATE_INTERVAL_MS = 300; // re-propagate ~3×/s (screen motion is slow at this scale)
 const POINT_SIZE = 0.05;
 const SELECTED_POINT_SIZE = 0.1;
@@ -48,9 +50,31 @@ export function LiveField() {
   const lastUpdate = useRef(0);
   const pendingTime = useRef(0);
   const busy = useRef(false);
+  const hoverIndex = useRef(-1); // point-cloud index under the cursor (-1 = none)
+  const newIndices = useRef<number[]>([]); // objects launched in the current TM year
+  const boostPhase = useRef(0); // 1 → 0 fade for the "launch into existence" pulse
   const { camera, gl } = useThree();
   const raycaster = useMemo(() => new THREE.Raycaster(), []);
   const mouse = useMemo(() => new THREE.Vector2(), []);
+
+  // Halo ring that snaps to the hovered dot so it's obvious which object the
+  // cursor is on. A separate object (not a buffer edit) so it never collides
+  // with selection/scheme/time-machine colouring of the point cloud.
+  const hoverMarker = useMemo(() => {
+    const geo = new THREE.RingGeometry(0.6, 0.85, 32);
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x00ffaa,
+      transparent: true,
+      opacity: 0.9,
+      side: THREE.DoubleSide,
+      depthTest: false,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.visible = false;
+    mesh.renderOrder = 999;
+    mesh.frustumCulled = false;
+    return mesh;
+  }, []);
 
   const worker = useMemo(
     () => new Worker(new URL('@/sim/liveSky.worker.ts', import.meta.url), { type: 'module' }),
@@ -132,6 +156,7 @@ export function LiveField() {
           const rows = norads.map((norad, i) => {
             const owner = ownerInfo(satcatOwner(norad));
             return {
+              index: i,
               norad,
               name: names[i] ?? `NORAD ${norad}`,
               owner: satcatOwner(norad) ?? '?',
@@ -139,6 +164,8 @@ export function LiveField() {
               ownerName: owner.name,
               type: satcatType(norad) ?? '?',
               launchYear: years[i] ?? 0,
+              line1: line1Ref.current[i],
+              line2: line2Ref.current[i],
             };
           });
           useSimStore.getState().setCatalogue(rows);
@@ -196,6 +223,14 @@ export function LiveField() {
             line2: line2Ref.current[idx],
           });
 
+          // select() clears selectedPos; seed it immediately from the dot's
+          // current scene position so the 3D model appears on click without
+          // waiting for the next SGP4 worker tick (the worker keeps it tracking
+          // afterwards). Mirrors how custom satellites set their position.
+          const posAttr = points.geometry.getAttribute('position') as THREE.BufferAttribute;
+          const pa = posAttr.array as Float32Array;
+          useSimStore.getState().setSelectedPos([pa[idx * 3], pa[idx * 3 + 1], pa[idx * 3 + 2]]);
+
           // Restore the scheme colours, then highlight the selected dot.
           paintColorsRef.current();
           const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
@@ -219,7 +254,47 @@ export function LiveField() {
       }
     };
 
+    // Hover → floating tooltip. Throttled raycast against the point cloud; sets
+    // the hovered object + cursor screen position in the store (a DOM overlay
+    // renders the tooltip). Mirrors the click raycast's distance-scaled radius.
+    let lastHover = 0;
+    const handlePointerMove = (event: PointerEvent) => {
+      const now = performance.now();
+      if (now - lastHover < 40) return;
+      lastHover = now;
+
+      const rect = gl.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const camDist = camera.position.length();
+      raycaster.params.Points!.threshold = Math.max(0.04, camDist * 0.012);
+
+      const intersects = raycaster.intersectObject(points);
+      if (intersects.length > 0 && intersects[0].index !== undefined) {
+        const idx = intersects[0].index;
+        const norad = noradsRef.current[idx];
+        const name = namesRef.current[idx];
+        if (norad && name) {
+          hoverIndex.current = idx;
+          gl.domElement.style.cursor = 'pointer';
+          useSimStore.getState().setHovered({
+            norad,
+            label: name,
+            launchYear: launchYearsRef.current[idx] ?? 0,
+            x: event.clientX,
+            y: event.clientY,
+          });
+          return;
+        }
+      }
+      hoverIndex.current = -1;
+      gl.domElement.style.cursor = '';
+      if (useSimStore.getState().hovered) useSimStore.getState().setHovered(null);
+    };
+
     gl.domElement.addEventListener('click', handleClick);
+    gl.domElement.addEventListener('pointermove', handlePointerMove);
 
     // load the real catalogue (GP/TLE data)
     useSimStore.getState().setCatalogueReady(false, 'Downloading orbital catalogue…');
@@ -241,9 +316,14 @@ export function LiveField() {
 
     return () => {
       gl.domElement.removeEventListener('click', handleClick);
+      gl.domElement.removeEventListener('pointermove', handlePointerMove);
+      gl.domElement.style.cursor = '';
+      useSimStore.getState().setHovered(null);
       worker.terminate();
       points.geometry.dispose();
       (points.material as THREE.Material).dispose();
+      hoverMarker.geometry.dispose();
+      (hoverMarker.material as THREE.Material).dispose();
     };
   }, [worker, points, gl, camera, raycaster, mouse]);
 
@@ -257,6 +337,22 @@ export function LiveField() {
 
   useFrame((_, delta) => {
     const st = useSimStore.getState();
+
+    // Snap the hover halo to the dot under the cursor, sized to stay a constant
+    // ~screen size and oriented to face the camera (reads the live position
+    // straight from the point cloud so it tracks the object's motion).
+    const hi = hoverIndex.current;
+    if (hi >= 0) {
+      const pa = (points.geometry.getAttribute('position') as THREE.BufferAttribute)
+        .array as Float32Array;
+      hoverMarker.position.set(pa[hi * 3], pa[hi * 3 + 1], pa[hi * 3 + 2]);
+      hoverMarker.quaternion.copy(camera.quaternion);
+      const d = camera.position.distanceTo(hoverMarker.position);
+      hoverMarker.scale.setScalar(d * 0.008);
+      hoverMarker.visible = true;
+    } else if (hoverMarker.visible) {
+      hoverMarker.visible = false;
+    }
 
     // advance the live clock
     let t = st.liveTimeMs;
@@ -286,23 +382,56 @@ export function LiveField() {
         st.setTimeMachineYear(y);
       }
       const yearFloor = Math.floor(y);
+      const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
+      const sizes = sizeAttr.array as Float32Array;
+
       if (yearFloor !== lastTMYear.current && launchYearsRef.current.length > 0) {
         lastTMYear.current = yearFloor;
-        const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
-        const sizes = sizeAttr.array as Float32Array;
         const launchYears = launchYearsRef.current;
+        // Reconstruct the population: show only objects launched up to this year;
+        // collect this year's launches so they can animate "into existence".
+        const fresh: number[] = [];
         for (let i = 0; i < launchYears.length; i++) {
-          sizes[i] = launchYears[i] <= yearFloor ? POINT_SIZE : 0;
+          if (launchYears[i] > yearFloor) {
+            sizes[i] = 0;
+          } else if (launchYears[i] === yearFloor) {
+            fresh.push(i);
+            sizes[i] = POINT_SIZE; // size set by the boost below
+          } else {
+            sizes[i] = POINT_SIZE;
+          }
         }
+        newIndices.current = fresh;
+        boostPhase.current = fresh.length > 0 ? 1 : 0;
+        sizeAttr.needsUpdate = true;
+      }
+
+      // Per-frame "launch flash": this year's new objects bloom large then settle
+      // to normal, so the user sees them appear rather than blink on.
+      if (boostPhase.current > 0.02 && newIndices.current.length > 0) {
+        boostPhase.current *= Math.pow(0.04, delta); // ~half-life 0.18s
+        const s = POINT_SIZE * (1 + boostPhase.current * 5);
+        for (const i of newIndices.current) sizes[i] = s;
+        sizeAttr.needsUpdate = true;
+      } else if (boostPhase.current !== 0 && newIndices.current.length > 0) {
+        boostPhase.current = 0;
+        for (const i of newIndices.current) sizes[i] = POINT_SIZE;
         sizeAttr.needsUpdate = true;
       }
     } else if (lastTMYear.current !== -1) {
       lastTMYear.current = -1;
+      newIndices.current = [];
+      boostPhase.current = 0;
       const sizeAttr = points.geometry.getAttribute('aSize') as THREE.BufferAttribute;
       (sizeAttr.array as Float32Array).fill(POINT_SIZE);
       sizeAttr.needsUpdate = true;
     }
   });
 
-  return <primitive object={points} />;
+  return (
+    <>
+      <primitive object={points} />
+      <primitive object={hoverMarker} />
+    </>
+  );
 }

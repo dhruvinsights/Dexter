@@ -5,6 +5,7 @@ import { useSimStore } from '@/state/useSimStore';
 import { play } from '@/lib/sound';
 import {
   analyze,
+  chat,
   health,
   streamAnalysis,
   type AgentHealthCheck,
@@ -139,7 +140,7 @@ export function AIAgentPanel() {
     setMessages((m) => [...m, { role: 'user', content: q }, { role: 'assistant', content: '' }]);
     setBusy(true);
     try {
-      const res = await analyze('risk_assessment', { ...currentMetrics(), question: q }, scenarioId);
+      const res = await chat(q, currentMetrics(), scenarioId);
       setMessages((m) => {
         const copy = [...m];
         copy[copy.length - 1] = { role: 'assistant', content: res.content };

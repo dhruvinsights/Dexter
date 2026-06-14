@@ -1,0 +1,14 @@
+# Netlify config for the Dexter frontend (Vite SPA).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback — serve index.html for any path that isn't a real file.
+# (Real assets like /assets/* and /tle/TLE.txt are served before this rule.)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

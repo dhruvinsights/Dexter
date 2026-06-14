@@ -3,6 +3,7 @@ import { TopBar } from '@/features/TopBar';
 import { Timeline } from '@/features/timeline/Timeline';
 import { MetricsStrip } from '@/features/metrics/MetricsStrip';
 import { SatelliteInfoPanel } from '@/features/live/SatelliteInfoPanel';
+import { HoverTooltip } from '@/features/live/HoverTooltip';
 import { TimeMachineOverlay } from '@/features/live/TimeMachineOverlay';
 import { Sidebar } from '@/features/shell/Sidebar';
 import { PanelHost } from '@/features/shell/PanelHost';
@@ -58,6 +59,9 @@ export function App() {
 
       {/* Draggable satellite readout (starts left, out of the panels' way) */}
       {mode === 'live' && selection && <SatelliteInfoPanel />}
+
+      {/* Cursor-following hover readout for any object in Live Sky */}
+      {mode === 'live' && <HoverTooltip />}
 
       <LoadingOverlay />
     </div>

@@ -31,6 +31,21 @@ app.add_middleware(
 
 app.include_router(ai.router)
 
+logger = logging.getLogger(__name__)
+
+
+@app.on_event("startup")
+def bootstrap_rag() -> None:
+    """Provision + seed the RAG knowledge base on startup (best-effort)."""
+    try:
+        from config.db2_connection import get_db_connection
+        from ai.rag_seed import ensure_policy_documents
+
+        db = get_db_connection()
+        ensure_policy_documents(db)
+    except Exception as e:  # noqa: BLE001 — never block startup on the DB
+        logger.warning(f"RAG bootstrap skipped (DB unavailable?): {e}")
+
 
 @app.get("/")
 def root():

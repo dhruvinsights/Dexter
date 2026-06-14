@@ -8,11 +8,14 @@ import { useSimStore } from '@/state/useSimStore';
  * type, and launch year. Sourced from `useSimStore.catalogue`, built once
  * when the GP catalogue + SATCAT metadata finish loading.
  */
+const ROW_CAP = 1000; // DOM rows to render at once; search narrows the rest
+
 export function SatelliteDataPanel() {
   const catalogue = useSimStore((s) => s.catalogue);
+  const selection = useSimStore((s) => s.selection);
   const [query, setQuery] = useState('');
 
-  const rows = useMemo(() => {
+  const { rows, total } = useMemo(() => {
     const q = query.trim().toLowerCase();
     const filtered = q
       ? catalogue.filter(
@@ -23,13 +26,24 @@ export function SatelliteDataPanel() {
             r.type.toLowerCase().includes(q),
         )
       : catalogue;
-    return filtered.slice(0, 300);
+    return { rows: filtered.slice(0, ROW_CAP), total: filtered.length };
   }, [catalogue, query]);
+
+  const selectRow = (r: (typeof catalogue)[number]) => {
+    useSimStore.getState().setMode('live');
+    useSimStore.getState().select({
+      index: r.index,
+      norad: r.norad,
+      label: r.name,
+      line1: r.line1,
+      line2: r.line2,
+    });
+  };
 
   return (
     <PanelShell
       title="Satellite Data"
-      subtitle={`${catalogue.length.toLocaleString()} objects · showing ${rows.length}`}
+      subtitle={`${catalogue.length.toLocaleString()} objects · ${total.toLocaleString()} matched · showing ${rows.length.toLocaleString()}`}
       icon={<Table2 size={14} />}
       width="w-[36rem]"
     >
@@ -57,7 +71,10 @@ export function SatelliteDataPanel() {
               {rows.map((r) => (
                 <tr
                   key={r.norad}
-                  className="border-t border-[#1f1f1f] text-neutral-300 transition-colors hover:bg-white/5"
+                  onClick={() => selectRow(r)}
+                  className={`cursor-pointer border-t border-[#1f1f1f] text-neutral-300 transition-colors hover:bg-white/5 ${
+                    selection?.norad === r.norad ? 'bg-[#00ff88]/15 text-white' : ''
+                  }`}
                 >
                   <td className="px-3 py-1.5 text-neutral-500">{r.norad}</td>
                   <td className="max-w-[12rem] truncate px-3 py-1.5 text-white">{r.name}</td>
@@ -73,6 +90,11 @@ export function SatelliteDataPanel() {
           {rows.length === 0 && (
             <div className="py-8 text-center font-mono text-[10px] text-neutral-600">
               {catalogue.length === 0 ? 'Catalogue still loading…' : 'No matches'}
+            </div>
+          )}
+          {total > rows.length && (
+            <div className="border-t border-[#1f1f1f] py-3 text-center font-mono text-[10px] text-neutral-600">
+              + {(total - rows.length).toLocaleString()} more — search to narrow the list
             </div>
           )}
         </div>

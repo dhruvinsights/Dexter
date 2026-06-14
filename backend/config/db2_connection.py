@@ -39,10 +39,14 @@ class Db2Connection:
         self.database = os.getenv('DB2_DATABASE')
         self.username = os.getenv('DB2_USERNAME')
         self.password = os.getenv('DB2_PASSWORD')
-        
+        # Default schema for all unqualified table names. Project tables (RAG
+        # policy docs, analysis cache, …) live in DEXTER, not the login user's
+        # own schema. Override with DB2_SCHEMA if needed.
+        self.schema = os.getenv('DB2_SCHEMA', 'DEXTER')
+
         if not all([self.host, self.database, self.username, self.password]):
             raise ValueError("Missing required Db2 configuration in environment variables")
-        
+
         self.connection_string = (
             f"DATABASE={self.database};"
             f"HOSTNAME={self.host};"
@@ -50,6 +54,7 @@ class Db2Connection:
             f"PROTOCOL=TCPIP;"
             f"UID={self.username};"
             f"PWD={self.password};"
+            f"CURRENTSCHEMA={self.schema};"
         )
         
         self._connection = None
@@ -77,8 +82,16 @@ class Db2Connection:
                 
                 # Create DBI connection for easier Python DB-API usage
                 self._dbi_connection = ibm_db_dbi.Connection(self._connection)
-                
-                logger.info("✓ Successfully connected to Db2")
+
+                # Pin the working schema so unqualified table names resolve to DEXTER.
+                try:
+                    cur = self._dbi_connection.cursor()
+                    cur.execute(f"SET CURRENT SCHEMA {self.schema}")
+                    cur.close()
+                except Exception as e:  # noqa: BLE001
+                    logger.warning(f"Could not set CURRENT SCHEMA to {self.schema}: {e}")
+
+                logger.info(f"✓ Successfully connected to Db2 (schema={self.schema})")
                 return True
                 
             except Exception as e:

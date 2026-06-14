@@ -29,9 +29,19 @@ class AIDataService:
     """
     
     def __init__(self):
-        """Initialize data service with Db2 connection"""
-        self.db = get_db_connection()
-        logger.info("AI Data Service initialized")
+        """Initialize data service with Db2 connection.
+
+        Tolerates an unavailable Db2 (e.g. in a cloud deploy where the host is
+        unreachable, or ibm_db isn't installed): self.db stays None and every
+        data method degrades to an empty result, so AI chat/analysis still work
+        without RAG grounding instead of 500-ing.
+        """
+        try:
+            self.db = get_db_connection()
+            logger.info("AI Data Service initialized")
+        except Exception as e:  # noqa: BLE001
+            self.db = None
+            logger.warning(f"Db2 unavailable — RAG/persistence disabled: {e}")
     
     def get_orbital_shell_stats(self, shell_name: Optional[str] = None) -> List[Dict[str, Any]]:
         """
@@ -212,15 +222,23 @@ class AIDataService:
         """
         try:
             with self.db.get_cursor() as cursor:
-                if search_term:
-                    query = """
-                        SELECT doc_id, title, source, content, created_at
-                        FROM policy_documents
-                        WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ?
-                        ORDER BY created_at DESC
-                    """
-                    search_pattern = f"%{search_term.lower()}%"
-                    cursor.execute(query, (search_pattern, search_pattern))
+                # Tokenise the search term and match ANY word (the callers pass
+                # multi-word phrases like "risk collision debris mitigation"; a
+                # single LIKE on the whole phrase matches nothing). Each token is
+                # matched against title OR content.
+                tokens = [t for t in (search_term or "").lower().split() if len(t) > 2]
+                if tokens:
+                    clauses = " OR ".join(["LOWER(title) LIKE ? OR LOWER(content) LIKE ?"] * len(tokens))
+                    params: list[str] = []
+                    for t in tokens:
+                        params.extend([f"%{t}%", f"%{t}%"])
+                    query = (
+                        "SELECT doc_id, title, source, content, created_at "
+                        "FROM policy_documents "
+                        f"WHERE {clauses} "
+                        "ORDER BY created_at DESC"
+                    )
+                    cursor.execute(query, tuple(params))
                 else:
                     query = """
                         SELECT doc_id, title, source, content, created_at
@@ -228,13 +246,13 @@ class AIDataService:
                         ORDER BY created_at DESC
                     """
                     cursor.execute(query)
-                
+
                 columns = [desc[0] for desc in cursor.description]
                 results = []
-                
+
                 for row in cursor.fetchall():
                     results.append(dict(zip(columns, row)))
-                
+
                 return results
             
         except Exception as e:

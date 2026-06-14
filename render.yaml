@@ -1,0 +1,50 @@
+# Render Blueprint for the Dexter AI backend (FastAPI).
+# Connect this repo in the Render dashboard → "New +" → "Blueprint"; Render reads
+# this file and provisions the service. Set the secret env vars (marked
+# sync:false) in the dashboard after the first deploy.
+services:
+  - type: web
+    name: dexter-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+      # ── AI provider ──────────────────────────────────────────────────────
+      # Ollama is local-only, so the cloud deploy must use a hosted LLM.
+      # Default to Gemini (generous free tier). Switch to "openai" + OPENAI_API_KEY
+      # if you prefer. Set the API key in the dashboard (it is a secret).
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash-latest
+
+      - key: ENVIRONMENT
+        value: production
+      - key: API_RELOAD
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+
+      # ── Optional: DB2 RAG ────────────────────────────────────────────────
+      # The current DB2 host is IBM-internal and is NOT reachable from Render,
+      # so RAG document grounding is disabled in the cloud (the app degrades
+      # gracefully — chat/analysis still work via the LLM). If you later point
+      # these at a publicly reachable Db2, RAG re-activates automatically.
+      # - key: DB2_HOST
+      #   sync: false
+      # - key: DB2_DATABASE
+      #   sync: false
+      # - key: DB2_USERNAME
+      #   sync: false
+      # - key: DB2_PASSWORD
+      #   sync: false
+      # - key: DB2_PORT
+      #   value: "50000"
