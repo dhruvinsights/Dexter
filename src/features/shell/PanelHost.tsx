@@ -7,6 +7,7 @@ import { KnowledgePanel } from '@/features/knowledge/KnowledgePanel';
 import { CustomTlePanel } from '@/features/live/CustomTlePanel';
 import { DateTimePicker } from '@/features/live/DateTimePicker';
 import { RegionPanel } from '@/features/live/RegionPanel';
+import { SatelliteDataPanel } from '@/features/live/SatelliteDataPanel';
 import { SettingsPanel } from '@/features/settings/SettingsPanel';
 
 /**
@@ -47,6 +48,8 @@ export function PanelHost() {
       return <CustomTlePanel />;
     case 'region':
       return <RegionPanel />;
+    case 'satdata':
+      return <SatelliteDataPanel />;
     case 'settings':
       return <SettingsPanel />;
     default:

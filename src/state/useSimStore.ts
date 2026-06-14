@@ -15,6 +15,16 @@ export interface Selection {
   line2?: string;
 }
 
+export interface CatalogueEntry {
+  norad: string;
+  name: string;
+  owner: string;
+  ownerFlag: string;
+  ownerName: string;
+  type: string;
+  launchYear: number;
+}
+
 interface SimStore {
   mode: ViewMode;
 
@@ -33,6 +43,8 @@ interface SimStore {
   // ── boot / data loading ──
   catalogueReady: boolean; // SGP4 catalogue parsed + first positions propagated
   catalogueLoadMsg: string; // human-readable boot status
+  /** Flat catalogue table for the Satellite Data panel (norad, name, owner, type, launch year). */
+  catalogue: CatalogueEntry[];
 
   // ── shared ──
   isPlaying: boolean;
@@ -59,6 +71,7 @@ interface SimStore {
   resetLiveToNow: () => void;
   setLiveCount: (n: number) => void;
   setCatalogueReady: (ready: boolean, msg?: string) => void;
+  setCatalogue: (rows: CatalogueEntry[]) => void;
 
   play: () => void;
   pause: () => void;
@@ -93,6 +106,7 @@ export const useSimStore = create<SimStore>((set) => ({
 
   catalogueReady: false,
   catalogueLoadMsg: 'Initialising…',
+  catalogue: [],
 
   isPlaying: true,
   speed: 2,
@@ -129,6 +143,7 @@ export const useSimStore = create<SimStore>((set) => ({
   setLiveCount: (n) => set({ liveCount: n }),
   setCatalogueReady: (ready, msg) =>
     set((st) => ({ catalogueReady: ready, catalogueLoadMsg: msg ?? st.catalogueLoadMsg })),
+  setCatalogue: (rows) => set({ catalogue: rows }),
 
   play: () => set({ isPlaying: true }),
   pause: () => set({ isPlaying: false }),

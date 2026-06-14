@@ -35,3 +35,6 @@ backend/config/*_mock.py
 
 # Reference code (keep local only, don't push to GitHub)
 reference-project-code/
+
+Dexter/
+Dexter.zip

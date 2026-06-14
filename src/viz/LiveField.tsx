@@ -125,8 +125,28 @@ export function LiveField() {
         console.info(`[boot] catalogue parsed: ${msg.count} objects — propagating first epoch (SGP4)`);
         // Colour once now, then re-paint when the catalogue metadata arrives.
         paintColors();
+        const buildTable = () => {
+          const norads = noradsRef.current;
+          const names = namesRef.current;
+          const years = launchYearsRef.current;
+          const rows = norads.map((norad, i) => {
+            const owner = ownerInfo(satcatOwner(norad));
+            return {
+              norad,
+              name: names[i] ?? `NORAD ${norad}`,
+              owner: satcatOwner(norad) ?? '?',
+              ownerFlag: owner.flag,
+              ownerName: owner.name,
+              type: satcatType(norad) ?? '?',
+              launchYear: years[i] ?? 0,
+            };
+          });
+          useSimStore.getState().setCatalogue(rows);
+        };
+        buildTable();
         loadSatcat().then(() => {
           paintColors();
+          buildTable();
           console.info('[boot] object metadata applied (owners, types)');
         });
       } else if (msg.type === 'positions') {
@@ -208,11 +228,18 @@ export function LiveField() {
     useSimStore.getState().setCatalogueReady(false, 'Downloading orbital catalogue…');
     console.info('[boot] downloading GP catalogue (/tle/TLE.txt)…');
     fetch('/tle/TLE.txt')
-      .then((r) => r.text())
+      .then((r) => {
+        if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+        return r.text();
+      })
       .then((text) => {
         useSimStore.getState().setCatalogueReady(false, 'Parsing element sets…');
         console.info(`[boot] catalogue downloaded (${(text.length / 1e6).toFixed(1)} MB) — parsing`);
         worker.postMessage({ type: 'init', text, max: MAX_OBJECTS });
+      })
+      .catch((err) => {
+        console.error('[boot] failed to load /tle/TLE.txt — run `npm run fetch-tle`', err);
+        useSimStore.getState().setCatalogueReady(true, 'Catalogue unavailable');
       });
 
     return () => {

@@ -9,6 +9,7 @@ import {
   Radio,
   MapPin,
   Settings,
+  Table2,
   Volume2,
   VolumeX,
 } from 'lucide-react';
@@ -33,6 +34,7 @@ const TOP: NavItem[] = [
   { id: 'forecast', label: 'Forecasting', icon: TrendingUp },
   { id: 'region', label: 'Region Filter', icon: MapPin, mode: 'live' },
   { id: 'customTle', label: 'Add Satellite', icon: Radio, mode: 'live' },
+  { id: 'satdata', label: 'Satellite Data', icon: Table2, mode: 'live' },
   { id: 'ai', label: 'AI Agent', icon: Bot },
   { id: 'knowledge', label: 'Knowledge Base', icon: Database },
 ];

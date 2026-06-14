@@ -13,6 +13,7 @@ export type PanelId =
   | 'ai'
   | 'knowledge'
   | 'customTle'
+  | 'satdata'
   | 'region'
   | 'settings';
 
