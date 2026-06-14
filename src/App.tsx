@@ -9,6 +9,8 @@ import { PanelHost } from '@/features/shell/PanelHost';
 import { CustomizeDrawer } from '@/features/shell/CustomizeDrawer';
 import { LoadingOverlay } from '@/features/shell/LoadingOverlay';
 import { useSimStore } from '@/state/useSimStore';
+import { useEffect } from 'react';
+import { loadPhysics } from '@/sim/loadPhysics';
 
 /**
  * Explore — Dexter's primary screen. The 3D orbital environment fills the
@@ -18,6 +20,12 @@ import { useSimStore } from '@/state/useSimStore';
 export function App() {
   const mode = useSimStore((s) => s.mode);
   const selection = useSimStore((s) => s.selection);
+  const setPhysics = useSimStore((s) => s.setPhysics);
+
+  // Seed the debris model from the real catalogue once on boot.
+  useEffect(() => {
+    loadPhysics().then(setPhysics).catch(() => {});
+  }, [setPhysics]);
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-black">

@@ -8,6 +8,7 @@ import { CustomTlePanel } from '@/features/live/CustomTlePanel';
 import { DateTimePicker } from '@/features/live/DateTimePicker';
 import { RegionPanel } from '@/features/live/RegionPanel';
 import { SatelliteDataPanel } from '@/features/live/SatelliteDataPanel';
+import { ShellAnalysisPanel } from '@/features/forecast/ShellAnalysisPanel';
 import { SettingsPanel } from '@/features/settings/SettingsPanel';
 
 /**
@@ -40,6 +41,8 @@ export function PanelHost() {
       return <DateTimePicker />;
     case 'forecast':
       return <ForecastingPanel />;
+    case 'shells':
+      return <ShellAnalysisPanel />;
     case 'ai':
       return <AIAgentPanel />;
     case 'knowledge':

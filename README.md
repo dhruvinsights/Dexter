@@ -29,9 +29,25 @@ npm run dev
 
 ## 📊 What's Working
 
+### What is real vs. modelled
+
+Dexter is explicit about its data provenance:
+
+| Feature | Source | Real? |
+|---------|--------|-------|
+| **Live Sky** satellites/positions | CelesTrak GP catalogue + SGP4 (`satellite.js`) | ✅ Real data, real physics |
+| **Object types / countries** | CelesTrak SATCAT | ✅ Real |
+| **Shell Analysis** (current debris by altitude) | SATCAT apogee/perigee binned into shells | ✅ Real current state |
+| **Scenario / Forecasting** projections | MOCAT-style source–sink model **seeded from the real catalogue** | ⚙️ Physics model (deterministic projection, not telemetry) |
+| **AI Agent** | Local Ollama / OpenAI / Gemini (optional) | Depends on your config |
+
+The Scenario/Forecast numbers come from a real **source–sink debris model** (`src/sim/mocat.ts`): launches and post-mission derelicts and collision fragments as sources; atmospheric drag decay, PMD compliance and ADR as sinks; collisions via the particle-in-a-box rate λ = ⟨σv⟩·NᵢNⱼ/V. It is seeded from the real on-orbit population (`public/shells.json`, built by `npm run build-shells` from SATCAT). This is a model — the same *kind* of model as MIT MOCAT / ESA MASTER — not measured data, and the UI says so.
+
 ### ✅ Core Features
-- **Live Satellite Tracking** - ~16,000 objects with real SGP4 physics
+- **Live Satellite Tracking** - real catalogue with real SGP4 physics
 - **3D Visualization** - React Three Fiber with day/night Earth
+- **Shell Analysis** - real per-altitude debris distribution + Kessler stability indicator
+- **Physics Engine** - MOCAT-style debris source–sink projection seeded from real data
 - **Time Controls** - Speed up, slow down, or scrub through time
 - **Time Machine** - Watch satellite deployment history from 1957
 - **Interactive Selection** - Click any satellite to inspect
@@ -84,8 +100,9 @@ npm run dev
 ```bash
 # 1. Frontend
 npm install
-npm run fetch-tle      # Download satellite data
-npm run fetch-satcat   # Download metadata
+npm run fetch-tle      # Download live catalogue (CelesTrak GP/TLE; ≤ every 2h)
+npm run fetch-satcat   # Download object metadata (owner, type)
+npm run build-shells   # Build the real per-altitude seed for the physics engine
 
 # 2. Backend
 cd backend

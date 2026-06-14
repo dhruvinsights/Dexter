@@ -10,6 +10,7 @@ export type PanelId =
   | 'timeMachine'
   | 'datetime'
   | 'forecast'
+  | 'shells'
   | 'ai'
   | 'knowledge'
   | 'customTle'

@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "fetch-tle": "tsx scripts/fetch-celestrak.ts",
-    "fetch-satcat": "tsx scripts/fetch-satcat.ts"
+    "fetch-satcat": "tsx scripts/fetch-satcat.ts",
+    "build-shells": "tsx scripts/build-shells.ts"
   },
   "dependencies": {
     "@react-three/drei": "^9.114.0",

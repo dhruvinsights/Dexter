@@ -100,7 +100,7 @@ export function LivePanel() {
 
       <p className="border-t border-[#1f1f1f] pt-3 text-[11px] leading-relaxed text-neutral-600">
         Live data from CelesTrak (USSF 18 SDS catalogue). These are genuine cataloged objects
-        at physically propagated positions — distinct from Scenario mode's statistical projection.
+        at physically propagated positions — distinct from Scenario mode's physics-model projection.
       </p>
     </div>
   );

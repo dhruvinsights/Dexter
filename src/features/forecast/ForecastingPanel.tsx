@@ -11,6 +11,7 @@ import { play } from '@/lib/sound';
  */
 export function ForecastingPanel() {
   const output = useSimStore((s) => s.output);
+  const physicsReal = useSimStore((s) => s.physicsReal);
   const [adr, setAdr] = useState(0); // 0..1 active debris removal aggressiveness
   const [launchCap, setLaunchCap] = useState(1); // 0.3..1.5 launch-rate multiplier
 
@@ -94,8 +95,9 @@ export function ForecastingPanel() {
         />
 
         <p className="font-mono text-[10px] leading-relaxed text-neutral-600">
-          Projection re-scales the {output.simulation_years}-year MOCAT baseline. Open the AI Agent for a
-          narrative risk assessment of this configuration.
+          {physicsReal ? 'Seeded from the real catalogue, then ' : 'Model '}re-scales the{' '}
+          {output.simulation_years}-year source–sink projection. This is a physics model (not measured
+          telemetry). Open the AI Agent for a narrative risk assessment.
         </p>
       </div>
     </PanelShell>

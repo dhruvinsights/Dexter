@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import type { RawMOCATOutput } from '@/integration/contracts';
 import { MOCK_RESULTS, SCENARIOS } from '@/integration/mocks';
 import type { ColorSchemeId } from '@/viz/colorSchemes';
+import type { PhysicsBundle } from '@/sim/loadPhysics';
+import type { shellStability } from '@/sim/mocat';
+
+type StabilityRow = ReturnType<typeof shellStability>[number];
 
 const DEFAULT_SCENARIO = 'baseline_2024';
 
@@ -34,6 +38,12 @@ interface SimStore {
   year: number; // fractional, 0..yearMax
   yearMax: number;
   density: number;
+  /** Engine results keyed by scenario_id (real seed + MOCAT projection). */
+  results: Record<string, RawMOCATOutput>;
+  /** Per-shell Kessler-stability indicator from the real seed. */
+  stability: StabilityRow[];
+  /** True once the physics engine has been seeded from the real catalogue. */
+  physicsReal: boolean;
 
   // ── live mode ──
   liveTimeMs: number;
@@ -63,6 +73,7 @@ interface SimStore {
 
   setMode: (m: ViewMode) => void;
   loadScenario: (id: string) => void;
+  setPhysics: (bundle: PhysicsBundle) => void;
   setYear: (y: number) => void;
   setDensity: (d: number) => void;
 
@@ -99,6 +110,9 @@ export const useSimStore = create<SimStore>((set) => ({
   year: 0,
   yearMax: MOCK_RESULTS[DEFAULT_SCENARIO].simulation_years,
   density: 1,
+  results: MOCK_RESULTS,
+  stability: [],
+  physicsReal: false,
 
   liveTimeMs: Date.now(),
   liveSpeed: 60,
@@ -129,11 +143,21 @@ export const useSimStore = create<SimStore>((set) => ({
       ...(m === 'live' ? { liveTimeMs: Date.now() } : {}),
     })),
 
-  loadScenario: (id) => {
-    const output = MOCK_RESULTS[id];
-    if (!output) return;
-    set({ scenarioId: id, output, yearMax: output.simulation_years, selection: null });
-  },
+  loadScenario: (id) =>
+    set((st) => {
+      const output = st.results[id];
+      if (!output) return {};
+      return { scenarioId: id, output, yearMax: output.simulation_years, selection: null };
+    }),
+
+  setPhysics: (bundle) =>
+    set((st) => ({
+      results: bundle.results,
+      stability: bundle.stability,
+      physicsReal: bundle.seededFromReal,
+      output: bundle.results[st.scenarioId] ?? st.output,
+      yearMax: (bundle.results[st.scenarioId] ?? st.output).simulation_years,
+    })),
   setYear: (y) => set((st) => ({ year: Math.min(st.yearMax, Math.max(0, y)) })),
   setDensity: (d) => set({ density: d }),
 
