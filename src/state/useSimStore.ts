@@ -110,7 +110,7 @@ export const useSimStore = create<SimStore>((set) => ({
 
   isPlaying: true,
   speed: 2,
-  showOrbits: false,
+  showOrbits: true,
   selection: null,
   selectedPos: null,
   colorScheme: 'objectType',
